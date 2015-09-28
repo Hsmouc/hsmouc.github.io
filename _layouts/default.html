@@ -1,24 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-
+---
+layout: compress
+---
 {% include head.html %}
+<body id="top-of-page" class="{{ page.format }}">
+	{% include navigation.html %}
 
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
+	{% include masthead.html %}
 
-    {% include nav.html %}
+	{{ content }}
 
-    {{ content }}
-
-    {% include footer.html %}
-
-
-<!-- Image to hack wechat -->
-<img src="/img/icon_wechat.png" width="0" height="0" />
-<!-- Migrate from head to bottom, no longer block render and still work -->
-
-<!-- Tencent QQ Analysis -->
-<script type="text/javascript" src="http://tajs.qq.com/stats?sId=43623438" charset="UTF-8"></script>
+	{% include footer.html %}
+	
+	{% include footer_scripts.html %}
 </body>
-
 </html>
