@@ -1,50 +1,56 @@
+# Carte Noire
 
-[![Start Video](https://github.com/Phlow/feeling-responsive/blob/gh-pages/images/video-feeling-responsive-1280x720.jpg)](https://www.youtube.com/embed/3b5zCFSmVvU)
+A simple Jekyll theme for blogging. Not named after the coffee.
 
-## A Responsive Jekyll Theme: *Feeling Responsive*
+![Homepage](http://i.imgur.com/xlmHArV.png)
 
-Do you want to get to know *Feeling Responsive*? Than check it out first and have a look on its home at  <http://phlow.github.io/feeling-responsive/>.
+### Article
+![Article](http://i.imgur.com/8rD8FfC.png)
 
-To get to know *Feeling Responsive* check out all the features explained in the [documentation][1].
+### Disqus Comments
+![Comments](http://i.imgur.com/TBZHQwF.png)
 
-And what license is *Feeling Responsive* released under? [This one][2].
+### Posts grouped by year
+![All Posts](http://i.imgur.com/9bNs2Sc.png)
 
+### JavaScript Search
+![Search](http://i.imgur.com/yQqMeSl.png)
 
+### Menu by mmenu
+![Menu](http://i.imgur.com/SClrNSH.png)
 
-## Why use this theme?
+## Contact
+If you wish to contact me regarding this theme please raise an issue on GitHub,
+tweet me [@_jacobtomlinson](http://www.twitter.com/_jacobtomlinson) or email me
+[jacob@jacobtomlinson.co.uk](mailto:jacob@jacobtomlinson.co.uk).
 
-Feeling Responsive is heavily customizable.
+## Contribution
+Pull requests are very welcome.
 
-1. Language-Support :)
-2. Optimized for speed and it's responsive.
-3. Built on Foundation Framework.
-4. Six different Headers.
-5. Customizable navigation, footer,...
+## Theme
+This jekyll theme has been created from scratch. Ideas and inspiration are taken
+from other places but the code is my own.
 
-**[More ›][3]**
+## Tools and Libraries
+The following tools and libraries are used in this theme
 
+### JavaScript
+ * [jQuery](http://jquery.com/)
+ * [MMenu](http://mmenu.frebsite.nl/)
+ * [HighlightJS](https://highlightjs.org/)
+ * [Simple Jekyll Search](https://github.com/christian-fei/Simple-Jekyll-Search)
 
+### CSS
+ * [Bootstrap](http://getbootstrap.com/)
+ * [Font Awesome](http://fortawesome.github.io/Font-Awesome/)
 
-## Video Tutorial
+### Social
+ * [AddThis](http://www.addthis.com/)
+ * [Disqus](https://disqus.com/)
 
-Click the image to [watch the YouTube-Video-Tutorial][4].
+### Other
+ * [Real Favicon Generator](http://realfavicongenerator.net/)
+ * [Google Analytics](http://www.google.com/analytics/)
 
-[![Start Video](https://github.com/Phlow/feeling-responsive/blob/gh-pages/images/video-feeling-responsive-tutorial-frontpage.jpg)](https://www.youtube.com/watch?v=rLS-BEvlEyY)
-
-
-
-
-
-
-
-
- [1]: http://phlow.github.io/feeling-responsive/documentation/
- [2]: https://github.com/Phlow/feeling-responsive/blob/gh-pages/LICENSE
- [3]: http://phlow.github.io/feeling-responsive/info/
- [4]: https://www.youtube.com/watch?v=rLS-BEvlEyY
- [5]: #
- [6]: #
- [7]: #
- [8]: #
- [9]: #
- [10]: #
+## License
+The jekyll theme, HTML, CSS and JavaScript is licensed under GPLv3 (unless stated otherwise in the file).
