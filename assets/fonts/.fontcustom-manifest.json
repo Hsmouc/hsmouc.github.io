@@ -1,7 +1,7 @@
 {
   "checksum": {
-    "previous": "5555562d684c691e057f2fd8868bbf28a0b7fed9be158c879930b5e673732cbc",
-    "current": "5555562d684c691e057f2fd8868bbf28a0b7fed9be158c879930b5e673732cbc"
+    "previous": "c5cdc0a58b7277d1f320a4ad50aa8ae2ad47fa6ed879c164db1cfb75439bd1d9",
+    "current": "c5cdc0a58b7277d1f320a4ad50aa8ae2ad47fa6ed879c164db1cfb75439bd1d9"
   },
   "fonts": [
     "./iconfont.ttf",
@@ -74,10 +74,6 @@
       "codepoint": 61710,
       "source": "svg-files-for-custom-font/cog.svg"
     },
-    "douban": {
-      "codepoint": 61750,
-      "source": "svg-files-for-custom-font/douban.svg"
-    },
     "dropbox": {
       "codepoint": 61711,
       "source": "svg-files-for-custom-font/dropbox.svg"
@@ -117,10 +113,6 @@
     "heart-outlined": {
       "codepoint": 61720,
       "source": "svg-files-for-custom-font/heart-outlined.svg"
-    },
-    "hippocampus": {
-      "codepoint": 61753,
-      "source": "svg-files-for-custom-font/hippocampus.svg"
     },
     "home": {
       "codepoint": 61721,
@@ -226,10 +218,6 @@
       "codepoint": 61745,
       "source": "svg-files-for-custom-font/warning.svg"
     },
-    "weibo": {
-      "codepoint": 61751,
-      "source": "svg-files-for-custom-font/weibo.svg"
-    },
     "xing": {
       "codepoint": 61749,
       "source": "svg-files-for-custom-font/xing.svg"
@@ -237,10 +225,6 @@
     "youtube": {
       "codepoint": 61746,
       "source": "svg-files-for-custom-font/youtube.svg"
-    },
-    "zhihu": {
-      "codepoint": 61752,
-      "source": "svg-files-for-custom-font/zhihu.svg"
     }
   },
   "options": {

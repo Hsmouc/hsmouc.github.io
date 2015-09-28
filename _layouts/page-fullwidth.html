@@ -5,7 +5,7 @@ format: page-fullwidth
 {% if page.image.title %}
 <div class="row t30">
 	<div class="small-12 columns">
-		<img src="{{ site.url }}/images/{{ page.image.title }}" width="970" alt="{{ page.title escape_once }}">
+		<img src="{{ site.urlimg }}{{ page.image.title }}" width="970" alt="{{ page.title escape_once }}">
 		{% if page.image.caption_url && page.image.caption %}
 		<p class="text-right caption">
 			<a href="{{ page.image.caption_url }}">{{ page.image.caption }}</a>
@@ -18,7 +18,6 @@ format: page-fullwidth
 
 <div class="row t30">
 	<div class="medium-12 columns">
-
 		<article>
 			<header>
 				{% if page.subheadline %}<p class="subheadline">{{ page.subheadline }}</p>{% endif %}
@@ -30,10 +29,9 @@ format: page-fullwidth
 				{{ page.teaser }}
 			</p>
 			{% endif %}
-			
+
 			{{ content }}
 		</article>
-
 	</div><!-- /.medium-12.columns -->
 </div><!-- /.row -->
 

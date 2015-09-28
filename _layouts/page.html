@@ -8,7 +8,7 @@ format: post
 			<header>
 				{% if page.image.title %}
 				<figure>
-					<img src="{{ site.url }}/images/{{ page.image.title }}" width="970" alt="{{ page.title escape_once }}" itemprop="image">
+					<img src="{{ site.urlimg }}{{ page.image.title }}" width="970" alt="{{ page.title escape_once }}" itemprop="image">
 
 					{% if page.image.caption_url && page.image.caption %}
 					<figcaption class="text-right">
@@ -39,16 +39,12 @@ format: post
 			{{ content }}
 			</span>
 
-			<p>
-			{% include qrcode.html %}
-			</p>
-
 			{% if page.show_meta == true %}
-			{% include meta_information.html %}
+			{% include meta_information %}
 			{% endif %}
 
 			{% if page.comments == true %}
-			{% include comments.html %}
+			{% include comments %}
 			{% endif %}
 		</article>
 	</div><!-- /.medium-8.columns -->
@@ -56,14 +52,14 @@ format: post
 
 	{% if page.sidebar == "left" %}
 	<div class="medium-4 columns medium-pull-8">
-		{% include sidebar.html %}
+		{% include sidebar %}
 	</div><!-- /.medium-4.columns -->
 	{% endif %}
 
 
 	{% if page.sidebar == "right" %}
 	<div class="medium-4 columns">
-		{% include sidebar.html %}
+		{% include sidebar %}
 	</div><!-- /.medium-4.columns -->
 	{% endif %}
 </div><!-- /.row -->
