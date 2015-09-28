@@ -7,22 +7,14 @@ summary:    Carte Noire is a dark blog theme for Jekyll focusing on a clear read
 categories: jekyll
 thumbnail:  heart
 tags:
- - welcome
- - to
- - carte
- - noire
+ - 欢迎
+ - 来
+ - Hsmouc
+ - 的博客
 ---
 
-Welcome to Carte Noire.
+欢迎来何诗鸣的博客
 
-Carte Noire began as a new theme for [my personal blog][1], but has now taken
-on a life of its own as a free theme for Jekyll.
+xxxxxx
 
-The theme has been designed with simplicity and readability in mind. It makes
-use of third party services such as Disqus ad AddThis to ensure the blog has
-all the features you would expect from a dynamic application such as Wordpress
-but with the hosting and maintenance simplicity of Jekyll.
-
-Please use/copy/share Carte Noire!
-
-[1]: http://www.jacobtomlinson.co.uk/
+我只是做个测试啦啦啦
