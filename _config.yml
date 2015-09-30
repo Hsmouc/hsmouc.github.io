@@ -1,27 +1,27 @@
 # Site settings
 title: "Hsmouc"
 email: heshiming001@icloud.com
-description: “描述."
+description: “life is hard."
 baseurl: ""
 url: "http://hsmouc.github.io/"
-title_description: "xxx"
+title_description: "猪在淤泥里寻欢取乐"
 title_image: "http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewktmv52wbj307y07yjrp.jpg"
 google_analytics: "UA-20365477-4"
-disqus_account: cartenoire
+disqus_account: Hsmouc
 github_repository: https://github.com/Hsmouc/Hsmouc.github.io/
 addthis_id: ra-513c6fa83da6ec67
 post_limit: 5
 
 # Social usernames/URLs
-twitter_username: _jacobtomlinson
-github_username:  jacobtomlinson
+twitter_username: heshiming001	
+github_username:  Hsmouc
 linkedin_link: xx
-google_plus_link: http://google.com
+google_plus_link: https://plus.google.com/u/0/101351542677141027265/about/p/pub
 stackoverflow_link: http://google.com
 
 # Footer
 footer_left: "Made with <i class=\"fa fa-heart\"></i> by <a href=\"https://twitter.com/heshiming001\">何诗鸣</a>"
-footer_right: "&lt;/&gt; on <a href=\"https://github.com/jacobtomlinson/carte-noire\">Github</a> &nbsp;<i class=\"fa fa-github-alt\"></i>"
+footer_right: "&lt;/&gt; on <a href=\"https://github.com/Hsmouc/hsmouc.github.io\">Github</a> &nbsp;<i class=\"fa fa-github-alt\"></i>"
 # Build settings
 markdown: redcarpet
 redcarpet:
