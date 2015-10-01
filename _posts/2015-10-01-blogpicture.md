@@ -6,7 +6,7 @@ author:     Hsmouc
 summary:    放上一张图片试试吧
 categories: Blog
 thumbnail:  heart
-tags:Blog
+tags:
  - 欢迎来我的博客
 ---
 <h1>让我们来测试下图片的显示效果吧</h1>
