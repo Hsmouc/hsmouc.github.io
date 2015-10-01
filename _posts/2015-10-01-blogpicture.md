@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      测试图片
+title:      测试图片显示效果
 date:       2015-10-1 11:40:25
 author:     Hsmouc
 summary:    放上一张图片试试吧
