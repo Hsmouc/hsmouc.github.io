@@ -11,5 +11,5 @@ tags:
 ---
 <h1>让我们来测试下图片的显示效果吧</h1>
 <p>我们放上一张图(☆_☆)<br/>
-http://ww4.sinaimg.cn/mw690/005WMcFzjw1ewlgqq7e28j31kw11xn62.jpg
+[picture](http://ww4.sinaimg.cn/mw690/005WMcFzjw1ewlgqq7e28j31kw11xn62.jpg)
 </p>
