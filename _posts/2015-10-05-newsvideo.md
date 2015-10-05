@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      社团
+title:      只恨太匆匆
 date:       2015-10-06 01:39:07
 author:     Hsmouc
 summary:    关于社团的第一篇也是最后一篇
