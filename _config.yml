@@ -20,11 +20,11 @@ google_plus_link: https://plus.google.com/u/0/101351542677141027265/about/p/pub
 stackoverflow_link: http://google.com
 
 # Footer
-footer_left: "Made with <i class=\"fa fa-heart\"></i> by <a href=\"https://twitter.com/heshiming001\">何诗鸣</a>"
+footer_left: "Made with <i class=\"fa fa-heart\"></i> by <a href=\"https://twitter.com/heshiming001\">Hsmouc</a>"
 footer_right: "&lt;/&gt; on <a href=\"https://github.com/Hsmouc/hsmouc.github.io\">Github</a> &nbsp;<i class=\"fa fa-github-alt\"></i>"
 # Build settings
 markdown: redcarpet
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
-permalink: pretty
+permalink: /:title.html
 exclude: [vendor]
