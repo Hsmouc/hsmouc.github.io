@@ -4,7 +4,7 @@ title:      高山自行车运动
 date:       2015-10-08 11:22:25
 author:     Hsmouc
 summary:    分享一个视频
-categories: video
+categories: photography
 thumbnail:  heart
 tags:
  - 欢迎来我的博客
