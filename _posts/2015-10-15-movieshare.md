@@ -19,8 +19,7 @@ tags:
 - 盗梦空间
 - 个性化推荐：估计大多数国人知道诺兰这个名字是因为这部电影，盗梦这个题材就已经足够吸引眼球了，加上Leonardo DiCaprio的精彩表演，严谨的逻辑和紧凑的剧情，应该不会让观众失望。 
 <img src="http://img3.douban.com/view/photo/photo/public/p640093961.jpg">
-
-<li>星际穿越</li>
+- 星际穿越
 - 个性化推荐：其实我觉得这个电影还是延续了诺兰的烧脑风格，在2014年成为了最热门电影之一。我的感觉就是看不懂，看不懂，看不懂，但是画面效果声音效果相当震撼，有机会一定要再看一次IMAX～； 
 
 <img src="http://img3.douban.com/view/photo/photo/public/p2211264233.jpg">
