@@ -816,24 +816,15 @@ ul {
 	}
 }
 
-#back-top {
+#btn {
+width:38px;
+height: 38px;/*按钮大片大小*/
+display: none;
+/*在一个屏幕的可见范围内没必要显示“回到顶部”按钮，所以默认不显示*/
+/*再通过当滚动条滚动超过一个屏幕时再用JavaScript显示按钮*/
 position: fixed;
-bottom: 20px;
-right: 20px;
-}
-#back-top a {
-width: 54px;
-height: 54px;
-display: block;
-background: #ddd url(../img/bgs/bg_up_arrow.png) no-repeat center center;
-background-color: #aaa;
--webkit-border-radius: 7px;
--moz-border-radius: 7px;
-border-radius: 7px;
--webkit-transition: 1s;
--moz-transition: 1s;
-transition: 1s;
-}
-#back-top a:hover {
-background-color: #777;
+left:50%;
+bottom:30px;/*固定定位，相对于屏幕的可见范围位置*/
+background:url(http://paddingme.qiniudn.com/top.png) no-repeat;margin-left: 25%;
+/*按钮背景图片，这里我用的是bootstrap官网的scrolltop图片*/
 }
