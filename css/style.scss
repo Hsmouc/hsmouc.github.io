@@ -818,18 +818,18 @@ ul {
 
 #back-top {
 @media (min-width: $screen-sm-min) {
-width: 90%;
-margin-left: 5%;
+bottom: 90%;
+right: 15%;
 }
 
 @media (min-width: $screen-md-min) {
-width: 80%;
+bottom: 80%;
 margin-left: 10%;
 }
 
 @media (min-width: $screen-lg-min) {
-width: 70%;
-margin-left: 15%;
+bottom: 70%;
+margin-left: 5%;
 }
 }
 #back-top a {
@@ -841,8 +841,8 @@ background-color: #aaa;
 -webkit-border-radius: 7px;
 -moz-border-radius: 7px;
 border-radius: 7px;
--webkit-transition: 1s;
--moz-transition: 1s;
+-webkit-transition: 2s;
+-moz-transition: 2s;
 transition: 1s;
 }
 #back-top a:hover {
