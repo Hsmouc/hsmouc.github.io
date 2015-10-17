@@ -73,10 +73,28 @@ layout: default
 
       </div>
       <div id="back-top">
-      <script type="text/javascript" src="/backtotop.js"></script>
       <a href="#top" title="回到顶部"></a>
-      
       </div>
+      <script type="text/javascript">
+          //返回头部
+          $("#mod-right-menu").hide();
+          $(function() {
+            $(window).scroll(function() {
+                             //当window的scrolltop距离大于1时，go to top按钮淡出，反之淡入
+                             if ($(this).scrollTop() > 1) {
+                             $("#mod-right-menu").fadeIn();
+                             } else {
+                             $("#mod-right-menu").fadeOut();
+                             }
+                             });
+            });
+            
+            // 给go to top按钮一个点击事件  
+            $("#scrollTop").click(function() {  
+                                  $("html,body").animate({scrollTop:0}, 800);  
+                                  return false;  
+                                  });  
+          </script>
       <stricpt>
       <div class="content-panel feedback">
         我<i class="fa fa-heart"></i> 反馈.<br />
