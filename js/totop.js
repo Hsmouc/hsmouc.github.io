@@ -1,16 +1,29 @@
-$("#back-top").hide();
-$(document).ready(function () {
+ (function($) {
+  
+  // When to show the scroll link
+  // higher number = scroll link appears further down the page
+  var upperLimit = 1000;
+  
+  // Our scroll link element
+  var scrollElem = $('#back-top');
+  
+  // Scroll to top speed
+  var scrollSpeed = 500;
+  
+  // Show and hide the scroll to top link based on scroll position
+  scrollElem.hide();
   $(window).scroll(function () {
-    if ($(this).scrollTop() > 100) {
-      $('#back-top').fadeIn();
-    } else {
-      $('#back-top').fadeOut();
-    }
-  });
-  $('#back-top a').click(function () {
-    $('body,html').animate({
-      scrollTop: 0
-    }, 1000);
-    return false;
-  });
-});
+                   var scrollTop = $(document).scrollTop();
+                   if ( scrollTop > upperLimit ) {
+                   $(scrollElem).stop().fadeTo(300, 1); // fade back in
+                   }else{
+                   $(scrollElem).stop().fadeTo(300, 0); // fade out
+                   }
+                   });
+  
+  // Scroll to top animation on click
+  $(scrollElem).click(function(){
+                      $('html, body').animate({scrollTop:0}, scrollSpeed); return false;
+                      });
+  
+  })(jQuery);
