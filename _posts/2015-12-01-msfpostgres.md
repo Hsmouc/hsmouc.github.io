@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Metasploit连通数据库
+title:      Metasploit连接数据库
 date:       2015-12-01 11:40:25
 author:     Hsmouc
 summary:    postgres数据库的使用以及实现自动化攻击
