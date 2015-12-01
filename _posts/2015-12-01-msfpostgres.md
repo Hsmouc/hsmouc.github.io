@@ -10,12 +10,12 @@ tags:
  - 欢迎来我的博客
 ---
 - 最近的事情真的有点多-_-#在搞飞思卡尔的比赛，在搞学院的本科生研究发展计划，在学习蛋疼的模电，在搞入侵测试233，貌似接下来两周还有一个c++考试和英语六级…… 好长时间不写博客，也好长时间没写代码了。昨天在Kali Linux上尝试了下连通postgres数据库并进行了自动化攻击测试。这篇算是一个小小的备忘录。
-###Linux上PostgreSQL的启用
+<h2>Linux上PostgreSQL的启用</h2>
 终端命令:
 {% highlight c %}
 service postgresql start
 {% endhighlight %}
-###数据库配置
+<h2>数据库配置</h2>
 设置密码:
 {% highlight c %}
 sudo -u postgres psql postgres
@@ -28,7 +28,7 @@ su postgres
 {% highlight c %}
 createuser user -P
 {% endhighlight %}
-###Metasploit配置
+<h2>Metasploit配置</h2>
 {% highlight c %}
 $ msfconsole
 msf > db_connect  //可以不输入后面的参数，它会给例子
@@ -36,7 +36,7 @@ msf > db_hosts    //列出数据库中的hosts
 msf > db_status   //查看数据库状态
 msf > db_hosts -d <ip> //删除数据中的某个host
 {% endhighlight %}
-###自动化渗透流程
+<h2>自动化渗透流程</h2>
 Nmap扫描，结果保存在数据库中:
 {% highlight c %}
 db_nmap -v -A -n <ip>   //参数根据你的需要
