@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>c++ primer 2.1 | Hsmouc</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这次准备把非编程题的答案也放上去+_+决定使用English来写题目以示逼格。
+
+2.1
+What are the differences between int, long, long long, and short? Between an unsigned and a signed type? Between a float and a double?
+c++ primer原文如下：C++ g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++ primer 2.1">
+<meta property="og:url" content="http://yoursite.com/2015/10/09/2015-10-09-cppcode2/index.html">
+<meta property="og:site_name" content="Hsmouc">
+<meta property="og:description" content="这次准备把非编程题的答案也放上去+_+决定使用English来写题目以示逼格。
+
+2.1
+What are the differences between int, long, long long, and short? Between an unsigned and a signed type? Between a float and a double?
+c++ primer原文如下：C++ g">
+<meta property="og:updated_time" content="2015-12-15T16:36:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="c++ primer 2.1">
+<meta name="twitter:description" content="这次准备把非编程题的答案也放上去+_+决定使用English来写题目以示逼格。
+
+2.1
+What are the differences between int, long, long long, and short? Between an unsigned and a signed type? Between a float and a double?
+c++ primer原文如下：C++ g">
+  
+    <link rel="alternative" href="/atom.xml" title="Hsmouc" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewktmv52wbj307y07yjrp.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">年糕</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Hsmouc" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+								<a class="facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100009396457642" title="facebook">facebook</a>
+					        
+								<a class="google" target="_blank" href="https://plus.google.com/u/0/101351542677141027265" title="google">google</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Blog/" style="font-size: 20px;">Blog</a> <a href="/tags/C/" style="font-size: 15px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 15px;">Pi</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/L">0</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/y">1</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/e">2</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/e">3</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/c">4</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/:">5</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/h">6</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/t">7</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/t">8</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/p">9</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/:">10</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/">11</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/">12</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/l">13</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/y">14</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/e">15</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/e">16</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/c">17</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/.">18</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/m">19</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="/e">20</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">工科在读，C/Python学习中，嵌入式开发，前端/渗透/摄影/吃货ˉ﹃ˉ</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">年糕</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewktmv52wbj307y07yjrp.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">年糕</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Hsmouc" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+						<a class="facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100009396457642" title="facebook">facebook</a>
+			        
+						<a class="google" target="_blank" href="https://plus.google.com/u/0/101351542677141027265" title="google">google</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-2015-10-09-cppcode2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/09/2015-10-09-cppcode2/" class="article-date">
+  	<time datetime="2015-10-09T15:25:11.000Z" itemprop="datePublished">2015-10-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      c++ primer 2.1
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这次准备把非编程题的答案也放上去+_+<br>决定使用English来写题目以示逼格。</p>
+
+<p><li>2.1</li></p>
+<p><li>What are the differences between int, long, long long, and short? Between an unsigned and a signed type? Between a float and a double?</li></p>
+<p><small>c++ primer原文如下：C++ guarantees short and int is at least 16 bits, long at least 32 bits, long long at least 64 bits.<br><br>The signed can represent positive numbers, negative numbers and zero, while unsigned can only represent numbers no less than zero.<br><br>The C and C++ standards do not specify the representation of float, double and long double. It is possible that all three implemented as IEEE double-precision. Nevertheless, for most architectures (gcc, MSVC; x86, x64, ARM) float is indeed a IEEE single-precision floating point number (binary32), and double is a IEEE double-precision floating point number (binary64).</small></p>
+
+<p><li>2.2</li></p>
+<p><li>To calculate a mortgage payment, what types would you use for the rate, principal, and payment? Explain why you selected each type.</li></p>
+<p><small>太水了</small></p>
+
+<p><li>2.3</li></p>
+<p><li>What output will the following code produce?</li><br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">unsigned u=<span class="number">10</span>,u2=<span class="number">42</span>;</span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;u2-u&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">32</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;u-u2&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">4294967264</span></span><br><span class="line">int i=<span class="number">10</span>,i2=<span class="number">42</span>;  </span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;i2-i&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">32</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;i-i2&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span>-<span class="number">32</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;i-u&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">0</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;u-i&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>; <span class="regexp">//</span><span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+<p><li>2.8</li></p>
+<p><li>Using escape sequences, write a program to print 2M followed by a newline. Modify the program to print 2, then a tab, then an M, followed by a newline.</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">&#123;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="number">2</span>&lt;&lt;<span class="string">"\115\012"</span>;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="number">2</span>&lt;&lt;<span class="string">"\t\115\012"</span>;</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><li>2.9</li></p>
+<p><li>Explain the following definitions. For those that are illegal, explain what’s wrong and how to correct it.<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(a) <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; <span class="keyword">int</span> input_value;</span><br><span class="line">(b) <span class="keyword">int</span> i = &#123; <span class="number">3.14</span> &#125;;</span><br><span class="line">(c) <span class="keyword">double</span> salary = wage = <span class="number">9999.99</span>;</span><br><span class="line">(d) <span class="keyword">int</span> i = <span class="number">3.14</span>;</span><br></pre></td></tr></table></figure></li></p>
+<p></p>
+<p><small>error:expect’(‘for funtion-style cast or type construction.</small></p><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> input_value=<span class="number">0</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;input_value;</span><br></pre></td></tr></table></figure><br><br><p><small>warning: implicit conversion from ‘double’ to ‘int’ changes value from 3.14 to 3</small></p><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> i=&#123;<span class="number">3.14</span>&#125;;</span><br></pre></td></tr></table></figure><br><br><p><small>error: use of undeclared identifier ‘wage’</small></p><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> wage;</span><br><span class="line"><span class="keyword">double</span> salary = wage = <span class="number">9999.99</span>;</span><br></pre></td></tr></table></figure><br><br><li>2.10</li><br><li>What are the initial values, if any, of each of the following variables?</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> global_str;</span><br><span class="line"><span class="keyword">int</span> global_int;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> local_int;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> local_str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><p><small>global_str is global variable, so the value is empty string. global_int is global variable, so the value is zero. local_int is a local variable which is not uninitialized, so it has a undefined value. local_str is also a local variable which is not uninitialized, but it has a value that is defined by the class. So it is empty string. </small></p>
+
+<p><li>2.13</li></p>
+<p><li>What is the value of j in the following program?</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> i = <span class="number">100</span>;</span><br><span class="line">   <span class="keyword">int</span> j = i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><small>j=100</small></p>
+
+<p><li>2.14</li></p>
+<p><li>Is the following program legal? If so, what values are printed?</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">100</span>, sum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i!=<span class="number">10</span>;++i)</span><br><span class="line">    &#123;sum+=i&#125;;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;sum&lt;&lt;<span class="built_in">std</span>::endl;</span><br></pre></td></tr></table></figure></p>
+<p><small>Output:100 45</small></p><br><br><br><br><br><p><small>剩下的东西明天再搞吧，今天好烦，名字换成2.1了，就这么任性的决定了。</small></p>
+
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/14/2015-10-14-markdown/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          使用markdown排版
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/08/2015-10-08-cppcode1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">c++ primer 1</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2015-10-09-cppcode2" data-title="c++ primer 2.1" data-url="http://yoursite.com/2015/10/09/2015-10-09-cppcode2/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 年糕
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Blog/" style="font-size: 20px;">Blog</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 15px;">Pi</a>
+						<a href="/tags/Blog/" style="font-size: 20px;">Blog</a> <a href="/tags/C/" style="font-size: 15px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 15px;">Pi</a>
 					</div>
 				</section>
 				
@@ -380,6 +380,89 @@
 
 
   
+    <article id="post-2015-10-17-backtotop" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/17/2015-10-17-backtotop/" class="article-date">
+  	<time datetime="2015-10-17T02:34:08.000Z" itemprop="datePublished">2015-10-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/17/2015-10-17-backtotop/">js代码实现返回顶部功能</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>写在文前<br>话说本来也没想搞这个按钮的，但是前两天心血来潮写了一个电影推荐的文章，突然感觉回到页首好麻烦，于是我就去简单搞了一个返回顶部的按钮。<br>实现这个功能其实并不复杂，</p>
+<h3 id="u4F7F_u7528_u951A_u8FDE_u63A5"><a href="#u4F7F_u7528_u951A_u8FDE_u63A5" class="headerlink" title="使用锚连接"></a>使用锚连接</h3><ol>
+<li><p>在body的标签添加定位id:  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">body</span> <span class="attribute">id</span>=<span class="value">"top"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在最底部需要返回顶部的位置添加触发代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#top"</span>&gt;</span>返回顶部<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这种方法的优点是显而易见的，缺点就是效果非常的渣。一天前我的返回顶部的标签js失败的时候就是这种效果，强迫症怎能就此止步！</p>
+<h3 id="u57FA_u4E8EjQuery_u5B9E_u73B0"><a href="#u57FA_u4E8EjQuery_u5B9E_u73B0" class="headerlink" title="基于jQuery实现"></a>基于jQuery实现</h3><ol>
+<li>添加div  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"back-top"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">title</span>=<span class="value">"返回顶部"</span>&gt;</span><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/img/scrollup.png"</span>/&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>那个png文件是你自己要放在img文件夹里的，就是一个箭头的图。我的箭头图就是自己用ps画的。</p>
+<ol>
+<li>添加样式  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#back-top</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> fixed</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">30px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin-left</span>:<span class="value"> <span class="number">1040px</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="id">#back-top</span> <span class="tag">a</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">54px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">54px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#ddd</span> <span class="function">url</span>(../img/bgs/bg_up_arrow.png) no-repeat center center</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#aaa</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-border-radius</span>:<span class="value"> <span class="number">7px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-moz-border-radius</span>:<span class="value"> <span class="number">7px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">7px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-transition</span>:<span class="value"> <span class="number">1s</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-moz-transition</span>:<span class="value"> <span class="number">1s</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">transition</span>:<span class="value"> <span class="number">1s</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="id">#back-top</span> <span class="tag">a</span><span class="pseudo">:hover</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#777</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这里是使用一个背景透明的向上箭头图片，通过backgroud-color指定正常时和鼠标放上时的背景颜色，border-radius指定圆角的半径。</p>
+<ol>
+<li>添加js代码<br>我的代码如下，是直接放在post的模版文件里的，有兴趣的同学可以试试新建一个.js文件，在post模版文件里引用：  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;SCRIPT type=text/javascript&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">goTopEx</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> obj = <span class="built_in">document</span>.getElementById(<span class="string">"back-top"</span>);</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">getScrollTop</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">document</span>.documentElement.scrollTop + <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">setScrollTop</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">document</span>.documentElement.scrollTop) &#123;</span><br><span class="line">                <span class="built_in">document</span>.documentElement.scrollTop = value;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">document</span>.body.scrollTop = value;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">window</span>.onscroll = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            getScrollTop() &gt; <span class="number">0</span> ? obj.style.display = <span class="string">""</span></span><br><span class="line">            : obj.style.display = <span class="string">"none"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        obj.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> goTop = setInterval(scrollMove, <span class="number">10</span>);</span><br><span class="line">            <span class="function"><span class="keyword">function</span> <span class="title">scrollMove</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                setScrollTop(getScrollTop() / <span class="number">1.1</span>);</span><br><span class="line">                <span class="keyword">if</span> (getScrollTop() &lt; <span class="number">1</span>)</span><br><span class="line">                clearInterval(goTop);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">goTopEx();</span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="title">SCRIPT</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>以上就是实现过程，效果可以参考我的文章页面，忽略我用ps画的箭头-_-#</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/前端开发/">前端开发</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-2015-10-14-markdown" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -452,6 +535,151 @@
 
 
   
+    <article id="post-2015-10-09-cppcode2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/09/2015-10-09-cppcode2/" class="article-date">
+  	<time datetime="2015-10-09T15:25:11.000Z" itemprop="datePublished">2015-10-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/09/2015-10-09-cppcode2/">c++ primer 2.1</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这次准备把非编程题的答案也放上去+_+<br>决定使用English来写题目以示逼格。</p>
+
+<p><li>2.1</li></p>
+<p><li>What are the differences between int, long, long long, and short? Between an unsigned and a signed type? Between a float and a double?</li></p>
+<p><small>c++ primer原文如下：C++ guarantees short and int is at least 16 bits, long at least 32 bits, long long at least 64 bits.<br><br>The signed can represent positive numbers, negative numbers and zero, while unsigned can only represent numbers no less than zero.<br><br>The C and C++ standards do not specify the representation of float, double and long double. It is possible that all three implemented as IEEE double-precision. Nevertheless, for most architectures (gcc, MSVC; x86, x64, ARM) float is indeed a IEEE single-precision floating point number (binary32), and double is a IEEE double-precision floating point number (binary64).</small></p>
+
+<p><li>2.2</li></p>
+<p><li>To calculate a mortgage payment, what types would you use for the rate, principal, and payment? Explain why you selected each type.</li></p>
+<p><small>太水了</small></p>
+
+<p><li>2.3</li></p>
+<p><li>What output will the following code produce?</li><br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">unsigned u=<span class="number">10</span>,u2=<span class="number">42</span>;</span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;u2-u&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">32</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;u-u2&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">4294967264</span></span><br><span class="line">int i=<span class="number">10</span>,i2=<span class="number">42</span>;  </span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;i2-i&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">32</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;i-i2&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span>-<span class="number">32</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;i-u&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">0</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;u-i&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>; <span class="regexp">//</span><span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+<p><li>2.8</li></p>
+<p><li>Using escape sequences, write a program to print 2M followed by a newline. Modify the program to print 2, then a tab, then an M, followed by a newline.</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">&#123;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="number">2</span>&lt;&lt;<span class="string">"\115\012"</span>;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="number">2</span>&lt;&lt;<span class="string">"\t\115\012"</span>;</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><li>2.9</li></p>
+<p><li>Explain the following definitions. For those that are illegal, explain what’s wrong and how to correct it.<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(a) <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; <span class="keyword">int</span> input_value;</span><br><span class="line">(b) <span class="keyword">int</span> i = &#123; <span class="number">3.14</span> &#125;;</span><br><span class="line">(c) <span class="keyword">double</span> salary = wage = <span class="number">9999.99</span>;</span><br><span class="line">(d) <span class="keyword">int</span> i = <span class="number">3.14</span>;</span><br></pre></td></tr></table></figure></li></p>
+<p></p>
+<p><small>error:expect’(‘for funtion-style cast or type construction.</small></p><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> input_value=<span class="number">0</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;input_value;</span><br></pre></td></tr></table></figure><br><br><p><small>warning: implicit conversion from ‘double’ to ‘int’ changes value from 3.14 to 3</small></p><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> i=&#123;<span class="number">3.14</span>&#125;;</span><br></pre></td></tr></table></figure><br><br><p><small>error: use of undeclared identifier ‘wage’</small></p><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> wage;</span><br><span class="line"><span class="keyword">double</span> salary = wage = <span class="number">9999.99</span>;</span><br></pre></td></tr></table></figure><br><br><li>2.10</li><br><li>What are the initial values, if any, of each of the following variables?</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> global_str;</span><br><span class="line"><span class="keyword">int</span> global_int;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> local_int;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> local_str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><p><small>global_str is global variable, so the value is empty string. global_int is global variable, so the value is zero. local_int is a local variable which is not uninitialized, so it has a undefined value. local_str is also a local variable which is not uninitialized, but it has a value that is defined by the class. So it is empty string. </small></p>
+
+<p><li>2.13</li></p>
+<p><li>What is the value of j in the following program?</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> i = <span class="number">100</span>;</span><br><span class="line">   <span class="keyword">int</span> j = i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><small>j=100</small></p>
+
+<p><li>2.14</li></p>
+<p><li>Is the following program legal? If so, what values are printed?</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">100</span>, sum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i!=<span class="number">10</span>;++i)</span><br><span class="line">    &#123;sum+=i&#125;;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;sum&lt;&lt;<span class="built_in">std</span>::endl;</span><br></pre></td></tr></table></figure></p>
+<p><small>Output:100 45</small></p><br><br><br><br><br><p><small>剩下的东西明天再搞吧，今天好烦，名字换成2.1了，就这么任性的决定了。</small></p>
+
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-2015-10-08-cppcode1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/08/2015-10-08-cppcode1/" class="article-date">
+  	<time datetime="2015-10-08T15:23:08.000Z" itemprop="datePublished">2015-10-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/08/2015-10-08-cppcode1/">c++ primer 1</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <li>1.9</li><br><li>编写程序，使用while循环将50到100的整数相加。</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">     <span class="keyword">int</span> sum=<span class="number">0</span>,i=<span class="number">50</span>;</span><br><span class="line">     <span class="keyword">while</span>(i!=<span class="number">101</span>)</span><br><span class="line">     sum+=i++;</span><br><span class="line">     <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"sum="</span>&lt;&lt;sum&lt;&lt;<span class="built_in">std</span>::end;</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><li>1.10</li><br><li>除了++运算符将运算对象的值增加1以外，还有一个递减运算符(–)实现将值减少1.编写程序，使用递减运算符在循环中按递减顺序打印出10与0之间的整数。</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> val=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(val&gt;=<span class="number">0</span>)</span><br><span class="line">       <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;val--&lt;&lt;<span class="built_in">std</span>::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><li>1.11</li><br><li>编写程序，提示用户输入两个整数，打印出这两个整数所指定的范围内的所有整数。</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">      <span class="keyword">int</span> small = <span class="number">0</span>,big = <span class="number">0</span>,temp;</span><br><span class="line">      <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"enter two integers:\n"</span>;</span><br><span class="line">      <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;small&gt;&gt;big;</span><br><span class="line">          <span class="keyword">if</span>(small&gt;big)&#123;</span><br><span class="line">             temp=small;</span><br><span class="line">             big=temp;</span><br><span class="line">             small=big;</span><br><span class="line">          &#125;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> curr = small;curr &lt;= big; curr++)</span><br><span class="line">         <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;curr:</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><li>1.16</li><br><li>编写程序，从cin中读取一组数，输出其和。</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> limit=<span class="number">0</span>,sum=<span class="number">0</span>,value=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"How many integers would you like to enter?"</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;limit;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;value &amp;&amp; (--limit !=<span class="number">0</span>))</span><br><span class="line">    sum+=value;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;sum+value&lt;&lt;<span class="built_in">std</span>::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><hr><br><li>2015年10月10日更新<br><br>&nbsp;&nbsp;&nbsp;&nbsp;根据lyeec的建议,添加了题目。</li><br><hr><br><li>2015年10月15日更新<br><br>&nbsp;&nbsp;&nbsp;&nbsp;改正了1.11的错误。</li>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-2015-10-04-Mac" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -493,6 +721,66 @@
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/操作系统/">操作系统</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-2015-10-02-landscape" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/02/2015-10-02-landscape/" class="article-date">
+  	<time datetime="2015-10-02T03:46:46.000Z" itemprop="datePublished">2015-10-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/02/2015-10-02-landscape/">晨曦</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p></p><h1>晨曦</h1><p></p>
+<p>早晨四点半起床爬山去做日出的延时摄影，然而效果很不理想。随手附两张照片证明到此一游<br><br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1ewn7ys7uqlj31kw11xnb1.jpg"><br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewn7ytpzctj31kw11x7h7.jpg"><br>对了，今天我还要去重拍这个延时，我正好来试一试在网页中外链视频的办法。<br><br>晚安<br></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Landscape/">Landscape</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/摄影/">摄影</a>
 	</div>
 
 
