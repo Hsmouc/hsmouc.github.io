@@ -114,7 +114,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Blog/" style="font-size: 20px;">Blog</a> <a href="/tags/C/" style="font-size: 15px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 15px;">Pi</a>
+						<a href="/tags/Blog/" style="font-size: 20px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 15px;">Pi</a>
 					</div>
 				</section>
 				
@@ -401,6 +401,128 @@
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/前端开发/">前端开发</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-2015-10-15-cppcode3" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/15/2015-10-15-cppcode3/" class="article-date">
+  	<time datetime="2015-10-15T13:21:08.000Z" itemprop="datePublished">2015-10-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/15/2015-10-15-cppcode3/">c++ primer 2.2</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>2.15  </li>
+<li><p>Which of the following definitions,if any,are invalid?Why?        </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(a) <span class="keyword">int</span> ival=<span class="number">1.01</span>;  <span class="comment">//valid</span></span><br><span class="line">(b) <span class="keyword">int</span> &amp;rval=<span class="number">1.01</span>;  <span class="comment">//invalid</span></span><br><span class="line">(c) <span class="keyword">int</span> &amp;rval2=ival; <span class="comment">//valid</span></span><br><span class="line">(d) <span class="keyword">int</span> &amp;rval3;  <span class="comment">//invalid</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.17</p>
+</li>
+<li>What does the following code print?      <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i, &amp;ri = i;</span><br><span class="line">i = <span class="number">5</span>; ri = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">" "</span> &lt;&lt; ri &lt;&lt; <span class="built_in">std</span>::endl;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>输出10 10(这玩意叫右值引用，所以说把值赋给了与引用绑定的对象)</p>
+<ul>
+<li>2.18</li>
+<li><p>Write code to change the value of a pointer. Write code to change the value to which the pointer points.  </p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">int</span> a<span class="number">=0</span>,<span class="keyword">b=1;</span><br><span class="line"></span><span class="label">int</span> *<span class="literal">p1</span>=&amp;a,*<span class="literal">p2</span><span class="label">=p1</span><span class="comment">;</span></span><br><span class="line"><span class="label">p1</span><span class="label">=b</span><span class="comment">;</span></span><br><span class="line">*<span class="literal">p2</span><span class="label">=b</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.20</p>
+</li>
+<li>What does the following program do?<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int i = 42;</span><br><span class="line">int <span class="keyword">*</span>p1 = &amp;i; <span class="keyword">*</span>p1 = <span class="keyword">*</span>p1 <span class="keyword">*</span> <span class="keyword">*</span>p1;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>结果是1764 你以为把乘号放在指针符号中间我就不认识啦～</p>
+<ul>
+<li>2.21</li>
+<li>Explain each of the following definitions. Indicate whether any are illegal and, if so, why.<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">(a) <span class="keyword">double</span>* dp = &amp;i;  <span class="comment">//illegal</span></span><br><span class="line">(b) <span class="keyword">int</span> *ip = i;  <span class="comment">//illegal</span></span><br><span class="line">(c) <span class="keyword">int</span> *p = &amp;i;  <span class="comment">//legal</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这个题呢，除了两种例外情况，其他所有指针的类型都要和它指向的类型相匹配哦。</p>
+<ul>
+<li>2.24</li>
+<li>Why is the initialization of p legal but that of lp illegal?  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">void</span> *p = &amp;i;</span><br><span class="line"><span class="keyword">long</span> *lp = &amp;i;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>void* 是一个可以指向类型的指针，第二个反正我是不会这么写。</p>
+<ul>
+<li>2.27</li>
+<li><p>Which of the following initializations are legal? Explain why.  </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = -<span class="number">1</span>, &amp;r = <span class="number">0</span>;         <span class="comment">// illegal</span></span><br><span class="line"><span class="keyword">int</span> *<span class="keyword">const</span> p2 = &amp;i2;        <span class="comment">// legal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> i = -<span class="number">1</span>, &amp;r = <span class="number">0</span>;   <span class="comment">// legal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *<span class="keyword">const</span> p3 = &amp;i2;  <span class="comment">// legal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p1 = &amp;i2;        <span class="comment">// legal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;<span class="keyword">const</span> r2;        <span class="comment">// illegal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> i2 = i, &amp;r = i;   <span class="comment">// legal</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.28</p>
+</li>
+<li><p>Explain the following definitions. Identify any that are illegal.</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i, *<span class="keyword">const</span> cp;       <span class="comment">// illegal</span></span><br><span class="line"><span class="keyword">int</span> *p1, *<span class="keyword">const</span> p2;     <span class="comment">// illegal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ic, &amp;r = ic;  <span class="comment">// illegal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *<span class="keyword">const</span> p3;    <span class="comment">// illegal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p;           <span class="comment">// legal</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.30</p>
+</li>
+<li>For each of the following declarations indicate whether the object being declared has top-level or low-level const.<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">const</span> int <span class="literal">v2</span> = <span class="number">0</span><span class="comment">; int v1 = v2;</span></span><br><span class="line"><span class="label">int</span> *<span class="literal">p1</span> = &amp;<span class="literal">v1</span>, &amp;<span class="literal">r1</span> = <span class="literal">v1</span><span class="comment">;</span></span><br><span class="line"><span class="label">const</span> int *<span class="literal">p2</span> = &amp;<span class="literal">v2</span>, *const <span class="literal">p3</span> = &amp;i, &amp;<span class="literal">r2</span> = <span class="literal">v2</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>根据定义很容易判断v2是顶层const，p2是底层const，因为p3是一个指向常量的指针(point to const)，它本身又是一个常量，所以说它既是底层const，又是顶层const。</p>
+<ul>
+<li>2.40</li>
+<li><p>Write your own version of the Sales_data class.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> Sales_data&#123;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> bookName;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> bookPublish;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> ISBN;</span><br><span class="line">   <span class="keyword">int</span> soldnum=<span class="number">0</span>;</span><br><span class="line">   <span class="keyword">double</span> revenue=<span class="number">0.0</span>;</span><br><span class="line">   <span class="keyword">double</span> price = <span class="number">0.0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.41</p>
+</li>
+<li>Use your Sales_data class to rewrite the exercises in § 1.5.1(p. 22), § 1.5.2(p. 24), and § 1.6(p. 25). For now, you should define your Sales_data class in the same file as your main function.</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">struct</span> Sales_data</span><br><span class="line">&#123;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</span><br><span class="line">   <span class="keyword">int</span> soldnum;</span><br><span class="line">   <span class="keyword">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    Sales_data book;</span><br><span class="line">    doublr price;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;book.bookNo&gt;&gt;book.soldnum&gt;&gt;price;</span><br><span class="line">    book.revenue=price*book.soldnum;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;book.bookNo&lt;&lt;<span class="string">" "</span>&lt;&lt;book.soldnum&lt;&lt;<span class="string">" "</span>&lt;&lt;book.revenue&lt;&lt;<span class="string">" "</span>&lt;&lt;price;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个应该在学谭爷爷的c的时候就会了+_+   还有一个<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> Sale_data</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</span><br><span class="line">    <span class="keyword">unsigned</span> units_sold = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    Sale_data book1, book2;</span><br><span class="line">    <span class="keyword">double</span> price1, price2;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; book1.bookNo &gt;&gt; book1.units_sold &gt;&gt; price1;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; book2.bookNo &gt;&gt; book2.units_sold &gt;&gt; price2;</span><br><span class="line">    book1.revenue = book1.units_sold * price1;</span><br><span class="line">    book2.revenue = book2.units_sold * price2;</span><br><span class="line">    <span class="keyword">if</span> (book1.bookNo == book2.bookNo)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">unsigned</span> totalCnt = book1.units_sold + book2.units_sold;</span><br><span class="line">        <span class="keyword">double</span> totalRevenue = book1.revenue + book2.revenue;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; book1.bookNo &lt;&lt; <span class="string">" "</span> &lt;&lt; totalCnt &lt;&lt; <span class="string">" "</span> &lt;&lt; totalRevenue &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        <span class="keyword">if</span> (totalCnt != <span class="number">0</span>)</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; totalRevenue / totalCnt &lt;&lt; <span class="built_in">std</span>::endl;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"(no sales)"</span> &lt;&lt; <span class="built_in">std</span>::endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">"Data must refer to same ISBN"</span> &lt;&lt; <span class="built_in">std</span>::endl;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;  <span class="comment">// indicate failure</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这不就是那个书店程序么……</p>
+<hr>
+<p>应该是还有一个程序的，今天来不及弄了，自定义数据结构其实第一章也提到了一些。这样子关于变量和基本类型的东西基本就搞完了。但是里面还有很多我没能搞明白的东西，《c++ primer》作为一本工具书应该是用来查阅的，写这些例题也算是慢慢把c++重新学一遍吧，加油！</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
 	</div>
 
 
@@ -822,66 +944,10 @@
 
 
   
-    <article id="post-2015-10-01-blog" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2015/10/01/2015-10-01-blog/" class="article-date">
-  	<time datetime="2015-09-30T16:40:35.000Z" itemprop="datePublished">2015-10-01</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/01/2015-10-01-blog/">建博客的血泪史</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p></p><h1>建博客的血泪史</h1><p></p>
-<p>开学这么长时间了，还是没有从上学期的阴影中走出来T<em>T。好吧，在黄岛学院这个神（wu）奇（liao）的地方呆了一周，在机房搞了一个周的MFC，还去了各种公司参观，这都不是重点，重点是写报告啊啊啊啊啊ಠ</em>ರೃ 简吐槽时间结束，言归正转，让我们来打开新世界的大门。</p><br><p>我建立这个博客的过程简直是一部血泪史，不过从无到有学习知识的过程总是令人兴奋的。这个事情的契机在于<a href="http://lyeec.me" target="_blank" rel="external">@Lyeec</a>在某年某月推荐我学了Python，然后分享了<a href="http://www.liaoxuefeng.com" target="_blank" rel="external">@廖雪峰</a>的Python教程。虽然我并没有学好Python，但是我在无意间看到了Git的教程，后来一发不可收拾申请了属于自己的github账号并且拥有了一个属于自己的博客。<br>大体的步骤是这样：首先申请一个Github账号，然后新建一个repo（xxx.github.io），我的叫Hsmouc.github.io。接着去github上面搜索关键字Jekyll，然后就会出来一堆的模版，然后通过Git clone命令（先去学git，推荐上面廖雪峰的教程，当然我没有看完，但是掌握了基本操作）将这个repo的名字改成你新建的repo的名字，最后用git push命令将它push到你自己的github上。现在可以在浏览器地址栏输入xxx.github.io啦，这就是你博客的初始样式。<br>如果你熟悉html语言，精通js，那么你可以push自己的站点让Github帮助你托管。假如你像我一样连最基本的html语法都要一条条Google的话，那你可以使用Jekyll模版，在使用模版的过程中逐渐熟悉网页的布局之类。<br>其实到这里基本上就已经差不多了，以上就是我用了大约一周时间搞出了一个博客的过程。仅从流程上来看其实并不复杂，但是在具体细节上还需要自己一遍又一遍的请教大神或者默默Google，细节上的问题有时间我会补充，在以后的一段时间我会不断的给我的博客增加一些功能。这个渣渣的排版等我学会了Markdown再改吧，在vim里面写html我也是醉了◡ ヽ(`Д´)ﾉ ┻━┻ </p><br><p>晚安，各位</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Blog/">Blog</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/前端开发/">前端开发</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">
