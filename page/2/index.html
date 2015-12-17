@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Blog/" style="font-size: 20px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 15px;">Pi</a>
+						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 15px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/MFC/" style="font-size: 17.5px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 12.5px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 12.5px;">Pi</a> <a href="/tags/Wi-Fi/" style="font-size: 15px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a>
 					</div>
 				</section>
 				
@@ -192,11 +192,11 @@
 
       <div class="body-wrap">
   
-    <article id="post-2015-10-01-blog" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2015-10-23-wifi2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/10/01/2015-10-01-blog/" class="article-date">
-  	<time datetime="2015-09-30T16:40:35.000Z" itemprop="datePublished">2015-10-01</time>
+      <a href="/2015/10/22/2015-10-23-wifi2/" class="article-date">
+  	<time datetime="2015-10-22T13:40:27.000Z" itemprop="datePublished">2015-10-22</time>
 </a>
     </div>
   
@@ -209,7 +209,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/01/2015-10-01-blog/">建博客的血泪史</a>
+      <a class="article-title" href="/2015/10/22/2015-10-23-wifi2/">无线网络攻防进阶</a>
     </h1>
   
 
@@ -218,8 +218,504 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p></p><h1>建博客的血泪史</h1><p></p>
-<p>开学这么长时间了，还是没有从上学期的阴影中走出来T<em>T。好吧，在黄岛学院这个神（wu）奇（liao）的地方呆了一周，在机房搞了一个周的MFC，还去了各种公司参观，这都不是重点，重点是写报告啊啊啊啊啊ಠ</em>ರೃ 简吐槽时间结束，言归正转，让我们来打开新世界的大门。</p><br><p>我建立这个博客的过程简直是一部血泪史，不过从无到有学习知识的过程总是令人兴奋的。这个事情的契机在于<a href="http://lyeec.me" target="_blank" rel="external">@Lyeec</a>在某年某月推荐我学了Python，然后分享了<a href="http://www.liaoxuefeng.com" target="_blank" rel="external">@廖雪峰</a>的Python教程。虽然我并没有学好Python，但是我在无意间看到了Git的教程，后来一发不可收拾申请了属于自己的github账号并且拥有了一个属于自己的博客。<br>大体的步骤是这样：首先申请一个Github账号，然后新建一个repo（xxx.github.io），我的叫Hsmouc.github.io。接着去github上面搜索关键字Jekyll，然后就会出来一堆的模版，然后通过Git clone命令（先去学git，推荐上面廖雪峰的教程，当然我没有看完，但是掌握了基本操作）将这个repo的名字改成你新建的repo的名字，最后用git push命令将它push到你自己的github上。现在可以在浏览器地址栏输入xxx.github.io啦，这就是你博客的初始样式。<br>如果你熟悉html语言，精通js，那么你可以push自己的站点让Github帮助你托管。假如你像我一样连最基本的html语法都要一条条Google的话，那你可以使用Jekyll模版，在使用模版的过程中逐渐熟悉网页的布局之类。<br>其实到这里基本上就已经差不多了，以上就是我用了大约一周时间搞出了一个博客的过程。仅从流程上来看其实并不复杂，但是在具体细节上还需要自己一遍又一遍的请教大神或者默默Google，细节上的问题有时间我会补充，在以后的一段时间我会不断的给我的博客增加一些功能。这个渣渣的排版等我学会了Markdown再改吧，在vim里面写html我也是醉了◡ ヽ(`Д´)ﾉ ┻━┻ </p><br><p>晚安，各位</p>
+        <ul>
+<li>还是写在文前：使用aircrack-ng成功截取握手包之后并破解路由器密码以后，让我们来思考黑客可能会做些什么。还是和以前一样，不要攻击邻居家的路由器，不要设法窃取别人的密码，这样是非法的。</li>
+</ul>
+<h3 id="u4E86_u89E3ARP_u6B3A_u9A97_u653B_u51FB"><a href="#u4E86_u89E3ARP_u6B3A_u9A97_u653B_u51FB" class="headerlink" title="了解ARP欺骗攻击"></a>了解ARP欺骗攻击</h3><p>让攻击者获得局域网上的封包甚至篡改封包。原理是让送至特定IP地址的流量被错误的送到攻击者所取代的地方。    </p>
+<ol>
+<li><em>被动式封包嗅探</em><br>通过对无线网络的通讯内容进行监控，利用获取的数据包来获得用户名和密码等敏感信息。我等下要演示的就是这种攻击。   </li>
+<li><em>中间人攻击</em><br>指攻击者与通讯的两端分别建立独立的联系，并交换其所收到的数据，使通讯的两端认为他们正在通过一个私密的连接与对方直接对话，但事实上整个会话都被攻击者完全控制。在中间人攻击中，攻击者可以拦截通讯双方的通话并插入新的内容。</li>
+</ol>
+<h3 id="u6211_u7684_u5B9E_u9A8C"><a href="#u6211_u7684_u5B9E_u9A8C" class="headerlink" title="我的实验"></a>我的实验</h3><p>由于我用的macbook网卡不支持开热点，在淘宝上买了块RT2571网卡，更换了好几个驱动并没有成功。所以我至今还没有使用aireply-ng等等工具。所以我打算先黑一下自己的电脑，等网卡搞定了再去黑我的iPhone。</p>
+<h4 id="Wireshark_u7B80_u4ECB"><a href="#Wireshark_u7B80_u4ECB" class="headerlink" title="Wireshark简介"></a>Wireshark简介</h4><p>本来想介绍很多东西的，但是想想大家应该也能Google到，我就不多说了。在这里特别推荐一本书，叫《Wireshark 网络分析就是这么简单》。</p>
+<h4 id="u4E24_u79CD_u65B9_u6CD5"><a href="#u4E24_u79CD_u65B9_u6CD5" class="headerlink" title="两种方法"></a>两种方法</h4><ol>
+<li>airport+Wireshark<br>还是网卡支持的原因，在Wireshark里无法调到混杂模式。于是我先在终端中输入<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo airport en0 sniff x <span class="comment">//x表示信道</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>接着在Wireshark里打开包，随意分析了一下学校开放路由的包内容。Statistic－&gt;http－&gt;request,然后我看到了这个：<br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exac8o6x23j31400p0n5d.jpg" alt=""><br>我就这么毫无防备的看到了大家在看什么-_-#</p>
+<ol>
+<li>如果我的Mac是一个热点<br>事情好像突然严肃了起来。这样就意味着所有连接到我电脑的设备的数据包都会被我看到，并不需要通过ARP欺骗或者从网关克隆这样的手段，一切好像变的简单了起来。<br>我打算先上四张图（图片均加万恶马赛克）:<br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaah59hz6j310m01rmxn.jpg" alt=""><br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaah8jeoxj30ku0fwgwn.jpg" alt=""><br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaahdoqyfj30ku0fwn79.jpg" alt=""><br><img src="http://ww3.sinaimg.cn/mw690/005WMcFzjw1exaahalk0fj30ku0fwk0j.jpg" alt=""><br>我拿我们学校的网站试了一试，结果自己被吓到了……<br>我尝试了三个网站：校园信息网站／校园教务处网站／校园支付网站。我分别在这三个网站上登录，并用Wireshark抓取数据包。在Filter中输入http并用control+f输入POST，打开数据包查看内容，截图大家都看到了:校园支付和校园信息的登录信息都使用了明码，而由湖南青果软件公司负责的教务信息系统则使用了MD5加密。虽然MD5加密也可以通过暴力美学的方式破解，但是难度很大，  <h3 id="u4E00_u70B9_u603B_u7ED3"><a href="#u4E00_u70B9_u603B_u7ED3" class="headerlink" title="一点总结"></a>一点总结</h3>话说做完整个测试我的内心是崩溃的。平时连了多少未知的Wi-Fi呢？仔细一想还真的是有些后怕。或许那些hacker就默默的蹲在麦当劳或者星巴克的某个角落，等着一个个无知的鱼儿上钩。或者黑客攻下了你的路由器，篡改MAC地址，发动ARP欺骗攻击和中间人攻击，事情恐怕就不是蹭网那么简单了。还是提出一些建议吧。其实对于普通用户来说我并不建议大家绑定MAC地址啊，关闭SSID广播啊之类的办法，其实把路由器的无线密码设置的复杂一些，不要使用默认的路由器登录密码，也不要乱连开放的无线网，这就基本足够了。我的理解就是:你的数据值多少钱，你就应该花多少钱保护它，就这样。</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ARP/">ARP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wi-Fi/">Wi-Fi</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/渗透入侵/">渗透入侵</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2015-10-19-wifi" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/19/2015-10-19-wifi/" class="article-date">
+  	<time datetime="2015-10-19T03:40:25.000Z" itemprop="datePublished">2015-10-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/19/2015-10-19-wifi/">无线网络攻防初探</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>写在文前：由于相关法律法规本文章不予显示(╯°Д°）╯︵ /(.□ . )想什么呢…… 好吧，这项技术呢，是不允许的啦，仅供学习，而且千万不要拿隔壁人家的AP做试验喔，黑自己就好了嘛。  </li>
+</ul>
+<h2 id="u51C6_u5907_u5DE5_u4F5C"><a href="#u51C6_u5907_u5DE5_u4F5C" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="u539F_u6750_u6599"><a href="#u539F_u6750_u6599" class="headerlink" title="原材料"></a>原材料</h3><ol>
+<li>带网卡的计算机</li>
+<li>无线路由器 </li>
+<li>Linux或Mac OS X系统 （什么你是windows？请出门右拐)</li>
+<li>aircrack-ng （我才不会告诉你们我还有kismet呢）</li>
+</ol>
+<h3 id="u5B89_u88C5_u5FC5_u5907_u7684_u5DE5_u5177"><a href="#u5B89_u88C5_u5FC5_u5907_u7684_u5DE5_u5177" class="headerlink" title="安装必备的工具"></a>安装必备的工具</h3><p>首先我们进<a href="http://www.aircrack-ng.org" target="_blank" rel="external">aircrack</a>的官网。右侧边栏<a href="http://www.aircrack-ng.org/install.html" target="_blank" rel="external">Installation</a>选择相应的系统，比如我选择On Mac OS X。然后它说”The simplest and easiest way to install on Mac OS X is via <a href="https://www.macports.org" target="_blank" rel="external">Macports</a>. You simply do “sudo port install aircrack-ng”.”默认大家都过四级了，我就不翻译了。然后我们下载一个Macports，默认大家都会用Mac装dmg。然后装好了，试试它给我的命令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo port install aircrack-ng</span><br></pre></td></tr></table></figure></p>
+<p>终端里出现了这样的提示<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zsh:command not found: port</span><br></pre></td></tr></table></figure></p>
+<p>好吧，让我们来google一下怎么了。其实这个原因很简单，你装完了Macports，但是终端并不知道你有了新后宫，所以呢更新下路径就解决了。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/paths</span><br></pre></td></tr></table></figure></p>
+<p>增加新的两行：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/opt/local/bin</span><br><span class="line">/opt/local/sbin</span><br></pre></td></tr></table></figure></p>
+<p><em>小贴士：下面装完aircrack-ng的时候还要用这个噢</em><br>好了，让我们再输入一次:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo port install aircrack-ng</span><br></pre></td></tr></table></figure></p>
+<p>然后终端就是这样子的:<br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ex6rt5bfh7j31400p0grg.jpg" alt=""><br>安装完毕后，输入aircrack-ng –help指令试试。果然还是command not found。用上面搞port问题的方法可以解决。再介绍一个其他方法：<br>终端输入：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> PATH=$PATH:/opt/local/bin</span><br></pre></td></tr></table></figure></p>
+<p>成功了！</p>
+<h2 id="Hacking"><a href="#Hacking" class="headerlink" title="Hacking"></a>Hacking</h2><h3 id="u626B_u63CF"><a href="#u626B_u63CF" class="headerlink" title="扫描"></a>扫描</h3><p>在终端里输入指令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airport en0 scan</span><br></pre></td></tr></table></figure></p>
+<p>什么？你又报错了？那就对了，那是因为你没有找到airport的路径，也没有把airport加入到sbin下面。解决办法是执行下面的命令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/\Versions/Current/Resources/airport /usr/sbin/airport</span><br></pre></td></tr></table></figure></p>
+<p>再试一次，这时候我们看到终端上出现了一些wifi的信息。我们选择WEP加密的无线网络，记下它的channel.</p>
+<h3 id="u76D1_u542C"><a href="#u76D1_u542C" class="headerlink" title="监听"></a>监听</h3><p>使用命令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo airport en0 sniff <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>解释一下，我选择的是一个1信道，SSID为429的无线网络。好嘛，这就是隔壁宿舍的宿舍号嘛-_-＃之后会发现网卡进入了监听模式。过了一会，按control＋c来结束监听，这时候会提示你^CSession saved to/tmp/airportSniffxxxxx.cap，监听环节结束。</p>
+<h3 id="u8DD1_u5305"><a href="#u8DD1_u5305" class="headerlink" title="跑包"></a>跑包</h3><p>我们首先在终端里输入：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aircrack-ng -w ~/wordlist.txt /tmp/airportSniffxxxxxx.cap</span><br></pre></td></tr></table></figure></p>
+<p>-w表示使用字典， ~/wordlist.txt是字典的所在路径，/tmp/airportSniffxxxxxx.cap是包所在的位置。<br>回车以后<br><img src="http://ww2.sinaimg.cn/mw690/005WMcFzjw1ex6rstrn2kj313w0cjq60.jpg" alt=""><br>观察handshake和IVs数值，我们选择handshack的数值为1的429，记下序号为10。在index number of target network里面输入10.<br>就会出现下图这样类似黑客帝国中炫酷的画面：<img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ex6rswn550j313w0cjjtk.jpg" alt="">ps打不开这个截图，我就不打码了，成神别砍我T_T</p>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>一次最简单的Wi-FiHacking就这么完成了，知道你们的Wi-Fi有多不安全了吧。因为是成神的Wi-Fi，确定他不会砍我，所以我甚至没有隐藏我的MAC地址。用aircrack-ng可以做到什么程度呢？WEP/WPA2加密的无线网络，只要有足够长的时间，只要密码本足够全，破解密码只是时间问题。所以说，大家在加密Wi-Fi的时候首先不要用WEP加密，这种加密基本可以秒破。WPA2加密的密码最好保证长度，要有大小写，特殊符号等等，这样可以大大增加黑客解包的难度。被黑客攻下AP可不仅仅是多一个人蹭网的简单后果，严重程度可以参见知乎问题<a href="http://www.zhihu.com/question/23061570" target="_blank" rel="external">无线路由器被蹭网后，有被黑的风险吗</a>。<br>关于aircrack-ng的其他功能我会继续介绍，我也会继续关注无线网络安全。</p>
+<li>对了,我的外置usb无线网卡已经在路上了，我会尝试使用Deauth攻击噢～</li>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wi-Fi/">Wi-Fi</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/渗透入侵/">渗透入侵</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2015-10-17-backtotop" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/17/2015-10-17-backtotop/" class="article-date">
+  	<time datetime="2015-10-17T02:34:08.000Z" itemprop="datePublished">2015-10-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/17/2015-10-17-backtotop/">js代码实现返回顶部功能</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>写在文前<br>话说本来也没想搞这个按钮的，但是前两天心血来潮写了一个电影推荐的文章，突然感觉回到页首好麻烦，于是我就去简单搞了一个返回顶部的按钮。<br>实现这个功能其实并不复杂，</p>
+<h3 id="u4F7F_u7528_u951A_u8FDE_u63A5"><a href="#u4F7F_u7528_u951A_u8FDE_u63A5" class="headerlink" title="使用锚连接"></a>使用锚连接</h3><ol>
+<li><p>在body的标签添加定位id:  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">body</span> <span class="attribute">id</span>=<span class="value">"top"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在最底部需要返回顶部的位置添加触发代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#top"</span>&gt;</span>返回顶部<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这种方法的优点是显而易见的，缺点就是效果非常的渣。一天前我的返回顶部的标签js失败的时候就是这种效果，强迫症怎能就此止步！</p>
+<h3 id="u57FA_u4E8EjQuery_u5B9E_u73B0"><a href="#u57FA_u4E8EjQuery_u5B9E_u73B0" class="headerlink" title="基于jQuery实现"></a>基于jQuery实现</h3><ol>
+<li>添加div  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"back-top"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">title</span>=<span class="value">"返回顶部"</span>&gt;</span><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/img/scrollup.png"</span>/&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>那个png文件是你自己要放在img文件夹里的，就是一个箭头的图。我的箭头图就是自己用ps画的。</p>
+<ol>
+<li>添加样式  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#back-top</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> fixed</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">30px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin-left</span>:<span class="value"> <span class="number">1040px</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="id">#back-top</span> <span class="tag">a</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">54px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">54px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#ddd</span> <span class="function">url</span>(../img/bgs/bg_up_arrow.png) no-repeat center center</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#aaa</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-border-radius</span>:<span class="value"> <span class="number">7px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-moz-border-radius</span>:<span class="value"> <span class="number">7px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">7px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-transition</span>:<span class="value"> <span class="number">1s</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-moz-transition</span>:<span class="value"> <span class="number">1s</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">transition</span>:<span class="value"> <span class="number">1s</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="id">#back-top</span> <span class="tag">a</span><span class="pseudo">:hover</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#777</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这里是使用一个背景透明的向上箭头图片，通过backgroud-color指定正常时和鼠标放上时的背景颜色，border-radius指定圆角的半径。</p>
+<ol>
+<li>添加js代码<br>我的代码如下，是直接放在post的模版文件里的，有兴趣的同学可以试试新建一个.js文件，在post模版文件里引用：  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;SCRIPT type=text/javascript&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">goTopEx</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> obj = <span class="built_in">document</span>.getElementById(<span class="string">"back-top"</span>);</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">getScrollTop</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">document</span>.documentElement.scrollTop + <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">setScrollTop</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">document</span>.documentElement.scrollTop) &#123;</span><br><span class="line">                <span class="built_in">document</span>.documentElement.scrollTop = value;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">document</span>.body.scrollTop = value;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">window</span>.onscroll = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            getScrollTop() &gt; <span class="number">0</span> ? obj.style.display = <span class="string">""</span></span><br><span class="line">            : obj.style.display = <span class="string">"none"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        obj.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> goTop = setInterval(scrollMove, <span class="number">10</span>);</span><br><span class="line">            <span class="function"><span class="keyword">function</span> <span class="title">scrollMove</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                setScrollTop(getScrollTop() / <span class="number">1.1</span>);</span><br><span class="line">                <span class="keyword">if</span> (getScrollTop() &lt; <span class="number">1</span>)</span><br><span class="line">                clearInterval(goTop);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">goTopEx();</span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="title">SCRIPT</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>以上就是实现过程，效果可以参考我的文章页面，忽略我用ps画的箭头-_-#</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/前端开发/">前端开发</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2015-10-15-movieshare" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/16/2015-10-15-movieshare/" class="article-date">
+  	<time datetime="2015-10-16T00:22:25.000Z" itemprop="datePublished">2015-10-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/16/2015-10-15-movieshare/">观影指南</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>先写这么一个很大的题目自己占个坑，没事满满补吧。<br>写在文前：这个电影评分，比如说IMDb的，豆瓣的，还有其他的各种作为参考是可以的,太当真你就输了。所谓观影是一件相当私人的事情，所以这个指南属于我的私货。<br>想想以后还是有可能添加很多东西进去的，于是我决定按照类型简单分类。wiki上说电影有Σ（ﾟдﾟlll），卧槽这么多分类～ 算了，按导演分吧。</p>
+<h2 id="u514B_u91CC_u65AF_u6258_u5F17_B7_u8BFA_u5170"><a href="#u514B_u91CC_u65AF_u6258_u5F17_B7_u8BFA_u5170" class="headerlink" title="克里斯托弗·诺兰"></a>克里斯托弗·诺兰</h2><p>诺兰是我最爱的导演，没有之一。</p>
+<ul>
+<li>盗梦空间<br>估计大多数国人知道诺兰这个名字是因为这部电影，盗梦这个题材就已经足够吸引眼球了，加上Leonardo DiCaprio的精彩表演，严谨的逻辑和紧凑的剧情，应该不会让观众失望。 </li>
+<li>星际穿越<br>其实我觉得这个电影还是延续了诺兰的烧脑风格，在2014年成为了最热门电影之一。我的感觉就是看不懂，看不懂，看不懂，但是画面效果声音效果相当震撼，有机会一定要再看一次IMAX～； </li>
+<li>蝙蝠侠：黑暗骑士<br>请收下我的膝盖。话说看完这部电影你会重新审视你知道的超级英雄。把超级英雄的类型片拍到了极致，这是我最爱的电影。尤其喜欢希斯莱杰的表演，看了不下十遍。</li>
+<li>致命魔术<br>一个关于复仇的故事，叙事精巧，情节悬疑，又是一个大家都喜欢的题材。可能诺兰才是本片中最厉害的魔术师。       </li>
+<li>记忆碎片<br>支离破碎的记忆，个人非常喜欢本片的交叉剪辑。一条线彩色顺叙，一条线黑白倒叙，最后巧妙的交融在了一起。我打算再看一遍，看两遍真心不能完全看懂啊。</li>
+</ul>
+<h2 id="u6606_u6C40_B7_u5854_u4F26_u8482_u8BFA"><a href="#u6606_u6C40_B7_u5854_u4F26_u8482_u8BFA" class="headerlink" title="昆汀·塔伦蒂诺"></a>昆汀·塔伦蒂诺</h2><p>鬼才导演，暴力美学。</p>
+<ul>
+<li>低俗小说<br>非线性的叙事电影代表作，结构巧妙。我认为最精彩的不是引人入胜的故事，而是昆汀讲故事的方式。评价两极分化的电影，不是所有人都会喜欢。</li>
+<li>杀死比尔<br>一部眼花缭乱，绝对能带给你感官刺激的动作电影，暴力美学的典范。讲述了一个有关复仇的故事。配乐相当优秀，请戴好你们的耳机享受。</li>
+<li>被解救的姜戈<br>个人觉得剪辑节奏有点慢，片子时间太长没有看完。</li>
+<li>无耻混蛋<br>获得了第82届奥斯卡最佳导演、最佳影片等七项提名的电影。荒诞中透着真实，昆汀丢弃了历史和严肃，可是却自己玩出了疯癫的诗意。</li>
+</ul>
+<h2 id="u53F2_u8482_u6587_B7_u65AF_u76AE_u5C14_u4F2F_u683C"><a href="#u53F2_u8482_u6587_B7_u65AF_u76AE_u5C14_u4F2F_u683C" class="headerlink" title="史蒂文·斯皮尔伯格"></a>史蒂文·斯皮尔伯格</h2><p>大制作的好莱坞电影。</p>
+<ul>
+<li>拯救大兵瑞恩<br>我个人还是比较喜欢战争片的，这部电影应该是我看过的反映二战残酷血腥最成功的一部影片，剧情和表演都很完美。还有关于人性的探讨，让人沉思。</li>
+<li>辛德勒的名单<br>个人不是很喜欢这部电影，但是喜欢它的配乐。看在几乎所有的榜单都会把它列入其中的份子上就先写上吧。</li>
+</ul>
+<h2 id="u65AF_u5766_u5229_B7_u5E93_u5E03_u91CC_u514B"><a href="#u65AF_u5766_u5229_B7_u5E93_u5E03_u91CC_u514B" class="headerlink" title="斯坦利·库布里克"></a>斯坦利·库布里克</h2><p>战后现代主义电影代表人物。</p>
+<ul>
+<li>闪灵<br>对，我首先推荐的不是他的2001太空漫游，而是这么一部恐怖片。怎么说呢，闪灵给我幼小的心灵留下了严重的阴影，以致于在看完闪灵之后至今没有看过恐怖片。最佳观影时间：夜深人静 最佳观影地点：只有你一个人的家里，或者其他没人的地方，别问我是怎么知道的(¬_¬)</li>
+<li>2001太空漫游<br>这是1968年在华盛顿首映的电影，其他的自己感受。应该算是现代科幻电影的开山之作了吧。</li>
+<li>发条橙<br>建议一个人欣赏，至于为什么我就不说了。请移步google或者豆瓣，“彻底的善和彻底的恶一样没有人性”</li>
+</ul>
+<h2 id="u57C3_u5C3C_u5965_B7_u83AB_u91CC_u5EB7_u5185"><a href="#u57C3_u5C3C_u5965_B7_u83AB_u91CC_u5EB7_u5185" class="headerlink" title="埃尼奥·莫里康内"></a>埃尼奥·莫里康内</h2><p>那些难忘的声音。</p>
+<ul>
+<li>海上钢琴师<br>莫里康内并不是这部电影的导演，但是音乐显然是这部电影的精华所在。1900的故事，关于钢琴，关于尽头，关于彼岸。</li>
+<li>西西里的美丽传说<br>美丽之后的政治隐喻，已添加至将要观看列表。</li>
+<li>天堂电影院<br>托纳多雷的时空三部曲之一，Quelle con gli occhi azzurri sono le più difficili.语言不通真的是很麻烦呢。</li>
+</ul>
+<h2 id="u5415_u514B_B7_u8D1D_u677E"><a href="#u5415_u514B_B7_u8D1D_u677E" class="headerlink" title="吕克·贝松"></a>吕克·贝松</h2><p>有一部太赞的电影。</p>
+<ul>
+<li>这个杀手不太冷<br>这个故事有点萌，又有点悲伤。强烈推荐的电影，当时一直没有看是因为这个奇怪的译名。对了，还有那首《shape of my heart》，真的是神片配神曲啊。</li>
+<li>超体<br>脑洞，脑洞，脑洞……当时看的是IMAX，记得里面的场景相当的震撼，部分场景非常宏大，虽然很多影评人对这部电影的评价并不是很高，私以为还是值回票价的。</li>
+<li>第五元素<br>还是初一的时候看的电影，不知道吕克贝松。看完了心里只有三个字WTF～话说当时真的被这鬼电影震惊到了，法国人真会玩啊。后来意外看到了这个电影没想到这么有名-_-#</li>
+</ul>
+<h2 id="u963F_u5C14_u5F17_u96F7_u5FB7_B7_u5E0C_u533A_u67EF_u514B"><a href="#u963F_u5C14_u5F17_u96F7_u5FB7_B7_u5E0C_u533A_u67EF_u514B" class="headerlink" title="阿尔弗雷德·希区柯克"></a>阿尔弗雷德·希区柯克</h2><p>“希区柯克”不仅仅是一个名字。</p>
+<ul>
+<li>惊魂记<br>单论这个电影的镜头有多么惊悚已经毫无意义，玩恐怖现在的确比那时候厉害多了。但是希区柯克的电影的悬疑设定的确无可指摘。这是一部关于分裂人格的电影。以分裂人格为主题的另一部我喜欢的优秀电影是《致命ID》。</li>
+<li>迷魂记<br>“他把变焦与移动镜头结合起来从上往下拍摄一个楼梯井的镜头，成功地造成了主人公恐高症的晕眩的心理感觉。他的做法是把楼梯井的模型侧放，摄影机对准楼梯井口，处于远处慢慢推向模型，而变焦镜头开始时处于长焦（望远镜头）慢慢拉成广角，要求是模型的大小 在银幕上必须保持不变。”这个效果我用24-70mm的镜头尝试过（因为我用的最长焦就是105-_-#）没有成功。现在这个效果可以通过adobe公司的AE轻松实现。</li>
+<li>蝴蝶梦<br>这个配乐，呃，还真是有点惊悚。</li><li>他的电影我看的不多，以后再补。</li>
+
+
+</ul>
+<h2 id="u83B1_u5FB7_u5229_u2022_u65AF_u79D1_u7279"><a href="#u83B1_u5FB7_u5229_u2022_u65AF_u79D1_u7279" class="headerlink" title="莱德利•斯科特"></a>莱德利•斯科特</h2><p>平凡的大多数的极致。</p>
+<ul>
+<li>银翼杀手<br>经典的科幻惊悚片，除了构思精巧的情节，还有相当复杂的哲学况味，很适合大家慢慢体会。特效也达到了当时的最高水平，获得了奥斯卡最佳视觉效果和最佳美术指导的提名。</li>
+<li>陌路狂花<br>一部教科书式的电影，象征着女权主义的兴起，很优秀的一部公路片。</li>
+<li>黑鹰坠落<br>这部电影不能再爱了。我觉得是最真实的描写战争的电影之一，丝毫没有掩饰战争的血腥，背后透出的对人性的思考更是引人入胜。</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/review/">review</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/摄影/">摄影</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2015-10-15-cppcode3" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/15/2015-10-15-cppcode3/" class="article-date">
+  	<time datetime="2015-10-15T13:21:08.000Z" itemprop="datePublished">2015-10-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/15/2015-10-15-cppcode3/">c++ primer 2.2</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>2.15  </li>
+<li><p>Which of the following definitions,if any,are invalid?Why?        </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(a) <span class="keyword">int</span> ival=<span class="number">1.01</span>;  <span class="comment">//valid</span></span><br><span class="line">(b) <span class="keyword">int</span> &amp;rval=<span class="number">1.01</span>;  <span class="comment">//invalid</span></span><br><span class="line">(c) <span class="keyword">int</span> &amp;rval2=ival; <span class="comment">//valid</span></span><br><span class="line">(d) <span class="keyword">int</span> &amp;rval3;  <span class="comment">//invalid</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.17</p>
+</li>
+<li>What does the following code print?      <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i, &amp;ri = i;</span><br><span class="line">i = <span class="number">5</span>; ri = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">" "</span> &lt;&lt; ri &lt;&lt; <span class="built_in">std</span>::endl;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>输出10 10(这玩意叫右值引用，所以说把值赋给了与引用绑定的对象)</p>
+<ul>
+<li>2.18</li>
+<li><p>Write code to change the value of a pointer. Write code to change the value to which the pointer points.  </p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">int</span> a<span class="number">=0</span>,<span class="keyword">b=1;</span><br><span class="line"></span><span class="label">int</span> *<span class="literal">p1</span>=&amp;a,*<span class="literal">p2</span><span class="label">=p1</span><span class="comment">;</span></span><br><span class="line"><span class="label">p1</span><span class="label">=b</span><span class="comment">;</span></span><br><span class="line">*<span class="literal">p2</span><span class="label">=b</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.20</p>
+</li>
+<li>What does the following program do?<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int i = 42;</span><br><span class="line">int <span class="keyword">*</span>p1 = &amp;i; <span class="keyword">*</span>p1 = <span class="keyword">*</span>p1 <span class="keyword">*</span> <span class="keyword">*</span>p1;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>结果是1764 你以为把乘号放在指针符号中间我就不认识啦～</p>
+<ul>
+<li>2.21</li>
+<li>Explain each of the following definitions. Indicate whether any are illegal and, if so, why.<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">(a) <span class="keyword">double</span>* dp = &amp;i;  <span class="comment">//illegal</span></span><br><span class="line">(b) <span class="keyword">int</span> *ip = i;  <span class="comment">//illegal</span></span><br><span class="line">(c) <span class="keyword">int</span> *p = &amp;i;  <span class="comment">//legal</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这个题呢，除了两种例外情况，其他所有指针的类型都要和它指向的类型相匹配哦。</p>
+<ul>
+<li>2.24</li>
+<li>Why is the initialization of p legal but that of lp illegal?  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">void</span> *p = &amp;i;</span><br><span class="line"><span class="keyword">long</span> *lp = &amp;i;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>void* 是一个可以指向类型的指针，第二个反正我是不会这么写。</p>
+<ul>
+<li>2.27</li>
+<li><p>Which of the following initializations are legal? Explain why.  </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = -<span class="number">1</span>, &amp;r = <span class="number">0</span>;         <span class="comment">// illegal</span></span><br><span class="line"><span class="keyword">int</span> *<span class="keyword">const</span> p2 = &amp;i2;        <span class="comment">// legal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> i = -<span class="number">1</span>, &amp;r = <span class="number">0</span>;   <span class="comment">// legal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *<span class="keyword">const</span> p3 = &amp;i2;  <span class="comment">// legal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p1 = &amp;i2;        <span class="comment">// legal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;<span class="keyword">const</span> r2;        <span class="comment">// illegal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> i2 = i, &amp;r = i;   <span class="comment">// legal</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.28</p>
+</li>
+<li><p>Explain the following definitions. Identify any that are illegal.</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i, *<span class="keyword">const</span> cp;       <span class="comment">// illegal</span></span><br><span class="line"><span class="keyword">int</span> *p1, *<span class="keyword">const</span> p2;     <span class="comment">// illegal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ic, &amp;r = ic;  <span class="comment">// illegal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *<span class="keyword">const</span> p3;    <span class="comment">// illegal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p;           <span class="comment">// legal</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.30</p>
+</li>
+<li>For each of the following declarations indicate whether the object being declared has top-level or low-level const.<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">const</span> int <span class="literal">v2</span> = <span class="number">0</span><span class="comment">; int v1 = v2;</span></span><br><span class="line"><span class="label">int</span> *<span class="literal">p1</span> = &amp;<span class="literal">v1</span>, &amp;<span class="literal">r1</span> = <span class="literal">v1</span><span class="comment">;</span></span><br><span class="line"><span class="label">const</span> int *<span class="literal">p2</span> = &amp;<span class="literal">v2</span>, *const <span class="literal">p3</span> = &amp;i, &amp;<span class="literal">r2</span> = <span class="literal">v2</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>根据定义很容易判断v2是顶层const，p2是底层const，因为p3是一个指向常量的指针(point to const)，它本身又是一个常量，所以说它既是底层const，又是顶层const。</p>
+<ul>
+<li>2.40</li>
+<li><p>Write your own version of the Sales_data class.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> Sales_data&#123;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> bookName;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> bookPublish;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> ISBN;</span><br><span class="line">   <span class="keyword">int</span> soldnum=<span class="number">0</span>;</span><br><span class="line">   <span class="keyword">double</span> revenue=<span class="number">0.0</span>;</span><br><span class="line">   <span class="keyword">double</span> price = <span class="number">0.0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.41</p>
+</li>
+<li>Use your Sales_data class to rewrite the exercises in § 1.5.1(p. 22), § 1.5.2(p. 24), and § 1.6(p. 25). For now, you should define your Sales_data class in the same file as your main function.</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">struct</span> Sales_data</span><br><span class="line">&#123;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</span><br><span class="line">   <span class="keyword">int</span> soldnum;</span><br><span class="line">   <span class="keyword">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    Sales_data book;</span><br><span class="line">    doublr price;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;book.bookNo&gt;&gt;book.soldnum&gt;&gt;price;</span><br><span class="line">    book.revenue=price*book.soldnum;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;book.bookNo&lt;&lt;<span class="string">" "</span>&lt;&lt;book.soldnum&lt;&lt;<span class="string">" "</span>&lt;&lt;book.revenue&lt;&lt;<span class="string">" "</span>&lt;&lt;price;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个应该在学谭爷爷的c的时候就会了+_+   还有一个<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> Sale_data</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</span><br><span class="line">    <span class="keyword">unsigned</span> units_sold = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    Sale_data book1, book2;</span><br><span class="line">    <span class="keyword">double</span> price1, price2;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; book1.bookNo &gt;&gt; book1.units_sold &gt;&gt; price1;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; book2.bookNo &gt;&gt; book2.units_sold &gt;&gt; price2;</span><br><span class="line">    book1.revenue = book1.units_sold * price1;</span><br><span class="line">    book2.revenue = book2.units_sold * price2;</span><br><span class="line">    <span class="keyword">if</span> (book1.bookNo == book2.bookNo)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">unsigned</span> totalCnt = book1.units_sold + book2.units_sold;</span><br><span class="line">        <span class="keyword">double</span> totalRevenue = book1.revenue + book2.revenue;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; book1.bookNo &lt;&lt; <span class="string">" "</span> &lt;&lt; totalCnt &lt;&lt; <span class="string">" "</span> &lt;&lt; totalRevenue &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        <span class="keyword">if</span> (totalCnt != <span class="number">0</span>)</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; totalRevenue / totalCnt &lt;&lt; <span class="built_in">std</span>::endl;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"(no sales)"</span> &lt;&lt; <span class="built_in">std</span>::endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">"Data must refer to same ISBN"</span> &lt;&lt; <span class="built_in">std</span>::endl;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;  <span class="comment">// indicate failure</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这不就是那个书店程序么……</p>
+<hr>
+<p>应该是还有一个程序的，今天来不及弄了，自定义数据结构其实第一章也提到了一些。这样子关于变量和基本类型的东西基本就搞完了。但是里面还有很多我没能搞明白的东西，《c++ primer》作为一本工具书应该是用来查阅的，写这些例题也算是慢慢把c++重新学一遍吧，加油！</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2015-10-14-markdown" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/14/2015-10-14-markdown/" class="article-date">
+  	<time datetime="2015-10-14T02:40:27.000Z" itemprop="datePublished">2015-10-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/14/2015-10-14-markdown/">使用markdown排版</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>终于从使用html标签的排版方式进化到了Markdown排版，我们来试试功能。</p>
+<h1 id="u8FD9_u662F_u4E2A_u6807_u9898"><a href="#u8FD9_u662F_u4E2A_u6807_u9898" class="headerlink" title="这是个标题"></a>这是个标题</h1><h2 id="u8FD9_u4E5F_u662F_u4E2A_u6807_u9898"><a href="#u8FD9_u4E5F_u662F_u4E2A_u6807_u9898" class="headerlink" title="这也是个标题"></a>这也是个标题</h2><h3 id="u5F3A_u884C_u518D_u8BD5_u4E00_u4E2A_u6807_u9898"><a href="#u5F3A_u884C_u518D_u8BD5_u4E00_u4E2A_u6807_u9898" class="headerlink" title="强行再试一个标题"></a>强行再试一个标题</h3><p>果然可以了嘛(￣▽￣)  再试试别的功能。<br>我们来引用试试：</p>
+<blockquote>
+<p>这句话是我说的。   </p>
+</blockquote>
+<p><em>好像还不错的样子( ´ ▽ ` )ﾉ 斜体喔</em></p>
+<ul>
+<li><p>简明的教程<a href="http://www.jianshu.com/p/q81RER" target="_blank" rel="external">简书</a>写的很不错。  </p>
+</li>
+<li><p>语法大全参见<a href="http://wowubuntu.com/markdown/" target="_blank" rel="external">wowubuntu</a>。  </p>
+</li>
+<li><p>最后强行推荐一个Mac软件<a href="http://mouapp.com" target="_blank" rel="external">Mou</a>，不错的Markdown编辑器。（界面截图）<br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ex12b8u4cej30p00h0gos.jpg" alt=""></p>
+</li>
+</ul>
 
       
     </div>
@@ -254,9 +750,281 @@
 
 
   
+    <article id="post-2015-10-09-cppcode2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/09/2015-10-09-cppcode2/" class="article-date">
+  	<time datetime="2015-10-09T15:25:11.000Z" itemprop="datePublished">2015-10-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/09/2015-10-09-cppcode2/">c++ primer 2.1</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这次准备把非编程题的答案也放上去+_+<br>决定使用English来写题目以示逼格。</p>
+
+<p><li>2.1</li></p>
+<p><li>What are the differences between int, long, long long, and short? Between an unsigned and a signed type? Between a float and a double?</li></p>
+<p><small>c++ primer原文如下：C++ guarantees short and int is at least 16 bits, long at least 32 bits, long long at least 64 bits.<br><br>The signed can represent positive numbers, negative numbers and zero, while unsigned can only represent numbers no less than zero.<br><br>The C and C++ standards do not specify the representation of float, double and long double. It is possible that all three implemented as IEEE double-precision. Nevertheless, for most architectures (gcc, MSVC; x86, x64, ARM) float is indeed a IEEE single-precision floating point number (binary32), and double is a IEEE double-precision floating point number (binary64).</small></p>
+
+<p><li>2.2</li></p>
+<p><li>To calculate a mortgage payment, what types would you use for the rate, principal, and payment? Explain why you selected each type.</li></p>
+<p><small>太水了</small></p>
+
+<p><li>2.3</li></p>
+<p><li>What output will the following code produce?</li><br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">unsigned u=<span class="number">10</span>,u2=<span class="number">42</span>;</span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;u2-u&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">32</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;u-u2&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">4294967264</span></span><br><span class="line">int i=<span class="number">10</span>,i2=<span class="number">42</span>;  </span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;i2-i&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">32</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;i-i2&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span>-<span class="number">32</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;i-u&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">0</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;u-i&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>; <span class="regexp">//</span><span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+<p><li>2.8</li></p>
+<p><li>Using escape sequences, write a program to print 2M followed by a newline. Modify the program to print 2, then a tab, then an M, followed by a newline.</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">&#123;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="number">2</span>&lt;&lt;<span class="string">"\115\012"</span>;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="number">2</span>&lt;&lt;<span class="string">"\t\115\012"</span>;</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><li>2.9</li></p>
+<p><li>Explain the following definitions. For those that are illegal, explain what’s wrong and how to correct it.<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(a) <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; <span class="keyword">int</span> input_value;</span><br><span class="line">(b) <span class="keyword">int</span> i = &#123; <span class="number">3.14</span> &#125;;</span><br><span class="line">(c) <span class="keyword">double</span> salary = wage = <span class="number">9999.99</span>;</span><br><span class="line">(d) <span class="keyword">int</span> i = <span class="number">3.14</span>;</span><br></pre></td></tr></table></figure></li></p>
+<p></p>
+<p><small>error:expect’(‘for funtion-style cast or type construction.</small></p><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> input_value=<span class="number">0</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;input_value;</span><br></pre></td></tr></table></figure><br><br><p><small>warning: implicit conversion from ‘double’ to ‘int’ changes value from 3.14 to 3</small></p><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> i=&#123;<span class="number">3.14</span>&#125;;</span><br></pre></td></tr></table></figure><br><br><p><small>error: use of undeclared identifier ‘wage’</small></p><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> wage;</span><br><span class="line"><span class="keyword">double</span> salary = wage = <span class="number">9999.99</span>;</span><br></pre></td></tr></table></figure><br><br><li>2.10</li><br><li>What are the initial values, if any, of each of the following variables?</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> global_str;</span><br><span class="line"><span class="keyword">int</span> global_int;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> local_int;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> local_str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><p><small>global_str is global variable, so the value is empty string. global_int is global variable, so the value is zero. local_int is a local variable which is not uninitialized, so it has a undefined value. local_str is also a local variable which is not uninitialized, but it has a value that is defined by the class. So it is empty string. </small></p>
+
+<p><li>2.13</li></p>
+<p><li>What is the value of j in the following program?</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> i = <span class="number">100</span>;</span><br><span class="line">   <span class="keyword">int</span> j = i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><small>j=100</small></p>
+
+<p><li>2.14</li></p>
+<p><li>Is the following program legal? If so, what values are printed?</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">100</span>, sum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i!=<span class="number">10</span>;++i)</span><br><span class="line">    &#123;sum+=i&#125;;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;sum&lt;&lt;<span class="built_in">std</span>::endl;</span><br></pre></td></tr></table></figure></p>
+<p><small>Output:100 45</small></p><br><br><br><br><br><p><small>剩下的东西明天再搞吧，今天好烦，名字换成2.1了，就这么任性的决定了。</small></p>
+
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2015-10-08-cppcode1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/08/2015-10-08-cppcode1/" class="article-date">
+  	<time datetime="2015-10-08T15:23:08.000Z" itemprop="datePublished">2015-10-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/08/2015-10-08-cppcode1/">c++ primer 1</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <li>1.9</li><br><li>编写程序，使用while循环将50到100的整数相加。</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">     <span class="keyword">int</span> sum=<span class="number">0</span>,i=<span class="number">50</span>;</span><br><span class="line">     <span class="keyword">while</span>(i!=<span class="number">101</span>)</span><br><span class="line">     sum+=i++;</span><br><span class="line">     <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"sum="</span>&lt;&lt;sum&lt;&lt;<span class="built_in">std</span>::end;</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><li>1.10</li><br><li>除了++运算符将运算对象的值增加1以外，还有一个递减运算符(–)实现将值减少1.编写程序，使用递减运算符在循环中按递减顺序打印出10与0之间的整数。</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> val=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(val&gt;=<span class="number">0</span>)</span><br><span class="line">       <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;val--&lt;&lt;<span class="built_in">std</span>::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><li>1.11</li><br><li>编写程序，提示用户输入两个整数，打印出这两个整数所指定的范围内的所有整数。</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">      <span class="keyword">int</span> small = <span class="number">0</span>,big = <span class="number">0</span>,temp;</span><br><span class="line">      <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"enter two integers:\n"</span>;</span><br><span class="line">      <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;small&gt;&gt;big;</span><br><span class="line">          <span class="keyword">if</span>(small&gt;big)&#123;</span><br><span class="line">             temp=small;</span><br><span class="line">             big=temp;</span><br><span class="line">             small=big;</span><br><span class="line">          &#125;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> curr = small;curr &lt;= big; curr++)</span><br><span class="line">         <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;curr:</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><li>1.16</li><br><li>编写程序，从cin中读取一组数，输出其和。</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> limit=<span class="number">0</span>,sum=<span class="number">0</span>,value=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"How many integers would you like to enter?"</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;limit;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;value &amp;&amp; (--limit !=<span class="number">0</span>))</span><br><span class="line">    sum+=value;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;sum+value&lt;&lt;<span class="built_in">std</span>::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><hr><br><li>2015年10月10日更新<br><br>&nbsp;&nbsp;&nbsp;&nbsp;根据lyeec的建议,添加了题目。</li><br><hr><br><li>2015年10月15日更新<br><br>&nbsp;&nbsp;&nbsp;&nbsp;改正了1.11的错误。</li>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2015-10-04-Mac" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/04/2015-10-04-Mac/" class="article-date">
+  	<time datetime="2015-10-04T10:34:38.000Z" itemprop="datePublished">2015-10-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/04/2015-10-04-Mac/">重新认识Mac</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>先附上几张照片吧</p><br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1ewpa4y4ivcj31400p012q.jpg"><br><img src="http://ww2.sinaimg.cn/mw690/005WMcFzjw1ewpa4xlolpj31400p00vk.jpg"><br><img src="http://ww2.sinaimg.cn/mw690/005WMcFzjw1ewpa4ypqupj31400p044g.jpg"><br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewpa4z7lckj30fk03vmxh.jpg"><br><p><br>这个就是传说中的Mac OS X User Edition啦，貌似Apple的新出的系统也没有这么炫酷吧+_+，今天瞎捣鼓了一下，也重新认识了下强大的OS X系统。<br><br>改变的主要有以下几点：<br><br><li>使用<a href="https://www.iterm2.com" target="_blank" rel="external">iterm2</a>和个性化配置<a href="https://github.com/robbyrussell/oh-my-zsh/tree/master/themes/" target="_blank" rel="external">oh-my-zsh。</a></li><br><li>使用<a href="https://github.com/SamRothCA/Today-Scripts/releases" target="_blank" rel="external">Today-Scripts</a>，这是一款能在通知栏运行脚本程序的软件。</li><br><li>使用<a href="https://www.alfredapp.com" target="_blank" rel="external">Alfred</a>来替换系统自带的spotlight。</li><br>iTerm 2 相比自带的 Terminal 应用，有太多优点了。例如，可以设置主题，支持画面分割，各种使用的快捷键，以及快速唤出。配合 Oh My Zsh 使用，效果相当之炫酷。<br><br>当然你首先得安装Zsh和iTerm2。至于怎么安装，直接上官网或者去Github上面clone一下人家的项目就好。<br><br>在<a href="https://github.com/robbyrussell/oh-my-zsh/tree/master/themes/" target="_blank" rel="external">Themes</a>上面下载主题。安装好以后用vim打开.zshrc文件，在配置文件中将<br><code>ZSH_THEME=&quot;robbyrussell&quot;</code>改为：<br><code>ZSH_THEME=&quot;你想改的主题&quot;</code><br>然后打开你的终端看看效果吧。<br><br></p><br><p><br>我还使用了一个新的wight小程序，名字是Today－Scripts。它可以在通知栏运行程序脚本。安装完可以自己添加代码。官方的<a href"https:="" github.com="" samrothca="" today-scripts="" wiki#"="">wiki</a>给出了很多脚本,可以根据需要自己添加，当然你也可以自己写一些脚本来做一些更加Geek的事情。</p><br><p><br>最后强烈推荐一个小程序，名为Alfred，简直黑科技。用快捷键快速调用基本可以完全告别dock和鼠标，然而我并没有购买完整版，完整版甚至可以在搜索框中执行终端的指令，售价17.99欧元。<br></p><br><p><br>ps 我还是抽时间去弄一下markdown吧，Mou已经装好，HTML排版是在是不忍吐槽了。<br></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS-X/">OS X</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/操作系统/">操作系统</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2015-10-02-landscape" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/02/2015-10-02-landscape/" class="article-date">
+  	<time datetime="2015-10-02T03:46:46.000Z" itemprop="datePublished">2015-10-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/02/2015-10-02-landscape/">晨曦</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p></p><h1>晨曦</h1><p></p>
+<p>早晨四点半起床爬山去做日出的延时摄影，然而效果很不理想。随手附两张照片证明到此一游<br><br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1ewn7ys7uqlj31kw11xnb1.jpg"><br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewn7ytpzctj31kw11x7h7.jpg"><br>对了，今天我还要去重拍这个延时，我正好来试一试在网页中外链视频的办法。<br><br>晚安<br></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Landscape/">Landscape</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/摄影/">摄影</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </div>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>无线网络攻防初探 | Hsmouc</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="写在文前：由于相关法律法规本文章不予显示(╯°Д°）╯︵ /(.□ . )想什么呢…… 好吧，这项技术呢，是不允许的啦，仅供学习，而且千万不要拿隔壁人家的AP做试验喔，黑自己就好了嘛。  
+
+准备工作原材料
+带网卡的计算机
+无线路由器 
+Linux或Mac OS X系统 （什么你是windows？请出门右拐)
+aircrack-ng （我才不会告诉你们我还有kismet呢）
+
+安装必备的工具首先我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="无线网络攻防初探">
+<meta property="og:url" content="http://yoursite.com/2015/10/19/2015-10-19-wifi/index.html">
+<meta property="og:site_name" content="Hsmouc">
+<meta property="og:description" content="写在文前：由于相关法律法规本文章不予显示(╯°Д°）╯︵ /(.□ . )想什么呢…… 好吧，这项技术呢，是不允许的啦，仅供学习，而且千万不要拿隔壁人家的AP做试验喔，黑自己就好了嘛。  
+
+准备工作原材料
+带网卡的计算机
+无线路由器 
+Linux或Mac OS X系统 （什么你是windows？请出门右拐)
+aircrack-ng （我才不会告诉你们我还有kismet呢）
+
+安装必备的工具首先我">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ex6rt5bfh7j31400p0grg.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/mw690/005WMcFzjw1ex6rstrn2kj313w0cjq60.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ex6rswn550j313w0cjjtk.jpg">
+<meta property="og:updated_time" content="2015-12-17T14:48:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="无线网络攻防初探">
+<meta name="twitter:description" content="写在文前：由于相关法律法规本文章不予显示(╯°Д°）╯︵ /(.□ . )想什么呢…… 好吧，这项技术呢，是不允许的啦，仅供学习，而且千万不要拿隔壁人家的AP做试验喔，黑自己就好了嘛。  
+
+准备工作原材料
+带网卡的计算机
+无线路由器 
+Linux或Mac OS X系统 （什么你是windows？请出门右拐)
+aircrack-ng （我才不会告诉你们我还有kismet呢）
+
+安装必备的工具首先我">
+  
+    <link rel="alternative" href="/atom.xml" title="Hsmouc" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewktmv52wbj307y07yjrp.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">年糕</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>標籤</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>關於</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/instagram">相册</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Hsmouc" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/5449180097/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+					        
+								<a class="facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100009396457642" title="facebook">facebook</a>
+					        
+								<a class="google" target="_blank" href="https://plus.google.com/u/0/101351542677141027265" title="google">google</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 15px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/MFC/" style="font-size: 17.5px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 12.5px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 12.5px;">Pi</a> <a href="/tags/Wi-Fi/" style="font-size: 15px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://lyeec.me/">墨坊</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">工科在读，C/Python学习中，嵌入式开发，前端/渗透/摄影/吃货ˉ﹃ˉ</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">年糕</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewktmv52wbj307y07yjrp.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">年糕</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/instagram">相册</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Hsmouc" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/5449180097/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+			        
+						<a class="facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100009396457642" title="facebook">facebook</a>
+			        
+						<a class="google" target="_blank" href="https://plus.google.com/u/0/101351542677141027265" title="google">google</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-2015-10-19-wifi" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/19/2015-10-19-wifi/" class="article-date">
+  	<time datetime="2015-10-19T03:40:25.000Z" itemprop="datePublished">2015-10-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      无线网络攻防初探
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wi-Fi/">Wi-Fi</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/渗透入侵/">渗透入侵</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>写在文前：由于相关法律法规本文章不予显示(╯°Д°）╯︵ /(.□ . )想什么呢…… 好吧，这项技术呢，是不允许的啦，仅供学习，而且千万不要拿隔壁人家的AP做试验喔，黑自己就好了嘛。  </li>
+</ul>
+<h2 id="u51C6_u5907_u5DE5_u4F5C"><a href="#u51C6_u5907_u5DE5_u4F5C" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="u539F_u6750_u6599"><a href="#u539F_u6750_u6599" class="headerlink" title="原材料"></a>原材料</h3><ol>
+<li>带网卡的计算机</li>
+<li>无线路由器 </li>
+<li>Linux或Mac OS X系统 （什么你是windows？请出门右拐)</li>
+<li>aircrack-ng （我才不会告诉你们我还有kismet呢）</li>
+</ol>
+<h3 id="u5B89_u88C5_u5FC5_u5907_u7684_u5DE5_u5177"><a href="#u5B89_u88C5_u5FC5_u5907_u7684_u5DE5_u5177" class="headerlink" title="安装必备的工具"></a>安装必备的工具</h3><p>首先我们进<a href="http://www.aircrack-ng.org" target="_blank" rel="external">aircrack</a>的官网。右侧边栏<a href="http://www.aircrack-ng.org/install.html" target="_blank" rel="external">Installation</a>选择相应的系统，比如我选择On Mac OS X。然后它说”The simplest and easiest way to install on Mac OS X is via <a href="https://www.macports.org" target="_blank" rel="external">Macports</a>. You simply do “sudo port install aircrack-ng”.”默认大家都过四级了，我就不翻译了。然后我们下载一个Macports，默认大家都会用Mac装dmg。然后装好了，试试它给我的命令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo port install aircrack-ng</span><br></pre></td></tr></table></figure></p>
+<p>终端里出现了这样的提示<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zsh:command not found: port</span><br></pre></td></tr></table></figure></p>
+<p>好吧，让我们来google一下怎么了。其实这个原因很简单，你装完了Macports，但是终端并不知道你有了新后宫，所以呢更新下路径就解决了。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/paths</span><br></pre></td></tr></table></figure></p>
+<p>增加新的两行：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/opt/local/bin</span><br><span class="line">/opt/local/sbin</span><br></pre></td></tr></table></figure></p>
+<p><em>小贴士：下面装完aircrack-ng的时候还要用这个噢</em><br>好了，让我们再输入一次:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo port install aircrack-ng</span><br></pre></td></tr></table></figure></p>
+<p>然后终端就是这样子的:<br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ex6rt5bfh7j31400p0grg.jpg" alt=""><br>安装完毕后，输入aircrack-ng –help指令试试。果然还是command not found。用上面搞port问题的方法可以解决。再介绍一个其他方法：<br>终端输入：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> PATH=$PATH:/opt/local/bin</span><br></pre></td></tr></table></figure></p>
+<p>成功了！</p>
+<h2 id="Hacking"><a href="#Hacking" class="headerlink" title="Hacking"></a>Hacking</h2><h3 id="u626B_u63CF"><a href="#u626B_u63CF" class="headerlink" title="扫描"></a>扫描</h3><p>在终端里输入指令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airport en0 scan</span><br></pre></td></tr></table></figure></p>
+<p>什么？你又报错了？那就对了，那是因为你没有找到airport的路径，也没有把airport加入到sbin下面。解决办法是执行下面的命令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/\Versions/Current/Resources/airport /usr/sbin/airport</span><br></pre></td></tr></table></figure></p>
+<p>再试一次，这时候我们看到终端上出现了一些wifi的信息。我们选择WEP加密的无线网络，记下它的channel.</p>
+<h3 id="u76D1_u542C"><a href="#u76D1_u542C" class="headerlink" title="监听"></a>监听</h3><p>使用命令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo airport en0 sniff <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>解释一下，我选择的是一个1信道，SSID为429的无线网络。好嘛，这就是隔壁宿舍的宿舍号嘛-_-＃之后会发现网卡进入了监听模式。过了一会，按control＋c来结束监听，这时候会提示你^CSession saved to/tmp/airportSniffxxxxx.cap，监听环节结束。</p>
+<h3 id="u8DD1_u5305"><a href="#u8DD1_u5305" class="headerlink" title="跑包"></a>跑包</h3><p>我们首先在终端里输入：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aircrack-ng -w ~/wordlist.txt /tmp/airportSniffxxxxxx.cap</span><br></pre></td></tr></table></figure></p>
+<p>-w表示使用字典， ~/wordlist.txt是字典的所在路径，/tmp/airportSniffxxxxxx.cap是包所在的位置。<br>回车以后<br><img src="http://ww2.sinaimg.cn/mw690/005WMcFzjw1ex6rstrn2kj313w0cjq60.jpg" alt=""><br>观察handshake和IVs数值，我们选择handshack的数值为1的429，记下序号为10。在index number of target network里面输入10.<br>就会出现下图这样类似黑客帝国中炫酷的画面：<img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ex6rswn550j313w0cjjtk.jpg" alt="">ps打不开这个截图，我就不打码了，成神别砍我T_T</p>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>一次最简单的Wi-FiHacking就这么完成了，知道你们的Wi-Fi有多不安全了吧。因为是成神的Wi-Fi，确定他不会砍我，所以我甚至没有隐藏我的MAC地址。用aircrack-ng可以做到什么程度呢？WEP/WPA2加密的无线网络，只要有足够长的时间，只要密码本足够全，破解密码只是时间问题。所以说，大家在加密Wi-Fi的时候首先不要用WEP加密，这种加密基本可以秒破。WPA2加密的密码最好保证长度，要有大小写，特殊符号等等，这样可以大大增加黑客解包的难度。被黑客攻下AP可不仅仅是多一个人蹭网的简单后果，严重程度可以参见知乎问题<a href="http://www.zhihu.com/question/23061570" target="_blank" rel="external">无线路由器被蹭网后，有被黑的风险吗</a>。<br>关于aircrack-ng的其他功能我会继续介绍，我也会继续关注无线网络安全。</p>
+<li>对了,我的外置usb无线网卡已经在路上了，我会尝试使用Deauth攻击噢～</li>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/22/2015-10-23-wifi2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          无线网络攻防进阶
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/17/2015-10-17-backtotop/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">js代码实现返回顶部功能</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2015-10-19-wifi" data-title="无线网络攻防初探" data-url="http://yoursite.com/2015/10/19/2015-10-19-wifi/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"hsmouc"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 年糕
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

