@@ -4,35 +4,26 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>无线网络攻防进阶 | Hsmouc</title>
+  <title>centos搭建服务器－安装apache | Hsmouc</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="还是写在文前：使用aircrack-ng成功截取握手包之后并破解路由器密码以后，让我们来思考黑客可能会做些什么。还是和以前一样，不要攻击邻居家的路由器，不要设法窃取别人的密码，这样是非法的。
+  <meta name="description" content="好久都没更新博客里面的文章了，快要开学了发现寒假自己什么都没搞出来啊啊啊……最蛋疼的是学校的智能车比赛的网站，要实现论坛的功能。学校的服务器现在又不让用，只好在我自己的VPS上搭建一个简易的服务器来测试了。这是我开始自己搭服务器过程的记录，可能会有点乱……
 
-了解ARP欺骗攻击让攻击者获得局域网上的封包甚至篡改封包。原理是让送至特定IP地址的流量被错误的送到攻击者所取代的地方。    
-
-被动式封包嗅探通过对无线网络的通讯内容进行监控，利用获取的数据包来获得用户">
+我在本地使用的是Mac OS X，远程服务器运行的是centos-6 x86系统。这个VPS是在Bandwagon上购买的，可以使用shad">
 <meta property="og:type" content="article">
-<meta property="og:title" content="无线网络攻防进阶">
-<meta property="og:url" content="http://yoursite.com/2015/10/22/2015-10-23-wifi2/index.html">
+<meta property="og:title" content="centos搭建服务器－安装apache">
+<meta property="og:url" content="http://yoursite.com/2016/02/16/2016-02-16-vps/index.html">
 <meta property="og:site_name" content="Hsmouc">
-<meta property="og:description" content="还是写在文前：使用aircrack-ng成功截取握手包之后并破解路由器密码以后，让我们来思考黑客可能会做些什么。还是和以前一样，不要攻击邻居家的路由器，不要设法窃取别人的密码，这样是非法的。
+<meta property="og:description" content="好久都没更新博客里面的文章了，快要开学了发现寒假自己什么都没搞出来啊啊啊……最蛋疼的是学校的智能车比赛的网站，要实现论坛的功能。学校的服务器现在又不让用，只好在我自己的VPS上搭建一个简易的服务器来测试了。这是我开始自己搭服务器过程的记录，可能会有点乱……
 
-了解ARP欺骗攻击让攻击者获得局域网上的封包甚至篡改封包。原理是让送至特定IP地址的流量被错误的送到攻击者所取代的地方。    
-
-被动式封包嗅探通过对无线网络的通讯内容进行监控，利用获取的数据包来获得用户">
-<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exac8o6x23j31400p0n5d.jpg">
-<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaah59hz6j310m01rmxn.jpg">
-<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaah8jeoxj30ku0fwgwn.jpg">
-<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaahdoqyfj30ku0fwn79.jpg">
-<meta property="og:image" content="http://ww3.sinaimg.cn/mw690/005WMcFzjw1exaahalk0fj30ku0fwk0j.jpg">
-<meta property="og:updated_time" content="2015-12-17T14:52:48.000Z">
+我在本地使用的是Mac OS X，远程服务器运行的是centos-6 x86系统。这个VPS是在Bandwagon上购买的，可以使用shad">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/005WMcFzjw1f11dv2fa1hj31700rh15c.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/005WMcFzjw1f11duxql7pj313r0p0167.jpg">
+<meta property="og:updated_time" content="2016-02-16T11:31:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="无线网络攻防进阶">
-<meta name="twitter:description" content="还是写在文前：使用aircrack-ng成功截取握手包之后并破解路由器密码以后，让我们来思考黑客可能会做些什么。还是和以前一样，不要攻击邻居家的路由器，不要设法窃取别人的密码，这样是非法的。
+<meta name="twitter:title" content="centos搭建服务器－安装apache">
+<meta name="twitter:description" content="好久都没更新博客里面的文章了，快要开学了发现寒假自己什么都没搞出来啊啊啊……最蛋疼的是学校的智能车比赛的网站，要实现论坛的功能。学校的服务器现在又不让用，只好在我自己的VPS上搭建一个简易的服务器来测试了。这是我开始自己搭服务器过程的记录，可能会有点乱……
 
-了解ARP欺骗攻击让攻击者获得局域网上的封包甚至篡改封包。原理是让送至特定IP地址的流量被错误的送到攻击者所取代的地方。    
-
-被动式封包嗅探通过对无线网络的通讯内容进行监控，利用获取的数据包来获得用户">
+我在本地使用的是Mac OS X，远程服务器运行的是centos-6 x86系统。这个VPS是在Bandwagon上购买的，可以使用shad">
   
     <link rel="alternative" href="/atom.xml" title="Hsmouc" type="application/atom+xml">
   
@@ -208,11 +199,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-2015-10-23-wifi2" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-2016-02-16-vps" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/10/22/2015-10-23-wifi2/" class="article-date">
-  	<time datetime="2015-10-22T13:40:27.000Z" itemprop="datePublished">2015-10-22</time>
+      <a href="/2016/02/16/2016-02-16-vps/" class="article-date">
+  	<time datetime="2016-02-16T02:40:25.000Z" itemprop="datePublished">2016-02-16</time>
 </a>
     </div>
   
@@ -225,7 +216,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      无线网络攻防进阶
+      centos搭建服务器－安装apache
     </h1>
   
 
@@ -234,12 +225,12 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ARP/">ARP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wi-Fi/">Wi-Fi</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
 	</div>
 
         
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/渗透入侵/">渗透入侵</a>
+	<a class="article-category-link" href="/categories/操作系统/">操作系统</a>
 	</div>
 
 
@@ -250,23 +241,22 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ul>
-<li>还是写在文前：使用aircrack-ng成功截取握手包之后并破解路由器密码以后，让我们来思考黑客可能会做些什么。还是和以前一样，不要攻击邻居家的路由器，不要设法窃取别人的密码，这样是非法的。</li>
-</ul>
-<h3 id="u4E86_u89E3ARP_u6B3A_u9A97_u653B_u51FB"><a href="#u4E86_u89E3ARP_u6B3A_u9A97_u653B_u51FB" class="headerlink" title="了解ARP欺骗攻击"></a>了解ARP欺骗攻击</h3><p>让攻击者获得局域网上的封包甚至篡改封包。原理是让送至特定IP地址的流量被错误的送到攻击者所取代的地方。    </p>
-<ol>
-<li><em>被动式封包嗅探</em><br>通过对无线网络的通讯内容进行监控，利用获取的数据包来获得用户名和密码等敏感信息。我等下要演示的就是这种攻击。   </li>
-<li><em>中间人攻击</em><br>指攻击者与通讯的两端分别建立独立的联系，并交换其所收到的数据，使通讯的两端认为他们正在通过一个私密的连接与对方直接对话，但事实上整个会话都被攻击者完全控制。在中间人攻击中，攻击者可以拦截通讯双方的通话并插入新的内容。</li>
-</ol>
-<h3 id="u6211_u7684_u5B9E_u9A8C"><a href="#u6211_u7684_u5B9E_u9A8C" class="headerlink" title="我的实验"></a>我的实验</h3><p>由于我用的macbook网卡不支持开热点，在淘宝上买了块RT2571网卡，更换了好几个驱动并没有成功。所以我至今还没有使用aireply-ng等等工具。所以我打算先黑一下自己的电脑，等网卡搞定了再去黑我的iPhone。</p>
-<h4 id="Wireshark_u7B80_u4ECB"><a href="#Wireshark_u7B80_u4ECB" class="headerlink" title="Wireshark简介"></a>Wireshark简介</h4><p>本来想介绍很多东西的，但是想想大家应该也能Google到，我就不多说了。在这里特别推荐一本书，叫《Wireshark 网络分析就是这么简单》。</p>
-<h4 id="u4E24_u79CD_u65B9_u6CD5"><a href="#u4E24_u79CD_u65B9_u6CD5" class="headerlink" title="两种方法"></a>两种方法</h4><ol>
-<li>airport+Wireshark<br>还是网卡支持的原因，在Wireshark里无法调到混杂模式。于是我先在终端中输入<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo airport en0 sniff x <span class="comment">//x表示信道</span></span><br></pre></td></tr></table></figure>
+<li><p>好久都没更新博客里面的文章了，快要开学了发现寒假自己什么都没搞出来啊啊啊……最蛋疼的是学校的智能车比赛的网站，要实现论坛的功能。学校的服务器现在又不让用，只好在我自己的VPS上搭建一个简易的服务器来测试了。这是我开始自己搭服务器过程的记录，可能会有点乱……</p>
 </li>
-</ol>
-<p>接着在Wireshark里打开包，随意分析了一下学校开放路由的包内容。Statistic－&gt;http－&gt;request,然后我看到了这个：<br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exac8o6x23j31400p0n5d.jpg" alt=""><br>我就这么毫无防备的看到了大家在看什么-_-#</p>
-<ol>
-<li>如果我的Mac是一个热点<br>事情好像突然严肃了起来。这样就意味着所有连接到我电脑的设备的数据包都会被我看到，并不需要通过ARP欺骗或者从网关克隆这样的手段，一切好像变的简单了起来。<br>我打算先上四张图（图片均加万恶马赛克）:<br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaah59hz6j310m01rmxn.jpg" alt=""><br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaah8jeoxj30ku0fwgwn.jpg" alt=""><br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaahdoqyfj30ku0fwn79.jpg" alt=""><br><img src="http://ww3.sinaimg.cn/mw690/005WMcFzjw1exaahalk0fj30ku0fwk0j.jpg" alt=""><br>我拿我们学校的网站试了一试，结果自己被吓到了……<br>我尝试了三个网站：校园信息网站／校园教务处网站／校园支付网站。我分别在这三个网站上登录，并用Wireshark抓取数据包。在Filter中输入http并用control+f输入POST，打开数据包查看内容，截图大家都看到了:校园支付和校园信息的登录信息都使用了明码，而由湖南青果软件公司负责的教务信息系统则使用了MD5加密。虽然MD5加密也可以通过暴力美学的方式破解，但是难度很大，  <h3 id="u4E00_u70B9_u603B_u7ED3"><a href="#u4E00_u70B9_u603B_u7ED3" class="headerlink" title="一点总结"></a>一点总结</h3>话说做完整个测试我的内心是崩溃的。平时连了多少未知的Wi-Fi呢？仔细一想还真的是有些后怕。或许那些hacker就默默的蹲在麦当劳或者星巴克的某个角落，等着一个个无知的鱼儿上钩。或者黑客攻下了你的路由器，篡改MAC地址，发动ARP欺骗攻击和中间人攻击，事情恐怕就不是蹭网那么简单了。还是提出一些建议吧。其实对于普通用户来说我并不建议大家绑定MAC地址啊，关闭SSID广播啊之类的办法，其实把路由器的无线密码设置的复杂一些，不要使用默认的路由器登录密码，也不要乱连开放的无线网，这就基本足够了。我的理解就是:你的数据值多少钱，你就应该花多少钱保护它，就这样。</li>
-</ol>
+<li><p>我在本地使用的是Mac OS X，远程服务器运行的是centos-6 x86系统。这个VPS是在<a href="https://bandwagonhost.com/" target="_blank" rel="external">Bandwagon</a>上购买的，可以使用shadowsocks科学上网(咦，我好像说了什么不该说的)。</p>
+</li>
+</ul>
+<p>##LAMP环境<br>所谓LAMP就是Linux+apache+MySQL+PHP，我目前只装好了apache……不然怎么能是万里长征第一步～</p>
+<p>###安装Apache<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="operator"><span class="keyword">install</span> httpd</span><br><span class="line">chkconfig <span class="comment">--level 235 httpd on</span></span><br><span class="line">/etc/init.<span class="keyword">d</span>/httpd <span class="keyword">start</span></span></span><br></pre></td></tr></table></figure></p>
+<p>安装完后在浏览器中输入远程服务器的IP地址，看到这样的画面就说明安装成功了。<img src="http://ww2.sinaimg.cn/large/005WMcFzjw1f11dv2fa1hj31700rh15c.jpg" alt="屏幕快照"></p>
+<p>###配置ssh<br>配置ssh的目的在于方便的上传和下载文件，更加流畅的终端输入体验……<br>在终端中输入如下命令:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="operator"><span class="keyword">install</span> openssh-<span class="keyword">server</span></span></span><br></pre></td></tr></table></figure></p>
+<p>安装完成后启动sshd服务:<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/sshd <span class="literal">start</span></span><br></pre></td></tr></table></figure></p>
+<p>设置开机启动:<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig sshd <span class="function_start"><span class="keyword">on</span></span></span><br></pre></td></tr></table></figure></p>
+<p>我在本地使用:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@<span class="number">138.128</span><span class="number">.197</span><span class="number">.11</span></span><br></pre></td></tr></table></figure></p>
+<p>报错<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh: connect to host <span class="number">138.128</span><span class="number">.197</span><span class="number">.11</span> port <span class="number">22</span>: Connection refused</span><br></pre></td></tr></table></figure></p>
+<p>我用<code>netstat -antp |grep sshd</code>命令查看了一下，系统的响应是这样的<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcp        <span class="number">0</span>      <span class="number">0</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">22</span>           <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:*                   LISTEN      <span class="number">3746</span>/sshd</span><br></pre></td></tr></table></figure></p>
+<p>问题应该是出在了ssh的隧道没有对公网开放<br>修改ssh的配置文件<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim <span class="regexp">/etc/</span>ssh<span class="regexp">/sshd_config</span></span><br></pre></td></tr></table></figure></p>
+<p>把<code>ListenAddress 0.0.0.0</code>改为<code>ListenAddress 138.128.197.11</code>这个是我远程服务器的IP，重新启动ssh服务发现无法启动，终端提示要先定义端口，我并不知道为什么……在刚刚那行配置前加上<code>port 22</code>然后<code>service sshd restart</code>，居然就成功了<br>附上成功后的图<br><img src="http://ww4.sinaimg.cn/large/005WMcFzjw1f11duxql7pj313r0p0167.jpg" alt="屏幕快照"> </p>
 
       
     </div>
@@ -276,18 +266,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/10/23/2015-10-23-cppcode4/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          c++ primer 3
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/10/19/2015-10-19-wifi/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">无线网络攻防初探</div>
+    <a href="/2015/12/17/2015-12-17-pi/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">通过python控制Pi的GPIO</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -322,7 +303,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="2015-10-23-wifi2" data-title="无线网络攻防进阶" data-url="http://yoursite.com/2015/10/22/2015-10-23-wifi2/"></div>
+	<div class="ds-thread" data-thread-key="2016-02-16-vps" data-title="centos搭建服务器－安装apache" data-url="http://yoursite.com/2016/02/16/2016-02-16-vps/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

