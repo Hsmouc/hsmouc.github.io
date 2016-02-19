@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>centos搭建LNMP服务器 | Hsmouc</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="我们首先来看一张图片:    
+前天折腾完apache，顺便装好了MySQL和PHP，放了一个Discuz!的开源论坛程序，什么乱七八糟权限都没管，全是弱密码。刚准备写个博纪念一下，发现我VPS被人黑了……无奈只好重新安装一遍centos。在vagarlee的建议下，我吸取上一次的教训，使用更轻量的Nginx来替代Apache。
+
+安装Nginx在使用yum安装Nginx的时候有一些小小的麻烦,需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="centos搭建LNMP服务器">
+<meta property="og:url" content="http://yoursite.com/2016/02/19/2016-02-19-vps/index.html">
+<meta property="og:site_name" content="Hsmouc">
+<meta property="og:description" content="我们首先来看一张图片:    
+前天折腾完apache，顺便装好了MySQL和PHP，放了一个Discuz!的开源论坛程序，什么乱七八糟权限都没管，全是弱密码。刚准备写个博纪念一下，发现我VPS被人黑了……无奈只好重新安装一遍centos。在vagarlee的建议下，我吸取上一次的教训，使用更轻量的Nginx来替代Apache。
+
+安装Nginx在使用yum安装Nginx的时候有一些小小的麻烦,需">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/005WMcFzjw1f14m96z58dj313t0odagt.jpg">
+<meta property="og:updated_time" content="2016-02-19T07:47:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="centos搭建LNMP服务器">
+<meta name="twitter:description" content="我们首先来看一张图片:    
+前天折腾完apache，顺便装好了MySQL和PHP，放了一个Discuz!的开源论坛程序，什么乱七八糟权限都没管，全是弱密码。刚准备写个博纪念一下，发现我VPS被人黑了……无奈只好重新安装一遍centos。在vagarlee的建议下，我吸取上一次的教训，使用更轻量的Nginx来替代Apache。
+
+安装Nginx在使用yum安装Nginx的时候有一些小小的麻烦,需">
+  
+    <link rel="alternative" href="/atom.xml" title="Hsmouc" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewktmv52wbj307y07yjrp.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">年糕</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>Tags</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/instagram">相册</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Hsmouc" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/5449180097/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+					        
+								<a class="facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100009396457642" title="facebook">facebook</a>
+					        
+								<a class="google" target="_blank" href="https://plus.google.com/u/0/101351542677141027265" title="google">google</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 15px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/MFC/" style="font-size: 17.5px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 12.5px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 15px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 15px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://lyeec.me/">墨坊</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">工科在读，C/Python学习中，嵌入式开发，前端/渗透/摄影/吃货ˉ﹃ˉ</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">年糕</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewktmv52wbj307y07yjrp.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">年糕</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/instagram">相册</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Hsmouc" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/5449180097/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+			        
+						<a class="facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100009396457642" title="facebook">facebook</a>
+			        
+						<a class="google" target="_blank" href="https://plus.google.com/u/0/101351542677141027265" title="google">google</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-2016-02-19-vps" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/19/2016-02-19-vps/" class="article-date">
+  	<time datetime="2016-02-19T06:20:15.000Z" itemprop="datePublished">2016-02-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      centos搭建LNMP服务器
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/服务器/">服务器</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>我们首先来看一张图片:<img src="http://ww3.sinaimg.cn/large/005WMcFzjw1f14m96z58dj313t0odagt.jpg" alt="Fuck DDOS">    </li>
+<li>前天折腾完apache，顺便装好了MySQL和PHP，放了一个Discuz!的开源论坛程序，什么乱七八糟权限都没管，全是弱密码。刚准备写个博纪念一下，发现我VPS被人黑了……无奈只好重新安装一遍centos。在<a href="http://lyeec.me" target="_blank" rel="external">vagarlee</a>的建议下，我吸取上一次的教训，使用更轻量的Nginx来替代Apache。</li>
+</ul>
+<h3 id="u5B89_u88C5Nginx"><a href="#u5B89_u88C5Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h3><p>在使用yum安装Nginx的时候有一些小小的麻烦,需要自己建立一个<code>nginx.repo</code>的软件源配置文件。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/yum<span class="class">.repo</span><span class="class">.d</span>/nginx.repo</span><br></pre></td></tr></table></figure></p>
+<p>在其中填写如下内容:<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[nginx]</span><br><span class="line">name=nginx repo</span><br><span class="line">baseurl=http://nginx.org/packages/centos/<span class="variable">$releasever</span>/<span class="variable">$basearch</span>/</span><br><span class="line">gpgcheck=<span class="number">0</span></span><br><span class="line">enabled=<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>保存，使用<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="keyword">install</span> nginx</span><br></pre></td></tr></table></figure></p>
+<p>nginx安装完成。<br>启动Nginx服务:<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/nginx <span class="literal">start</span></span><br></pre></td></tr></table></figure></p>
+<p>这个时候访问VPS的IP地址应该就能出现Nginx的欢迎页面了。</p>
+<h3 id="u5B89_u88C5MySQL"><a href="#u5B89_u88C5MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="operator"><span class="keyword">install</span> mysql-<span class="keyword">server</span> mysql mysql-deve</span></span><br></pre></td></tr></table></figure>
+<p>我第一次安装MySQl的时候想当然只安装了mysql，并没有安装mysql-server导致数据库无法使用，mysql-server是一个服务端，需要安装。<br>启用MySQl服务:<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld <span class="literal">start</span></span><br></pre></td></tr></table></figure></p>
+<p>这时候会出现长长的提示信息，恭喜数据库安装成功。<br>接下来我们给数据库设置管理员账号和密码:<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">mysqladmin</span> -u root password <span class="string">'yourpassword'</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="u5B89_u88C5PHP"><a href="#u5B89_u88C5PHP" class="headerlink" title="安装PHP"></a>安装PHP</h3><p>这一步比较简单，直接使用yum:<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> php-fpm php-mysql</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>至此，LNMP环境的软件包已经全部安装完成，下面就是简单的配置阶段。</li>
+</ul>
+<h3 id="u914D_u7F6EPHP"><a href="#u914D_u7F6EPHP" class="headerlink" title="配置PHP"></a>配置PHP</h3><p>更改下面的文件:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim <span class="regexp">/etc/</span>php.ini</span><br></pre></td></tr></table></figure></p>
+<p>将1改为0<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cgi<span class="class">.fix_pathinfo</span> = <span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+<p>这儿有一段英文解释，来自<a href="www.digitalocean.com">digitalocean</a>:</p>
+<blockquote>
+<p>If this number is kept as a 1, the php interpreter will do its best to process the file that is as near to the requested file as possible. This is a possible security risk. If this number is set to 0, conversely, the interpreter will only process the exact file path—a much safer alternative.</p>
+</blockquote>
+<h3 id="u914D_u7F6ENginx"><a href="#u914D_u7F6ENginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h3><p>主要是改一下Nginx.conf这个文件夹里的配置文件:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim <span class="regexp">/etc/</span>nginx<span class="regexp">/conf.d/</span><span class="keyword">default</span>.conf</span><br></pre></td></tr></table></figure></p>
+<p>改成了这样:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line"></span><br><span class="line">    listen       <span class="number">80</span>;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    <span class="preprocessor">#charset koi8-r;</span></span><br><span class="line">    <span class="preprocessor">#access_log  /var/log/nginx/log/host.access.log  main;</span></span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">        index  index.html index.htm index.php;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="preprocessor">#error_page  <span class="number">404</span>              /<span class="number">404.</span>html;</span></span><br><span class="line"></span><br><span class="line">    <span class="preprocessor"># redirect server <span class="keyword">error</span> pages to the static page /<span class="number">50</span>x.html</span></span><br><span class="line">    <span class="preprocessor">#</span></span><br><span class="line">    error_page   <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span>  /<span class="number">50</span>x.html;</span><br><span class="line">    location = /<span class="number">50</span>x.html &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="preprocessor"># proxy the PHP scripts to Apache listening on <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">80</span></span></span><br><span class="line">    <span class="preprocessor">#</span></span><br><span class="line">    <span class="preprocessor">#location ~ \.php$ &#123;</span></span><br><span class="line">    <span class="preprocessor">#    proxy_pass   http:<span class="comment">//127.0.0.1;</span></span></span><br><span class="line">    <span class="preprocessor">#&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="preprocessor"># pass the PHP scripts to FastCGI server listening on <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">9000</span></span></span><br><span class="line">    <span class="preprocessor">#</span></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        root           /usr/share/nginx/html;</span><br><span class="line">        fastcgi_pass   <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">9000</span>;</span><br><span class="line">        fastcgi_index  index.php;</span><br><span class="line">        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</span><br><span class="line">        include        fastcgi_params;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>改<code>server_name</code>后面的地址为<code>localhost</code></li>
+<li>改<code>location</code>中的<code>root</code>地址为<code>/usr/share/nginx/html</code></li>
+<li>在index        index.html        index.htm后加上index.php</li>
+<li>把<code>&quot;location ~ \.php$ {&quot;,</code>前的注释去了，改<code>fastcgi_param</code>后面的内容为<code>SCRIPT_FILENAME  $document_root</code></li>
+</ul>
+<p>保存退出后打开php-fpm的配置:<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/php-fpm.<span class="keyword">d</span>/www.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure></p>
+<p>找到<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">; Unix user/<span class="keyword">group</span> <span class="title">of</span> processes</span><br><span class="line">; Note: The <span class="keyword">user</span> <span class="title">is</span> mandatory. If the <span class="keyword">group</span> <span class="title">is</span> not set, the default user's <span class="keyword">group</span></span><br><span class="line"><span class="title">;	will</span> be used.</span><br><span class="line">; RPM: apache Choosed to be able to access some dir as httpd</span><br><span class="line"><span class="keyword">user</span> <span class="title">= nginx</span></span><br><span class="line">; RPM: Keep a <span class="keyword">group</span> <span class="title">allowed</span> to <span class="operator">write</span> <span class="operator">in</span> log dir.</span><br><span class="line"><span class="keyword">group</span> <span class="title">= nginx</span></span><br></pre></td></tr></table></figure></p>
+<p>改成<code>User=nginx</code>，<code>group=nginx</code><br>重新启动php-fpm即可</p>
+<h3 id="u53C2_u8003_u7684_u6587_u6863"><a href="#u53C2_u8003_u7684_u6587_u6863" class="headerlink" title="参考的文档"></a>参考的文档</h3><p><a href="http://nginx.org/en/docs/" target="_blank" rel="external">Nginx官方文档</a><br><a href="https://support.rackspace.com/how-to/installing-nginx-and-php-fpm-setup-for-nginx/" target="_blank" rel="external">Installing Nginx and php-fpm - Setup For Nginx</a><br><a href="https://www.nginx.com/resources/wiki/start/topics/examples/phpfcgi/" target="_blank" rel="external">Nginx -PHP FastCGI Example</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/02/16/2016-02-16-vps/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">centos搭建服务器－安装apache</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016-02-19-vps" data-title="centos搭建LNMP服务器" data-url="http://yoursite.com/2016/02/19/2016-02-19-vps/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"hsmouc"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 年糕
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-71542166-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

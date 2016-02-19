@@ -72,12 +72,12 @@
 					<div class="tips-arrow"></div>
 					<ul class="tips-inner">
 						<li>菜单</li>
-						<li>標籤</li>
+						<li>Tags</li>
 						
 						<li>友情链接</li>
 						
 						
-						<li>關於</li>
+						<li>Über</li>
 						
 					</ul>
 				</div>
@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 15px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MFC/" style="font-size: 17.5px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 12.5px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 15px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 15px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a>
+						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 15px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/MFC/" style="font-size: 17.5px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 12.5px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 15px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 15px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a>
 					</div>
 				</section>
 				
@@ -191,6 +191,67 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-2015-10-08-cppcode1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/08/2015-10-08-cppcode1/" class="article-date">
+  	<time datetime="2015-10-08T15:23:08.000Z" itemprop="datePublished">2015-10-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/08/2015-10-08-cppcode1/">c++ primer 1</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <li>1.9</li><br><li>编写程序，使用while循环将50到100的整数相加。</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">     <span class="keyword">int</span> sum=<span class="number">0</span>,i=<span class="number">50</span>;</span><br><span class="line">     <span class="keyword">while</span>(i!=<span class="number">101</span>)</span><br><span class="line">     sum+=i++;</span><br><span class="line">     <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"sum="</span>&lt;&lt;sum&lt;&lt;<span class="built_in">std</span>::end;</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><li>1.10</li><br><li>除了++运算符将运算对象的值增加1以外，还有一个递减运算符(–)实现将值减少1.编写程序，使用递减运算符在循环中按递减顺序打印出10与0之间的整数。</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> val=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(val&gt;=<span class="number">0</span>)</span><br><span class="line">       <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;val--&lt;&lt;<span class="built_in">std</span>::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><li>1.11</li><br><li>编写程序，提示用户输入两个整数，打印出这两个整数所指定的范围内的所有整数。</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">      <span class="keyword">int</span> small = <span class="number">0</span>,big = <span class="number">0</span>,temp;</span><br><span class="line">      <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"enter two integers:\n"</span>;</span><br><span class="line">      <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;small&gt;&gt;big;</span><br><span class="line">          <span class="keyword">if</span>(small&gt;big)&#123;</span><br><span class="line">             temp=small;</span><br><span class="line">             big=temp;</span><br><span class="line">             small=big;</span><br><span class="line">          &#125;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> curr = small;curr &lt;= big; curr++)</span><br><span class="line">         <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;curr:</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><li>1.16</li><br><li>编写程序，从cin中读取一组数，输出其和。</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> limit=<span class="number">0</span>,sum=<span class="number">0</span>,value=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"How many integers would you like to enter?"</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;limit;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;value &amp;&amp; (--limit !=<span class="number">0</span>))</span><br><span class="line">    sum+=value;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;sum+value&lt;&lt;<span class="built_in">std</span>::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><hr><br><li>2015年10月10日更新<br><br>&nbsp;&nbsp;&nbsp;&nbsp;根据lyeec的建议,添加了题目。</li><br><hr><br><li>2015年10月15日更新<br><br>&nbsp;&nbsp;&nbsp;&nbsp;改正了1.11的错误。</li>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-2015-10-04-Mac" class="article article-type-post" itemscope itemprop="blogPost">
   
