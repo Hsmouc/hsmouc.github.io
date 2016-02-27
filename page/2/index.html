@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 15px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/MFC/" style="font-size: 17.5px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 12.5px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 15px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 15px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a>
+						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 15px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/MFC/" style="font-size: 17.5px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 12.5px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 17.5px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 15px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a>
 					</div>
 				</section>
 				
@@ -191,6 +191,85 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-2015-11-16-mfc" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/16/2015-11-16-mfc/" class="article-date">
+  	<time datetime="2015-11-16T13:21:08.000Z" itemprop="datePublished">2015-11-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/16/2015-11-16-mfc/">MFC POJ1</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##MFC的作业</p>
+<ul>
+<li>设计基于单文档/视图结构的程序。绘制一条直的道路，然后然后设计一个小车（矩形代替，有车号），使其沿道路匀速行走，到终点自动返回，来回行走。道路的宽度、长度由设定菜单完成；还有开始、结束菜单；有高速、中速、低速三个菜单控制小车速度。</li>
+<li>简要分析下：主要用到的知识有：单文档界面(SDI)应用程序，利用ClassWizard编制消息处理函数，定时器消息，客户区重绘等等……</li>
+<li>实现    </li>
+</ul>
+<p>修改文档类的定义，添加成员变量：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> CCarsDoc : <span class="keyword">public</span> CDocument&#123;<span class="keyword">protected</span>: <span class="comment">// create from serialization only</span>	CCarsDoc();	DECLARE_DYNCREATE(CCarsDoc)<span class="comment">// Attributes</span><span class="keyword">public</span>:   CRect m_rectCar;   <span class="keyword">int</span> speed;<span class="comment">// Operations</span><span class="keyword">public</span>:<span class="comment">// Overrides</span></span><br></pre></td></tr></table></figure></p>
+<p>在CCarsDoc的成员函数OnNewDocument()中初始化数据:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BOOL CCarsDoc::OnNewDocument()&#123;	<span class="keyword">if</span> (!CDocument::OnNewDocument())		<span class="keyword">return</span> FALSE;     m_rectCar=CRect(<span class="number">100</span>,<span class="number">100</span>,<span class="number">180</span>,<span class="number">150</span>);	 <span class="keyword">int</span> speed = <span class="number">1</span>;	 m_boolNew=<span class="literal">true</span>;	 m_Length=<span class="number">0</span>;	 m_Width=<span class="number">0</span>;	<span class="comment">// <span class="doctag">TODO:</span> add reinitialization code here</span>	<span class="comment">// (SDI documents will reuse this document)</span>    <span class="keyword">return</span> TRUE;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>再通过资源编辑器中的菜单编辑器完成菜单的编辑，使用ClassWizard生成消息处理函数，并自动添加菜单消息和消息处理函数的映射，在消息处理函数中加入代码:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CCarsView::Onstart() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	CRect rectClient;	GetClientRect(&amp;rectClient);	SetTimer(<span class="number">1</span>,<span class="number">100</span>,<span class="literal">NULL</span>);		&#125;<span class="keyword">void</span> CCarsView::OnTimer(UINT nIDEvent) &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span></span><br><span class="line">	CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	InvalidateRect(pDoc-&gt;m_rectCar,TRUE);	<span class="keyword">static</span> <span class="keyword">int</span> flag = <span class="number">1</span>;	<span class="keyword">if</span>(pDoc-&gt;m_rectCar.right &gt; pDoc-&gt;m_Length || pDoc-&gt;m_rectCar.left &lt; <span class="number">50</span>)	&#123;		flag *= -<span class="number">1</span>;	&#125;	    pDoc-&gt;m_rectCar.left += pDoc-&gt;speed*flag;	pDoc-&gt;m_rectCar.right += pDoc-&gt;speed*flag;		InvalidateRect(pDoc-&gt;m_rectCar,FALSE);	CView::OnTimer(nIDEvent);	&#125;<span class="keyword">void</span> CCarsView::Onstop() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	KillTimer(<span class="number">1</span>);&#125;<span class="keyword">void</span> CCarsView::Onhigh() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>    CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;speed=<span class="number">10</span>;&#125;<span class="keyword">void</span> CCarsView::Onmedium() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);    pDoc-&gt;speed=<span class="number">5</span>;&#125;<span class="keyword">void</span> CCarsView::Onlow() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>    CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;speed=<span class="number">1</span>;&#125;<span class="keyword">void</span> CCarsView::OnMenuitem32777() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	CCarsDlg dlginput;	<span class="keyword">int</span> nRet = dlginput.DoModal();	<span class="keyword">if</span>(nRet = IDOK)	&#123;		pDoc-&gt;m_Length=dlginput.m_Length;		pDoc-&gt;m_Width=dlginput.m_Width;		pDoc-&gt;m_boolNew=<span class="literal">false</span>;		Invalidate();	&#125;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后在OnDraw()里绘制小车和跑道:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CCarsView::OnDraw(CDC* pDC)&#123;	CCarsDoc* pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDC-&gt;Rectangle(pDoc-&gt;m_rectCar);	pDC-&gt;MoveTo(<span class="number">50</span>,<span class="number">50</span>);	pDC-&gt;LineTo(pDoc-&gt;m_Length,<span class="number">50</span>);	pDC-&gt;MoveTo(<span class="number">50</span>,<span class="number">50</span>+(pDoc-&gt;m_Width));	pDC-&gt;LineTo(pDoc-&gt;m_Length,<span class="number">50</span>+(pDoc-&gt;m_Width));		<span class="comment">// <span class="doctag">TODO:</span> add draw code for native data here</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>设计一个具有一定外形和颜色的计数器。开始结束由鼠标控制。   </li>
+<li>实现:</li>
+</ul>
+<p>修改文档类的定义，添加成员变量:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> CCountDoc : <span class="keyword">public</span> CDocument&#123;<span class="keyword">protected</span>: <span class="comment">// create from serialization only</span>	CCountDoc();	DECLARE_DYNCREATE(CCountDoc)<span class="comment">// Attributes</span><span class="keyword">public</span>:	<span class="keyword">int</span> m_iCount;<span class="comment">// Operations</span><span class="keyword">public</span>:<span class="comment">// Overrides..... 省略以下</span></span><br></pre></td></tr></table></figure></p>
+<p>在成员函数OnNewDocument()中初始化数据:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m_iCount = <span class="number">0</span>;</span><br></pre></td></tr></table></figure></p>
+<p>使用ClassWizaid生成消息处理函数,鼠标左键开始计数，右键停止计数:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CCountView::OnLButtonDown(UINT nFlags, CPoint point) &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span>	SetTimer(<span class="number">1</span>,<span class="number">100</span>,<span class="literal">NULL</span>);	CView::OnLButtonDown(nFlags, point);&#125;<span class="keyword">void</span> CCountView::OnRButtonDown(UINT nFlags, CPoint point) &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span>	KillTimer(<span class="number">1</span>);	CView::OnRButtonDown(nFlags, point);&#125;<span class="keyword">void</span> CCountView::OnTimer(UINT nIDEvent) &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span>    CCountDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_iCount++;	Invalidate();	CView::OnTimer(nIDEvent);&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对了，绘图的时候要有颜色:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CCountView::OnDraw(CDC* pDC)&#123;	CCountDoc* pDoc = GetDocument();	ASSERT_VALID(pDoc);	CString strDisplay;	CPen penBlue;	penBlue.CreatePen(PS_SOLID,<span class="number">3</span>,RGB(<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>));	strDisplay.Format (<span class="string">"Current number:%d"</span>,pDoc-&gt;m_iCount);	pDC-&gt;SetTextColor(RGB(<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>));	pDC-&gt;SelectObject(&amp;penBlue);	pDC-&gt;Rectangle(<span class="number">50</span>,<span class="number">50</span>,<span class="number">280</span>,<span class="number">180</span>);	pDC-&gt;TextOut(<span class="number">100</span>,<span class="number">100</span>,strDisplay);	<span class="comment">// <span class="doctag">TODO:</span> add draw code for native data here</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="u5C0F_u7ED3"><a href="#u5C0F_u7ED3" class="headerlink" title="小结"></a>小结</h3><p>我要检讨一下自己当时小学期的时候没有好好学习MFC，很多东西都不记得了。在编写这两个程序的过程中还遇到了很多问题，比如让小车往返运动的问题，请教了<a href="http://lyeec.me" target="_blank" rel="external">@Lyeec</a>。还有，我一定要养成随手写注释的习惯。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MFC/">MFC</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-2015-11-12-ARP" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -999,94 +1078,6 @@
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/前端开发/">前端开发</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2015-10-09-cppcode2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/10/09/2015-10-09-cppcode2/" class="article-date">
-  	<time datetime="2015-10-09T15:25:11.000Z" itemprop="datePublished">2015-10-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/09/2015-10-09-cppcode2/">c++ primer 2.1</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这次准备把非编程题的答案也放上去+_+<br>决定使用English来写题目以示逼格。</p>
-
-<p><li>2.1</li></p>
-<p><li>What are the differences between int, long, long long, and short? Between an unsigned and a signed type? Between a float and a double?</li></p>
-<p><small>c++ primer原文如下：C++ guarantees short and int is at least 16 bits, long at least 32 bits, long long at least 64 bits.<br><br>The signed can represent positive numbers, negative numbers and zero, while unsigned can only represent numbers no less than zero.<br><br>The C and C++ standards do not specify the representation of float, double and long double. It is possible that all three implemented as IEEE double-precision. Nevertheless, for most architectures (gcc, MSVC; x86, x64, ARM) float is indeed a IEEE single-precision floating point number (binary32), and double is a IEEE double-precision floating point number (binary64).</small></p>
-
-<p><li>2.2</li></p>
-<p><li>To calculate a mortgage payment, what types would you use for the rate, principal, and payment? Explain why you selected each type.</li></p>
-<p><small>太水了</small></p>
-
-<p><li>2.3</li></p>
-<p><li>What output will the following code produce?</li><br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">unsigned u=<span class="number">10</span>,u2=<span class="number">42</span>;</span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;u2-u&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">32</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;u-u2&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">4294967264</span></span><br><span class="line">int i=<span class="number">10</span>,i2=<span class="number">42</span>;  </span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;i2-i&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">32</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;i-i2&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span>-<span class="number">32</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;i-u&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>;  <span class="regexp">//</span><span class="number">0</span></span><br><span class="line"><span class="symbol">std:</span><span class="symbol">:cout&lt;&lt;u-i&lt;&lt;std</span><span class="symbol">:</span><span class="symbol">:endl</span>; <span class="regexp">//</span><span class="number">0</span></span><br></pre></td></tr></table></figure></p>
-<p><li>2.8</li></p>
-<p><li>Using escape sequences, write a program to print 2M followed by a newline. Modify the program to print 2, then a tab, then an M, followed by a newline.</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">&#123;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="number">2</span>&lt;&lt;<span class="string">"\115\012"</span>;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="number">2</span>&lt;&lt;<span class="string">"\t\115\012"</span>;</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><li>2.9</li></p>
-<p><li>Explain the following definitions. For those that are illegal, explain what’s wrong and how to correct it.<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(a) <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; <span class="keyword">int</span> input_value;</span><br><span class="line">(b) <span class="keyword">int</span> i = &#123; <span class="number">3.14</span> &#125;;</span><br><span class="line">(c) <span class="keyword">double</span> salary = wage = <span class="number">9999.99</span>;</span><br><span class="line">(d) <span class="keyword">int</span> i = <span class="number">3.14</span>;</span><br></pre></td></tr></table></figure></li></p>
-<p></p>
-<p><small>error:expect’(‘for funtion-style cast or type construction.</small></p><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> input_value=<span class="number">0</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;input_value;</span><br></pre></td></tr></table></figure><br><br><p><small>warning: implicit conversion from ‘double’ to ‘int’ changes value from 3.14 to 3</small></p><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> i=&#123;<span class="number">3.14</span>&#125;;</span><br></pre></td></tr></table></figure><br><br><p><small>error: use of undeclared identifier ‘wage’</small></p><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> wage;</span><br><span class="line"><span class="keyword">double</span> salary = wage = <span class="number">9999.99</span>;</span><br></pre></td></tr></table></figure><br><br><li>2.10</li><br><li>What are the initial values, if any, of each of the following variables?</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> global_str;</span><br><span class="line"><span class="keyword">int</span> global_int;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> local_int;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> local_str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><p><small>global_str is global variable, so the value is empty string. global_int is global variable, so the value is zero. local_int is a local variable which is not uninitialized, so it has a undefined value. local_str is also a local variable which is not uninitialized, but it has a value that is defined by the class. So it is empty string. </small></p>
-
-<p><li>2.13</li></p>
-<p><li>What is the value of j in the following program?</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> i = <span class="number">100</span>;</span><br><span class="line">   <span class="keyword">int</span> j = i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><small>j=100</small></p>
-
-<p><li>2.14</li></p>
-<p><li>Is the following program legal? If so, what values are printed?</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">100</span>, sum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i!=<span class="number">10</span>;++i)</span><br><span class="line">    &#123;sum+=i&#125;;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;sum&lt;&lt;<span class="built_in">std</span>::endl;</span><br></pre></td></tr></table></figure></p>
-<p><small>Output:100 45</small></p><br><br><br><br><br><p><small>剩下的东西明天再搞吧，今天好烦，名字换成2.1了，就这么任性的决定了。</small></p>
-
-
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
 	</div>
 
 

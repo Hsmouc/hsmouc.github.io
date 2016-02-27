@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 15px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/MFC/" style="font-size: 17.5px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 12.5px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 15px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 15px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a>
+						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 15px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/MFC/" style="font-size: 17.5px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 12.5px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 17.5px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 15px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a>
 					</div>
 				</section>
 				
@@ -191,6 +191,86 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-2016-02-27-pi" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/27/2016-02-27-pi/" class="article-date">
+  	<time datetime="2016-02-27T06:46:15.000Z" itemprop="datePublished">2016-02-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/27/2016-02-27-pi/">娱乐向---Raspberry Pi搭建家庭影音娱乐系统</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>Raspberry Pi比较入门的玩法就是用它来实现电视机机顶盒的一些功能，大家都知道树莓派上有大名鼎鼎的XBMC影音播放系统，安装完后完全可以当作网络机顶盒使用。但是我今天不会介绍XBMC，在我的方案里我通过树莓派将iPhone的音频直接输出到电视上，另外使用omxplayer进行视频播放。</li>
+</ul>
+<h3 id="u5B89_u88C5_u548C_u914D_u7F6E_u65E0_u7EBF_u7F51_u5361"><a href="#u5B89_u88C5_u548C_u914D_u7F6E_u65E0_u7EBF_u7F51_u5361" class="headerlink" title="安装和配置无线网卡"></a>安装和配置无线网卡</h3><p>至于为什么要配置无线网卡，答案很简单—电视机旁边没网线。我这儿正好有一块Ralink公司生产的RT2571无线网卡，把它连接到树莓派上，效果如图～ 因为我没鼠标和键盘，就只好先拿网线连路由用ssh配置无限网卡啦。<img src="http://ww2.sinaimg.cn/mw690/005WMcFzjw1f1dp0ao9wnj31kw23u1kx.jpg" alt="连接了RT2571的树莓派"><br>接下来使用:<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg <span class="string">| grep usb</span></span><br></pre></td></tr></table></figure></p>
+<p>看下无线网卡识别是否正常，找到输出的信息中有这些:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[    <span class="number">3.340509</span>] usb <span class="number">1</span>-<span class="number">1.3</span>: Product: <span class="number">54</span>M.USB.......</span><br><span class="line">[    <span class="number">3.346769</span>] usb <span class="number">1</span>-<span class="number">1.3</span>: Manufacturer: Ralink</span><br></pre></td></tr></table></figure></p>
+<p>说明网卡已经正确识别，测试下能否搜索到无线信号:<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo iwlist wlan0 <span class="built_in">scan</span></span><br></pre></td></tr></table></figure></p>
+<p>结果见下图:<br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1f1dp4r087jj30ve0jwgr1.jpg" alt="screenshot"><br>接下来配置无线网卡，使用vim打开网络配置文件:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim <span class="regexp">/etc/</span>network<span class="regexp">/interfaces</span></span><br></pre></td></tr></table></figure></p>
+<p>我的配置文件像这样:<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># interfaces(5) file used by ifup(8) and ifdown(8)</span></span><br><span class="line"><span class="preprocessor"># Please note that this file is written to be used with dhcpcd</span></span><br><span class="line"><span class="preprocessor"># For static IP, consult /etc/dhcpcd.conf and 'man dhcpcd.conf'</span></span><br><span class="line"><span class="preprocessor"># Include files from /etc/network/interfaces.d:</span></span><br><span class="line">source-directory /etc/network/interfaces.d</span><br><span class="line">auto lo</span><br><span class="line"><span class="preprocessor">#iface lo inet loopback</span></span><br><span class="line">iface eth0 inet dhcp</span><br><span class="line">auto wlan0</span><br><span class="line">allow-hotplug wlan0</span><br><span class="line"><span class="preprocessor"># iface wlan0 inet manual</span></span><br><span class="line"><span class="preprocessor"># wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf</span></span><br><span class="line"><span class="preprocessor"># iface default inet dhcp</span></span><br><span class="line">iface wlan0 inet dhcp</span><br><span class="line">wpa-ssid <span class="string">"yourssid"</span></span><br><span class="line">wpa-psk <span class="string">"password"</span></span><br></pre></td></tr></table></figure></p>
+<p>将其中的<code>wpa-ssid</code>和<code>wpa-psk</code>换成你的无线网络名和密码即可。<br>一般来说重新启动下树莓派无线网络即可自动连接。</p>
+<h3 id="Shairport_u8BA9_u6811_u8393_u6D3E_u652F_u6301AirPlay"><a href="#Shairport_u8BA9_u6811_u8393_u6D3E_u652F_u6301AirPlay" class="headerlink" title="Shairport让树莓派支持AirPlay"></a>Shairport让树莓派支持AirPlay</h3><p>首先介绍下AirPlay，内容来源<a href="https://support.apple.com/zh-cn/HT204289" target="_blank" rel="external">Apple support</a>:  </p>
+<blockquote>
+<p>借助 AirPlay，您可以将音乐、照片和视频流化到 Apple TV，或者将音乐流化到 AirPort Express 或已启用 AirPlay 的扬声器。借助 AirPlay 镜像，您可以在 Apple TV 上显示 iOS 屏幕。  </p>
+</blockquote>
+<p>我们通过一个开源软件shairport让树莓派支持Apple的AirPlay。你可以提前连接独立声卡和音响。至于为什么需要独立声卡，你可以插上耳机感受下树莓派的底噪，音质感人～</p>
+<h4 id="u5B89_u88C5shairport_u53CA_u5176_u4F9D_u8D56_u5305"><a href="#u5B89_u88C5shairport_u53CA_u5176_u4F9D_u8D56_u5305" class="headerlink" title="安装shairport及其依赖包"></a>安装shairport及其依赖包</h4><p>在终端执行如下命令:<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install  libao-dev libssl-dev git avahi-utils libwww-<span class="keyword">perl</span></span><br><span class="line">sudo apt-<span class="built_in">get</span> install libcrypt-openssl-rsa-<span class="keyword">perl</span> libio-socket-inet6-<span class="keyword">perl</span>  libmodule-build-<span class="keyword">perl</span></span><br></pre></td></tr></table></figure></p>
+<p>然后在合适的地方建个文件夹，cd到文件夹目录接着:<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git clone http<span class="variable">s:</span>//github.<span class="keyword">com</span>/njh/<span class="keyword">perl</span>-net-sdp.git</span><br><span class="line"><span class="keyword">cd</span> <span class="keyword">perl</span>-net-sdp</span><br><span class="line"><span class="keyword">perl</span> Build.PL</span><br><span class="line">./Build</span><br><span class="line">./Build test</span><br><span class="line">sudo ./Build install</span><br><span class="line"><span class="keyword">cd</span> ..</span><br><span class="line">git clone http<span class="variable">s:</span>//github.<span class="keyword">com</span>/abrasive/shairport.git</span><br><span class="line"><span class="keyword">cd</span> shairport</span><br><span class="line"><span class="keyword">make</span></span><br></pre></td></tr></table></figure></p>
+<p>运行shairport:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./shairport -<span class="tag">a</span> <span class="string">"raspberry pi"</span></span><br></pre></td></tr></table></figure></p>
+<p>之后在iPhone或者iPad上就可以看到这个AirPlay的选项，如图:<br><img src="http://ww3.sinaimg.cn/mw690/005WMcFzjw1f1dvytz5awj30hs0vkada.jpg" alt=""><br><img src="http://ww3.sinaimg.cn/mw690/005WMcFzjw1f1dvz5gmb3j30hs0vk3zh.jpg" alt=""><br>享受音乐吧(☆_☆)</p>
+<h3 id="omxplayer_u64AD_u653E_u5668"><a href="#omxplayer_u64AD_u653E_u5668" class="headerlink" title="omxplayer播放器"></a>omxplayer播放器</h3><p>omxplayer是没有图形界面的，只能通过命令行来操作，不过它麻雀虽小五脏具全。<br>在终端中直接输入omxplayer就会出现相关的帮助信息，还给出了示例。在这里我就不介绍它的具体用法了。   </p>
+<h3 id="u4E00_u70B9_u5FC3_u5F97"><a href="#u4E00_u70B9_u5FC3_u5F97" class="headerlink" title="一点心得"></a>一点心得</h3><p>因为开源硬件得天独厚的软件生态，树莓派可DIY的东西被无限延伸。操作起来也并不像人们想象的那么复杂，不是计算机相关专业的同学们也可以快速上手。在我这次的尝试中发现了一些小小的问题。可能是树莓派制作成本的限制，其音频输出相当的糟糕，干扰非常严重。想用树莓派直接用HDMI连接电视做高清机顶盒的同学们一定记得给树莓配上一块独立声卡，HDMI的音频输出也是相当糟糕=)</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pi/">Pi</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/嵌入式开发/">嵌入式开发</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-2016-02-19-vps" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -872,85 +952,6 @@ GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<sp
 </ol>
 <p>声明什么的我就不写了，下面是修改OnDraw()成员函数。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CFunctioncurveView::OnDraw(CDC* pDC)&#123;	CFunctioncurveDoc* pDoc = GetDocument();	ASSERT_VALID(pDoc);	<span class="keyword">const</span> <span class="keyword">double</span> PI=<span class="number">3.14159265359</span>;	<span class="keyword">const</span> <span class="keyword">double</span> dbYMax=<span class="number">1.0</span>;	<span class="keyword">const</span> <span class="keyword">double</span> dbYMin=-<span class="number">1.0</span>;	<span class="keyword">const</span> <span class="keyword">double</span> dbXMin=<span class="number">0.0</span>;	<span class="keyword">const</span> <span class="keyword">double</span> dbXMax=<span class="number">2</span>*PI;	<span class="keyword">const</span> <span class="keyword">int</span> iPt = <span class="number">200</span>;	<span class="keyword">const</span> <span class="keyword">int</span> xOrg = <span class="number">50</span>;	<span class="keyword">const</span> <span class="keyword">int</span> yOrg = <span class="number">350</span>;	<span class="keyword">const</span> <span class="keyword">int</span> xMax = <span class="number">700</span>;	<span class="keyword">const</span> <span class="keyword">int</span> yMin = <span class="number">20</span>;	<span class="keyword">double</span> dbXRatio=(xMax-xOrg)/(dbXMax-dbXMin);    <span class="keyword">double</span> dbYRatio=(yOrg-yMin)/(dbYMax-dbYMin);    <span class="keyword">int</span> x = xOrg;    <span class="keyword">int</span> y = yOrg;	<span class="keyword">if</span>(!pDoc-&gt;m_boolNew) <span class="comment">//声明的m_boolNew是为了让新建文档为空白视图</span>	&#123;	    		pDC-&gt;MoveTo(x,y);	    CPen penNew,*ppenOld; 	   	penNew.CreatePen(PS_SOLID,<span class="number">2</span>,pDoc-&gt;m_brush);	    ppenOld=pDC-&gt;SelectObject(&amp;penNew); <span class="comment">//选择画笔颜色</span>		<span class="keyword">if</span>(pDoc-&gt;model == <span class="number">0</span>) <span class="comment">//判断画正弦还是余弦</span>		&#123;    	    <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span>;i &lt;= iPt; i++)			&#123;	  	          x = (<span class="keyword">int</span>)(dbXRatio*(dbXMax/iPt*i-dbXMin)+xOrg);		      y = (<span class="keyword">int</span>)(yOrg-dbYRatio*(<span class="built_in">sin</span>(dbXMax/iPt*i)-dbYMin));		      pDC-&gt;LineTo(x,y);			&#125;		&#125;		<span class="keyword">else</span>		&#123;	        <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span>;i &lt;= iPt; i++)			&#123;	  		      x = (<span class="keyword">int</span>)(dbXRatio*(dbXMax/iPt*i-dbXMin)+xOrg);		      y = (<span class="keyword">int</span>)(yOrg-dbYRatio*(<span class="built_in">cos</span>(dbXMax/iPt*i)-dbYMin));		      pDC-&gt;LineTo(x,y);			&#125;		 		&#125;		pDC-&gt;SelectObject(ppenOld);		penNew.DeleteObject();<span class="comment">//用完画笔后要及时销毁，否则再次创建的时候会报错</span>		pDC-&gt;MoveTo(xOrg,yOrg);		pDC-&gt;LineTo(xMax,yOrg);		pDC-&gt;MoveTo(xOrg,yOrg);		pDC-&gt;LineTo(xOrg,yMin);		x=(xMax-xOrg)/<span class="number">2</span>;		y=yOrg+<span class="number">10</span>;        pDC-&gt;TextOut(x,y,<span class="string">"X"</span>);		x=xOrg-<span class="number">20</span>;		y=(yOrg-yMin)/<span class="number">2</span>;		pDC-&gt;TextOut(x,y,<span class="string">"Y"</span>);	&#125;	<span class="keyword">else</span> 	&#123;		CRect rectClient;		GetClientRect(rectClient);		pDC-&gt;FillSolidRect(rectClient,RGB(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>));	&#125;	<span class="comment">// <span class="doctag">TODO:</span> add draw code for native data here</span>&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="u5C0F_u7ED3"><a href="#u5C0F_u7ED3" class="headerlink" title="小结"></a>小结</h3><p>这个题用的时间比较长的原因有有两个:第一个问题在于我错误的认为brush是pen，然后搞brush类半天什么也画不出来。还有一个问题就是我在给sin/cos创建消息映射函数的时候把成员函数的名字作死命名为sin/cos，后来将math.h包括进来的时候编译器报错,因为我重复定义了sin和cos……还是很感谢<a href="http://lyeec.me" target="_blank" rel="external">@Lyeec</a>帮我找出了问题所在(<em>_</em>)</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MFC/">MFC</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2015-11-16-mfc" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/11/16/2015-11-16-mfc/" class="article-date">
-  	<time datetime="2015-11-16T13:21:08.000Z" itemprop="datePublished">2015-11-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/2015-11-16-mfc/">MFC POJ1</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##MFC的作业</p>
-<ul>
-<li>设计基于单文档/视图结构的程序。绘制一条直的道路，然后然后设计一个小车（矩形代替，有车号），使其沿道路匀速行走，到终点自动返回，来回行走。道路的宽度、长度由设定菜单完成；还有开始、结束菜单；有高速、中速、低速三个菜单控制小车速度。</li>
-<li>简要分析下：主要用到的知识有：单文档界面(SDI)应用程序，利用ClassWizard编制消息处理函数，定时器消息，客户区重绘等等……</li>
-<li>实现    </li>
-</ul>
-<p>修改文档类的定义，添加成员变量：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> CCarsDoc : <span class="keyword">public</span> CDocument&#123;<span class="keyword">protected</span>: <span class="comment">// create from serialization only</span>	CCarsDoc();	DECLARE_DYNCREATE(CCarsDoc)<span class="comment">// Attributes</span><span class="keyword">public</span>:   CRect m_rectCar;   <span class="keyword">int</span> speed;<span class="comment">// Operations</span><span class="keyword">public</span>:<span class="comment">// Overrides</span></span><br></pre></td></tr></table></figure></p>
-<p>在CCarsDoc的成员函数OnNewDocument()中初始化数据:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BOOL CCarsDoc::OnNewDocument()&#123;	<span class="keyword">if</span> (!CDocument::OnNewDocument())		<span class="keyword">return</span> FALSE;     m_rectCar=CRect(<span class="number">100</span>,<span class="number">100</span>,<span class="number">180</span>,<span class="number">150</span>);	 <span class="keyword">int</span> speed = <span class="number">1</span>;	 m_boolNew=<span class="literal">true</span>;	 m_Length=<span class="number">0</span>;	 m_Width=<span class="number">0</span>;	<span class="comment">// <span class="doctag">TODO:</span> add reinitialization code here</span>	<span class="comment">// (SDI documents will reuse this document)</span>    <span class="keyword">return</span> TRUE;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>再通过资源编辑器中的菜单编辑器完成菜单的编辑，使用ClassWizard生成消息处理函数，并自动添加菜单消息和消息处理函数的映射，在消息处理函数中加入代码:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CCarsView::Onstart() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	CRect rectClient;	GetClientRect(&amp;rectClient);	SetTimer(<span class="number">1</span>,<span class="number">100</span>,<span class="literal">NULL</span>);		&#125;<span class="keyword">void</span> CCarsView::OnTimer(UINT nIDEvent) &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span></span><br><span class="line">	CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	InvalidateRect(pDoc-&gt;m_rectCar,TRUE);	<span class="keyword">static</span> <span class="keyword">int</span> flag = <span class="number">1</span>;	<span class="keyword">if</span>(pDoc-&gt;m_rectCar.right &gt; pDoc-&gt;m_Length || pDoc-&gt;m_rectCar.left &lt; <span class="number">50</span>)	&#123;		flag *= -<span class="number">1</span>;	&#125;	    pDoc-&gt;m_rectCar.left += pDoc-&gt;speed*flag;	pDoc-&gt;m_rectCar.right += pDoc-&gt;speed*flag;		InvalidateRect(pDoc-&gt;m_rectCar,FALSE);	CView::OnTimer(nIDEvent);	&#125;<span class="keyword">void</span> CCarsView::Onstop() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	KillTimer(<span class="number">1</span>);&#125;<span class="keyword">void</span> CCarsView::Onhigh() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>    CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;speed=<span class="number">10</span>;&#125;<span class="keyword">void</span> CCarsView::Onmedium() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);    pDoc-&gt;speed=<span class="number">5</span>;&#125;<span class="keyword">void</span> CCarsView::Onlow() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>    CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;speed=<span class="number">1</span>;&#125;<span class="keyword">void</span> CCarsView::OnMenuitem32777() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	CCarsDlg dlginput;	<span class="keyword">int</span> nRet = dlginput.DoModal();	<span class="keyword">if</span>(nRet = IDOK)	&#123;		pDoc-&gt;m_Length=dlginput.m_Length;		pDoc-&gt;m_Width=dlginput.m_Width;		pDoc-&gt;m_boolNew=<span class="literal">false</span>;		Invalidate();	&#125;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后在OnDraw()里绘制小车和跑道:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CCarsView::OnDraw(CDC* pDC)&#123;	CCarsDoc* pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDC-&gt;Rectangle(pDoc-&gt;m_rectCar);	pDC-&gt;MoveTo(<span class="number">50</span>,<span class="number">50</span>);	pDC-&gt;LineTo(pDoc-&gt;m_Length,<span class="number">50</span>);	pDC-&gt;MoveTo(<span class="number">50</span>,<span class="number">50</span>+(pDoc-&gt;m_Width));	pDC-&gt;LineTo(pDoc-&gt;m_Length,<span class="number">50</span>+(pDoc-&gt;m_Width));		<span class="comment">// <span class="doctag">TODO:</span> add draw code for native data here</span>&#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>设计一个具有一定外形和颜色的计数器。开始结束由鼠标控制。   </li>
-<li>实现:</li>
-</ul>
-<p>修改文档类的定义，添加成员变量:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> CCountDoc : <span class="keyword">public</span> CDocument&#123;<span class="keyword">protected</span>: <span class="comment">// create from serialization only</span>	CCountDoc();	DECLARE_DYNCREATE(CCountDoc)<span class="comment">// Attributes</span><span class="keyword">public</span>:	<span class="keyword">int</span> m_iCount;<span class="comment">// Operations</span><span class="keyword">public</span>:<span class="comment">// Overrides..... 省略以下</span></span><br></pre></td></tr></table></figure></p>
-<p>在成员函数OnNewDocument()中初始化数据:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m_iCount = <span class="number">0</span>;</span><br></pre></td></tr></table></figure></p>
-<p>使用ClassWizaid生成消息处理函数,鼠标左键开始计数，右键停止计数:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CCountView::OnLButtonDown(UINT nFlags, CPoint point) &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span>	SetTimer(<span class="number">1</span>,<span class="number">100</span>,<span class="literal">NULL</span>);	CView::OnLButtonDown(nFlags, point);&#125;<span class="keyword">void</span> CCountView::OnRButtonDown(UINT nFlags, CPoint point) &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span>	KillTimer(<span class="number">1</span>);	CView::OnRButtonDown(nFlags, point);&#125;<span class="keyword">void</span> CCountView::OnTimer(UINT nIDEvent) &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span>    CCountDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_iCount++;	Invalidate();	CView::OnTimer(nIDEvent);&#125;</span><br></pre></td></tr></table></figure></p>
-<p>对了，绘图的时候要有颜色:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CCountView::OnDraw(CDC* pDC)&#123;	CCountDoc* pDoc = GetDocument();	ASSERT_VALID(pDoc);	CString strDisplay;	CPen penBlue;	penBlue.CreatePen(PS_SOLID,<span class="number">3</span>,RGB(<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>));	strDisplay.Format (<span class="string">"Current number:%d"</span>,pDoc-&gt;m_iCount);	pDC-&gt;SetTextColor(RGB(<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>));	pDC-&gt;SelectObject(&amp;penBlue);	pDC-&gt;Rectangle(<span class="number">50</span>,<span class="number">50</span>,<span class="number">280</span>,<span class="number">180</span>);	pDC-&gt;TextOut(<span class="number">100</span>,<span class="number">100</span>,strDisplay);	<span class="comment">// <span class="doctag">TODO:</span> add draw code for native data here</span>&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="u5C0F_u7ED3"><a href="#u5C0F_u7ED3" class="headerlink" title="小结"></a>小结</h3><p>我要检讨一下自己当时小学期的时候没有好好学习MFC，很多东西都不记得了。在编写这两个程序的过程中还遇到了很多问题，比如让小车往返运动的问题，请教了<a href="http://lyeec.me" target="_blank" rel="external">@Lyeec</a>。还有，我一定要养成随手写注释的习惯。</p>
 
       
     </div>
