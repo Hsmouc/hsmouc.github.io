@@ -4,21 +4,45 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>建博客的血泪史 | Hsmouc</title>
+  <title>使用tor隐藏自己的踪迹和深网 | Hsmouc</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="建博客的血泪史
-开学这么长时间了，还是没有从上学期的阴影中走出来TT。好吧，在黄岛学院这个神（wu）奇（liao）的地方呆了一周，在机房搞了一个周的MFC，还去了各种公司参观，这都不是重点，重点是写报告啊啊啊啊啊ಠರೃ 简吐槽时间结束，言归正转，让我们来打开新世界的大门。我建立这个博客的过程简直是一部血泪史，不过从无到有学习知识的过程总是令人兴奋的。这个事情的契机在于@Lyeec在某年某月推荐我学">
+  <meta name="description" content="tor是什么官方的介绍简单翻译下：   
+
+tor是一个免费软件和开放的网络，可以帮助你防御网络流量嗅探(一种会威胁个人自由和隐私的网络监视)。用tor可以保护商业机密，社会激进分子，军事机密，和一些学者的研究成果。
+
+（渣翻译请自行体会其中重点）来自torproject.org  
+如何使用配置Vidalia据我所知，有三种办法使用tor:   
+
+使用tor的命令行版(比较复杂)  
+使用Vi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="建博客的血泪史">
-<meta property="og:url" content="http://yoursite.com/2015/10/01/2015-10-01-blog/index.html">
+<meta property="og:title" content="使用tor隐藏自己的踪迹和深网">
+<meta property="og:url" content="http://yoursite.com/2016/03/06/2016-03-13-tor/index.html">
 <meta property="og:site_name" content="Hsmouc">
-<meta property="og:description" content="建博客的血泪史
-开学这么长时间了，还是没有从上学期的阴影中走出来TT。好吧，在黄岛学院这个神（wu）奇（liao）的地方呆了一周，在机房搞了一个周的MFC，还去了各种公司参观，这都不是重点，重点是写报告啊啊啊啊啊ಠರೃ 简吐槽时间结束，言归正转，让我们来打开新世界的大门。我建立这个博客的过程简直是一部血泪史，不过从无到有学习知识的过程总是令人兴奋的。这个事情的契机在于@Lyeec在某年某月推荐我学">
-<meta property="og:updated_time" content="2015-12-18T11:17:10.000Z">
+<meta property="og:description" content="tor是什么官方的介绍简单翻译下：   
+
+tor是一个免费软件和开放的网络，可以帮助你防御网络流量嗅探(一种会威胁个人自由和隐私的网络监视)。用tor可以保护商业机密，社会激进分子，军事机密，和一些学者的研究成果。
+
+（渣翻译请自行体会其中重点）来自torproject.org  
+如何使用配置Vidalia据我所知，有三种办法使用tor:   
+
+使用tor的命令行版(比较复杂)  
+使用Vi">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/005WMcFzjw1f1vkfm9sdjj30e50fdabl.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005WMcFzjw1f1vkgzqmhpj30kg0k2act.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/005WMcFzjw1f1vkqfccksj313w0g5n02.jpg">
+<meta property="og:updated_time" content="2016-03-13T14:07:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="建博客的血泪史">
-<meta name="twitter:description" content="建博客的血泪史
-开学这么长时间了，还是没有从上学期的阴影中走出来TT。好吧，在黄岛学院这个神（wu）奇（liao）的地方呆了一周，在机房搞了一个周的MFC，还去了各种公司参观，这都不是重点，重点是写报告啊啊啊啊啊ಠರೃ 简吐槽时间结束，言归正转，让我们来打开新世界的大门。我建立这个博客的过程简直是一部血泪史，不过从无到有学习知识的过程总是令人兴奋的。这个事情的契机在于@Lyeec在某年某月推荐我学">
+<meta name="twitter:title" content="使用tor隐藏自己的踪迹和深网">
+<meta name="twitter:description" content="tor是什么官方的介绍简单翻译下：   
+
+tor是一个免费软件和开放的网络，可以帮助你防御网络流量嗅探(一种会威胁个人自由和隐私的网络监视)。用tor可以保护商业机密，社会激进分子，军事机密，和一些学者的研究成果。
+
+（渣翻译请自行体会其中重点）来自torproject.org  
+如何使用配置Vidalia据我所知，有三种办法使用tor:   
+
+使用tor的命令行版(比较复杂)  
+使用Vi">
   
     <link rel="alternative" href="/atom.xml" title="Hsmouc" type="application/atom+xml">
   
@@ -194,11 +218,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-2015-10-01-blog" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-2016-03-13-tor" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/10/01/2015-10-01-blog/" class="article-date">
-  	<time datetime="2015-09-30T16:40:35.000Z" itemprop="datePublished">2015-10-01</time>
+      <a href="/2016/03/06/2016-03-13-tor/" class="article-date">
+  	<time datetime="2016-03-06T11:40:25.000Z" itemprop="datePublished">2016-03-06</time>
 </a>
     </div>
   
@@ -211,7 +235,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      建博客的血泪史
+      使用tor隐藏自己的踪迹和深网
     </h1>
   
 
@@ -220,12 +244,12 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Blog/">Blog</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tor/">tor</a></li></ul>
 	</div>
 
         
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/前端开发/">前端开发</a>
+	<a class="article-category-link" href="/categories/渗透入侵/">渗透入侵</a>
 	</div>
 
 
@@ -235,8 +259,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p></p><h1>建博客的血泪史</h1><p></p>
-<p>开学这么长时间了，还是没有从上学期的阴影中走出来T<em>T。好吧，在黄岛学院这个神（wu）奇（liao）的地方呆了一周，在机房搞了一个周的MFC，还去了各种公司参观，这都不是重点，重点是写报告啊啊啊啊啊ಠ</em>ರೃ 简吐槽时间结束，言归正转，让我们来打开新世界的大门。</p><br><p>我建立这个博客的过程简直是一部血泪史，不过从无到有学习知识的过程总是令人兴奋的。这个事情的契机在于<a href="http://lyeec.me" target="_blank" rel="external">@Lyeec</a>在某年某月推荐我学了Python，然后分享了<a href="http://www.liaoxuefeng.com" target="_blank" rel="external">@廖雪峰</a>的Python教程。虽然我并没有学好Python，但是我在无意间看到了Git的教程，后来一发不可收拾申请了属于自己的github账号并且拥有了一个属于自己的博客。<br>大体的步骤是这样：首先申请一个Github账号，然后新建一个repo（xxx.github.io），我的叫Hsmouc.github.io。接着去github上面搜索关键字Jekyll，然后就会出来一堆的模版，然后通过Git clone命令（先去学git，推荐上面廖雪峰的教程，当然我没有看完，但是掌握了基本操作）将这个repo的名字改成你新建的repo的名字，最后用git push命令将它push到你自己的github上。现在可以在浏览器地址栏输入xxx.github.io啦，这就是你博客的初始样式。<br>如果你熟悉html语言，精通js，那么你可以push自己的站点让Github帮助你托管。假如你像我一样连最基本的html语法都要一条条Google的话，那你可以使用Jekyll模版，在使用模版的过程中逐渐熟悉网页的布局之类。<br>其实到这里基本上就已经差不多了，以上就是我用了大约一周时间搞出了一个博客的过程。仅从流程上来看其实并不复杂，但是在具体细节上还需要自己一遍又一遍的请教大神或者默默Google，细节上的问题有时间我会补充，在以后的一段时间我会不断的给我的博客增加一些功能。这个渣渣的排版等我学会了Markdown再改吧，在vim里面写html我也是醉了◡ ヽ(`Д´)ﾉ ┻━┻ </p><br><p>晚安，各位</p>
+        <h3 id="tor_u662F_u4EC0_u4E48"><a href="#tor_u662F_u4EC0_u4E48" class="headerlink" title="tor是什么"></a>tor是什么</h3><p>官方的介绍简单翻译下：   </p>
+<blockquote>
+<p>tor是一个免费软件和开放的网络，可以帮助你防御网络流量嗅探(一种会威胁个人自由和隐私的网络监视)。用tor可以保护商业机密，社会激进分子，军事机密，和一些学者的研究成果。</p>
+</blockquote>
+<p>（渣翻译请自行体会其中重点）<br>来自<a href="https://www.torproject.org/" target="_blank" rel="external">torproject.org</a>  </p>
+<h3 id="u5982_u4F55_u4F7F_u7528"><a href="#u5982_u4F55_u4F7F_u7528" class="headerlink" title="如何使用"></a>如何使用</h3><h4 id="u914D_u7F6EVidalia"><a href="#u914D_u7F6EVidalia" class="headerlink" title="配置Vidalia"></a>配置Vidalia</h4><p>据我所知，有三种办法使用tor:   </p>
+<ol>
+<li>使用tor的命令行版(比较复杂)  </li>
+<li>使用Vidalia(GUI版本，目前已经停止维护)  </li>
+<li>使用tor browser(最简单)  </li>
+</ol>
+<p>我使用的是Vidalia，可以在这个地方下载<a href="https://dist.torproject.org/vidalia-bundles/" target="_blank" rel="external">Vidalia</a>，貌似没有for Linux？<br>Vidalia的配置比较简单，前提是可以科学上网，因为万能的某长城貌似已经全面封锁了tor。<br><img src="http://ww2.sinaimg.cn/large/005WMcFzjw1f1vkfm9sdjj30e50fdabl.jpg" alt="screenshot"><br>选择Settings,<br><img src="http://ww1.sinaimg.cn/large/005WMcFzjw1f1vkgzqmhpj30kg0k2act.jpg" alt="screenshot"><br>选择我使用代理连接互联网，这里我的本地1080端口运行的是shadowsocks的代理。并选择我的ISP提供商封锁了tor网络的连接，并添加网桥.<br>注意，网桥可以向bridges@torproject.org发送一封内容为get bridges的邮件获得。<br>其他的设置不用管，点connect，洋葱变绿时说明连接上了tor。   </p>
+<h4 id="u914D_u7F6Echrome"><a href="#u914D_u7F6Echrome" class="headerlink" title="配置chrome"></a>配置chrome</h4><p>强推一个插件SwitchyOmega,可以快速在切换浏览器代理设置。<img src="http://ww3.sinaimg.cn/large/005WMcFzjw1f1vkqfccksj313w0g5n02.jpg" alt=""></p>
+<p>左侧+New Profile，如图配置9050端口即可。<br>访问下面这个页面看看配置是否成功:<a href="https://check.torproject.org/" target="_blank" rel="external">checktor</a></p>
+<p>###Deep Web(深网)<br>使用tor代理，访问下面的页面试试：<a href="http://zqktlwi4fecvo6ri.onion/wiki/" target="_blank" rel="external">The Hidden Wiki</a><br>是的，这里充满各种违法的信息，比特币洗钱，军火交易，假身份……这就是人们常说的地下黑产聚集地，这就是deep web。你可以找到各种各样的信息，会遇到各种各样疯狂的人。这里高度自治，如果你足够强大也可以与之对抗。<br>一个挺不错的聊天室链接<a href="http://tetatl6umgbmtv27.onion/" target="_blank" rel="external">chat with stangers</a>，在这里我遇到了无所事事的美国年轻黑客，对中国文化很感兴趣；也偶遇了做运维的美国大叔，耐心的给我讲解perl……有两点要注意:</p>
+<ol>
+<li>不要泄露个人信息</li>
+<li>英语要好，lol</li>
+</ol>
 
       
     </div>
@@ -246,15 +287,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/10/01/2015-10-01-method/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          添加图片和代码高亮的方法
-        
-      </div>
-    </a>
   
+    <a href="/2016/03/06/2016-03-06-sqlmap/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">一桩由sqlmap引发的血案</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
   
 </nav>
 
@@ -287,7 +324,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="2015-10-01-blog" data-title="建博客的血泪史" data-url="http://yoursite.com/2015/10/01/2015-10-01-blog/"></div>
+	<div class="ds-thread" data-thread-key="2016-03-13-tor" data-title="使用tor隐藏自己的踪迹和深网" data-url="http://yoursite.com/2016/03/06/2016-03-13-tor/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

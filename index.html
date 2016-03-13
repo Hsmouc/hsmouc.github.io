@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 15px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/MFC/" style="font-size: 17.5px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 10px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 17.5px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 17.5px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a>
+						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 15px;">Blog</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/MFC/" style="font-size: 17.5px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 10px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 17.5px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 15px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/tor/" style="font-size: 10px;">tor</a>
 					</div>
 				</section>
 				
@@ -191,6 +191,85 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-2016-03-13-tor" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/06/2016-03-13-tor/" class="article-date">
+  	<time datetime="2016-03-06T11:40:25.000Z" itemprop="datePublished">2016-03-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/06/2016-03-13-tor/">使用tor隐藏自己的踪迹和深网</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="tor_u662F_u4EC0_u4E48"><a href="#tor_u662F_u4EC0_u4E48" class="headerlink" title="tor是什么"></a>tor是什么</h3><p>官方的介绍简单翻译下：   </p>
+<blockquote>
+<p>tor是一个免费软件和开放的网络，可以帮助你防御网络流量嗅探(一种会威胁个人自由和隐私的网络监视)。用tor可以保护商业机密，社会激进分子，军事机密，和一些学者的研究成果。</p>
+</blockquote>
+<p>（渣翻译请自行体会其中重点）<br>来自<a href="https://www.torproject.org/" target="_blank" rel="external">torproject.org</a>  </p>
+<h3 id="u5982_u4F55_u4F7F_u7528"><a href="#u5982_u4F55_u4F7F_u7528" class="headerlink" title="如何使用"></a>如何使用</h3><h4 id="u914D_u7F6EVidalia"><a href="#u914D_u7F6EVidalia" class="headerlink" title="配置Vidalia"></a>配置Vidalia</h4><p>据我所知，有三种办法使用tor:   </p>
+<ol>
+<li>使用tor的命令行版(比较复杂)  </li>
+<li>使用Vidalia(GUI版本，目前已经停止维护)  </li>
+<li>使用tor browser(最简单)  </li>
+</ol>
+<p>我使用的是Vidalia，可以在这个地方下载<a href="https://dist.torproject.org/vidalia-bundles/" target="_blank" rel="external">Vidalia</a>，貌似没有for Linux？<br>Vidalia的配置比较简单，前提是可以科学上网，因为万能的某长城貌似已经全面封锁了tor。<br><img src="http://ww2.sinaimg.cn/large/005WMcFzjw1f1vkfm9sdjj30e50fdabl.jpg" alt="screenshot"><br>选择Settings,<br><img src="http://ww1.sinaimg.cn/large/005WMcFzjw1f1vkgzqmhpj30kg0k2act.jpg" alt="screenshot"><br>选择我使用代理连接互联网，这里我的本地1080端口运行的是shadowsocks的代理。并选择我的ISP提供商封锁了tor网络的连接，并添加网桥.<br>注意，网桥可以向bridges@torproject.org发送一封内容为get bridges的邮件获得。<br>其他的设置不用管，点connect，洋葱变绿时说明连接上了tor。   </p>
+<h4 id="u914D_u7F6Echrome"><a href="#u914D_u7F6Echrome" class="headerlink" title="配置chrome"></a>配置chrome</h4><p>强推一个插件SwitchyOmega,可以快速在切换浏览器代理设置。<img src="http://ww3.sinaimg.cn/large/005WMcFzjw1f1vkqfccksj313w0g5n02.jpg" alt=""></p>
+<p>左侧+New Profile，如图配置9050端口即可。<br>访问下面这个页面看看配置是否成功:<a href="https://check.torproject.org/" target="_blank" rel="external">checktor</a></p>
+<p>###Deep Web(深网)<br>使用tor代理，访问下面的页面试试：<a href="http://zqktlwi4fecvo6ri.onion/wiki/" target="_blank" rel="external">The Hidden Wiki</a><br>是的，这里充满各种违法的信息，比特币洗钱，军火交易，假身份……这就是人们常说的地下黑产聚集地，这就是deep web。你可以找到各种各样的信息，会遇到各种各样疯狂的人。这里高度自治，如果你足够强大也可以与之对抗。<br>一个挺不错的聊天室链接<a href="http://tetatl6umgbmtv27.onion/" target="_blank" rel="external">chat with stangers</a>，在这里我遇到了无所事事的美国年轻黑客，对中国文化很感兴趣；也偶遇了做运维的美国大叔，耐心的给我讲解perl……有两点要注意:</p>
+<ol>
+<li>不要泄露个人信息</li>
+<li>英语要好，lol</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tor/">tor</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/渗透入侵/">渗透入侵</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-2016-03-06-sqlmap" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -895,82 +974,6 @@ GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<sp
 </code></pre>
 <p>我觉得我写的简直乱到一定程度了-_-#   </p>
 <h3 id="u5C0F_u7ED3"><a href="#u5C0F_u7ED3" class="headerlink" title="小结"></a>小结</h3><p>这个程序几乎是一气呵成的，编译一遍通过简直感人。但是这个程序还是有很多细节有待完善，比如说设置初始值的问题。个人认为用户在打开这个程序的时候应该是两个卫星在跑而不是一片空白，用户根据自己的个性化需求更改一些参数，这样看起来会更友好一些。单论MFC的文档/视图结构的话貌似并没什么太复杂的内容，整个就是一个大模版，只要你循规蹈矩，解出这些水题也就是时间问题吧=_=</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MFC/">MFC</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2015-11-17-mfc" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/11/17/2015-11-17-mfc/" class="article-date">
-  	<time datetime="2015-11-17T13:21:08.000Z" itemprop="datePublished">2015-11-17</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/17/2015-11-17-mfc/">MFC POJ2</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="MFC_u7684_u4F5C_u4E1A"><a href="#MFC_u7684_u4F5C_u4E1A" class="headerlink" title="MFC的作业"></a>MFC的作业</h2><ul>
-<li>用规定的颜色绘制正弦、余弦曲线。由菜单或对话框定颜色。</li>
-<li>这个看起来如此简单的东西耗费了我半天的时间ಥ_ಥ，大部分时间用在了调一个令人无语的bug上。</li>
-</ul>
-<p>首先我做了下菜单，包括一个颜色选择菜单(弹出颜色选择对话框)，一个模式选择的下拉菜单(画正弦还是画余弦)。   </p>
-<p>做完菜单以后给它们添加消息处理函数。  </p>
-<ol>
-<li><p>颜色选择:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改消息映射函数，添加使用颜色选择公用对话框</span></span><br><span class="line"><span class="keyword">void</span> CFunctioncurveView::OnInput() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CFunctioncurveDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	<span class="function">CColorDialog <span class="title">colordlg</span><span class="params">(pDoc-&gt;m_brush)</span></span>; 	pDoc-&gt;m_brush = RGB(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>); 	<span class="keyword">if</span>(colordlg.DoModal()== IDOK)	&#123;		pDoc-&gt;m_brush = colordlg.GetColor();	    pDoc-&gt;m_boolNew=<span class="literal">false</span>;		InvalidateRect(<span class="literal">NULL</span>);     &#125;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>模式选择</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这里我在Document类声明中添加了一个model变量，用它来做选择结构</span></span><br><span class="line"><span class="keyword">void</span> CFunctioncurveView::OnsinFunc() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CFunctioncurveDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;model = <span class="number">0</span>;	&#125;<span class="keyword">void</span> CFunctioncurveView::OncosFunc() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CFunctioncurveDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;model = <span class="number">1</span>;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>声明什么的我就不写了，下面是修改OnDraw()成员函数。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CFunctioncurveView::OnDraw(CDC* pDC)&#123;	CFunctioncurveDoc* pDoc = GetDocument();	ASSERT_VALID(pDoc);	<span class="keyword">const</span> <span class="keyword">double</span> PI=<span class="number">3.14159265359</span>;	<span class="keyword">const</span> <span class="keyword">double</span> dbYMax=<span class="number">1.0</span>;	<span class="keyword">const</span> <span class="keyword">double</span> dbYMin=-<span class="number">1.0</span>;	<span class="keyword">const</span> <span class="keyword">double</span> dbXMin=<span class="number">0.0</span>;	<span class="keyword">const</span> <span class="keyword">double</span> dbXMax=<span class="number">2</span>*PI;	<span class="keyword">const</span> <span class="keyword">int</span> iPt = <span class="number">200</span>;	<span class="keyword">const</span> <span class="keyword">int</span> xOrg = <span class="number">50</span>;	<span class="keyword">const</span> <span class="keyword">int</span> yOrg = <span class="number">350</span>;	<span class="keyword">const</span> <span class="keyword">int</span> xMax = <span class="number">700</span>;	<span class="keyword">const</span> <span class="keyword">int</span> yMin = <span class="number">20</span>;	<span class="keyword">double</span> dbXRatio=(xMax-xOrg)/(dbXMax-dbXMin);    <span class="keyword">double</span> dbYRatio=(yOrg-yMin)/(dbYMax-dbYMin);    <span class="keyword">int</span> x = xOrg;    <span class="keyword">int</span> y = yOrg;	<span class="keyword">if</span>(!pDoc-&gt;m_boolNew) <span class="comment">//声明的m_boolNew是为了让新建文档为空白视图</span>	&#123;	    		pDC-&gt;MoveTo(x,y);	    CPen penNew,*ppenOld; 	   	penNew.CreatePen(PS_SOLID,<span class="number">2</span>,pDoc-&gt;m_brush);	    ppenOld=pDC-&gt;SelectObject(&amp;penNew); <span class="comment">//选择画笔颜色</span>		<span class="keyword">if</span>(pDoc-&gt;model == <span class="number">0</span>) <span class="comment">//判断画正弦还是余弦</span>		&#123;    	    <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span>;i &lt;= iPt; i++)			&#123;	  	          x = (<span class="keyword">int</span>)(dbXRatio*(dbXMax/iPt*i-dbXMin)+xOrg);		      y = (<span class="keyword">int</span>)(yOrg-dbYRatio*(<span class="built_in">sin</span>(dbXMax/iPt*i)-dbYMin));		      pDC-&gt;LineTo(x,y);			&#125;		&#125;		<span class="keyword">else</span>		&#123;	        <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span>;i &lt;= iPt; i++)			&#123;	  		      x = (<span class="keyword">int</span>)(dbXRatio*(dbXMax/iPt*i-dbXMin)+xOrg);		      y = (<span class="keyword">int</span>)(yOrg-dbYRatio*(<span class="built_in">cos</span>(dbXMax/iPt*i)-dbYMin));		      pDC-&gt;LineTo(x,y);			&#125;		 		&#125;		pDC-&gt;SelectObject(ppenOld);		penNew.DeleteObject();<span class="comment">//用完画笔后要及时销毁，否则再次创建的时候会报错</span>		pDC-&gt;MoveTo(xOrg,yOrg);		pDC-&gt;LineTo(xMax,yOrg);		pDC-&gt;MoveTo(xOrg,yOrg);		pDC-&gt;LineTo(xOrg,yMin);		x=(xMax-xOrg)/<span class="number">2</span>;		y=yOrg+<span class="number">10</span>;        pDC-&gt;TextOut(x,y,<span class="string">"X"</span>);		x=xOrg-<span class="number">20</span>;		y=(yOrg-yMin)/<span class="number">2</span>;		pDC-&gt;TextOut(x,y,<span class="string">"Y"</span>);	&#125;	<span class="keyword">else</span> 	&#123;		CRect rectClient;		GetClientRect(rectClient);		pDC-&gt;FillSolidRect(rectClient,RGB(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>));	&#125;	<span class="comment">// <span class="doctag">TODO:</span> add draw code for native data here</span>&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="u5C0F_u7ED3"><a href="#u5C0F_u7ED3" class="headerlink" title="小结"></a>小结</h3><p>这个题用的时间比较长的原因有有两个:第一个问题在于我错误的认为brush是pen，然后搞brush类半天什么也画不出来。还有一个问题就是我在给sin/cos创建消息映射函数的时候把成员函数的名字作死命名为sin/cos，后来将math.h包括进来的时候编译器报错,因为我重复定义了sin和cos……还是很感谢<a href="http://lyeec.me" target="_blank" rel="external">@Lyeec</a>帮我找出了问题所在(<em>_</em>)</p>
 
       
     </div>
