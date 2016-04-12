@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>基于89C51的电子时钟设计 | Hsmouc</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="电子系统设计实验课–电子钟代码是用C写的，写的很烂，基本没有考虑优化的问题。因为只有一个周的时间，我还要上蛋疼的雅思课，所以忽略函数的胡乱调用与变量的命名吧。这个电子钟实现了如下功能:   
+
+时间的精确走动
+时分秒年月日都可以通过键盘调节
+秒表功能    
+
+做好的效果图是这样的：
+硬件设计整体来说用了一块89C51，用hc165来读键盘的信息，hc164来将输入的串行数据转并行输出，送LCD显">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于89C51的电子时钟设计">
+<meta property="og:url" content="http://yoursite.com/2016/04/12/2016-04-12-clock/index.html">
+<meta property="og:site_name" content="Hsmouc">
+<meta property="og:description" content="电子系统设计实验课–电子钟代码是用C写的，写的很烂，基本没有考虑优化的问题。因为只有一个周的时间，我还要上蛋疼的雅思课，所以忽略函数的胡乱调用与变量的命名吧。这个电子钟实现了如下功能:   
+
+时间的精确走动
+时分秒年月日都可以通过键盘调节
+秒表功能    
+
+做好的效果图是这样的：
+硬件设计整体来说用了一块89C51，用hc165来读键盘的信息，hc164来将输入的串行数据转并行输出，送LCD显">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005WMcFzjw1f2u9bwuytwj31kw16oax2.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/005WMcFzjw1f2u8dwplkvj30jd0bctan.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/005WMcFzjw1f2u8fxnfg7j30jz0bi40y.jpg">
+<meta property="og:updated_time" content="2016-04-12T13:52:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于89C51的电子时钟设计">
+<meta name="twitter:description" content="电子系统设计实验课–电子钟代码是用C写的，写的很烂，基本没有考虑优化的问题。因为只有一个周的时间，我还要上蛋疼的雅思课，所以忽略函数的胡乱调用与变量的命名吧。这个电子钟实现了如下功能:   
+
+时间的精确走动
+时分秒年月日都可以通过键盘调节
+秒表功能    
+
+做好的效果图是这样的：
+硬件设计整体来说用了一块89C51，用hc165来读键盘的信息，hc164来将输入的串行数据转并行输出，送LCD显">
+  
+    <link rel="alternative" href="/atom.xml" title="Hsmouc" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewktmv52wbj307y07yjrp.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">年糕</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>標籤</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>關於</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/instagram">相册</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Hsmouc" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/5449180097/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+					        
+								<a class="facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100009396457642" title="facebook">facebook</a>
+					        
+								<a class="google" target="_blank" href="https://plus.google.com/u/0/101351542677141027265" title="google">google</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 14px;">Blog</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 12px;">Linux</a> <a href="/tags/MFC/" style="font-size: 18px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 10px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 16px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 14px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/tor/" style="font-size: 10px;">tor</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://lyeec.me/">墨坊</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">工科在读，C/Python学习中，嵌入式开发，前端/渗透/摄影/吃货ˉ﹃ˉ</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">年糕</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewktmv52wbj307y07yjrp.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">年糕</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/instagram">相册</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Hsmouc" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/5449180097/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="weibo">weibo</a>
+			        
+						<a class="facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100009396457642" title="facebook">facebook</a>
+			        
+						<a class="google" target="_blank" href="https://plus.google.com/u/0/101351542677141027265" title="google">google</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-2016-04-12-clock" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/12/2016-04-12-clock/" class="article-date">
+  	<time datetime="2016-04-12T12:34:43.000Z" itemprop="datePublished">2016-04-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      基于89C51的电子时钟设计
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/嵌入式开发/">嵌入式开发</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u7535_u5B50_u7CFB_u7EDF_u8BBE_u8BA1_u5B9E_u9A8C_u8BFE_u2013_u7535_u5B50_u949F"><a href="#u7535_u5B50_u7CFB_u7EDF_u8BBE_u8BA1_u5B9E_u9A8C_u8BFE_u2013_u7535_u5B50_u949F" class="headerlink" title="电子系统设计实验课–电子钟"></a>电子系统设计实验课–电子钟</h2><p>代码是用C写的，写的很烂，基本没有考虑优化的问题。因为只有一个周的时间，我还要上蛋疼的雅思课，所以忽略函数的胡乱调用与变量的命名吧。<br>这个电子钟实现了如下功能:   </p>
+<ul>
+<li>时间的精确走动</li>
+<li>时分秒年月日都可以通过键盘调节</li>
+<li>秒表功能    </li>
+</ul>
+<p>做好的效果图是这样的：<br><img src="http://ww1.sinaimg.cn/large/005WMcFzjw1f2u9bwuytwj31kw16oax2.jpg" alt=""></p>
+<h3 id="u786C_u4EF6_u8BBE_u8BA1"><a href="#u786C_u4EF6_u8BBE_u8BA1" class="headerlink" title="硬件设计"></a>硬件设计</h3><p>整体来说用了一块89C51，用hc165来读键盘的信息，hc164来将输入的串行数据转并行输出，送LCD显示。读键值的原理图如下:<br><img src="http://ww4.sinaimg.cn/large/005WMcFzjw1f2u8dwplkvj30jd0bctan.jpg" alt="">(乱码是什么鬼)<br>下面这张是hc164送显示的原理图:<br><img src="http://ww2.sinaimg.cn/large/005WMcFzjw1f2u8fxnfg7j30jz0bi40y.jpg" alt=""> (乱码又是什么鬼)</p>
+<h3 id="u8F6F_u4EF6_u8BBE_u8BA1"><a href="#u8F6F_u4EF6_u8BBE_u8BA1" class="headerlink" title="软件设计"></a>软件设计</h3><p>大体上来说整个程序有两个部分:直接控制硬件的驱动层和我们实现电子钟功能的函数应用层。我们把它们分别放在DRI文件夹下和USR文件夹下。   </p>
+<h4 id="u9A71_u52A8_u5C42_u8BBE_u8BA1"><a href="#u9A71_u52A8_u5C42_u8BBE_u8BA1" class="headerlink" title="驱动层设计"></a>驱动层设计</h4><p>(°_°)我要放源代码了:   </p>
+<h5 id="hc165_u7684_u5E95_u5C42_u63A7_u5236_u4EE3_u7801"><a href="#hc165_u7684_u5E95_u5C42_u63A7_u5236_u4EE3_u7801" class="headerlink" title="hc165的底层控制代码"></a>hc165的底层控制代码</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;reg52.h&gt;</span></span></span><br><span class="line">sbit hc165_sdo=P1^<span class="number">5</span>;</span><br><span class="line">sbit hc165_sclk=P1^<span class="number">6</span>;</span><br><span class="line">sbit hc165_pl=P1^<span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> key=<span class="number">0x3e</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">hc165_init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	hc165_sdo=<span class="number">1</span>;</span><br><span class="line">	hc165_sclk=<span class="number">0</span>;</span><br><span class="line">	hc165_pl=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> <span class="title">hc165_re</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> i,x=<span class="number">0</span>;</span><br><span class="line">	hc165_pl=<span class="number">0</span>;</span><br><span class="line">	x=x+<span class="number">0</span>;</span><br><span class="line">	hc165_pl=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>( hc165_sdo == <span class="number">1</span> )</span><br><span class="line">		x = x + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>( i = <span class="number">0</span>;i &lt; <span class="number">7</span>;i ++)&#123;</span><br><span class="line">		hc165_sclk=<span class="number">1</span>;</span><br><span class="line">		x = x &lt;&lt; <span class="number">1</span>;</span><br><span class="line">		hc165_sclk=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>( hc165_sdo == <span class="number">1</span> )</span><br><span class="line">			x = x + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="hc164_28LCD_u663E_u793A_u7684_u5E95_u5C42_u63A7_u5236_u4EE3_u7801_29"><a href="#hc164_28LCD_u663E_u793A_u7684_u5E95_u5C42_u63A7_u5236_u4EE3_u7801_29" class="headerlink" title="hc164(LCD显示的底层控制代码)"></a>hc164(LCD显示的底层控制代码)</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;reg52.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;clock.h&gt;</span></span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> data second[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> timedisplay[<span class="number">14</span>]=&#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line">sbit LCD_E = P1^<span class="number">2</span>;</span><br><span class="line">sbit LCD_RW = P1^<span class="number">1</span>;</span><br><span class="line">sbit LCD_RS = P1^<span class="number">0</span>;</span><br><span class="line">sbit HC164_SDAT = P1^<span class="number">3</span>;</span><br><span class="line">sbit HC164_SCLK = P1^<span class="number">4</span>;</span><br><span class="line"><span class="keyword">extern</span> clockTypeDef clock;</span><br><span class="line"><span class="keyword">char</span> position = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> flash = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> j = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> code ascii[]=&#123;<span class="string">"0123456789"</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">send_data</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> dat)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++)&#123;</span><br><span class="line">		HC164_SCLK = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(dat &amp; <span class="number">0x80</span>)&#123;</span><br><span class="line">			HC164_SDAT = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			HC164_SDAT = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		HC164_SCLK = <span class="number">1</span>;</span><br><span class="line">		dat = dat &lt;&lt; <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Delay1ms</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> a,b;</span><br><span class="line">	<span class="keyword">for</span>(; c&gt;<span class="number">0</span>; c--) &#123;</span><br><span class="line">		<span class="keyword">for</span>(b = <span class="number">199</span>; b &gt; <span class="number">0</span>; b--) &#123;</span><br><span class="line">			<span class="keyword">for</span>(a = <span class="number">1</span>; a &gt; <span class="number">0</span>; a--);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LcdWrCmd</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> com)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> x;</span><br><span class="line">	LCD_E = <span class="number">0</span>;</span><br><span class="line">	LCD_RS = <span class="number">0</span>;</span><br><span class="line">	LCD_RW = <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	send_data(com);</span><br><span class="line">	x++;</span><br><span class="line">	LCD_E = <span class="number">1</span>;</span><br><span class="line">	x++;</span><br><span class="line">	LCD_E = <span class="number">0</span>;</span><br><span class="line">	Delay1ms(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LcdWrData</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> dat)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> x;</span><br><span class="line">	LCD_E = <span class="number">0</span>;</span><br><span class="line">	LCD_RS = <span class="number">1</span>;</span><br><span class="line">	LCD_RW = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	send_data(dat);</span><br><span class="line">	x++;</span><br><span class="line">	LCD_E = <span class="number">1</span>;</span><br><span class="line">	x++;</span><br><span class="line">	LCD_E = <span class="number">0</span>;</span><br><span class="line">	Delay1ms(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">disp_line</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> line)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(line == <span class="number">0</span>)&#123;</span><br><span class="line">		LcdWrCmd(<span class="number">0x80</span> + <span class="number">0x00</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		LcdWrCmd(<span class="number">0x80</span> + <span class="number">0x40</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LcdInit</span><span class="params">()</span></span>&#123;</span><br><span class="line">	LcdWrCmd(<span class="number">0x38</span>);</span><br><span class="line">	LcdWrCmd(<span class="number">0x0c</span>);</span><br><span class="line">	LcdWrCmd(<span class="number">0x06</span>);</span><br><span class="line">	LcdWrCmd(<span class="number">0x01</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">second_display</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	LcdWrCmd(<span class="number">0x01</span>);</span><br><span class="line">	disp_line(<span class="number">0</span>);</span><br><span class="line">	LcdWrData(ascii[second[<span class="number">0</span>]/<span class="number">10</span>]);</span><br><span class="line">	LcdWrData(ascii[second[<span class="number">0</span>]%<span class="number">10</span>]);</span><br><span class="line">	LcdWrData(<span class="number">0x27</span>);</span><br><span class="line">	LcdWrData(ascii[second[<span class="number">1</span>]/<span class="number">10</span>]);</span><br><span class="line">	LcdWrData(ascii[second[<span class="number">1</span>]%<span class="number">10</span>]);</span><br><span class="line">	LcdWrData(<span class="string">'"'</span>);</span><br><span class="line">	LcdWrData(ascii[second[<span class="number">2</span>]/<span class="number">10</span>]);</span><br><span class="line">	LcdWrData(ascii[second[<span class="number">2</span>]%<span class="number">10</span>]);	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">time_display</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> i;</span><br><span class="line">	timedisplay[<span class="number">0</span>] = clock.Year/<span class="number">1000</span>;</span><br><span class="line">	timedisplay[<span class="number">1</span>] = clock.Year/<span class="number">100</span>%<span class="number">10</span>;</span><br><span class="line">	timedisplay[<span class="number">2</span>] = clock.Year/<span class="number">10</span>%<span class="number">10</span>;</span><br><span class="line">	timedisplay[<span class="number">3</span>] = clock.Year%<span class="number">10</span>;</span><br><span class="line">	timedisplay[<span class="number">4</span>] = clock.Month/<span class="number">10</span>;</span><br><span class="line">	timedisplay[<span class="number">5</span>] = clock.Month%<span class="number">10</span>;</span><br><span class="line">	timedisplay[<span class="number">6</span>] = clock.Day/<span class="number">10</span>;</span><br><span class="line">	timedisplay[<span class="number">7</span>] = clock.Day%<span class="number">10</span>;</span><br><span class="line">	timedisplay[<span class="number">8</span>] = clock.Hour/<span class="number">10</span>;</span><br><span class="line">	timedisplay[<span class="number">9</span>] = clock.Hour%<span class="number">10</span>;</span><br><span class="line">	timedisplay[<span class="number">10</span>] = clock.Minute/<span class="number">10</span>;</span><br><span class="line">	timedisplay[<span class="number">11</span>] = clock.Minute%<span class="number">10</span>;</span><br><span class="line">	timedisplay[<span class="number">12</span>] = clock.Second/<span class="number">10</span>;</span><br><span class="line">	timedisplay[<span class="number">13</span>] = clock.Second%<span class="number">10</span>;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">14</span>; i ++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(i == <span class="number">0</span>)</span><br><span class="line">			disp_line(<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">if</span>((i == <span class="number">4</span>)||(i == <span class="number">6</span>))</span><br><span class="line">			LcdWrData(<span class="string">'-'</span>);</span><br><span class="line">		<span class="keyword">if</span>(i == <span class="number">8</span>)</span><br><span class="line">			disp_line(<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">if</span>((i == <span class="number">10</span>)||(i == <span class="number">12</span>))</span><br><span class="line">			LcdWrData(<span class="string">':'</span>);</span><br><span class="line">		<span class="keyword">if</span>((i == position)&amp;&amp;(flash == <span class="number">1</span>))&#123;</span><br><span class="line">			<span class="keyword">if</span>(j &gt;= <span class="number">25</span>)&#123;</span><br><span class="line">				<span class="keyword">if</span>(j &gt;= <span class="number">50</span>)&#123;</span><br><span class="line">					j = <span class="number">0</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				LcdWrData(<span class="string">' '</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				LcdWrData(ascii[timedisplay[i]]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			LcdWrData(ascii[timedisplay[i]]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="u7528_u6237_u5C42_u8BBE_u8BA1"><a href="#u7528_u6237_u5C42_u8BBE_u8BA1" class="headerlink" title="用户层设计"></a>用户层设计</h4><p>用户层主要是一个计算时间的函数，时间的计算是通过定时器中断实现的，中断时间是10ms一次。因为我们添加了秒表功能。</p>
+<h5 id="u65F6_u95F4_u8BA1_u7B97"><a href="#u65F6_u95F4_u8BA1_u7B97" class="headerlink" title="时间计算"></a>时间计算</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;reg52.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;clock.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> data time[<span class="number">6</span>] = &#123;<span class="number">1970</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> data second[<span class="number">3</span>] =&#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> timeMs10 = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> secMs10 = <span class="number">0</span>;</span><br><span class="line">clockTypeDef clock;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">timeCalc</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	timeMs10++;</span><br><span class="line">	<span class="keyword">if</span>(timeMs10 == <span class="number">100</span>) &#123;</span><br><span class="line">		timeMs10 = <span class="number">0</span>;</span><br><span class="line">		time[<span class="number">5</span>]++;</span><br><span class="line">		<span class="keyword">if</span>(time[<span class="number">5</span>] == <span class="number">60</span>) &#123;</span><br><span class="line">			time[<span class="number">4</span>]++;</span><br><span class="line">			time[<span class="number">5</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">4</span>] == <span class="number">60</span>) &#123;</span><br><span class="line">				time[<span class="number">3</span>]++;</span><br><span class="line">				time[<span class="number">4</span>] = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">if</span>(time[<span class="number">3</span>] == <span class="number">24</span>) &#123;</span><br><span class="line">					time[<span class="number">2</span>]++;</span><br><span class="line">					time[<span class="number">3</span>] = <span class="number">0</span>;</span><br><span class="line">					<span class="keyword">if</span>(time[<span class="number">1</span>] == <span class="number">1</span> || time[<span class="number">1</span>] == <span class="number">3</span> || time[<span class="number">1</span>] == <span class="number">5</span> || time[<span class="number">1</span>] == <span class="number">7</span> || time[<span class="number">1</span>] == <span class="number">8</span> || time[<span class="number">1</span>] == <span class="number">10</span> || time[<span class="number">1</span>] == <span class="number">12</span>) &#123;</span><br><span class="line">						<span class="keyword">if</span>(time[<span class="number">2</span>] == <span class="number">31</span>) &#123;</span><br><span class="line">							time[<span class="number">1</span>]++;</span><br><span class="line">							time[<span class="number">2</span>] = <span class="number">0</span>;</span><br><span class="line">							<span class="keyword">if</span>(time[<span class="number">1</span>] == <span class="number">12</span>) &#123;</span><br><span class="line">								time[<span class="number">0</span>]++;</span><br><span class="line">							&#125;</span><br><span class="line">						&#125;	</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span>(time[<span class="number">1</span>] == <span class="number">4</span> || time[<span class="number">1</span>] == <span class="number">6</span> || time[<span class="number">1</span>] == <span class="number">9</span> || time[<span class="number">1</span>] == <span class="number">11</span>) &#123;</span><br><span class="line">						<span class="keyword">if</span>(time[<span class="number">2</span>] == <span class="number">30</span>) &#123;</span><br><span class="line">							time[<span class="number">1</span>]++;</span><br><span class="line">							time[<span class="number">2</span>] = <span class="number">0</span>;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span>(time[<span class="number">1</span>] &gt;= <span class="number">2</span>) &#123;</span><br><span class="line">						<span class="keyword">if</span>(time[<span class="number">0</span>]%<span class="number">4</span> == <span class="number">0</span>) &#123;</span><br><span class="line">							<span class="keyword">if</span>(time[<span class="number">2</span>] == <span class="number">29</span>) &#123;</span><br><span class="line">								time[<span class="number">1</span>]++;</span><br><span class="line">								time[<span class="number">2</span>] = <span class="number">0</span>;</span><br><span class="line">							&#125;</span><br><span class="line">						&#125;</span><br><span class="line">						<span class="keyword">else</span></span><br><span class="line">							<span class="keyword">if</span>(time[<span class="number">2</span>] == <span class="number">28</span>) &#123;</span><br><span class="line">								time[<span class="number">1</span>]++;</span><br><span class="line">								time[<span class="number">2</span>] = <span class="number">0</span>;</span><br><span class="line">							&#125;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; 		</span><br><span class="line">	&#125;</span><br><span class="line">	clock.Year = time[<span class="number">0</span>];</span><br><span class="line">	clock.Month = time[<span class="number">1</span>];</span><br><span class="line">	clock.Day = time[<span class="number">2</span>];</span><br><span class="line">	clock.Hour = time[<span class="number">3</span>];</span><br><span class="line">	clock.Minute = time[<span class="number">4</span>];</span><br><span class="line">	clock.Second = time[<span class="number">5</span>];					</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">secondCalc</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	secMs10++;</span><br><span class="line">	<span class="keyword">if</span>(secMs10 == <span class="number">1</span>) &#123;</span><br><span class="line">		second[<span class="number">2</span>] += <span class="number">1</span>;</span><br><span class="line">		secMs10 = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(second[<span class="number">2</span>] == <span class="number">99</span>) &#123;</span><br><span class="line">			second[<span class="number">2</span>] = <span class="number">0</span>;</span><br><span class="line">			second[<span class="number">1</span>]++;</span><br><span class="line">			<span class="keyword">if</span>(second[<span class="number">1</span>] == <span class="number">60</span>) &#123;</span><br><span class="line">				second[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">				second[<span class="number">0</span>]++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="u952E_u76D8_u5904_u7406"><a href="#u952E_u76D8_u5904_u7406" class="headerlink" title="键盘处理"></a>键盘处理</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;reg51.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;key.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;hc165.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;lcd.h&gt;</span></span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> flag;</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> flash;</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">char</span> position;</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> data time[<span class="number">6</span>];</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> mode = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> clearFlag = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> startFlag = <span class="number">1</span>; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">keyControl</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	flag = hc165_re();</span><br><span class="line">	Delay1ms(<span class="number">100</span>);</span><br><span class="line">	flag = hc165_re();</span><br><span class="line">	<span class="keyword">if</span>(flag == <span class="number">0xfe</span>) &#123;</span><br><span class="line">		mode = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(flag == <span class="number">0xfd</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span>(startFlag == <span class="number">0</span>)</span><br><span class="line">			startFlag = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			startFlag = <span class="number">0</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(flag == <span class="number">0xfb</span>) &#123;</span><br><span class="line">		flash = <span class="number">1</span>;</span><br><span class="line">		clearFlag = <span class="number">0</span>;</span><br><span class="line">	&#125;				 </span><br><span class="line">	<span class="keyword">if</span>(flag == <span class="number">0x7f</span>) &#123;</span><br><span class="line">		flash = <span class="number">0</span>;</span><br><span class="line">		position = <span class="number">0</span>;</span><br><span class="line">		mode = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(flag == <span class="number">0xf7</span>) &#123;</span><br><span class="line">		Delay1ms(<span class="number">100</span>);</span><br><span class="line">		position = position - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(position &lt; <span class="number">0</span>)</span><br><span class="line">			position = <span class="number">13</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(flag == <span class="number">0xef</span>) &#123;</span><br><span class="line">		Delay1ms(<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		position = position + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(position &gt; <span class="number">13</span>)</span><br><span class="line">			position = <span class="number">0</span>;</span><br><span class="line">	&#125;		 </span><br><span class="line">	<span class="keyword">if</span>(flag == <span class="number">0xdf</span> &amp;&amp; flash == <span class="number">1</span>) &#123;</span><br><span class="line">		Delay1ms(<span class="number">100</span>);</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">0</span>]/<span class="number">1000</span> &gt; <span class="number">8</span>)</span><br><span class="line">				time[<span class="number">0</span>] = <span class="number">0</span>;	</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">0</span>] += <span class="number">1000</span>;		 			</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">0</span>]/<span class="number">100</span>%<span class="number">10</span> &gt; <span class="number">8</span>)</span><br><span class="line">				time[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">0</span>] += <span class="number">100</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">2</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">0</span>]/<span class="number">10</span>%<span class="number">10</span> &gt; <span class="number">8</span>)</span><br><span class="line">				time[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">0</span>] += <span class="number">10</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">3</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">0</span>]%<span class="number">10</span> &gt; <span class="number">8</span>)</span><br><span class="line">				time[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">0</span>] += <span class="number">1</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">4</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">1</span>]/<span class="number">10</span>%<span class="number">10</span> &gt; <span class="number">0</span>)</span><br><span class="line">				time[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">1</span>] += <span class="number">10</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">5</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">1</span>]%<span class="number">10</span> &gt; <span class="number">8</span>)</span><br><span class="line">				time[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">1</span>] += <span class="number">1</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">6</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">2</span>]/<span class="number">10</span> &gt; <span class="number">2</span>)</span><br><span class="line">				time[<span class="number">2</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">2</span>] += <span class="number">10</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">7</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">2</span>]%<span class="number">10</span> &gt; <span class="number">8</span>)</span><br><span class="line">				time[<span class="number">2</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">2</span>] += <span class="number">1</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">8</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">3</span>]/<span class="number">10</span> &gt; <span class="number">1</span>)</span><br><span class="line">				time[<span class="number">3</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">3</span>] += <span class="number">10</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">9</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">3</span>]%<span class="number">10</span> &gt; <span class="number">8</span>)</span><br><span class="line">				time[<span class="number">3</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">3</span>] += <span class="number">1</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">10</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">4</span>]/<span class="number">10</span> &gt; <span class="number">4</span>)</span><br><span class="line">				time[<span class="number">4</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">4</span>] += <span class="number">10</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">11</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">4</span>]%<span class="number">10</span> &gt; <span class="number">8</span>)</span><br><span class="line">				time[<span class="number">4</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">4</span>] += <span class="number">1</span>;				</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">12</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">5</span>]/<span class="number">10</span> &gt; <span class="number">4</span>)</span><br><span class="line">				time[<span class="number">5</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">5</span>] += <span class="number">10</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">13</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">5</span>]%<span class="number">10</span> &gt; <span class="number">8</span>)</span><br><span class="line">				time[<span class="number">5</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">5</span>] += <span class="number">1</span>;				</span><br><span class="line">		&#125;</span><br><span class="line">					</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(flag == <span class="number">0xbf</span> &amp;&amp; flash == <span class="number">1</span>) &#123;</span><br><span class="line">		Delay1ms(<span class="number">100</span>);</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">0</span>]/<span class="number">1000</span> &lt; <span class="number">1</span>)</span><br><span class="line">				time[<span class="number">0</span>] = <span class="number">0</span>;	</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">0</span>] -= <span class="number">1000</span>;		 			</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">0</span>]/<span class="number">100</span>%<span class="number">10</span> &lt; <span class="number">1</span>)</span><br><span class="line">				time[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">0</span>] -= <span class="number">100</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">2</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">0</span>]/<span class="number">10</span>%<span class="number">10</span> &lt; <span class="number">1</span>)</span><br><span class="line">				time[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">0</span>] -= <span class="number">10</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">3</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">0</span>]%<span class="number">10</span> &lt; <span class="number">1</span>)</span><br><span class="line">				time[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">0</span>] -= <span class="number">1</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">4</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">1</span>]/<span class="number">10</span>%<span class="number">10</span> &lt; <span class="number">1</span>)</span><br><span class="line">				time[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">1</span>] -= <span class="number">10</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">5</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">1</span>]%<span class="number">10</span> &lt; <span class="number">1</span>)</span><br><span class="line">				time[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">1</span>] -= <span class="number">1</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">6</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">2</span>]/<span class="number">10</span> &lt; <span class="number">1</span>)</span><br><span class="line">				time[<span class="number">2</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">2</span>] -= <span class="number">10</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">7</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">2</span>]%<span class="number">10</span> &lt; <span class="number">1</span>)</span><br><span class="line">				time[<span class="number">2</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">2</span>] -= <span class="number">1</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">8</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">3</span>]/<span class="number">10</span> &lt; <span class="number">1</span>)</span><br><span class="line">				time[<span class="number">3</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">3</span>] -= <span class="number">10</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">9</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">3</span>]%<span class="number">10</span> &lt; <span class="number">1</span>)</span><br><span class="line">				time[<span class="number">3</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">3</span>] -= <span class="number">1</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">10</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">4</span>]/<span class="number">10</span> &lt; <span class="number">1</span>)</span><br><span class="line">				time[<span class="number">4</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">4</span>] -= <span class="number">10</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">11</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">4</span>]%<span class="number">10</span> &lt; <span class="number">1</span>)</span><br><span class="line">				time[<span class="number">4</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">4</span>] -= <span class="number">1</span>;				</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">12</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">5</span>]/<span class="number">10</span> &lt; <span class="number">1</span>)</span><br><span class="line">				time[<span class="number">5</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">5</span>] -= <span class="number">10</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(position == <span class="number">13</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">5</span>]%<span class="number">10</span> &lt; <span class="number">1</span>)</span><br><span class="line">				time[<span class="number">5</span>] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">5</span>] -= <span class="number">1</span>;				</span><br><span class="line">		&#125;</span><br><span class="line">					</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="u4E3B_u51FD_u6570_u548C_u4E2D_u65AD"><a href="#u4E3B_u51FD_u6570_u548C_u4E2D_u65AD" class="headerlink" title="主函数和中断"></a>主函数和中断</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;reg52.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;lcd.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;hc165.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;clock.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;key.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> j;</span><br><span class="line"><span class="keyword">extern</span> clockTypeDef clock;</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> mode;</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> data second[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> clearFlag;</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> startFlag;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	TH0 = <span class="number">0xd8</span>;</span><br><span class="line">	TL0 = <span class="number">0xf0</span>;</span><br><span class="line">	TMOD = <span class="number">0x01</span>;</span><br><span class="line">	ET0 = <span class="number">1</span>;</span><br><span class="line">	TR0 = <span class="number">1</span>;</span><br><span class="line">	EA = <span class="number">1</span>;</span><br><span class="line">	hc165_init();</span><br><span class="line">	LcdInit();</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(mode == <span class="number">0</span>)</span><br><span class="line">			second_display();</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			time_display();</span><br><span class="line">		keyControl();	</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">time_int0</span><span class="params">(<span class="keyword">void</span>)</span> interrupt 1 </span>&#123;</span><br><span class="line"> 	<span class="keyword">unsigned</span> <span class="keyword">char</span> i;</span><br><span class="line">	ET0 = <span class="number">0</span>;</span><br><span class="line">	TR0 = <span class="number">0</span>;</span><br><span class="line">	TH0 = <span class="number">0xd8</span>;<span class="comment">//0x3c;</span></span><br><span class="line">	TL0 = <span class="number">0xf0</span>;<span class="comment">//0xb0;</span></span><br><span class="line">	TR0 = <span class="number">1</span>;</span><br><span class="line">	timeCalc();</span><br><span class="line">	<span class="keyword">if</span>(mode == <span class="number">0</span> &amp;&amp; startFlag == <span class="number">0</span>)</span><br><span class="line">		secondCalc();</span><br><span class="line">	<span class="keyword">if</span>(mode == <span class="number">0</span> &amp;&amp; clearFlag == <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</span><br><span class="line">			second[i] = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		startFlag = <span class="number">1</span>;</span><br><span class="line">		clearFlag = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	j = j + <span class="number">1</span>;</span><br><span class="line">	ET0 = <span class="number">1</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u5C0F_u7ED3"><a href="#u5C0F_u7ED3" class="headerlink" title="小结"></a>小结</h3><p>从时间的计算上来说这个程序貌似并没有特别麻烦，有很多种实现的方法。这个程序的蛋疼之处在于我们计算出时间后必须将算出的时间逐位取出才能显示，所以增加了很多的工作量。还有就是关于修改时间的问题。通过按键来修改时间再简单不过，问题在于老师要求修改时间时被修改的数要实现闪烁，原来的6位数组不得不拆分成14位，增加了很多代码量。总的来说，因为开始做之前没有提前做好项目的整体规划，导致后期变量很乱，函数的调用函数值的传递也不是很合理。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/03/06/2016-03-06-sqlmap/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">一桩由sqlmap引发的血案</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016-04-12-clock" data-title="基于89C51的电子时钟设计" data-url="http://yoursite.com/2016/04/12/2016-04-12-clock/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"hsmouc"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 年糕
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-71542166-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
