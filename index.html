@@ -192,6 +192,268 @@
 
       <div class="body-wrap">
   
+    <article id="post-2016-04-13-mfc" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/13/2016-04-13-mfc/" class="article-date">
+  	<time datetime="2016-04-13T07:34:43.000Z" itemprop="datePublished">2016-04-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/13/2016-04-13-mfc/">基于MFC框架的贪吃蛇程序</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="MFC_u7684_u4F5C_u4E1A"><a href="#MFC_u7684_u4F5C_u4E1A" class="headerlink" title="MFC的作业"></a>MFC的作业</h2><h3 id="u8981_u6C42"><a href="#u8981_u6C42" class="headerlink" title="要求"></a>要求</h3><p>使用MFC的文本视图框架来写，实现贪吃蛇的基本功能：食物随机出现，键盘操作，蛇吃食物变长，蛇撞到边界和自己游戏结束，添加蛇身速度选择的按钮控件。   </p>
+<h3 id="u4EE3_u7801_u5B9E_u73B0"><a href="#u4EE3_u7801_u5B9E_u73B0" class="headerlink" title="代码实现"></a>代码实现</h3><p>SnakeDoc.h和SnakeDoc.cpp中的变量声明与初始化如下:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> CSnakeDoc : <span class="keyword">public</span> CDocument</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">protected</span>: <span class="comment">// create from serialization only</span></span><br><span class="line">	CSnakeDoc();</span><br><span class="line">	DECLARE_DYNCREATE(CSnakeDoc)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Attributes</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">struct</span>&#123;</span><br><span class="line">	<span class="keyword">int</span> body_x;</span><br><span class="line">	<span class="keyword">int</span> body_y;</span><br><span class="line">	<span class="keyword">int</span> direction;</span><br><span class="line">	<span class="keyword">int</span> length;</span><br><span class="line">	&#125;snake[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line">	<span class="keyword">struct</span>&#123;</span><br><span class="line">	<span class="keyword">int</span> food_x;</span><br><span class="line">	<span class="keyword">int</span> food_y;</span><br><span class="line">	<span class="keyword">bool</span> isfood;</span><br><span class="line">	&#125;food;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">bool</span> startFlag;</span><br><span class="line">	... <span class="comment">//省略</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Operations</span></span><br><span class="line">BOOL CSnakeDoc::OnNewDocument()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (!CDocument::OnNewDocument())</span><br><span class="line">		<span class="keyword">return</span> FALSE;</span><br><span class="line">	snake[<span class="number">0</span>].body_x = <span class="number">10</span>;</span><br><span class="line">	snake[<span class="number">0</span>].body_y = <span class="number">10</span>;</span><br><span class="line">	snake[<span class="number">1</span>].body_x = <span class="number">11</span>;</span><br><span class="line">	snake[<span class="number">1</span>].body_y = <span class="number">10</span>;</span><br><span class="line">	snake[<span class="number">2</span>].body_x = <span class="number">12</span>;</span><br><span class="line">	snake[<span class="number">2</span>].body_y = <span class="number">10</span>;</span><br><span class="line">	snake[<span class="number">0</span>].direction = <span class="number">3</span>;</span><br><span class="line">	snake[<span class="number">0</span>].length = <span class="number">3</span>;</span><br><span class="line">	food.isfood = <span class="literal">true</span>;</span><br><span class="line">	startFlag = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> add reinitialization code here</span></span><br><span class="line">	<span class="comment">// (SDI documents will reuse this document)</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> TRUE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>蛇和食物用两个结构体来表示，snake[]结构体中包含了蛇的坐标和蛇身的长度(蛇是用方块组成，简单来说length表示构成蛇的方块数)。food结构体中包含了食物的坐标和食物是否出现的状态。   </p>
+<p>视图类中的代码是这样的:  </p>
+<pre><code class="c++"><span class="keyword">void</span> CSnakeView::OnDraw(CDC* pDC)
+{
+    CSnakeDoc* pDoc = GetDocument();
+    ASSERT_VALID(pDoc);
+    pDC-&gt;TextOut(<span class="number">20</span>,<span class="number">20</span>,<span class="string">"Hsmouc"</span>);
+    pDC-&gt;TextOut(<span class="number">20</span>,<span class="number">50</span>,<span class="string">"Ocean University of China"</span>);
+    CBrush DrawBrush=(RGB(<span class="number">130</span>,<span class="number">130</span>,<span class="number">0</span>));
+    CBrush *Drawbrush=pDC-&gt;SelectObject(&amp;DrawBrush);
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span> ; i++){
+        pDC-&gt;Rectangle(pDoc-&gt;snake[i].body_x*<span class="number">20</span>,pDoc-&gt;snake[i].body_y*<span class="number">20</span>,(pDoc-&gt;snake[i].body_x+<span class="number">1</span>)*<span class="number">20</span>,(pDoc-&gt;snake[i].body_y+<span class="number">1</span>)*<span class="number">20</span>);
+
+    }
+    pDC-&gt;SelectObject(DrawBrush);
+    <span class="comment">// <span class="doctag">TODO:</span> add draw code for native data here</span>
+}
+<span class="keyword">void</span> CSnakeView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) 
+{
+    <span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span>
+    CSnakeDoc* pDoc = GetDocument();
+    ASSERT_VALID(pDoc);
+    <span class="keyword">switch</span>(nChar){
+        <span class="keyword">case</span> VK_UP:
+            <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].direction != <span class="number">2</span>){
+                pDoc-&gt;snake[<span class="number">0</span>].direction = <span class="number">1</span>;
+            }
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> VK_DOWN:
+            <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].direction != <span class="number">1</span>){
+                pDoc-&gt;snake[<span class="number">0</span>].direction = <span class="number">2</span>;
+            }
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> VK_LEFT:
+            <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].direction != <span class="number">4</span>){
+                pDoc-&gt;snake[<span class="number">0</span>].direction = <span class="number">3</span>;
+            }
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> VK_RIGHT:
+            <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].direction != <span class="number">3</span>){
+                pDoc-&gt;snake[<span class="number">0</span>].direction = <span class="number">4</span>;
+            }
+            <span class="keyword">break</span>;
+    }
+    CView::OnKeyDown(nChar, nRepCnt, nFlags);
+}
+
+<span class="keyword">void</span> CSnakeView::OnTimer(UINT nIDEvent) 
+{
+    <span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span>
+    CDC *pDC = GetDC();
+    CSnakeDoc* pDoc = GetDocument();
+    ASSERT_VALID(pDoc);
+    CRect rectClient;
+    GetClientRect(&amp;rectClient);
+    <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].body_x*<span class="number">20</span> &lt;= rectClient.left || pDoc-&gt;snake[<span class="number">0</span>].body_x*<span class="number">20</span> &gt;= rectClient.right || pDoc-&gt;snake[<span class="number">0</span>].body_y*<span class="number">20</span> &lt;= rectClient.top || pDoc-&gt;snake[<span class="number">0</span>].body_y*<span class="number">20</span> &gt;= rectClient.bottom){
+        KillTimer(<span class="number">1</span>);
+        AfxMessageBox(<span class="string">"233"</span>);
+        InvalidateRect(rectClient);
+        pDoc-&gt;gameReset();
+    }
+    <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].length &gt; <span class="number">3</span>){
+        <span class="keyword">for</span>(<span class="keyword">int</span> temp = pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span> ; temp &gt; <span class="number">0</span> ; temp--){
+            <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].body_x*<span class="number">20</span>==pDoc-&gt;snake[temp].body_x*<span class="number">20</span> &amp;&amp; pDoc-&gt;snake[<span class="number">0</span>].body_y*<span class="number">20</span> == pDoc-&gt;snake[temp].body_y*<span class="number">20</span>){
+                KillTimer(<span class="number">1</span>);
+                AfxMessageBox(<span class="string">"233"</span>);
+                InvalidateRect(rectClient);
+                pDoc-&gt;gameReset();
+            }
+        }
+    }
+    pDC-&gt;SelectStockObject(WHITE_PEN);
+    pDC-&gt;Rectangle(pDoc-&gt;snake[pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span>].body_x*<span class="number">20</span>,pDoc-&gt;snake[pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span>].body_y*<span class="number">20</span>,(pDoc-&gt;snake[pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span>].body_x+<span class="number">1</span>)*<span class="number">20</span>,(pDoc-&gt;snake[pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span>].body_y+<span class="number">1</span>)*<span class="number">20</span>);
+    <span class="keyword">for</span>(<span class="keyword">int</span> i=pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span> ; i &gt; <span class="number">0</span> ; i--){
+        pDoc-&gt;snake[i].body_x = pDoc-&gt;snake[i<span class="number">-1</span>].body_x;
+        pDoc-&gt;snake[i].body_y = pDoc-&gt;snake[i<span class="number">-1</span>].body_y;
+    }
+    <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].direction==<span class="number">1</span>){
+        pDoc-&gt;snake[<span class="number">0</span>].body_y--;
+    }
+    <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].direction==<span class="number">2</span>){
+        pDoc-&gt;snake[<span class="number">0</span>].body_y++;
+    }
+    <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].direction==<span class="number">3</span>){
+        pDoc-&gt;snake[<span class="number">0</span>].body_x--;
+    }
+    <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].direction==<span class="number">4</span>){
+        pDoc-&gt;snake[<span class="number">0</span>].body_x++;
+    }
+    pDC-&gt;SelectStockObject(BLACK_PEN);
+
+    CBrush DrawBrush = (RGB(<span class="number">130</span>,<span class="number">130</span>,<span class="number">0</span>));
+    CBrush *Drawbrush = pDC-&gt;SelectObject(&amp;DrawBrush);
+    pDC-&gt;Rectangle(pDoc-&gt;snake[<span class="number">0</span>].body_x*<span class="number">20</span>,pDoc-&gt;snake[<span class="number">0</span>].body_y*<span class="number">20</span>,(pDoc-&gt;snake[<span class="number">0</span>].body_x+<span class="number">1</span>)*<span class="number">20</span>,(pDoc-&gt;snake[<span class="number">0</span>].body_y+<span class="number">1</span>)*<span class="number">20</span>);
+    pDC-&gt;SelectObject(DrawBrush);
+    <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].body_x*<span class="number">20</span> == pDoc-&gt;food.food_x*<span class="number">20</span> &amp;&amp; pDoc-&gt;snake[<span class="number">0</span>].body_y*<span class="number">20</span> == pDoc-&gt;food.food_y*<span class="number">20</span>)
+    {
+        pDoc-&gt;snake[<span class="number">0</span>].length++;
+        pDoc-&gt;food.isfood = <span class="literal">true</span>;
+        pDoc-&gt;snake[pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span>].body_x = pDoc-&gt;snake[pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-2</span>].body_x;
+        pDoc-&gt;snake[pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span>].body_y = pDoc-&gt;snake[pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-2</span>].body_y;
+    }
+    <span class="keyword">if</span>(pDoc-&gt;food.isfood == <span class="literal">true</span>)
+    {
+        srand((<span class="keyword">unsigned</span>)time(<span class="literal">NULL</span>));
+        <span class="keyword">do</span>{
+            <span class="keyword">for</span>(<span class="keyword">int</span> temp=pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span> ; temp &gt;= <span class="number">0</span> ; temp--)
+                <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].body_x*<span class="number">20</span> == pDoc-&gt;snake[temp].body_x*<span class="number">20</span> &amp;&amp; pDoc-&gt;snake[<span class="number">0</span>].body_y*<span class="number">20</span> == pDoc-&gt;snake[temp].body_y*<span class="number">20</span>){
+                    pDoc-&gt;food.food_x=rand()%<span class="number">25</span>;
+                    pDoc-&gt;food.food_y=rand()%<span class="number">25</span>;
+                    <span class="keyword">for</span>(temp=pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span> ; temp &gt;= <span class="number">0</span> ; temp--){
+                        <span class="keyword">if</span>(pDoc-&gt;food.food_x*<span class="number">20</span> == pDoc-&gt;snake[temp].body_x*<span class="number">20</span> &amp;&amp; pDoc-&gt;food.food_y*<span class="number">20</span> == pDoc-&gt;snake[temp].body_y*<span class="number">20</span>){
+                            temp = pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span>;
+                            pDoc-&gt;food.food_x=rand()%<span class="number">25</span>;
+                            pDoc-&gt;food.food_y=rand()%<span class="number">25</span>;
+                        }
+                    }
+                }
+        }<span class="keyword">while</span>(pDoc-&gt;food.food_x*<span class="number">20</span> &lt; <span class="number">50</span> || pDoc-&gt;food.food_y*<span class="number">20</span> &lt; <span class="number">50</span> || pDoc-&gt;food.food_x*<span class="number">20</span> &gt; rectClient.right<span class="number">-100</span> || pDoc-&gt;food.food_y*<span class="number">20</span> &gt; rectClient.right<span class="number">-100</span>);
+        pDC-&gt;Rectangle(pDoc-&gt;food.food_x*<span class="number">20</span>,pDoc-&gt;food.food_y*<span class="number">20</span>,(pDoc-&gt;food.food_x+<span class="number">1</span>)*<span class="number">20</span>,(pDoc-&gt;food.food_y+<span class="number">1</span>)*<span class="number">20</span>);
+        pDoc-&gt;food.isfood = <span class="literal">false</span>;
+    }
+    CView::OnTimer(nIDEvent);
+}
+<span class="keyword">void</span> CSnakeView::OnLButtonDown(UINT nFlags, CPoint point) 
+{
+    <span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default    </span>
+    CView::OnLButtonDown(nFlags, point);
+}
+
+<span class="keyword">void</span> CSnakeView::OnEasy() 
+{
+    <span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>
+    CSnakeDoc* pDoc = GetDocument();
+    ASSERT_VALID(pDoc);
+    <span class="keyword">if</span>(pDoc-&gt;startFlag == <span class="literal">true</span>){
+        SetTimer(<span class="number">1</span>,<span class="number">400</span>,<span class="literal">NULL</span>);
+    }
+}
+
+<span class="keyword">void</span> CSnakeView::OnCrazy() 
+{
+    <span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>
+    CSnakeDoc* pDoc = GetDocument();
+    ASSERT_VALID(pDoc);
+    <span class="keyword">if</span>(pDoc-&gt;startFlag == <span class="literal">true</span>){
+        SetTimer(<span class="number">1</span>,<span class="number">100</span>,<span class="literal">NULL</span>);
+    }
+}
+
+<span class="keyword">void</span> CSnakeView::OnHard() 
+{
+    <span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>
+    CSnakeDoc* pDoc = GetDocument();
+    ASSERT_VALID(pDoc);
+    <span class="keyword">if</span>(pDoc-&gt;startFlag == <span class="literal">true</span>){
+        SetTimer(<span class="number">1</span>,<span class="number">200</span>,<span class="literal">NULL</span>);
+    }
+}
+
+<span class="keyword">void</span> CSnakeView::OnNormol() 
+{
+    <span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>
+    CSnakeDoc* pDoc = GetDocument();
+    ASSERT_VALID(pDoc);
+    <span class="keyword">if</span>(pDoc-&gt;startFlag == <span class="literal">true</span>){
+        SetTimer(<span class="number">1</span>,<span class="number">300</span>,<span class="literal">NULL</span>);
+    }
+}
+
+<span class="keyword">void</span> CSnakeView::OnStart() 
+{
+    <span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>
+    CSnakeDoc* pDoc = GetDocument();
+    ASSERT_VALID(pDoc);
+    pDoc-&gt;startFlag = <span class="literal">true</span>;
+    SetTimer(<span class="number">1</span>,<span class="number">300</span>,<span class="literal">NULL</span>); <span class="comment">//normal    </span>
+}
+
+
+
+<span class="keyword">void</span> CSnakeView::OnPause() 
+{
+    <span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>
+    KillTimer(<span class="number">1</span>);    
+}
+
+
+
+<span class="keyword">void</span> CSnakeView::OnStop() 
+{
+    <span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>
+    AfxMessageBox(<span class="string">"Have a nice day!"</span>);
+    ASSERT(AfxGetApp()-&gt;m_pMainWnd != <span class="literal">NULL</span>);
+    AfxGetApp()-&gt;m_pMainWnd-&gt;SendMessage(WM_CLOSE);
+
+}
+</code></pre>
+<p>让蛇动起来的方式是使用定时器，和以前我做过的卫星和小车大同小异。在这个程序中，蛇前进的方式是通过定时器计时，每过相同的时间，将蛇身部分的位置依次向前传递，用白色的画笔擦去蛇的最后一节。吃食物的时候把食物当成蛇新的头，同时数组长度增加1。  </p>
+<h3 id="u5C0F_u7ED3"><a href="#u5C0F_u7ED3" class="headerlink" title="小结"></a>小结</h3><p>这个程序比较繁琐……</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MFC/">MFC</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-2016-04-12-clock" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -902,73 +1164,6 @@ GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<sp
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/嵌入式开发/">嵌入式开发</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2015-12-08-mfc" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/09/2015-12-08-mfc/" class="article-date">
-  	<time datetime="2015-12-09T08:34:43.000Z" itemprop="datePublished">2015-12-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/09/2015-12-08-mfc/">MFC POJ4</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="MFC_u7684_u4F5C_u4E1A"><a href="#MFC_u7684_u4F5C_u4E1A" class="headerlink" title="MFC的作业"></a>MFC的作业</h2><ul>
-<li>编写一个计算器程序。使用该计算机使用编辑控件直接输入数据，并有加减乘除、平方根和倒数运算功能。</li>
-<li>简要分析:用AppWizard生成一个基于对话框的应用程序框架，编辑对话框模版资源，添加一个编辑控件，添加8个按钮，设置下ID和Caption。</li>
-</ul>
-<h3 id="u4EE3_u7801_u90E8_u5206"><a href="#u4EE3_u7801_u90E8_u5206" class="headerlink" title="代码部分"></a>代码部分</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CCalculatorDlg::OnSetfocusInput() </span><br><span class="line">&#123;</span><br><span class="line">	m_fInput=<span class="number">0.0</span>;</span><br><span class="line">	UpdateData(FALSE);</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> CCalculatorDlg::OnAdd() </span><br><span class="line">&#123;</span><br><span class="line">	OnCalc();</span><br><span class="line">	m_nOP=<span class="number">1</span>;</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> CCalculatorDlg::OnCalc() </span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></span><br><span class="line">	UpdateData(TRUE);</span><br><span class="line">	<span class="keyword">switch</span>(m_nOP)</span><br><span class="line">	&#123;</span><br><span class="line">	    <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">		    m_fResult=m_fInput;</span><br><span class="line">		    <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">			m_fResult+=m_fInput;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">			m_fResult-=m_fInput;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">			m_fResult*=m_fInput;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">			m_fResult/=m_fInput;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">			m_fResult=<span class="number">1</span>/m_fInput;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">			m_fResult=<span class="built_in">sqrt</span>(m_fInput);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	m_fInput=m_fResult;</span><br><span class="line">	UpdateData(FALSE);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> CCalculatorDlg::OnClear() </span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></span><br><span class="line">	m_fResult=<span class="number">0.0</span>;</span><br><span class="line">	m_fInput=<span class="number">0.0</span>;</span><br><span class="line">	m_nOP=<span class="number">0</span>;</span><br><span class="line">	UpdateData(FALSE);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> CCalculatorDlg::OnDiv() </span><br><span class="line">&#123;</span><br><span class="line">	OnCalc();</span><br><span class="line">	m_nOP=<span class="number">4</span>;</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> CCalculatorDlg::OnMul() </span><br><span class="line">&#123;</span><br><span class="line">	OnCalc();</span><br><span class="line">	m_nOP=<span class="number">3</span>;</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> CCalculatorDlg::OnReciprocal() </span><br><span class="line">&#123;</span><br><span class="line">	m_nOP=<span class="number">5</span>;</span><br><span class="line">	OnCalc();</span><br><span class="line">	m_nOP=<span class="number">0</span>;</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> CCalculatorDlg::OnSqrt() </span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></span><br><span class="line">	m_nOP=<span class="number">6</span>;</span><br><span class="line">	OnCalc();</span><br><span class="line">	m_nOP=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> CCalculatorDlg::OnSub() </span><br><span class="line">&#123;</span><br><span class="line">	OnCalc();</span><br><span class="line">	m_nOP=<span class="number">2</span>;</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>省略了一些声明和初始化代码。</p>
-<h3 id="u5C0F_u7ED3"><a href="#u5C0F_u7ED3" class="headerlink" title="小结"></a>小结</h3><p>新知识主要有:<br>为编辑控件的消息EN_SETFOCUS添加一个映射函数OnSetfocusInput()。<br>对话框类的成员函数UpdateData()用于更新数据。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MFC/">MFC</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/编程学习/">编程学习</a>
 	</div>
 
 
