@@ -4,35 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>无线网络攻防进阶 | Hsmouc</title>
+  <title>犯错纪录 | Hsmouc</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="还是写在文前：使用aircrack-ng成功截取握手包之后并破解路由器密码以后，让我们来思考黑客可能会做些什么。还是和以前一样，不要攻击邻居家的路由器，不要设法窃取别人的密码，这样是非法的。
-
-了解ARP欺骗攻击让攻击者获得局域网上的封包甚至篡改封包。原理是让送至特定IP地址的流量被错误的送到攻击者所取代的地方。    
-
-被动式封包嗅探通过对无线网络的通讯内容进行监控，利用获取的数据包来获得用户">
-<meta property="og:type" content="article">
-<meta property="og:title" content="无线网络攻防进阶">
-<meta property="og:url" content="http://yoursite.com/2015/10/22/2015-10-23-wifi2/index.html">
+  <meta name="description" content="写在文前这样一个页面的出现算是我的自我检讨，互联网中没有任何链接指向这个页面(除去Github我的仓库中可以查到这个页面)。大体上来说，这个页面只属于我和我的女朋友。所以说，这里的听众只有一个人，那就是现在正在浏览这个页面的你。开这个页面的起因是我会犯各种各样奇奇怪怪的不能容忍的错误，我需要一个地方去记录他们。在这里我会写上我对我们两个之间关系的看法，会分析自己犯错误的原因。在这里我会坦诚地，客观">
+<meta property="og:type" content="website">
+<meta property="og:title" content="犯错纪录">
+<meta property="og:url" content="http://yoursite.com/record/index.html">
 <meta property="og:site_name" content="Hsmouc">
-<meta property="og:description" content="还是写在文前：使用aircrack-ng成功截取握手包之后并破解路由器密码以后，让我们来思考黑客可能会做些什么。还是和以前一样，不要攻击邻居家的路由器，不要设法窃取别人的密码，这样是非法的。
-
-了解ARP欺骗攻击让攻击者获得局域网上的封包甚至篡改封包。原理是让送至特定IP地址的流量被错误的送到攻击者所取代的地方。    
-
-被动式封包嗅探通过对无线网络的通讯内容进行监控，利用获取的数据包来获得用户">
-<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exac8o6x23j31400p0n5d.jpg">
-<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaah59hz6j310m01rmxn.jpg">
-<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaah8jeoxj30ku0fwgwn.jpg">
-<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaahdoqyfj30ku0fwn79.jpg">
-<meta property="og:image" content="http://ww3.sinaimg.cn/mw690/005WMcFzjw1exaahalk0fj30ku0fwk0j.jpg">
-<meta property="og:updated_time" content="2015-12-17T14:52:48.000Z">
+<meta property="og:description" content="写在文前这样一个页面的出现算是我的自我检讨，互联网中没有任何链接指向这个页面(除去Github我的仓库中可以查到这个页面)。大体上来说，这个页面只属于我和我的女朋友。所以说，这里的听众只有一个人，那就是现在正在浏览这个页面的你。开这个页面的起因是我会犯各种各样奇奇怪怪的不能容忍的错误，我需要一个地方去记录他们。在这里我会写上我对我们两个之间关系的看法，会分析自己犯错误的原因。在这里我会坦诚地，客观">
+<meta property="og:updated_time" content="2016-04-26T12:54:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="无线网络攻防进阶">
-<meta name="twitter:description" content="还是写在文前：使用aircrack-ng成功截取握手包之后并破解路由器密码以后，让我们来思考黑客可能会做些什么。还是和以前一样，不要攻击邻居家的路由器，不要设法窃取别人的密码，这样是非法的。
-
-了解ARP欺骗攻击让攻击者获得局域网上的封包甚至篡改封包。原理是让送至特定IP地址的流量被错误的送到攻击者所取代的地方。    
-
-被动式封包嗅探通过对无线网络的通讯内容进行监控，利用获取的数据包来获得用户">
+<meta name="twitter:title" content="犯错纪录">
+<meta name="twitter:description" content="写在文前这样一个页面的出现算是我的自我检讨，互联网中没有任何链接指向这个页面(除去Github我的仓库中可以查到这个页面)。大体上来说，这个页面只属于我和我的女朋友。所以说，这里的听众只有一个人，那就是现在正在浏览这个页面的你。开这个页面的起因是我会犯各种各样奇奇怪怪的不能容忍的错误，我需要一个地方去记录他们。在这里我会写上我对我们两个之间关系的看法，会分析自己犯错误的原因。在这里我会坦诚地，客观">
   
     <link rel="alternative" href="/atom.xml" title="Hsmouc" type="application/atom+xml">
   
@@ -208,13 +191,7 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-2015-10-23-wifi2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/10/22/2015-10-23-wifi2/" class="article-date">
-  	<time datetime="2015-10-22T13:40:27.000Z" itemprop="datePublished">2015-10-22</time>
-</a>
-    </div>
+      <div class="body-wrap"><article id="post-" class="article article-type-post" itemscope itemprop="blogPost">
   
   <div class="article-inner">
     
@@ -225,7 +202,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      无线网络攻防进阶
+      犯错纪录
     </h1>
   
 
@@ -233,15 +210,7 @@
       
       <div class="article-info article-info-post">
         
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ARP/">ARP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wi-Fi/">Wi-Fi</a></li></ul>
-	</div>
-
         
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/渗透入侵/">渗透入侵</a>
-	</div>
-
 
         <div class="clearfix"></div>
       </div>
@@ -250,23 +219,17 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ul>
-<li>还是写在文前：使用aircrack-ng成功截取握手包之后并破解路由器密码以后，让我们来思考黑客可能会做些什么。还是和以前一样，不要攻击邻居家的路由器，不要设法窃取别人的密码，这样是非法的。</li>
-</ul>
-<h3 id="u4E86_u89E3ARP_u6B3A_u9A97_u653B_u51FB"><a href="#u4E86_u89E3ARP_u6B3A_u9A97_u653B_u51FB" class="headerlink" title="了解ARP欺骗攻击"></a>了解ARP欺骗攻击</h3><p>让攻击者获得局域网上的封包甚至篡改封包。原理是让送至特定IP地址的流量被错误的送到攻击者所取代的地方。    </p>
-<ol>
-<li><em>被动式封包嗅探</em><br>通过对无线网络的通讯内容进行监控，利用获取的数据包来获得用户名和密码等敏感信息。我等下要演示的就是这种攻击。   </li>
-<li><em>中间人攻击</em><br>指攻击者与通讯的两端分别建立独立的联系，并交换其所收到的数据，使通讯的两端认为他们正在通过一个私密的连接与对方直接对话，但事实上整个会话都被攻击者完全控制。在中间人攻击中，攻击者可以拦截通讯双方的通话并插入新的内容。</li>
-</ol>
-<h3 id="u6211_u7684_u5B9E_u9A8C"><a href="#u6211_u7684_u5B9E_u9A8C" class="headerlink" title="我的实验"></a>我的实验</h3><p>由于我用的macbook网卡不支持开热点，在淘宝上买了块RT2571网卡，更换了好几个驱动并没有成功。所以我至今还没有使用aireply-ng等等工具。所以我打算先黑一下自己的电脑，等网卡搞定了再去黑我的iPhone。</p>
-<h4 id="Wireshark_u7B80_u4ECB"><a href="#Wireshark_u7B80_u4ECB" class="headerlink" title="Wireshark简介"></a>Wireshark简介</h4><p>本来想介绍很多东西的，但是想想大家应该也能Google到，我就不多说了。在这里特别推荐一本书，叫《Wireshark 网络分析就是这么简单》。</p>
-<h4 id="u4E24_u79CD_u65B9_u6CD5"><a href="#u4E24_u79CD_u65B9_u6CD5" class="headerlink" title="两种方法"></a>两种方法</h4><ol>
-<li>airport+Wireshark<br>还是网卡支持的原因，在Wireshark里无法调到混杂模式。于是我先在终端中输入<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo airport en0 sniff x <span class="comment">//x表示信道</span></span><br></pre></td></tr></table></figure>
+<li><h4 id="u5199_u5728_u6587_u524D"><a href="#u5199_u5728_u6587_u524D" class="headerlink" title="写在文前"></a>写在文前</h4><p>这样一个页面的出现算是我的自我检讨，互联网中没有任何链接指向这个页面(除去Github我的仓库中可以查到这个页面)。大体上来说，这个页面只属于我和我的女朋友。<br>所以说，这里的听众只有一个人，那就是现在正在浏览这个页面的你。<br>开这个页面的起因是我会犯各种各样奇奇怪怪的不能容忍的错误，我需要一个地方去记录他们。在这里我会写上我对我们两个之间关系的看法，会分析自己犯错误的原因。在这里我会坦诚地，客观地描述我的错误。<br>还有这样一个原因就是可能在你不开心的时候并不想见我，如果不停的打电话，发短信，或者去你的楼下等你出来可能都不是最好的办法。亲爱的，请记住这个页面的地址。你不理我的时候，就来这里看看，我一定会在这个地方留下我的想法。</p>
 </li>
-</ol>
-<p>接着在Wireshark里打开包，随意分析了一下学校开放路由的包内容。Statistic－&gt;http－&gt;request,然后我看到了这个：<br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exac8o6x23j31400p0n5d.jpg" alt=""><br>我就这么毫无防备的看到了大家在看什么-_-#</p>
+<li><h4 id="u683C_u5F0F_u8BF4_u660E"><a href="#u683C_u5F0F_u8BF4_u660E" class="headerlink" title="格式说明"></a>格式说明</h4><p>因为这个页面会长期更新，所以我采取下面的方式进行时间轴的切分。   </p>
 <ol>
-<li>如果我的Mac是一个热点<br>事情好像突然严肃了起来。这样就意味着所有连接到我电脑的设备的数据包都会被我看到，并不需要通过ARP欺骗或者从网关克隆这样的手段，一切好像变的简单了起来。<br>我打算先上四张图（图片均加万恶马赛克）:<br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaah59hz6j310m01rmxn.jpg" alt=""><br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaah8jeoxj30ku0fwgwn.jpg" alt=""><br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaahdoqyfj30ku0fwn79.jpg" alt=""><br><img src="http://ww3.sinaimg.cn/mw690/005WMcFzjw1exaahalk0fj30ku0fwk0j.jpg" alt=""><br>我拿我们学校的网站试了一试，结果自己被吓到了……<br>我尝试了三个网站：校园信息网站／校园教务处网站／校园支付网站。我分别在这三个网站上登录，并用Wireshark抓取数据包。在Filter中输入http并用control+f输入POST，打开数据包查看内容，截图大家都看到了:校园支付和校园信息的登录信息都使用了明码，而由湖南青果软件公司负责的教务信息系统则使用了MD5加密。虽然MD5加密也可以通过暴力美学的方式破解，但是难度很大，  <h3 id="u4E00_u70B9_u603B_u7ED3"><a href="#u4E00_u70B9_u603B_u7ED3" class="headerlink" title="一点总结"></a>一点总结</h3>话说做完整个测试我的内心是崩溃的。平时连了多少未知的Wi-Fi呢？仔细一想还真的是有些后怕。或许那些hacker就默默的蹲在麦当劳或者星巴克的某个角落，等着一个个无知的鱼儿上钩。或者黑客攻下了你的路由器，篡改MAC地址，发动ARP欺骗攻击和中间人攻击，事情恐怕就不是蹭网那么简单了。还是提出一些建议吧。其实对于普通用户来说我并不建议大家绑定MAC地址啊，关闭SSID广播啊之类的办法，其实把路由器的无线密码设置的复杂一些，不要使用默认的路由器登录密码，也不要乱连开放的无线网，这就基本足够了。我的理解就是:你的数据值多少钱，你就应该花多少钱保护它，就这样。</li>
+<li>以时间顺序纪录，标题是年月日。</li>
+<li>每个事情中间会用分割线隔开。</li>
+<li>我可能会在每个事情里面用各种各样的小标题来划分区块。</li>
 </ol>
+</li>
+</ul>
+<h3 id="2016_u5E744_u670825_u65E5"><a href="#2016_u5E744_u670825_u65E5" class="headerlink" title="2016年4月25日"></a>2016年4月25日</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;这个问题估计已经存在了好长好长的时间了，而且前段时间我一直没有意识到这个问题的严重性，现在票票炸毛了，我才意识到这个问题特别严重，也是我开这个页面的直接原因。<br>&nbsp;&nbsp;&nbsp;&nbsp;我觉得导火线就是我昨天晚上乱开玩笑，票票已经很生气了，而且我有错在先。我没有好好和你交流，还说因为是你游戏打输了导致你不开心的。我这样想是一种推卸责任的行为。根本原因是我好长一段时间以来都没有关心你，我自己特别被动，不会主动约你出去玩，让你特别无聊。我最近两周游戏玩的太多，这个我觉得是我犯的最大的错误。我参加的智能车的比赛虽然也占了很多的时间，但是我觉得你因为这个生气的可能性不大，我在调车的时候是需要保持专注的。而且离比赛很近了，我基本上大多数晚上是在实验室度过的。而玩游戏这个事情我觉得完全是我的问题。游戏是什么时候都可以玩的，也是可以选择不玩的，尤其是在时间紧张的情况下。基于这点我应该做出检讨，我不应该游戏上瘾，应该限制自己游戏的时间，在玩游戏之前最好先问问你，比如告诉你我今晚玩一个小时什么的。对了，除此之外还有一个事情会导致我不能秒回，这个你一直都不知道。是这样，我有一个课叫电子系统设计实验，上次那个电子钟就是那个课的一个小作业。我最近在做一个LED的电子时钟，不是上次的LCD，我们在使用ZLG7290芯片的时候遇到了一些问题，我和隔壁宿舍的黄子韬是一个组的，程序一般是我用他的电脑写。所以我有时候晚上会去他宿舍写代码，不带手机。还有就是有时候我会去隔壁杜恺的宿舍跟他讲事情，比如车子的PCB电路板什么的，这个时间可能也会比较长。这个解决办法就是我下次去他们的宿舍尽量带上手机。<br>&nbsp;&nbsp;&nbsp;&nbsp;还有就是关于我找你主动性的问题。我最近的事情真的是好多好多，可能经常顾不上你，唯一有时间的时候就是平时的早上，我经常没课。这个时候我就一个想法，就是赶紧补觉。今天早上第二节课我去黄子韬那里写代码了。下午一到三节有课，我下课后就赶紧去找你了。我觉得像周四这个样子，下午我可以约你出来一起学学习，学学英语什么的，一周拿出几个晚上来陪你上自习。因为我也需要提高我的GPA，你也要好好的学习，看书什么的，这才是一个法学生该有的样子。<br>&nbsp;&nbsp;&nbsp;&nbsp;关于我犯错以后会去找你的问题。我觉得这个想法很顺理成章，就是你不接我的电话，拒绝和我交流，我肯定会着急的。我一着急就想去见你，向你解释向你道歉。在东区外面我站了三次了。心里的感觉很复杂，大概描述一下。到了你们宿舍的门口，给你打电话，一般是不接的；然后就在qq上说，一般没有回应；(这次还没有qq)还有就是让你的舍友帮帮忙劝你一下，这三个事情是我唯一能在那里做的了。因为你们宿舍那个地方是交通要道，就是不太适合等人。如果我站在那个你们的宿舍门口，就会挡住人家去吃饭或者洗澡。往西站一站离东区的门特别近，人来人往。还有就是往里站，那个电线杆旁边还好，不会有太多的人注意到，唯一的缺点就是冬天特别冷，风又很大。我一开始站在那里觉得你一会儿就出来了吧，看看天，看看地上的草。十几分钟以后我会有点不好意思，因为从我旁边走过去好多人又走回来了，我不知道在外面应该做什么，这个时候我就特别希望你能够出来。下面就是会发牢骚，这是一定的。我会想你有多大的面子让我在外面等你好久，我甚至还不如给你送外卖的小哥受欢迎。我是你的男票，但我首先是人啊，就算再不想见我，也不应该连个电话都不接短信也不回吧，我走吧，我要放弃了，我凭什么在这里等啊，让别人看笑话吗……这种感情很强烈，让我非常痛苦。但是再过一阵子，如果我下面要上课，那我就在外面等到上课前我不迟到的时间，上完课再来等；如果我不用上课，那我站累了就坐在路边，你一定会出来的嘛，有什么问题解释清楚，交流一下我觉得都可以解决。这个时候我的想法就是，我觉得我等多长时间都是值得了。我有错在先，那我现在做的事情是为了弥补我的过失，我没有权利让你委曲求全来原谅我，我应该负荆请罪才是。而且我觉得你对我特别珍贵，在外面等你的时候，好多好多以前的回忆就会一遍一遍的出现，我真的不想失去你啊。所以说等再久都是值得的。<br>&nbsp;&nbsp;&nbsp;&nbsp;你在就好，我真的非常爱你。</p>
 
       
     </div>
@@ -274,25 +237,6 @@
   </div>
   
     
-<nav id="article-nav">
-  
-    <a href="/2015/10/23/2015-10-23-cppcode4/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          c++ primer 3
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/10/19/2015-10-19-wifi/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">无线网络攻防初探</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
   
 </article>
 
@@ -322,7 +266,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="2015-10-23-wifi2" data-title="无线网络攻防进阶" data-url="http://yoursite.com/2015/10/22/2015-10-23-wifi2/"></div>
+	<div class="ds-thread" data-thread-key="" data-title="犯错纪录" data-url="http://yoursite.com/record/index.html"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -366,7 +310,7 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
