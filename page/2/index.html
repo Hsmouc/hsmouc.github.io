@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 14px;">Blog</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 12px;">Linux</a> <a href="/tags/MFC/" style="font-size: 18px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 10px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 16px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 14px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/tor/" style="font-size: 10px;">tor</a>
+						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 14px;">Blog</a> <a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 12px;">Linux</a> <a href="/tags/MFC/" style="font-size: 18px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 10px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 16px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 14px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/tor/" style="font-size: 10px;">tor</a>
 					</div>
 				</section>
 				
@@ -191,6 +191,91 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-2015-12-12-pi" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/12/2015-12-12-pi/" class="article-date">
+  	<time datetime="2015-12-12T03:40:25.000Z" itemprop="datePublished">2015-12-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/12/2015-12-12-pi/">Raspberry Pi上手体验</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>生日快到了，女票送了一个树莓ψ(｀∇´)ψ,好开心，简单写下使用体验吧。</li>
+</ul>
+<h2 id="Raspberry_Pi_u7B80_u4ECB"><a href="#Raspberry_Pi_u7B80_u4ECB" class="headerlink" title="Raspberry Pi简介"></a>Raspberry Pi简介</h2><p>树莓派（英语：Raspberry Pi），是一款基于Linux系統的只有信用卡大小的单片机电脑。它由英国的树莓派基金会所开发，目的是以低价硬件及自由软件刺激在学校的基本电脑科学教育。配备有Broadcom出产的ARM架构700MHz BCM2836处理器，1G内存，还有一些必须的接口。<br>除了电脑上都有的接口，树莓派还有GPIO的拓展接口，这为工科狗实现一些很有意思的想法提供了巨大的空间，比如四轴飞行器，智能小车什么的。先留个坑，以后再填吧。</p>
+<h2 id="u7CFB_u7EDF_u7684_u5B89_u88C5"><a href="#u7CFB_u7EDF_u7684_u5B89_u88C5" class="headerlink" title="系统的安装"></a>系统的安装</h2><ol>
+<li>在Pi的官网上下载系统镜像<a href="https://www.raspberrypi.org/downloads" target="_blank" rel="external">(下载页面)</a>,我选择的是Raspbian(名字Raspberry+Debian233),解压后得到一个.img镜像。 </li>
+<li>插入TF卡，用df命令查看当前挂载的卷：<br><code>df -h</code><br>确认设备<br><code>diskutil list</code><br>确定一下你的TF卡是哪个。</li>
+<li>卸载TF卡上的分区<br><code>diskutil unmount /dev/disk2   // /dev/disk2是我的TF卡</code></li>
+<li>将系统刷入卡中<br>把当前目录切换到要装载的系统镜像的所在目录<br><code>sudo dd bs=4m if=2015-11-21-raspbian-jessie.img of=/dev/rdisk2</code><br>输入密码后不会出现任何提示，要等上几分钟，别着急用ctrl+c结束。</li>
+<li>卸载设备<br><code>diskutil unmountDisk /dev/disk2</code>    </li>
+</ol>
+<h2 id="Pi_u7684_u5F00_u673A_u914D_u7F6E"><a href="#Pi_u7684_u5F00_u673A_u914D_u7F6E" class="headerlink" title="Pi的开机配置"></a>Pi的开机配置</h2><h3 id="u8BED_u8A00_u548C_u952E_u76D8"><a href="#u8BED_u8A00_u548C_u952E_u76D8" class="headerlink" title="语言和键盘"></a>语言和键盘</h3><p>把HDMI，鼠标键盘电源线接好，然后它居然直接出现了桌面，难道是我的人品太好（ ｉ <em> ｉ ）。<br>激动的点开终端，咦，怎么有些键不能用=</em>=<br>别慌，Pi是腐国的产品，默认的是英式键盘的键位，我们使用的大部分都是美式键盘。所以我们简单的配置下:<br>终端输入<br><code>raspi-config</code><br>选<code>Internationalisation opntions</code><br>选<code>I3 Change Keyboard Layout</code><br>选<code>Generic 101-key  PC</code><br>选<code>Other</code><br>选<code>English(US)</code><br>选<code>English(US) - English(US,alternative international)</code><br>后面都选择确定，键盘上下键选择，tab切换选项，enter确定。<br>注意！！！我不建议大家把Pi的系统语言改成中文的，至于为什么大家试一试就知道了，字体炸裂……<br>注:编码需要选择下，UTF-8，原因大家都懂。给个<a href="http://www.guokr.com/post/520901/" target="_blank" rel="external">果壳</a>的参考，我就不多写了。  </p>
+<h3 id="u5B89_u88C5_u4E2D_u6587_u8F93_u5165_u6CD5"><a href="#u5B89_u88C5_u4E2D_u6587_u8F93_u5165_u6CD5" class="headerlink" title="安装中文输入法"></a>安装中文输入法</h3><p><code>sudo apt-get -y install ttf-wqy-zenhei</code></p>
+<h3 id="u5B89_u88C5VIM"><a href="#u5B89_u88C5VIM" class="headerlink" title="安装VIM"></a>安装VIM</h3><p>好吧，这步大家可以跳过，我有强迫症:-)<br><code>sudo apt-get install -y vim</code><br>简单配置下代码高亮<br>在～目录下新建.vimrc文件，写入下面的内容:  </p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">nu</span></span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></span><br><span class="line"><span class="keyword">set</span> tabstop=<span class="number">4</span></span><br></pre></td></tr></table></figure>
+<h2 id="u914D_u7F6Ewatchdog"><a href="#u914D_u7F6Ewatchdog" class="headerlink" title="配置watchdog"></a>配置watchdog</h2><p>Pi的看门狗防止程序死循环，设置好就能让Pi在当机的时候自动重启。 </p>
+<ol>
+<li>启动硬件看门狗模块<br><code>sudo modprobe bcm2708_wdog</code></li>
+<li>编辑/etc/modules,启动时自加载模块<br><code>sudo vim /etc/modules</code><br>在文件的最后加上<br><code>bcm2708_wdog</code></li>
+<li>启动与配置watchdog<br>启动watchdog<br><code>sudo /etc/init.d/watchdog start</code><br>编辑配置文件<br><code>sudo vim /etc/watchdog.conf</code><br>把<code>#watchdog-device =/dev/watchdog</code>前面的<code>#</code>删去<br>重新启动watchdog<br><code>sudo /etc/init.d/watchdog restart</code><br>还可以监控芯片温度什么，过热自动重启之类。<h2 id="u4E00_u4E9B_u5C0F_u63D2_u66F2_u548C_u968F_u624B_u62CD_u7684_u56FE"><a href="#u4E00_u4E9B_u5C0F_u63D2_u66F2_u548C_u968F_u624B_u62CD_u7684_u56FE" class="headerlink" title="一些小插曲和随手拍的图"></a>一些小插曲和随手拍的图</h2></li>
+</ol>
+<ul>
+<li>中间有个小小的意外，我随手装了个多媒体系统试试效果，XBMC，就是这货，装完重启直接进不了系统了233。简单分析了下原因，貌似是显存分配不足，应该要在安装前配置下内存的分配。这个小插曲直接导致了我决定今晚赶紧把今天做的配置记录下来。这样一块用来折腾的Pi估计以后要经常重刷系统了=_=  </li>
+<li>桌面上的显示器是一块笔记本的屏，我又在万能的某宝上买了块驱动版，我现在打算买个相框把屏幕裱起来。话说不加壳的屏真的是好薄啊，看起来很有逼格。<br><img src="http://ww2.sinaimg.cn/mw690/005WMcFzjw1eyx9x5jdvej32io1w0e81.jpg" alt=""><br><img src="http://ww3.sinaimg.cn/mw690/005WMcFzjw1eyx9wypk1rj32io1w0npd.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1eyx9whbb85j32io1w01kx.jpg" alt=""><h2 id="u6700_u540E_u7684_u6700_u540E"><a href="#u6700_u540E_u7684_u6700_u540E" class="headerlink" title="最后的最后"></a>最后的最后</h2>感谢我爱的和爱我的票票！！！</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pi/">Pi</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/嵌入式开发/">嵌入式开发</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-2015-12-08-mfc" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -921,91 +1006,6 @@
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/渗透入侵/">渗透入侵</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2015-10-17-backtotop" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/10/17/2015-10-17-backtotop/" class="article-date">
-  	<time datetime="2015-10-17T02:34:08.000Z" itemprop="datePublished">2015-10-17</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/17/2015-10-17-backtotop/">js代码实现返回顶部功能</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>写在文前<br>话说本来也没想搞这个按钮的，但是前两天心血来潮写了一个电影推荐的文章，突然感觉回到页首好麻烦，于是我就去简单搞了一个返回顶部的按钮。<br>实现这个功能其实并不复杂，</p>
-<h3 id="u4F7F_u7528_u951A_u8FDE_u63A5"><a href="#u4F7F_u7528_u951A_u8FDE_u63A5" class="headerlink" title="使用锚连接"></a>使用锚连接</h3><ol>
-<li><p>在body的标签添加定位id:  </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">body</span> <span class="attribute">id</span>=<span class="value">"top"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在最底部需要返回顶部的位置添加触发代码：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#top"</span>&gt;</span>返回顶部<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>这种方法的优点是显而易见的，缺点就是效果非常的渣。一天前我的返回顶部的标签js失败的时候就是这种效果，强迫症怎能就此止步！</p>
-<h3 id="u57FA_u4E8EjQuery_u5B9E_u73B0"><a href="#u57FA_u4E8EjQuery_u5B9E_u73B0" class="headerlink" title="基于jQuery实现"></a>基于jQuery实现</h3><ol>
-<li>添加div  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"back-top"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">title</span>=<span class="value">"返回顶部"</span>&gt;</span><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/img/scrollup.png"</span>/&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>那个png文件是你自己要放在img文件夹里的，就是一个箭头的图。我的箭头图就是自己用ps画的。</p>
-<ol>
-<li>添加样式  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#back-top</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> fixed</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">30px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin-left</span>:<span class="value"> <span class="number">1040px</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="id">#back-top</span> <span class="tag">a</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">54px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">54px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#ddd</span> <span class="function">url</span>(../img/bgs/bg_up_arrow.png) no-repeat center center</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#aaa</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-border-radius</span>:<span class="value"> <span class="number">7px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-moz-border-radius</span>:<span class="value"> <span class="number">7px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">7px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-transition</span>:<span class="value"> <span class="number">1s</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-moz-transition</span>:<span class="value"> <span class="number">1s</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">transition</span>:<span class="value"> <span class="number">1s</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="id">#back-top</span> <span class="tag">a</span><span class="pseudo">:hover</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#777</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>这里是使用一个背景透明的向上箭头图片，通过backgroud-color指定正常时和鼠标放上时的背景颜色，border-radius指定圆角的半径。</p>
-<ol>
-<li>添加js代码<br>我的代码如下，是直接放在post的模版文件里的，有兴趣的同学可以试试新建一个.js文件，在post模版文件里引用：  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;SCRIPT type=text/javascript&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">goTopEx</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> obj = <span class="built_in">document</span>.getElementById(<span class="string">"back-top"</span>);</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">getScrollTop</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">document</span>.documentElement.scrollTop + <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">setScrollTop</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">document</span>.documentElement.scrollTop) &#123;</span><br><span class="line">                <span class="built_in">document</span>.documentElement.scrollTop = value;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">document</span>.body.scrollTop = value;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">window</span>.onscroll = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            getScrollTop() &gt; <span class="number">0</span> ? obj.style.display = <span class="string">""</span></span><br><span class="line">            : obj.style.display = <span class="string">"none"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        obj.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> goTop = setInterval(scrollMove, <span class="number">10</span>);</span><br><span class="line">            <span class="function"><span class="keyword">function</span> <span class="title">scrollMove</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                setScrollTop(getScrollTop() / <span class="number">1.1</span>);</span><br><span class="line">                <span class="keyword">if</span> (getScrollTop() &lt; <span class="number">1</span>)</span><br><span class="line">                clearInterval(goTop);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">goTopEx();</span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="title">SCRIPT</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>以上就是实现过程，效果可以参考我的文章页面，忽略我用ps画的箭头-_-#</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/前端开发/">前端开发</a>
 	</div>
 
 

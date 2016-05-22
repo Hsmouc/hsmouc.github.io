@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 14px;">Blog</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 12px;">Linux</a> <a href="/tags/MFC/" style="font-size: 18px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 10px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 16px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 14px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/tor/" style="font-size: 10px;">tor</a>
+						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 14px;">Blog</a> <a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 12px;">Linux</a> <a href="/tags/MFC/" style="font-size: 18px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 10px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 16px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 14px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/tor/" style="font-size: 10px;">tor</a>
 					</div>
 				</section>
 				
@@ -191,6 +191,91 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-2015-10-17-backtotop" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/17/2015-10-17-backtotop/" class="article-date">
+  	<time datetime="2015-10-17T02:34:08.000Z" itemprop="datePublished">2015-10-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/17/2015-10-17-backtotop/">js代码实现返回顶部功能</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>写在文前<br>话说本来也没想搞这个按钮的，但是前两天心血来潮写了一个电影推荐的文章，突然感觉回到页首好麻烦，于是我就去简单搞了一个返回顶部的按钮。<br>实现这个功能其实并不复杂，</p>
+<h3 id="u4F7F_u7528_u951A_u8FDE_u63A5"><a href="#u4F7F_u7528_u951A_u8FDE_u63A5" class="headerlink" title="使用锚连接"></a>使用锚连接</h3><ol>
+<li><p>在body的标签添加定位id:  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">body</span> <span class="attribute">id</span>=<span class="value">"top"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在最底部需要返回顶部的位置添加触发代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#top"</span>&gt;</span>返回顶部<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这种方法的优点是显而易见的，缺点就是效果非常的渣。一天前我的返回顶部的标签js失败的时候就是这种效果，强迫症怎能就此止步！</p>
+<h3 id="u57FA_u4E8EjQuery_u5B9E_u73B0"><a href="#u57FA_u4E8EjQuery_u5B9E_u73B0" class="headerlink" title="基于jQuery实现"></a>基于jQuery实现</h3><ol>
+<li>添加div  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"back-top"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">title</span>=<span class="value">"返回顶部"</span>&gt;</span><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/img/scrollup.png"</span>/&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>那个png文件是你自己要放在img文件夹里的，就是一个箭头的图。我的箭头图就是自己用ps画的。</p>
+<ol>
+<li>添加样式  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#back-top</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> fixed</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">30px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">margin-left</span>:<span class="value"> <span class="number">1040px</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="id">#back-top</span> <span class="tag">a</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">54px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">54px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#ddd</span> <span class="function">url</span>(../img/bgs/bg_up_arrow.png) no-repeat center center</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#aaa</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-border-radius</span>:<span class="value"> <span class="number">7px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-moz-border-radius</span>:<span class="value"> <span class="number">7px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">7px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-transition</span>:<span class="value"> <span class="number">1s</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-moz-transition</span>:<span class="value"> <span class="number">1s</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">transition</span>:<span class="value"> <span class="number">1s</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="id">#back-top</span> <span class="tag">a</span><span class="pseudo">:hover</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#777</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这里是使用一个背景透明的向上箭头图片，通过backgroud-color指定正常时和鼠标放上时的背景颜色，border-radius指定圆角的半径。</p>
+<ol>
+<li>添加js代码<br>我的代码如下，是直接放在post的模版文件里的，有兴趣的同学可以试试新建一个.js文件，在post模版文件里引用：  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;SCRIPT type=text/javascript&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">goTopEx</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> obj = <span class="built_in">document</span>.getElementById(<span class="string">"back-top"</span>);</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">getScrollTop</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">document</span>.documentElement.scrollTop + <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">setScrollTop</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">document</span>.documentElement.scrollTop) &#123;</span><br><span class="line">                <span class="built_in">document</span>.documentElement.scrollTop = value;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">document</span>.body.scrollTop = value;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">window</span>.onscroll = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            getScrollTop() &gt; <span class="number">0</span> ? obj.style.display = <span class="string">""</span></span><br><span class="line">            : obj.style.display = <span class="string">"none"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        obj.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> goTop = setInterval(scrollMove, <span class="number">10</span>);</span><br><span class="line">            <span class="function"><span class="keyword">function</span> <span class="title">scrollMove</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                setScrollTop(getScrollTop() / <span class="number">1.1</span>);</span><br><span class="line">                <span class="keyword">if</span> (getScrollTop() &lt; <span class="number">1</span>)</span><br><span class="line">                clearInterval(goTop);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">goTopEx();</span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="title">SCRIPT</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>以上就是实现过程，效果可以参考我的文章页面，忽略我用ps画的箭头-_-#</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/前端开发/">前端开发</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-2015-10-15-movieshare" class="article article-type-post" itemscope itemprop="blogPost">
   
