@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 14px;">Blog</a> <a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 12px;">Linux</a> <a href="/tags/MFC/" style="font-size: 18px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 10px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 16px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 14px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/tor/" style="font-size: 10px;">tor</a>
+						<a href="/tags/ARP/" style="font-size: 10px;">ARP</a> <a href="/tags/Blog/" style="font-size: 14px;">Blog</a> <a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Landscape/" style="font-size: 10px;">Landscape</a> <a href="/tags/Linux/" style="font-size: 12px;">Linux</a> <a href="/tags/MFC/" style="font-size: 18px;">MFC</a> <a href="/tags/Metasploit/" style="font-size: 10px;">Metasploit</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/Pi/" style="font-size: 16px;">Pi</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Wi-Fi/" style="font-size: 14px;">Wi-Fi</a> <a href="/tags/review/" style="font-size: 10px;">review</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/tor/" style="font-size: 10px;">tor</a> <a href="/tags/游记/" style="font-size: 10px;">游记</a>
 					</div>
 				</section>
 				
@@ -191,6 +191,90 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-2015-10-19-wifi" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/19/2015-10-19-wifi/" class="article-date">
+  	<time datetime="2015-10-19T03:40:25.000Z" itemprop="datePublished">2015-10-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/19/2015-10-19-wifi/">无线网络攻防初探</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>写在文前：由于相关法律法规本文章不予显示(╯°Д°）╯︵ /(.□ . )想什么呢…… 好吧，这项技术呢，是不允许的啦，仅供学习，而且千万不要拿隔壁人家的AP做试验喔，黑自己就好了嘛。  </li>
+</ul>
+<h2 id="u51C6_u5907_u5DE5_u4F5C"><a href="#u51C6_u5907_u5DE5_u4F5C" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="u539F_u6750_u6599"><a href="#u539F_u6750_u6599" class="headerlink" title="原材料"></a>原材料</h3><ol>
+<li>带网卡的计算机</li>
+<li>无线路由器 </li>
+<li>Linux或Mac OS X系统 （什么你是windows？请出门右拐)</li>
+<li>aircrack-ng （我才不会告诉你们我还有kismet呢）</li>
+</ol>
+<h3 id="u5B89_u88C5_u5FC5_u5907_u7684_u5DE5_u5177"><a href="#u5B89_u88C5_u5FC5_u5907_u7684_u5DE5_u5177" class="headerlink" title="安装必备的工具"></a>安装必备的工具</h3><p>首先我们进<a href="http://www.aircrack-ng.org" target="_blank" rel="external">aircrack</a>的官网。右侧边栏<a href="http://www.aircrack-ng.org/install.html" target="_blank" rel="external">Installation</a>选择相应的系统，比如我选择On Mac OS X。然后它说”The simplest and easiest way to install on Mac OS X is via <a href="https://www.macports.org" target="_blank" rel="external">Macports</a>. You simply do “sudo port install aircrack-ng”.”默认大家都过四级了，我就不翻译了。然后我们下载一个Macports，默认大家都会用Mac装dmg。然后装好了，试试它给我的命令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo port install aircrack-ng</span><br></pre></td></tr></table></figure></p>
+<p>终端里出现了这样的提示<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zsh:command not found: port</span><br></pre></td></tr></table></figure></p>
+<p>好吧，让我们来google一下怎么了。其实这个原因很简单，你装完了Macports，但是终端并不知道你有了新后宫，所以呢更新下路径就解决了。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/paths</span><br></pre></td></tr></table></figure></p>
+<p>增加新的两行：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/opt/local/bin</span><br><span class="line">/opt/local/sbin</span><br></pre></td></tr></table></figure></p>
+<p><em>小贴士：下面装完aircrack-ng的时候还要用这个噢</em><br>好了，让我们再输入一次:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo port install aircrack-ng</span><br></pre></td></tr></table></figure></p>
+<p>然后终端就是这样子的:<br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ex6rt5bfh7j31400p0grg.jpg" alt=""><br>安装完毕后，输入aircrack-ng –help指令试试。果然还是command not found。用上面搞port问题的方法可以解决。再介绍一个其他方法：<br>终端输入：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> PATH=$PATH:/opt/local/bin</span><br></pre></td></tr></table></figure></p>
+<p>成功了！</p>
+<h2 id="Hacking"><a href="#Hacking" class="headerlink" title="Hacking"></a>Hacking</h2><h3 id="u626B_u63CF"><a href="#u626B_u63CF" class="headerlink" title="扫描"></a>扫描</h3><p>在终端里输入指令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airport en0 scan</span><br></pre></td></tr></table></figure></p>
+<p>什么？你又报错了？那就对了，那是因为你没有找到airport的路径，也没有把airport加入到sbin下面。解决办法是执行下面的命令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/\Versions/Current/Resources/airport /usr/sbin/airport</span><br></pre></td></tr></table></figure></p>
+<p>再试一次，这时候我们看到终端上出现了一些wifi的信息。我们选择WEP加密的无线网络，记下它的channel.</p>
+<h3 id="u76D1_u542C"><a href="#u76D1_u542C" class="headerlink" title="监听"></a>监听</h3><p>使用命令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo airport en0 sniff <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>解释一下，我选择的是一个1信道，SSID为429的无线网络。好嘛，这就是隔壁宿舍的宿舍号嘛-_-＃之后会发现网卡进入了监听模式。过了一会，按control＋c来结束监听，这时候会提示你^CSession saved to/tmp/airportSniffxxxxx.cap，监听环节结束。</p>
+<h3 id="u8DD1_u5305"><a href="#u8DD1_u5305" class="headerlink" title="跑包"></a>跑包</h3><p>我们首先在终端里输入：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aircrack-ng -w ~/wordlist.txt /tmp/airportSniffxxxxxx.cap</span><br></pre></td></tr></table></figure></p>
+<p>-w表示使用字典， ~/wordlist.txt是字典的所在路径，/tmp/airportSniffxxxxxx.cap是包所在的位置。<br>回车以后<br><img src="http://ww2.sinaimg.cn/mw690/005WMcFzjw1ex6rstrn2kj313w0cjq60.jpg" alt=""><br>观察handshake和IVs数值，我们选择handshack的数值为1的429，记下序号为10。在index number of target network里面输入10.<br>就会出现下图这样类似黑客帝国中炫酷的画面：<img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ex6rswn550j313w0cjjtk.jpg" alt="">ps打不开这个截图，我就不打码了，成神别砍我T_T</p>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>一次最简单的Wi-FiHacking就这么完成了，知道你们的Wi-Fi有多不安全了吧。因为是成神的Wi-Fi，确定他不会砍我，所以我甚至没有隐藏我的MAC地址。用aircrack-ng可以做到什么程度呢？WEP/WPA2加密的无线网络，只要有足够长的时间，只要密码本足够全，破解密码只是时间问题。所以说，大家在加密Wi-Fi的时候首先不要用WEP加密，这种加密基本可以秒破。WPA2加密的密码最好保证长度，要有大小写，特殊符号等等，这样可以大大增加黑客解包的难度。被黑客攻下AP可不仅仅是多一个人蹭网的简单后果，严重程度可以参见知乎问题<a href="http://www.zhihu.com/question/23061570" target="_blank" rel="external">无线路由器被蹭网后，有被黑的风险吗</a>。<br>关于aircrack-ng的其他功能我会继续介绍，我也会继续关注无线网络安全。</p>
+<li>对了,我的外置usb无线网卡已经在路上了，我会尝试使用Deauth攻击噢～</li>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wi-Fi/">Wi-Fi</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/渗透入侵/">渗透入侵</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-2015-10-17-backtotop" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -929,71 +1013,9 @@
 
 
   
-    <article id="post-2015-10-01-blog" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/10/01/2015-10-01-blog/" class="article-date">
-  	<time datetime="2015-09-30T16:40:35.000Z" itemprop="datePublished">2015-10-01</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/01/2015-10-01-blog/">建博客的血泪史</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p></p><h1>建博客的血泪史</h1><p></p>
-<p>开学这么长时间了，还是没有从上学期的阴影中走出来T<em>T。好吧，在黄岛学院这个神（wu）奇（liao）的地方呆了一周，在机房搞了一个周的MFC，还去了各种公司参观，这都不是重点，重点是写报告啊啊啊啊啊ಠ</em>ರೃ 简吐槽时间结束，言归正转，让我们来打开新世界的大门。</p><br><p>我建立这个博客的过程简直是一部血泪史，不过从无到有学习知识的过程总是令人兴奋的。这个事情的契机在于<a href="http://lyeec.me" target="_blank" rel="external">@Lyeec</a>在某年某月推荐我学了Python，然后分享了<a href="http://www.liaoxuefeng.com" target="_blank" rel="external">@廖雪峰</a>的Python教程。虽然我并没有学好Python，但是我在无意间看到了Git的教程，后来一发不可收拾申请了属于自己的github账号并且拥有了一个属于自己的博客。<br>大体的步骤是这样：首先申请一个Github账号，然后新建一个repo（xxx.github.io），我的叫Hsmouc.github.io。接着去github上面搜索关键字Jekyll，然后就会出来一堆的模版，然后通过Git clone命令（先去学git，推荐上面廖雪峰的教程，当然我没有看完，但是掌握了基本操作）将这个repo的名字改成你新建的repo的名字，最后用git push命令将它push到你自己的github上。现在可以在浏览器地址栏输入xxx.github.io啦，这就是你博客的初始样式。<br>如果你熟悉html语言，精通js，那么你可以push自己的站点让Github帮助你托管。假如你像我一样连最基本的html语法都要一条条Google的话，那你可以使用Jekyll模版，在使用模版的过程中逐渐熟悉网页的布局之类。<br>其实到这里基本上就已经差不多了，以上就是我用了大约一周时间搞出了一个博客的过程。仅从流程上来看其实并不复杂，但是在具体细节上还需要自己一遍又一遍的请教大神或者默默Google，细节上的问题有时间我会补充，在以后的一段时间我会不断的给我的博客增加一些功能。这个渣渣的排版等我学会了Markdown再改吧，在vim里面写html我也是醉了◡ ヽ(`Д´)ﾉ ┻━┻ </p><br><p>晚安，各位</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Blog/">Blog</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/前端开发/">前端开发</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 </div>
