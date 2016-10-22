@@ -84,25 +84,19 @@
 
 
 
-<meta name="description" content="sqlmap是一个开源的自动化渗透测试工具，被广泛用于发现SQL注入漏洞。sqlmap的使用几乎毫无技术含量。不过，对于一个杀手来说，他使用的刀只需要保证在任何情况下可靠还有一击毙命即可，至于刀上是否有繁复的装饰和是否仿制都是次要的。sqlmap就是注入的利器，可以高效的审计安全风险。
-
-sqlmap的一般用法我这次试验的平台是在kali Linux上，系统已经集成sqlmap工具。sql注入的">
+<meta name="description" content="sqlmap是一个开源的自动化渗透测试工具，被广泛用于发现SQL注入漏洞。sqlmap的使用几乎毫无技术含量。不过，对于一个杀手来说，他使用的刀只需要保证在任何情况下可靠还有一击毙命即可，至于刀上是否有繁复的装饰和是否仿制都是次要的。sqlmap就是注入的利器，可以高效的审计安全风险。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一桩由sqlmap引发的血案">
 <meta property="og:url" content="http://hsmouc.com/2016/03/06/2016-03-06-sqlmap/index.html">
 <meta property="og:site_name" content="梦的小窝">
-<meta property="og:description" content="sqlmap是一个开源的自动化渗透测试工具，被广泛用于发现SQL注入漏洞。sqlmap的使用几乎毫无技术含量。不过，对于一个杀手来说，他使用的刀只需要保证在任何情况下可靠还有一击毙命即可，至于刀上是否有繁复的装饰和是否仿制都是次要的。sqlmap就是注入的利器，可以高效的审计安全风险。
-
-sqlmap的一般用法我这次试验的平台是在kali Linux上，系统已经集成sqlmap工具。sql注入的">
+<meta property="og:description" content="sqlmap是一个开源的自动化渗透测试工具，被广泛用于发现SQL注入漏洞。sqlmap的使用几乎毫无技术含量。不过，对于一个杀手来说，他使用的刀只需要保证在任何情况下可靠还有一击毙命即可，至于刀上是否有繁复的装饰和是否仿制都是次要的。sqlmap就是注入的利器，可以高效的审计安全风险。">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/005WMcFzjw1f1op50sejjj31740s4qan.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005WMcFzjw1f1oplcex63j31700rh7eo.jpg">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/005WMcFzjw1f1opyfcew8j31400cwaen.jpg">
-<meta property="og:updated_time" content="2016-03-07T15:49:28.000Z">
+<meta property="og:updated_time" content="2016-10-22T15:40:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一桩由sqlmap引发的血案">
-<meta name="twitter:description" content="sqlmap是一个开源的自动化渗透测试工具，被广泛用于发现SQL注入漏洞。sqlmap的使用几乎毫无技术含量。不过，对于一个杀手来说，他使用的刀只需要保证在任何情况下可靠还有一击毙命即可，至于刀上是否有繁复的装饰和是否仿制都是次要的。sqlmap就是注入的利器，可以高效的审计安全风险。
-
-sqlmap的一般用法我这次试验的平台是在kali Linux上，系统已经集成sqlmap工具。sql注入的">
+<meta name="twitter:description" content="sqlmap是一个开源的自动化渗透测试工具，被广泛用于发现SQL注入漏洞。sqlmap的使用几乎毫无技术含量。不过，对于一个杀手来说，他使用的刀只需要保证在任何情况下可靠还有一击毙命即可，至于刀上是否有繁复的装饰和是否仿制都是次要的。sqlmap就是注入的利器，可以高效的审计安全风险。">
 <meta name="twitter:image" content="http://ww3.sinaimg.cn/large/005WMcFzjw1f1op50sejjj31740s4qan.jpg">
 
 
@@ -327,7 +321,8 @@ sqlmap的一般用法我这次试验的平台是在kali Linux上，系统已经�
 
       
         <ul>
-<li>sqlmap是一个开源的自动化渗透测试工具，被广泛用于发现SQL注入漏洞。sqlmap的使用几乎毫无技术含量。不过，对于一个杀手来说，他使用的刀只需要保证在任何情况下可靠还有一击毙命即可，至于刀上是否有繁复的装饰和是否仿制都是次要的。sqlmap就是注入的利器，可以高效的审计安全风险。</li>
+<li>sqlmap是一个开源的自动化渗透测试工具，被广泛用于发现SQL注入漏洞。sqlmap的使用几乎毫无技术含量。不过，对于一个杀手来说，他使用的刀只需要保证在任何情况下可靠还有一击毙命即可，至于刀上是否有繁复的装饰和是否仿制都是次要的。sqlmap就是注入的利器，可以高效的审计安全风险。<a id="more"></a> 
+</li>
 </ul>
 <h3 id="sqlmap的一般用法"><a href="#sqlmap的一般用法" class="headerlink" title="sqlmap的一般用法"></a>sqlmap的一般用法</h3><p>我这次试验的平台是在kali Linux上，系统已经集成sqlmap工具。sql注入的目标是上海某高校bbs。<br>sqlmap的使用非常简单，通常我们使用如下命令就可以获知目标url是否存在被注入的可能:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqlmap -u &quot;url&quot;</div></pre></td></tr></table></figure></p>
 <p>知道目标URL后可以用:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqlmap -u &quot;url&quot; --dbs</div></pre></td></tr></table></figure></p>

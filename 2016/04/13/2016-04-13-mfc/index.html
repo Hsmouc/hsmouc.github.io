@@ -84,19 +84,16 @@
 
 
 
-<meta name="description" content="MFC的作业要求使用MFC的文本视图框架来写，实现贪吃蛇的基本功能：食物随机出现，键盘操作，蛇吃食物变长，蛇撞到边界和自己游戏结束，添加蛇身速度选择的按钮控件。   
-代码实现SnakeDoc.h和SnakeDoc.cpp中的变量声明与初始化如下:1234567891011121314151617181920212223242526272829303132333435363738394041424">
+<meta name="description" content="MFC的作业要求使用MFC的文本视图框架来写，实现贪吃蛇的基本功能：食物随机出现，键盘操作，蛇吃食物变长，蛇撞到边界和自己游戏结束，添加蛇身速度选择的按钮控件。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于MFC框架的贪吃蛇程序">
 <meta property="og:url" content="http://hsmouc.com/2016/04/13/2016-04-13-mfc/index.html">
 <meta property="og:site_name" content="梦的小窝">
-<meta property="og:description" content="MFC的作业要求使用MFC的文本视图框架来写，实现贪吃蛇的基本功能：食物随机出现，键盘操作，蛇吃食物变长，蛇撞到边界和自己游戏结束，添加蛇身速度选择的按钮控件。   
-代码实现SnakeDoc.h和SnakeDoc.cpp中的变量声明与初始化如下:1234567891011121314151617181920212223242526272829303132333435363738394041424">
-<meta property="og:updated_time" content="2016-04-13T07:56:30.000Z">
+<meta property="og:description" content="MFC的作业要求使用MFC的文本视图框架来写，实现贪吃蛇的基本功能：食物随机出现，键盘操作，蛇吃食物变长，蛇撞到边界和自己游戏结束，添加蛇身速度选择的按钮控件。">
+<meta property="og:updated_time" content="2016-10-22T15:40:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于MFC框架的贪吃蛇程序">
-<meta name="twitter:description" content="MFC的作业要求使用MFC的文本视图框架来写，实现贪吃蛇的基本功能：食物随机出现，键盘操作，蛇吃食物变长，蛇撞到边界和自己游戏结束，添加蛇身速度选择的按钮控件。   
-代码实现SnakeDoc.h和SnakeDoc.cpp中的变量声明与初始化如下:1234567891011121314151617181920212223242526272829303132333435363738394041424">
+<meta name="twitter:description" content="MFC的作业要求使用MFC的文本视图框架来写，实现贪吃蛇的基本功能：食物随机出现，键盘操作，蛇吃食物变长，蛇撞到边界和自己游戏结束，添加蛇身速度选择的按钮控件。">
 
 
 
@@ -319,7 +316,7 @@
       
 
       
-        <h2 id="MFC的作业"><a href="#MFC的作业" class="headerlink" title="MFC的作业"></a>MFC的作业</h2><h3 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h3><p>使用MFC的文本视图框架来写，实现贪吃蛇的基本功能：食物随机出现，键盘操作，蛇吃食物变长，蛇撞到边界和自己游戏结束，添加蛇身速度选择的按钮控件。   </p>
+        <h2 id="MFC的作业"><a href="#MFC的作业" class="headerlink" title="MFC的作业"></a>MFC的作业</h2><h3 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h3><p>使用MFC的文本视图框架来写，实现贪吃蛇的基本功能：食物随机出现，键盘操作，蛇吃食物变长，蛇撞到边界和自己游戏结束，添加蛇身速度选择的按钮控件。<br> <a id="more"></a> </p>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>SnakeDoc.h和SnakeDoc.cpp中的变量声明与初始化如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">class CSnakeDoc : public CDocument</div><div class="line">&#123;</div><div class="line">protected: // create from serialization only</div><div class="line">	CSnakeDoc();</div><div class="line">	DECLARE_DYNCREATE(CSnakeDoc)</div><div class="line"></div><div class="line">// Attributes</div><div class="line">public:</div><div class="line">	struct&#123;</div><div class="line">	int body_x;</div><div class="line">	int body_y;</div><div class="line">	int direction;</div><div class="line">	int length;</div><div class="line">	&#125;snake[100];</div><div class="line"></div><div class="line">	struct&#123;</div><div class="line">	int food_x;</div><div class="line">	int food_y;</div><div class="line">	bool isfood;</div><div class="line">	&#125;food;</div><div class="line"></div><div class="line">	bool startFlag;</div><div class="line">	... //省略</div><div class="line">&#125;</div><div class="line">// Operations</div><div class="line">BOOL CSnakeDoc::OnNewDocument()</div><div class="line">&#123;</div><div class="line">	if (!CDocument::OnNewDocument())</div><div class="line">		return FALSE;</div><div class="line">	snake[0].body_x = 10;</div><div class="line">	snake[0].body_y = 10;</div><div class="line">	snake[1].body_x = 11;</div><div class="line">	snake[1].body_y = 10;</div><div class="line">	snake[2].body_x = 12;</div><div class="line">	snake[2].body_y = 10;</div><div class="line">	snake[0].direction = 3;</div><div class="line">	snake[0].length = 3;</div><div class="line">	food.isfood = true;</div><div class="line">	startFlag = false;</div><div class="line"></div><div class="line">	// TODO: add reinitialization code here</div><div class="line">	// (SDI documents will reuse this document)</div><div class="line"></div><div class="line">	return TRUE;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>蛇和食物用两个结构体来表示，snake[]结构体中包含了蛇的坐标和蛇身的长度(蛇是用方块组成，简单来说length表示构成蛇的方块数)。food结构体中包含了食物的坐标和食物是否出现的状态。   </p>
 <p>视图类中的代码是这样的:  </p>

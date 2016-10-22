@@ -84,21 +84,18 @@
 
 
 
-<meta name="description" content="python GPIO集成库我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835    C    Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。
-让LED闪烁在这个实验中，我只是简单的控制了一个GPIO口，输出一个方波信号，占空比5">
+<meta name="description" content="python GPIO集成库我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835    C    Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="通过python控制Pi的GPIO">
 <meta property="og:url" content="http://hsmouc.com/2015/12/17/2015-12-17-pi/index.html">
 <meta property="og:site_name" content="梦的小窝">
-<meta property="og:description" content="python GPIO集成库我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835    C    Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。
-让LED闪烁在这个实验中，我只是简单的控制了一个GPIO口，输出一个方波信号，占空比5">
+<meta property="og:description" content="python GPIO集成库我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835    C    Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/005WMcFzgw1ez451il6owj30fu0cjjue.jpg">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/005WMcFzgw1ez452ev870j31kw16oncv.jpg">
-<meta property="og:updated_time" content="2015-12-18T13:58:50.000Z">
+<meta property="og:updated_time" content="2016-10-22T15:41:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="通过python控制Pi的GPIO">
-<meta name="twitter:description" content="python GPIO集成库我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835    C    Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。
-让LED闪烁在这个实验中，我只是简单的控制了一个GPIO口，输出一个方波信号，占空比5">
+<meta name="twitter:description" content="python GPIO集成库我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835    C    Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。">
 <meta name="twitter:image" content="http://ww2.sinaimg.cn/large/005WMcFzgw1ez451il6owj30fu0cjjue.jpg">
 
 
@@ -322,7 +319,7 @@
       
 
       
-        <h2 id="python-GPIO集成库"><a href="#python-GPIO集成库" class="headerlink" title="python GPIO集成库"></a>python GPIO集成库</h2><p>我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835    C    Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。</p>
+        <h2 id="python-GPIO集成库"><a href="#python-GPIO集成库" class="headerlink" title="python GPIO集成库"></a>python GPIO集成库</h2><p>我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835    C    Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。<br> <a id="more"></a> </p>
 <h2 id="让LED闪烁"><a href="#让LED闪烁" class="headerlink" title="让LED闪烁"></a>让LED闪烁</h2><p>在这个实验中，我只是简单的控制了一个GPIO口，输出一个方波信号，占空比50%，这样就可以让一个LED小灯闪烁。  </p>
 <ul>
 <li>连接实验电路<br>在单片机学习中，掌握好各个引脚的功能是非常重要的，要根据电路的连接来写相关的控制程序。在Pi中我们可以使用<code>GPIO readall</code>来列出所有的引脚，便于我们下一步操作。<br><img src="http://ww2.sinaimg.cn/large/005WMcFzgw1ez451il6owj30fu0cjjue.jpg" alt="引脚图"><br>然后将LED，电阻串联起来，LED正端接GPIO口，负接地。记得用杜邦线，拿着导线乱碰很可能导致引脚短路，损坏Pi。   </li>

