@@ -1,0 +1,692 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Pi,C," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="最近一直在做树莓派相关的东西，终极目标是用它做一个使用cnn卷积神经网络算法的人工智能小车。这个坑很大需要好多时间来填，万里长征第一步就是训练数据的采集。在这篇文章里介绍了通过Python和CV2视觉库实现自动驾驶。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Raspberry Pi制作循迹小车">
+<meta property="og:url" content="http://hsmouc.com/2016/11/26/2016-12-6-pi/index.html">
+<meta property="og:site_name" content="梦的小窝">
+<meta property="og:description" content="最近一直在做树莓派相关的东西，终极目标是用它做一个使用cnn卷积神经网络算法的人工智能小车。这个坑很大需要好多时间来填，万里长征第一步就是训练数据的采集。在这篇文章里介绍了通过Python和CV2视觉库实现自动驾驶。">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/005WMcFzjw1fagt8pswuzj31kw16o4bg.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/005WMcFzjw1fagt5vvlf2j31kw16oh8r.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005WMcFzjw1fagyoqqoi0j30sf0lzdkj.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/005WMcFzjw1fagywx9vqxj30sg0lydjy.jpg">
+<meta property="og:updated_time" content="2016-12-06T04:53:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Raspberry Pi制作循迹小车">
+<meta name="twitter:description" content="最近一直在做树莓派相关的东西，终极目标是用它做一个使用cnn卷积神经网络算法的人工智能小车。这个坑很大需要好多时间来填，万里长征第一步就是训练数据的采集。在这篇文章里介绍了通过Python和CV2视觉库实现自动驾驶。">
+<meta name="twitter:image" content="http://ww2.sinaimg.cn/large/005WMcFzjw1fagt8pswuzj31kw16o4bg.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://hsmouc.com/2016/11/26/2016-12-6-pi/"/>
+
+
+  <title> 使用Raspberry Pi制作循迹小车 | 梦的小窝 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-71542166-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">梦的小窝</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用Raspberry Pi制作循迹小车
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-26T21:22:35+08:00" content="2016-11-26">
+              2016-11-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/嵌入式开发/" itemprop="url" rel="index">
+                    <span itemprop="name">嵌入式开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/26/2016-12-6-pi/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/26/2016-12-6-pi/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li><p>最近一直在做树莓派相关的东西，终极目标是用它做一个使用cnn卷积神经网络算法的人工智能小车。这个坑很大需要好多时间来填，万里长征第一步就是训练数据的采集。在这篇文章里介绍了通过Python和CV2视觉库实现自动驾驶。</p>
+<a id="more"></a> 
+<h2 id="硬件的准备"><a href="#硬件的准备" class="headerlink" title="硬件的准备"></a>硬件的准备</h2></li>
+<li>Raspberry Pi 3(树莓派) 操作系统ubuntu 16.04</li>
+<li>电机驱动电路</li>
+<li>电池与稳压电路</li>
+<li>舵机</li>
+<li>车模<h3 id="电机-舵机控制方案"><a href="#电机-舵机控制方案" class="headerlink" title="电机/舵机控制方案"></a>电机/舵机控制方案</h3></li>
+<li><p>说明一下，因为去年参加了飞思卡尔比赛，所以车模直接使用了飞思卡尔比赛的C车，电机是由NXP公司的MKL25单片机控制的。且给的是固定速度，也就是说由Raspberry Pi控制转向，单片机控制速度，两者之间并没有耦合关系，是完全独立的系统。<br><img src="http://ww2.sinaimg.cn/large/005WMcFzjw1fagt8pswuzj31kw16o4bg.jpg" alt="整车"><br><em>因为Pi貌似只能提供软件PWM，也就是说PWM波的频率越高，CPU使用越多。示波器实测频率极限大约为5KHz，电机要求频率为10KHz,所以不使用Pi来控制电机。</em>   </p>
+<blockquote>
+<p>Each pin activated in softPWM mode uses approximately 0.5% of the CPU.  </p>
+</blockquote>
+</li>
+<li><p>舵机由树莓派提供100Hz的PWM波控制。</p>
+</li>
+</ul>
+<h3 id="供电方案"><a href="#供电方案" class="headerlink" title="供电方案"></a>供电方案</h3><p>所有的设备由7.2V电池提供电力，树莓派需降压到5V，舵机需降压到5.7V。<br><em>tips:Pi的开机电流比较大，实测AMS11175.0稳压芯片提供的5V电压无法保证Pi正常开机，所以需要大电流稳压芯片</em><br><img src="http://ww2.sinaimg.cn/large/005WMcFzjw1fagt5vvlf2j31kw16oh8r.jpg" alt="稳压电路与电机驱动"></p>
+<h3 id="图像采集方案"><a href="#图像采集方案" class="headerlink" title="图像采集方案"></a>图像采集方案</h3><p>车上搭载了支持UVC协议的数字摄像头，具体的型号我也记不清了。在某宝上搜索UVC摄像头即可。摄像头与Raspberry Pi之间使用USB连接，我们使用的摄像头640*480分辨率，但是实测帧数较低，可能是Pi本身性能有限，代码拍照间隔大约为0.1s。</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="粗糙但可靠的方案"><a href="#粗糙但可靠的方案" class="headerlink" title="粗糙但可靠的方案"></a>粗糙但可靠的方案</h3><ul>
+<li>思路<br>摄像头采集图像流，使用Python定时器的功能每0.1s处理一次图像。赛道为白色，赛道外部为蓝色，通过图像的灰度差来判断赛道边界。取图像的中线，按640*480的分辨率取第320行。设置一个灰度阈值，从320行的第240个像素点左右找灰度跳变处并记录坐标，左右边界坐标相加取平均与240作差即可获得与赛道中线的偏差。</li>
+<li>代码</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> threading</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> cv2</div><div class="line"><span class="keyword">import</span> cv2.cv <span class="keyword">as</span> cv</div><div class="line"><span class="keyword">import</span> RPi.GPIO <span class="keyword">as</span> GPIO</div><div class="line"><span class="comment">#读视频流</span></div><div class="line">cap=cv2.VideoCapture(<span class="number">0</span>)</div><div class="line">i = <span class="number">0</span></div><div class="line">LEdge = <span class="number">0</span></div><div class="line">REdge = <span class="number">0</span></div><div class="line">lineErr = <span class="number">0</span></div><div class="line"><span class="comment">#GPIO-PWM初始化，设定频率为100Hz</span></div><div class="line">GPIO.setmode(GPIO.BOARD)</div><div class="line">GPIO.setup(<span class="number">12</span>,GPIO.OUT)</div><div class="line">p = GPIO.PWM(<span class="number">12</span>,<span class="number">100</span>)</div><div class="line">p.start(<span class="number">0</span>)</div></pre></td></tr></table></figure>
+<p>获取图像函数部分，由于需要为神经网络系统提供训练数据，所以把采集到的图片按顺序存放在img文件夹下。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fetch_img</span><span class="params">()</span>:</span></div><div class="line">        <span class="keyword">global</span> i,fn,im</div><div class="line">        fn = <span class="string">'img/'</span>+str(i)+<span class="string">'.jpg'</span></div><div class="line">        ret,im=cap.read()</div><div class="line">        cv2.imwrite(fn, im)</div><div class="line">        i = i + <span class="number">1</span></div></pre></td></tr></table></figure></p>
+<p>处理图像函数部分，每隔0.1s执行一次：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_img</span><span class="params">()</span>:</span></div><div class="line">        t = threading.Timer(<span class="number">0.1</span>,process_img)</div><div class="line">        t.start()</div><div class="line">        <span class="keyword">global</span> LEdge,REdge,lineErr</div><div class="line">        fetch_img()</div><div class="line">        <span class="comment">#获取灰度图像</span></div><div class="line">        gray=cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">640</span>):</div><div class="line">                <span class="keyword">if</span> gray[<span class="number">240</span>][j] &lt; <span class="number">80</span>: <span class="comment">#设置阈值为80</span></div><div class="line">                        gray[<span class="number">240</span>][j] = <span class="number">0</span></div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                        gray[<span class="number">240</span>][j] = <span class="number">1</span></div><div class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">320</span>,<span class="number">640</span>,<span class="number">1</span>):</div><div class="line">                <span class="keyword">if</span> gray[<span class="number">240</span>][k] == <span class="number">0</span>:</div><div class="line">                        REdge = k</div><div class="line">                        <span class="keyword">break</span></div><div class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">320</span>,<span class="number">0</span>,<span class="number">-1</span>):</div><div class="line">                <span class="keyword">if</span> gray[<span class="number">240</span>][k] == <span class="number">0</span>:</div><div class="line">                        LEdge = k</div><div class="line">                        <span class="keyword">break</span></div><div class="line">        lineErr = (REdge+LEdge)/<span class="number">2</span><span class="number">-320</span></div><div class="line">        <span class="keyword">print</span> lineErr</div></pre></td></tr></table></figure></p>
+<p>主函数部分，控制舵机方向：  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">        <span class="keyword">global</span> t,lineErr</div><div class="line">        process_img()</div><div class="line">        t = threading.Timer(<span class="number">1</span>, process_img)</div><div class="line">        t.start()</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">                <span class="keyword">while</span> <span class="number">1</span>:</div><div class="line">                        dc = <span class="number">8</span> - lineErr/<span class="number">40</span></div><div class="line">                        <span class="comment">#简单的比例控制，舵机PWM波占空比动态范围为6%-10%，8%时转向角度为0</span></div><div class="line">                        <span class="keyword">if</span> dc &gt; <span class="number">10</span>:</div><div class="line">                                dc = <span class="number">10</span></div><div class="line">                        <span class="keyword">if</span> dc &lt; <span class="number">6</span>:</div><div class="line">                                dc = <span class="number">6</span></div><div class="line">                        p.ChangeDutyCycle(dc)</div><div class="line">        <span class="keyword">except</span> KeyboardInterrupt:</div><div class="line">                <span class="keyword">pass</span></div><div class="line">        p.stop()</div><div class="line">        GPIO.cleanup()</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">        main()</div></pre></td></tr></table></figure>
+<h3 id="精致但不可靠的方案"><a href="#精致但不可靠的方案" class="headerlink" title="精致但不可靠的方案"></a>精致但不可靠的方案</h3><h4 id="霍夫线-HoughLine-变换"><a href="#霍夫线-HoughLine-变换" class="headerlink" title="霍夫线(HoughLine)变换"></a>霍夫线(HoughLine)变换</h4><p>霍夫线变换是一种用来寻找直线的方法，在opencv中相关函数为<code>HoughLines</code>和<code>HoughLinesP</code></p>
+<h4 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h4><p>既然霍夫线变换可以寻找图片中的直线，那么我们可以利用这种算法提取赛道边缘并得出边缘线和车身前进方向的夹角，以此判断前进方向与赛道中线的偏差。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> cv2.cv <span class="keyword">as</span> cv</div><div class="line"><span class="keyword">import</span> math</div><div class="line"></div><div class="line">im=cv.LoadImage(<span class="string">'img/213.jpg'</span>, cv.CV_LOAD_IMAGE_GRAYSCALE)</div><div class="line"></div><div class="line">pi = math.pi</div><div class="line">x = <span class="number">0</span></div><div class="line">dst = cv.CreateImage(cv.GetSize(im), <span class="number">8</span>, <span class="number">1</span>)</div><div class="line"></div><div class="line">cv.Canny(im, dst, <span class="number">200</span>, <span class="number">200</span>)</div><div class="line">cv.Threshold(dst, dst, <span class="number">100</span>, <span class="number">255</span>, cv.CV_THRESH_BINARY)</div><div class="line"></div><div class="line">color_dst_standard = cv.CreateImage(cv.GetSize(im), <span class="number">8</span>, <span class="number">3</span>)</div><div class="line">cv.CvtColor(im, color_dst_standard, cv.CV_GRAY2BGR)<span class="comment">#Create output image in RGB to put red lines</span></div><div class="line"></div><div class="line">lines = cv.HoughLines2(dst, cv.CreateMemStorage(<span class="number">0</span>), cv.CV_HOUGH_STANDARD, <span class="number">1</span>, pi/<span class="number">180</span>, <span class="number">90</span>, <span class="number">80</span>, <span class="number">200</span>)</div><div class="line">old = lines[<span class="number">0</span>][<span class="number">1</span>]*<span class="number">180</span>/pi</div><div class="line"><span class="keyword">for</span> (rho, theta) <span class="keyword">in</span> lines[:<span class="number">100</span>]:</div><div class="line">    err = theta*<span class="number">180</span>/pi - old</div><div class="line">    <span class="keyword">if</span> abs(err) &gt; <span class="number">3</span>:</div><div class="line">        x = x + theta*<span class="number">180</span>/pi</div><div class="line">    old = theta*<span class="number">180</span>/pi</div><div class="line">    a = math.cos(theta) </div><div class="line">    b = math.sin(theta)</div><div class="line">    x0 = a * rho</div><div class="line">    y0 = b * rho</div><div class="line">    pt1 = (cv.Round(x0 + <span class="number">1000</span>*(-b)), cv.Round(y0 + <span class="number">1000</span>*(a)))</div><div class="line">    pt2 = (cv.Round(x0 - <span class="number">1000</span>*(-b)), cv.Round(y0 - <span class="number">1000</span>*(a)))</div><div class="line">    cv.Line(color_dst_standard, pt1, pt2, cv.CV_RGB(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>), <span class="number">2</span>, <span class="number">4</span>)</div><div class="line"></div><div class="line"><span class="keyword">print</span> x</div><div class="line">cv.ShowImage(<span class="string">"Hough Standard"</span>, color_dst_standard)</div><div class="line">cv.WaitKey(<span class="number">0</span>)</div></pre></td></tr></table></figure></p>
+<p>这里载入了一张已经拍摄好的赛道图片，提取直线并绘图，运行结果如下：  </p>
+<p><img src="http://ww1.sinaimg.cn/large/005WMcFzjw1fagyoqqoi0j30sf0lzdkj.jpg" alt="screenshot"><br>可以清楚地看到赛道的两边被描绘出来，由<code>theta</code>值计算出角度。</p>
+<h4 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h4><p><img src="http://ww2.sinaimg.cn/large/005WMcFzjw1fagywx9vqxj30sg0lydjy.jpg" alt="screenshot"><br>尽管<code>HoughLines</code>函数提供了阈值，最长线，最短线的设置，想获得准确的路线信息还是很困难。测试场地的干扰实在太多，很难消除周边环境的影响，最终在测试了各种情况后，放弃了这种方法。<br>另外霍夫线变换对直线的提取对于树莓派的CPU来说实在是太吃力了，增加了系统的控制周期，导致系统的动态性能很差。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Pi/" rel="tag">#Pi</a>
+          
+            <a href="/tags/C/" rel="tag">#C</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/26/2016-11-26-pi/" rel="next" title="基于RFID和Raspberry Pi的雨伞租赁系统设计">
+                <i class="fa fa-chevron-left"></i> 基于RFID和Raspberry Pi的雨伞租赁系统设计
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/26/2016-12-6-pi/"
+           data-title="使用Raspberry Pi制作循迹小车" data-url="http://hsmouc.com/2016/11/26/2016-12-6-pi/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww4.sinaimg.cn/large/005WMcFzjw1f91geowlt0j31d91d9qnl.jpg"
+               alt="Hsmouc" />
+          <p class="site-author-name" itemprop="name">Hsmouc</p>
+          <p class="site-description motion-element" itemprop="description">乱七八糟的个人学习生活记录</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件的准备"><span class="nav-number">1.</span> <span class="nav-text">硬件的准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#电机-舵机控制方案"><span class="nav-number">1.1.</span> <span class="nav-text">电机/舵机控制方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#供电方案"><span class="nav-number">1.2.</span> <span class="nav-text">供电方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图像采集方案"><span class="nav-number">1.3.</span> <span class="nav-text">图像采集方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">2.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#粗糙但可靠的方案"><span class="nav-number">2.1.</span> <span class="nav-text">粗糙但可靠的方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#精致但不可靠的方案"><span class="nav-number">2.2.</span> <span class="nav-text">精致但不可靠的方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#霍夫线-HoughLine-变换"><span class="nav-number">2.2.1.</span> <span class="nav-text">霍夫线(HoughLine)变换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#局限性"><span class="nav-number">2.2.3.</span> <span class="nav-text">局限性</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsmouc</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hsmouc"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
