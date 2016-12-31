@@ -1,0 +1,809 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Pi,Python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="上篇文章讲到了用树莓派和openCV库来做简单的循迹，在这篇文章里我们将尝试用树莓派做一些更酷的事情。我们不希望给小车具体的规则(explicitly programmed)去做循迹，而是让它自己从已有的数据集(包括图像与转向角)学习如何循迹，没错这就是机器学习。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于卷积神经网络(CNN)的智能循迹小车">
+<meta property="og:url" content="http://hsmouc.com/2016/12/31/2016-12-31-pi/index.html">
+<meta property="og:site_name" content="梦的小窝">
+<meta property="og:description" content="上篇文章讲到了用树莓派和openCV库来做简单的循迹，在这篇文章里我们将尝试用树莓派做一些更酷的事情。我们不希望给小车具体的规则(explicitly programmed)去做循迹，而是让它自己从已有的数据集(包括图像与转向角)学习如何循迹，没错这就是机器学习。">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/005WMcFzjw1fbaf6jb9hpj31400p0dpd.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/005WMcFzjw1fbafa8bajaj30o20k8te7.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005WMcFzjw1fbag4hptgqj30m80goab4.jpg">
+<meta property="og:updated_time" content="2016-12-31T16:49:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于卷积神经网络(CNN)的智能循迹小车">
+<meta name="twitter:description" content="上篇文章讲到了用树莓派和openCV库来做简单的循迹，在这篇文章里我们将尝试用树莓派做一些更酷的事情。我们不希望给小车具体的规则(explicitly programmed)去做循迹，而是让它自己从已有的数据集(包括图像与转向角)学习如何循迹，没错这就是机器学习。">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/005WMcFzjw1fbaf6jb9hpj31400p0dpd.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://hsmouc.com/2016/12/31/2016-12-31-pi/"/>
+
+
+  <title> 基于卷积神经网络(CNN)的智能循迹小车 | 梦的小窝 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-71542166-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">梦的小窝</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                基于卷积神经网络(CNN)的智能循迹小车
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-31T21:12:15+08:00" content="2016-12-31">
+              2016-12-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/嵌入式开发/" itemprop="url" rel="index">
+                    <span itemprop="name">嵌入式开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/31/2016-12-31-pi/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/31/2016-12-31-pi/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/31/2016-12-31-pi/" class="leancloud_visitors" data-flag-title="基于卷积神经网络(CNN)的智能循迹小车">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li><p>上篇文章讲到了用树莓派和openCV库来做简单的循迹，在这篇文章里我们将尝试用树莓派做一些更酷的事情。我们不希望给小车具体的规则(explicitly programmed)去做循迹，而是让它自己从已有的数据集(包括图像与转向角)学习如何循迹，没错这就是机器学习。</p>
+<a id="more"></a> 
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3></li>
+<li>首要要提到的是，我还有一些坑没有填完，这条路并没有完全走通。还没有解决的问题是：<strong>我使用的Google Tensorflow不支持ARM架构的CPU，所以理论上没有办法在树莓派上训练和使用神经网络算法。</strong><br>模型是在x64的ubuntu上训练出来的。在这篇文章里不会详细介绍机器学习以及卷积神经网络算法的原理，而是侧重于说明功能的实现。<h4 id="硬件要求"><a href="#硬件要求" class="headerlink" title="硬件要求"></a>硬件要求</h4></li>
+</ul>
+<ol>
+<li>Raspberry Pi 3</li>
+<li>至少4GB内存的计算机 Intel x64架构<h4 id="软件部分"><a href="#软件部分" class="headerlink" title="软件部分"></a>软件部分</h4></li>
+<li>Python 2.7</li>
+<li>Google Tensorflow/TFlearn</li>
+<li>OS:ubuntu ARM 16.04/ubuntu x64 16.04<h4 id="总体思路"><a href="#总体思路" class="headerlink" title="总体思路"></a>总体思路</h4>循迹赛道上篇文章介绍过这里不再附图解释。<br>第一部分是数据的采集，思路是利用Python的定时器按固定周期拍照，拍完照片做两件事情：</li>
+</ol>
+<ul>
+<li>处理图像，灰度化由阈值判断赛道边界，并求出合理转向角。</li>
+<li>储存图像和转向角。<br>第二部分是由采集的数据训练神经网络，并观察误差情况。<br>第三部分则是使用模型，将摄像头实时拍到的图像传进模型，并有模型预测出转向情况，操纵舵机转向。</li>
+</ul>
+<h4 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h4><h5 id="训练数据采集"><a href="#训练数据采集" class="headerlink" title="训练数据采集"></a>训练数据采集</h5><p>第一部分图像的处理并求转向角在前一篇文章中已经介绍。所以在这里只补充一下数据的存储规则。<br>数据的存储规则是我自己订的，独一无二。好吧，我承认它很傻:-I。机器学习界广泛使用的数据存储格式是<code>.csv</code>，可是我是一个Python渣呀，我的具体代码是这样子的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">fn = <span class="string">'img/'</span>+str(i)+<span class="string">'_'</span>+str(err)+<span class="string">'.jpg'</span></div><div class="line">cv2.imwrite(fn, im)</div></pre></td></tr></table></figure>
+<p>这两行代码每个处理周期跑一遍，会在<code>img</code>文件夹下创建一张图，命名规则为序号+下划线+转向偏差，图像格式为<code>.jpg</code>，到时候我们把数据输入网络的时候只要用正则表达式把它们分一下不就行了嘛。有了输入和输出我们就可以训练我们的模型了。<br><img src="http://ww4.sinaimg.cn/large/005WMcFzjw1fbaf6jb9hpj31400p0dpd.jpg" alt="效果图"></p>
+<h5 id="训练数据读取"><a href="#训练数据读取" class="headerlink" title="训练数据读取"></a>训练数据读取</h5><p>首先我们通过正则表达式来提取转向角的数据，我们要做的就是获取这个文件夹里所以的文件名，然后按照下划线前面部分的序号对后面的转向数据排序。具体代码如下: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">img_rows, img_cols, img_depth = <span class="number">640</span>, <span class="number">480</span>, <span class="number">1</span></div><div class="line">array_len = <span class="number">1000</span> <span class="comment">#图像总数</span></div><div class="line">yArray = [<span class="number">0</span>]* array_len</div><div class="line">files=os.listdir(<span class="string">"/home/hsm/Desktop/img"</span>)</div><div class="line">files.sort()</div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(array_len):</div><div class="line">	files_re_a = re.split(<span class="string">r'\.'</span>, files[i])</div><div class="line">	files_re_b = re.split(<span class="string">r'\_'</span>, files_re_a[<span class="number">0</span>])</div><div class="line">	yArray[int(files_re_b[<span class="number">0</span>])<span class="number">-1</span>] = int(files_re_b[<span class="number">1</span>])</div><div class="line"></div><div class="line">Y_data = np.asarray(yArray)</div><div class="line">Y_train = Y_data.reshape(array_len,<span class="number">1</span>);</div><div class="line">Y_train = Y_train.astype(<span class="string">'float32'</span>)</div><div class="line">Y_train /= <span class="number">240</span>  <span class="comment">#归一化处理数据</span></div></pre></td></tr></table></figure>
+<p><code>re.split</code>函数可以切分字符串，我对文件名进行了两次切分，提取出了序号信息和转向信息。<br>完成转向信息的提取后，图像的数组就很容易构建，具体代码如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">img_num = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(array_len):</div><div class="line">    i = i + <span class="number">1</span></div><div class="line">    fn = <span class="string">'/home/hsm/Desktop/imgonly/'</span> + str(i) + <span class="string">'.jpg'</span></div><div class="line">    im=cv2.imread(fn,<span class="number">0</span>)</div><div class="line">    img_num.append(im)</div><div class="line"></div><div class="line">X_data=np.asarray(img_num)</div><div class="line"></div><div class="line"><span class="comment">#print X_data.shape</span></div><div class="line"></div><div class="line">X_train= X_data.reshape(array_len,img_rows,img_cols,<span class="number">1</span>)</div><div class="line">X_train = X_train.astype(<span class="string">'float32'</span>)</div><div class="line">X_train /= <span class="number">255</span></div></pre></td></tr></table></figure>
+<p>这里漏了一步，刚才提到我们图像命名非常的不科学，那么如何通过openCV按顺序读取它们并转换为灰度数组呢？我把刚才的图像文件夹复制了一份，并用macOS下的批量重命名工具将它们处理成按序号命名的图像了。</p>
+<h5 id="CNN卷积神经网络的建立与训练"><a href="#CNN卷积神经网络的建立与训练" class="headerlink" title="CNN卷积神经网络的建立与训练"></a>CNN卷积神经网络的建立与训练</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">net = tflearn.input_data(shape=[None, img_rows, img_cols, img_depth], name=&apos;input&apos;)</div><div class="line"></div><div class="line">net = tflearn.conv_2d(net, 8, [4, 5], strides=2, activation=&apos;relu&apos;)</div><div class="line"></div><div class="line">net = tflearn.conv_2d(net, 8, [4, 5], strides=2, activation=&apos;relu&apos;)</div><div class="line"></div><div class="line">net = tflearn.conv_2d(net, 16, [4, 5], strides=2, activation=&apos;relu&apos;)</div><div class="line"></div><div class="line">net = tflearn.conv_2d(net, 32, [2, 2], activation=&apos;relu&apos;)</div><div class="line"></div><div class="line">net = tflearn.fully_connected(net, 128, activation=&apos;relu&apos;)</div><div class="line"></div><div class="line">net = tflearn.dropout(net, 0.8)</div><div class="line"></div><div class="line">net = tflearn.fully_connected(net, 64, activation=&apos;relu&apos;)</div><div class="line">net = tflearn.dropout(net, 0.8)</div><div class="line"></div><div class="line">net = tflearn.fully_connected(net, 32, activation=&apos;relu&apos;)</div><div class="line">net = tflearn.dropout(net, 0.8)</div><div class="line"></div><div class="line">net = tflearn.fully_connected(net, 8, activation=&apos;relu&apos;)</div><div class="line">net = tflearn.dropout(net, 0.8)</div><div class="line"></div><div class="line">net = tflearn.fully_connected(net, 1, activation=&apos;tanh&apos;)</div><div class="line"></div><div class="line">net = tflearn.regression(net, loss=&apos;mean_square&apos;, metric=&apos;accuracy&apos;, learning_rate=1e-4, name=&apos;target&apos;)</div><div class="line"></div><div class="line">model = tflearn.DNN(net)</div><div class="line"></div><div class="line">model.fit(X_train, Y_train, n_epoch=10, batch_size=8,show_metric=True)</div><div class="line"></div><div class="line">model.save(&quot;/home/hsm/Desktop/model1/model1.tfl&quot;)</div></pre></td></tr></table></figure>
+<p>这里就不多做解释了，有兴趣的读者可以参考TFlearn的官方文档，写的非常详细，最后将训练好的模型存到指定的位置方便下次使用。<br>训练的过程：<br><img src="http://ww3.sinaimg.cn/large/005WMcFzjw1fbafa8bajaj30o20k8te7.jpg" alt="训练过程"><br>这里显示的精确度为1并不可靠。至于之前为什么强调内存问题，由于模型的训练非常吃内存，实测训练2770张图片，<code>batch_size</code>参数设为16将占用大约12GB内存，事实上我是用32GB内存的电脑训练的。</p>
+<h5 id="模型的使用和检验"><a href="#模型的使用和检验" class="headerlink" title="模型的使用和检验"></a>模型的使用和检验</h5><p>代码大概是这样，仍然需要先将要测试的图片读进来并且<code>reshape</code>一下，调用<code>model.predict</code>预测转向角。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">result = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(array_len):</div><div class="line">	pred = model.predict([X_in[i]])</div><div class="line">	result.append(pred[<span class="number">0</span>][<span class="number">0</span>])</div><div class="line"><span class="keyword">print</span> result</div><div class="line">y = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, array_len<span class="number">-1</span>):</div><div class="line">	y.append(Y_train[i][<span class="number">0</span>])</div><div class="line"><span class="keyword">print</span> y</div></pre></td></tr></table></figure></p>
+<p>为了更加方便的观察预测值和准确值的吻合情况，我使用了matplotlib库来绘图，画出来的曲线如下:<br><img src="http://ww1.sinaimg.cn/large/005WMcFzjw1fbag4hptgqj30m80goab4.jpg" alt=""><br>看起来有一些简陋，因为快期末考试了没时间画细致的图，所以先原谅我没有图例。横轴是图片的序号，纵轴是转向角，范围从-1到1。绿色的线是准确值，蓝色的线是模型的预测值，总体来看效果还不错。</p>
+<h3 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h3><p>我至今仍然不确定Tensorflow是否可以在ARM架构的CPU上运行，如果不行的话，我的解决方案大概有这么两个：</p>
+<ol>
+<li>换用Intel的小型一体机，不但满足x64架构的条件，而且数据处理能力也比我们现在使用的树莓派强上百倍。</li>
+<li>Python网络编程，通过WLAN将Pi采集的图片发到我的笔记本上，调用模型计算出转弯角度再将数据发回去。这个方案不是不行，不过貌似比较复杂。</li>
+</ol>
+<p>如果有碰巧读到这篇文章的读者，欢迎和我交流一下思路，感激不禁。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Pi/" rel="tag">#Pi</a>
+          
+            <a href="/tags/Python/" rel="tag">#Python</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/06/2016-12-6-pi/" rel="next" title="使用Raspberry Pi制作循迹小车">
+                <i class="fa fa-chevron-left"></i> 使用Raspberry Pi制作循迹小车
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/31/2016-12-31-pi/"
+           data-title="基于卷积神经网络(CNN)的智能循迹小车" data-url="http://hsmouc.com/2016/12/31/2016-12-31-pi/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww4.sinaimg.cn/large/005WMcFzjw1f91geowlt0j31d91d9qnl.jpg"
+               alt="Hsmouc" />
+          <p class="site-author-name" itemprop="name">Hsmouc</p>
+          <p class="site-description motion-element" itemprop="description">乱七八糟的个人学习生活记录</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#硬件要求"><span class="nav-number">1.1.</span> <span class="nav-text">硬件要求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#软件部分"><span class="nav-number">1.2.</span> <span class="nav-text">软件部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总体思路"><span class="nav-number">1.3.</span> <span class="nav-text">总体思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体实现"><span class="nav-number">1.4.</span> <span class="nav-text">具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#训练数据采集"><span class="nav-number">1.4.1.</span> <span class="nav-text">训练数据采集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#训练数据读取"><span class="nav-number">1.4.2.</span> <span class="nav-text">训练数据读取</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CNN卷积神经网络的建立与训练"><span class="nav-number">1.4.3.</span> <span class="nav-text">CNN卷积神经网络的建立与训练</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#模型的使用和检验"><span class="nav-number">1.4.4.</span> <span class="nav-text">模型的使用和检验</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存在的问题"><span class="nav-number">2.</span> <span class="nav-text">存在的问题</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsmouc</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hsmouc"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("kKHlf4qV0AFaIXctFqFjGXIG-gzGzoHsz", "iIyqUvbAEGJmFXnlc7mAcSAg");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
