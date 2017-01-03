@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+    
+  <url>
+    <loc>http://hsmouc.com/2016/12/31/2016-12-31-pi/</loc>
+    <lastmod>2017-01-01T06:20:32.000Z</lastmod>
+    <data>
+        <display>
+        <title>基于卷积神经网络(CNN)的智能循迹小车</title>
+        <pubTime>2016-12-31T13:12:15.000Z</pubTime>
+        
+        <tag>Pi</tag>
+         
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="嵌入式开发" url="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/12/12/2015-12-12-pi/</loc>
+    <lastmod>2016-12-31T14:27:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>Raspberry Pi上手体验</title>
+        <pubTime>2015-12-12T03:40:25.000Z</pubTime>
+        
+        <tag>Pi</tag>
+         
+         
+           
+             
+              <breadCrumb title="嵌入式开发" url="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2016/12/06/2016-12-6-pi/</loc>
+    <lastmod>2016-12-06T05:01:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>使用Raspberry Pi制作循迹小车</title>
+        <pubTime>2016-12-06T05:12:15.000Z</pubTime>
+        
+        <tag>Pi</tag>
+         
+        <tag>C</tag>
+         
+         
+           
+             
+              <breadCrumb title="嵌入式开发" url="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2016/11/26/2016-11-26-pi/</loc>
+    <lastmod>2016-12-06T04:13:43.000Z</lastmod>
+    <data>
+        <display>
+        <title>基于RFID和Raspberry Pi的雨伞租赁系统设计</title>
+        <pubTime>2016-11-26T13:22:35.000Z</pubTime>
+        
+        <tag>Pi</tag>
+         
+        <tag>C</tag>
+         
+         
+           
+             
+              <breadCrumb title="嵌入式开发" url="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2016/10/22/2016-10-22-robot/</loc>
+    <lastmod>2016-10-23T15:51:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>六足机器人技术报告</title>
+        <pubTime>2016-10-22T12:15:23.000Z</pubTime>
+        
+        <tag>C</tag>
+         
+        <tag>robot</tag>
+         
+         
+           
+             
+              <breadCrumb title="嵌入式开发" url="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2016/08/12/2016-08-12-the%20USA/</loc>
+    <lastmod>2016-10-23T15:51:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>美国游玩小记</title>
+        <pubTime>2016-08-12T13:55:13.000Z</pubTime>
+        
+        <tag>travel</tag>
+         
+         
+           
+             
+              <breadCrumb title="杂项" url="http://hsmouc.com/categories/%E6%9D%82%E9%A1%B9/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/10/22/2015-10-23-wifi2/</loc>
+    <lastmod>2016-10-22T15:42:01.000Z</lastmod>
+    <data>
+        <display>
+        <title>无线网络攻防进阶</title>
+        <pubTime>2015-10-22T13:40:27.000Z</pubTime>
+        
+        <tag>Wi-Fi</tag>
+         
+        <tag>ARP</tag>
+         
+         
+           
+             
+              <breadCrumb title="渗透入侵" url="http://hsmouc.com/categories/%E6%B8%97%E9%80%8F%E5%85%A5%E4%BE%B5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/11/08/2015-11-08-msf/</loc>
+    <lastmod>2016-10-22T15:41:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>Metasploit折腾小记</title>
+        <pubTime>2015-11-08T03:40:25.000Z</pubTime>
+        
+        <tag>Metasploit</tag>
+         
+         
+           
+             
+              <breadCrumb title="渗透入侵" url="http://hsmouc.com/categories/%E6%B8%97%E9%80%8F%E5%85%A5%E4%BE%B5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/11/12/2015-11-12-ARP/</loc>
+    <lastmod>2016-10-22T15:41:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>Ettercap使用小结</title>
+        <pubTime>2015-11-12T03:40:25.000Z</pubTime>
+        
+        <tag>Wi-Fi</tag>
+         
+         
+           
+             
+              <breadCrumb title="渗透入侵" url="http://hsmouc.com/categories/%E6%B8%97%E9%80%8F%E5%85%A5%E4%BE%B5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/11/16/2015-11-16-mfc/</loc>
+    <lastmod>2016-10-22T15:41:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>MFC POJ1</title>
+        <pubTime>2015-11-16T13:21:08.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+        <tag>MFC</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/11/17/2015-11-17-mfc/</loc>
+    <lastmod>2016-10-22T15:41:32.000Z</lastmod>
+    <data>
+        <display>
+        <title>MFC POJ2</title>
+        <pubTime>2015-11-17T13:21:08.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+        <tag>MFC</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/11/19/2015-11-19-mfc/</loc>
+    <lastmod>2016-10-22T15:41:28.000Z</lastmod>
+    <data>
+        <display>
+        <title>MFC POJ3</title>
+        <pubTime>2015-11-19T04:56:48.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+        <tag>MFC</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/12/09/2015-12-08-mfc/</loc>
+    <lastmod>2016-10-22T15:41:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>MFC POJ4</title>
+        <pubTime>2015-12-09T08:34:43.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+        <tag>MFC</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/12/13/2015-12-13-pi/</loc>
+    <lastmod>2016-10-22T15:41:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>Raspberry Pi开启SSH和VNC</title>
+        <pubTime>2015-12-13T02:40:25.000Z</pubTime>
+        
+        <tag>Pi</tag>
+         
+         
+           
+             
+              <breadCrumb title="嵌入式开发" url="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/12/17/2015-12-17-pi/</loc>
+    <lastmod>2016-10-22T15:41:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>通过python控制Pi的GPIO</title>
+        <pubTime>2015-12-17T02:40:25.000Z</pubTime>
+        
+        <tag>Pi</tag>
+         
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="嵌入式开发" url="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2016/02/16/2016-02-16-vps/</loc>
+    <lastmod>2016-10-22T15:41:01.000Z</lastmod>
+    <data>
+        <display>
+        <title>centos搭建服务器－安装apache</title>
+        <pubTime>2016-02-16T02:40:25.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://hsmouc.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2016/02/19/2016-02-19-vps/</loc>
+    <lastmod>2016-10-22T15:40:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>centos搭建LNMP服务器</title>
+        <pubTime>2016-02-19T06:20:15.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="服务器" url="http://hsmouc.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2016/02/27/2016-02-27-pi/</loc>
+    <lastmod>2016-10-22T15:40:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>娱乐向---Raspberry Pi搭建家庭影音娱乐系统</title>
+        <pubTime>2016-02-27T06:46:15.000Z</pubTime>
+        
+        <tag>Pi</tag>
+         
+         
+           
+             
+              <breadCrumb title="嵌入式开发" url="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2016/03/06/2016-03-06-sqlmap/</loc>
+    <lastmod>2016-10-22T15:40:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>一桩由sqlmap引发的血案</title>
+        <pubTime>2016-03-06T11:40:25.000Z</pubTime>
+        
+        <tag>sqlmap</tag>
+         
+         
+           
+             
+              <breadCrumb title="渗透入侵" url="http://hsmouc.com/categories/%E6%B8%97%E9%80%8F%E5%85%A5%E4%BE%B5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2016/03/06/2016-03-13-tor/</loc>
+    <lastmod>2016-10-22T15:40:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>使用tor隐藏自己的踪迹和深网</title>
+        <pubTime>2016-03-06T11:40:25.000Z</pubTime>
+        
+        <tag>tor</tag>
+         
+         
+           
+             
+              <breadCrumb title="渗透入侵" url="http://hsmouc.com/categories/%E6%B8%97%E9%80%8F%E5%85%A5%E4%BE%B5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2016/04/12/2016-04-12-clock/</loc>
+    <lastmod>2016-10-22T15:40:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>基于89C51的电子时钟设计</title>
+        <pubTime>2016-04-12T12:34:43.000Z</pubTime>
+        
+        <tag>C</tag>
+         
+         
+           
+             
+              <breadCrumb title="嵌入式开发" url="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2016/04/13/2016-04-13-mfc/</loc>
+    <lastmod>2016-10-22T15:40:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>基于MFC框架的贪吃蛇程序</title>
+        <pubTime>2016-04-13T07:34:43.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+        <tag>MFC</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2016/05/19/2016-05-19-Calculator/</loc>
+    <lastmod>2016-10-22T15:40:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>基于89C51的计算器设计</title>
+        <pubTime>2016-05-19T13:55:13.000Z</pubTime>
+        
+        <tag>C</tag>
+         
+         
+           
+             
+              <breadCrumb title="嵌入式开发" url="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+    
+  <url>
+    <loc>http://hsmouc.com/2015/10/01/2015-10-01-blog/</loc>
+    <lastmod>2015-12-18T11:17:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>建博客的血泪史</title>
+        <pubTime>2015-09-30T16:40:35.000Z</pubTime>
+        
+        <tag>Blog</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端开发" url="http://hsmouc.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/10/16/2015-10-15-movieshare/</loc>
+    <lastmod>2015-12-17T14:55:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>观影指南</title>
+        <pubTime>2015-10-16T00:22:25.000Z</pubTime>
+        
+        <tag>review</tag>
+         
+         
+           
+             
+              <breadCrumb title="摄影" url="http://hsmouc.com/categories/%E6%91%84%E5%BD%B1/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/10/19/2015-10-19-wifi/</loc>
+    <lastmod>2015-12-17T14:48:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>无线网络攻防初探</title>
+        <pubTime>2015-10-19T03:40:25.000Z</pubTime>
+        
+        <tag>Wi-Fi</tag>
+         
+         
+           
+             
+              <breadCrumb title="渗透入侵" url="http://hsmouc.com/categories/%E6%B8%97%E9%80%8F%E5%85%A5%E4%BE%B5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/10/23/2015-10-23-cppcode4/</loc>
+    <lastmod>2015-12-17T14:26:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>c++ primer 3</title>
+        <pubTime>2015-10-23T14:11:48.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://hsmouc.com/2015/10/15/2015-10-15-cppcode3/</loc>
+    <lastmod>2015-12-16T09:25:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>c++ primer 2.2</title>
+        <pubTime>2015-10-15T13:21:08.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/10/08/2015-10-08-cppcode1/</loc>
+    <lastmod>2015-12-15T16:36:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>c++ primer 1</title>
+        <pubTime>2015-10-08T15:23:08.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/10/09/2015-10-09-cppcode2/</loc>
+    <lastmod>2015-12-15T16:36:04.000Z</lastmod>
+    <data>
+        <display>
+        <title>c++ primer 2.1</title>
+        <pubTime>2015-10-09T15:25:11.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/10/17/2015-10-17-backtotop/</loc>
+    <lastmod>2015-12-15T16:28:24.000Z</lastmod>
+    <data>
+        <display>
+        <title>js代码实现返回顶部功能</title>
+        <pubTime>2015-10-17T02:34:08.000Z</pubTime>
+        
+        <tag>Javascript</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端开发" url="http://hsmouc.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/10/02/2015-10-02-landscape/</loc>
+    <lastmod>2015-12-15T16:14:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>晨曦</title>
+        <pubTime>2015-10-02T03:46:46.000Z</pubTime>
+        
+        <tag>Landscape</tag>
+         
+         
+           
+             
+              <breadCrumb title="摄影" url="http://hsmouc.com/categories/%E6%91%84%E5%BD%B1/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/10/04/2015-10-04-Mac/</loc>
+    <lastmod>2015-12-15T15:50:34.000Z</lastmod>
+    <data>
+        <display>
+        <title>重新认识Mac</title>
+        <pubTime>2015-10-04T10:34:38.000Z</pubTime>
+        
+        <tag>OS X</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://hsmouc.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/10/01/2015-10-01-method/</loc>
+    <lastmod>2015-12-15T15:46:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>添加图片和代码高亮的方法</title>
+        <pubTime>2015-10-01T04:01:23.000Z</pubTime>
+        
+        <tag>Blog</tag>
+         
+        <tag>Jekyll</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端开发" url="http://hsmouc.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/10/14/2015-10-14-markdown/</loc>
+    <lastmod>2015-12-15T14:45:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>使用markdown排版</title>
+        <pubTime>2015-10-14T02:40:27.000Z</pubTime>
+        
+        <tag>Blog</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端开发" url="http://hsmouc.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+</urlset>
