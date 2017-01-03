@@ -531,173 +531,6 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/23/2015-10-23-cppcode4/" itemprop="url">
-                  c++ primer 3
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-23T22:11:48+08:00" content="2015-10-23">
-              2015-10-23
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/编程学习/" itemprop="url" rel="index">
-                    <span itemprop="name">编程学习</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/23/2015-10-23-cppcode4/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/23/2015-10-23-cppcode4/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/10/23/2015-10-23-cppcode4/" class="leancloud_visitors" data-flag-title="c++ primer 3">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>3.1</li>
-<li><p>use using declaraton</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">     <span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> val = <span class="number">1</span>;val &lt;= <span class="number">10</span>;val++)</div><div class="line">     &#123;</div><div class="line">         sum+=val;</div><div class="line">     &#125;</div><div class="line">     <span class="built_in">cout</span>&lt;&lt;<span class="string">"sum="</span>&lt;&lt;sum&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">     <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>3.2</p>
-</li>
-<li>read the standard input a line at a time<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>:</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::getline;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">     <span class="built_in">string</span> line;</div><div class="line">     <span class="keyword">while</span>(getline(<span class="built_in">cin</span>,line))&#123;</div><div class="line">           <span class="built_in">cout</span>&lt;&lt;line&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="built_in">string</span> str;<span class="built_in">cin</span>&gt;&gt;str;<span class="built_in">cout</span>&lt;&lt;str&lt;&lt;<span class="built_in">endl</span>)</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>3.4</li>
-<li><p>read two strings and report whether the string are equll.if not,report which of two is larger.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>:</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">     sting str1,str2;</div><div class="line">     <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;str1&gt;&gt;str2)</div><div class="line">     &#123;</div><div class="line">        <span class="keyword">if</span>(str1==str2)</div><div class="line">          <span class="built_in">cout</span>&lt;&lt;<span class="string">"equll"</span>；</div><div class="line">        <span class="keyword">else</span></div><div class="line">          <span class="built_in">cout</span>&lt;&lt;<span class="string">"the larger string is"</span>&lt;&lt;((str1&gt;str2)?str1:str2)          </div><div class="line">     &#125;</div><div class="line">     <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>read two string and report whether that the string has the same length,if not ,report which is longer.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;str1&gt;&gt;str2)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(str1.size()==str2.size())</div><div class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"equll"</span>&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"the longer string is"</span>&lt;&lt;((str1.size()&gt;str2.size())?str1:str2)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>3.5</p>
-</li>
-<li><p>read strings from the standard input,concatenating what is read into one large string,and print the concatenated string.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">string</span> String_sum;</div><div class="line">    <span class="keyword">for</span>(<span class="built_in">string</span> buffer;<span class="built_in">cin</span>&lt;&lt;buffer;String_sum+=buffer)</div><div class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"The String_sum is"</span>&lt;&lt;String_sum&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>3.5</p>
-</li>
-<li><p>sparate adjacent input strings by a space.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">   <span class="built_in">string</span> str;</div><div class="line">   <span class="keyword">for</span>(<span class="built_in">string</span> buffer;<span class="built_in">cin</span>&gt;&gt;buffer;str+=(str.empty()?<span class="string">""</span>:<span class="string">" "</span>)+buffer);</div><div class="line">   <span class="built_in">cout</span>&lt;&lt;<span class="string">"The sum string is"</span>&lt;&lt;str&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">   <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>3.6</p>
-</li>
-<li><p>use a range for to change all the characters in a string to X.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">string</span> str;</div><div class="line">    <span class="built_in">cin</span>&lt;&lt;str;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;c : str) c = <span class="string">'X'</span>;</div><div class="line">    <span class="built_in">cout</span>&lt;&lt;str&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>3.10</p>
-</li>
-<li>reads a string of characters including punctuation and writes what was read but with the punctuation removed.<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter a string of characters including punctuation."</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">string</span> s; getline(<span class="built_in">cin</span>, s); <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>)</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : s) </div><div class="line">            <span class="keyword">if</span> (!<span class="built_in">ispunct</span>(i)) <span class="built_in">cout</span> &lt;&lt; i;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2015/10/22/2015-10-23-wifi2/" itemprop="url">
                   无线网络攻防进阶
                 </a>
@@ -1316,198 +1149,6 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/15/2015-10-15-cppcode3/" itemprop="url">
-                  c++ primer 2.2
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-15T21:21:08+08:00" content="2015-10-15">
-              2015-10-15
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/编程学习/" itemprop="url" rel="index">
-                    <span itemprop="name">编程学习</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/15/2015-10-15-cppcode3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/15/2015-10-15-cppcode3/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/10/15/2015-10-15-cppcode3/" class="leancloud_visitors" data-flag-title="c++ primer 2.2">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>2.15  </li>
-<li><p>Which of the following definitions,if any,are invalid?Why?        </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(a) int ival=1.01;  //valid</div><div class="line">(b) int &amp;rval=1.01;  //invalid</div><div class="line">(c) int &amp;rval2=ival; //valid</div><div class="line">(d) int &amp;rval3;  //invalid</div></pre></td></tr></table></figure>
-</li>
-<li><p>2.17</p>
-</li>
-<li>What does the following code print?      <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">int i, &amp;ri = i;</div><div class="line">i = 5; ri = 10;</div><div class="line">std::cout &lt;&lt; i &lt;&lt; &quot; &quot; &lt;&lt; ri &lt;&lt; std::endl;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>输出10 10(这玩意叫右值引用，所以说把值赋给了与引用绑定的对象)</p>
-<ul>
-<li>2.18</li>
-<li><p>Write code to change the value of a pointer. Write code to change the value to which the pointer points.  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">int a=0,b=1;</div><div class="line">int *p1=&amp;a,*p2=p1;</div><div class="line">p1=b;</div><div class="line">*p2=b;</div></pre></td></tr></table></figure>
-</li>
-<li><p>2.20</p>
-</li>
-<li>What does the following program do?<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">int i = 42;</div><div class="line">int *p1 = &amp;i; *p1 = *p1 * *p1;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>结果是1764 你以为把乘号放在指针符号中间我就不认识啦～</p>
-<ul>
-<li>2.21</li>
-<li>Explain each of the following definitions. Indicate whether any are illegal and, if so, why.<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">int i = 0;</div><div class="line">(a) double* dp = &amp;i;  //illegal</div><div class="line">(b) int *ip = i;  //illegal</div><div class="line">(c) int *p = &amp;i;  //legal</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>这个题呢，除了两种例外情况，其他所有指针的类型都要和它指向的类型相匹配哦。</p>
-<ul>
-<li>2.24</li>
-<li>Why is the initialization of p legal but that of lp illegal?  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">int i = 42;</div><div class="line">void *p = &amp;i;</div><div class="line">long *lp = &amp;i;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>void* 是一个可以指向类型的指针，第二个反正我是不会这么写。</p>
-<ul>
-<li>2.27</li>
-<li><p>Which of the following initializations are legal? Explain why.  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">int i = -1, &amp;r = 0;         // illegal</div><div class="line">int *const p2 = &amp;i2;        // legal</div><div class="line">const int i = -1, &amp;r = 0;   // legal</div><div class="line">const int *const p3 = &amp;i2;  // legal</div><div class="line">const int *p1 = &amp;i2;        // legal</div><div class="line">const int &amp;const r2;        // illegal</div><div class="line">const int i2 = i, &amp;r = i;   // legal</div></pre></td></tr></table></figure>
-</li>
-<li><p>2.28</p>
-</li>
-<li><p>Explain the following definitions. Identify any that are illegal.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int i, *const cp;       // illegal</div><div class="line">int *p1, *const p2;     // illegal</div><div class="line">const int ic, &amp;r = ic;  // illegal</div><div class="line">const int *const p3;    // illegal</div><div class="line">const int *p;           // legal</div></pre></td></tr></table></figure>
-</li>
-<li><p>2.30</p>
-</li>
-<li>For each of the following declarations indicate whether the object being declared has top-level or low-level const.<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">const int v2 = 0; int v1 = v2;</div><div class="line">int *p1 = &amp;v1, &amp;r1 = v1;</div><div class="line">const int *p2 = &amp;v2, *const p3 = &amp;i, &amp;r2 = v2;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>根据定义很容易判断v2是顶层const，p2是底层const，因为p3是一个指向常量的指针(point to const)，它本身又是一个常量，所以说它既是底层const，又是顶层const。</p>
-<ul>
-<li>2.40</li>
-<li><p>Write your own version of the Sales_data class.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> Sales_data&#123;</div><div class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</div><div class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> bookName;</div><div class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> bookPublish;</div><div class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> ISBN;</div><div class="line">   <span class="keyword">int</span> soldnum=<span class="number">0</span>;</div><div class="line">   <span class="keyword">double</span> revenue=<span class="number">0.0</span>;</div><div class="line">   <span class="keyword">double</span> price = <span class="number">0.0</span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>2.41</p>
-</li>
-<li>Use your Sales_data class to rewrite the exercises in § 1.5.1(p. 22), § 1.5.2(p. 24), and § 1.6(p. 25). For now, you should define your Sales_data class in the same file as your main function.</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">struct</span> Sales_data</div><div class="line">&#123;</div><div class="line">   <span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</div><div class="line">   <span class="keyword">int</span> soldnum;</div><div class="line">   <span class="keyword">double</span> revenue = <span class="number">0.0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    Sales_data book;</div><div class="line">    doublr price;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;book.bookNo&gt;&gt;book.soldnum&gt;&gt;price;</div><div class="line">    book.revenue=price*book.soldnum;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;book.bookNo&lt;&lt;<span class="string">" "</span>&lt;&lt;book.soldnum&lt;&lt;<span class="string">" "</span>&lt;&lt;book.revenue&lt;&lt;<span class="string">" "</span>&lt;&lt;price;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个应该在学谭爷爷的c的时候就会了+_+   还有一个<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">struct</span> Sale_data</div><div class="line">&#123;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</div><div class="line">    <span class="keyword">unsigned</span> units_sold = <span class="number">0</span>;</div><div class="line">    <span class="keyword">double</span> revenue = <span class="number">0.0</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    Sale_data book1, book2;</div><div class="line">    <span class="keyword">double</span> price1, price2;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; book1.bookNo &gt;&gt; book1.units_sold &gt;&gt; price1;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; book2.bookNo &gt;&gt; book2.units_sold &gt;&gt; price2;</div><div class="line">    book1.revenue = book1.units_sold * price1;</div><div class="line">    book2.revenue = book2.units_sold * price2;</div><div class="line">    <span class="keyword">if</span> (book1.bookNo == book2.bookNo)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">unsigned</span> totalCnt = book1.units_sold + book2.units_sold;</div><div class="line">        <span class="keyword">double</span> totalRevenue = book1.revenue + book2.revenue;</div><div class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; book1.bookNo &lt;&lt; <span class="string">" "</span> &lt;&lt; totalCnt &lt;&lt; <span class="string">" "</span> &lt;&lt; totalRevenue &lt;&lt; <span class="string">" "</span>;</div><div class="line">        <span class="keyword">if</span> (totalCnt != <span class="number">0</span>)</div><div class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; totalRevenue / totalCnt &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"(no sales)"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">"Data must refer to same ISBN"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;  <span class="comment">// indicate failure</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这不就是那个书店程序么……</p>
-<hr>
-<p>应该是还有一个程序的，今天来不及弄了，自定义数据结构其实第一章也提到了一些。这样子关于变量和基本类型的东西基本就搞完了。但是里面还有很多我没能搞明白的东西，《c++ primer》作为一本工具书应该是用来查阅的，写这些例题也算是慢慢把c++重新学一遍吧，加油！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2015/10/14/2015-10-14-markdown/" itemprop="url">
                   使用markdown排版
                 </a>
@@ -1650,8 +1291,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/09/2015-10-09-cppcode2/" itemprop="url">
-                  c++ primer 2.1
+                <a class="post-title-link" href="/2015/10/04/2015-10-04-Mac/" itemprop="url">
+                  重新认识Mac
                 </a>
               
             
@@ -1664,8 +1305,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-09T23:25:11+08:00" content="2015-10-09">
-              2015-10-09
+            <time itemprop="dateCreated" datetime="2015-10-04T18:34:38+08:00" content="2015-10-04">
+              2015-10-04
             </time>
           </span>
 
@@ -1678,8 +1319,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/编程学习/" itemprop="url" rel="index">
-                    <span itemprop="name">编程学习</span>
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
                   </a>
                 </span>
 
@@ -1694,8 +1335,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/10/09/2015-10-09-cppcode2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/09/2015-10-09-cppcode2/" itemprop="commentsCount"></span>
+                <a href="/2015/10/04/2015-10-04-Mac/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/04/2015-10-04-Mac/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1705,7 +1346,7 @@
 
           
           
-             <span id="/2015/10/09/2015-10-09-cppcode2/" class="leancloud_visitors" data-flag-title="c++ primer 2.1">
+             <span id="/2015/10/04/2015-10-04-Mac/" class="leancloud_visitors" data-flag-title="重新认识Mac">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1729,34 +1370,274 @@
       
         
           
-            <p>这次准备把非编程题的答案也放上去+_+<br>决定使用English来写题目以示逼格。</p>
+            <p>先附上几张照片吧</p><br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1ewpa4y4ivcj31400p012q.jpg"><br><img src="http://ww2.sinaimg.cn/mw690/005WMcFzjw1ewpa4xlolpj31400p00vk.jpg"><br><img src="http://ww2.sinaimg.cn/mw690/005WMcFzjw1ewpa4ypqupj31400p044g.jpg"><br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewpa4z7lckj30fk03vmxh.jpg"><br><p><br>这个就是传说中的Mac OS X User Edition啦，貌似Apple的新出的系统也没有这么炫酷吧+_+，今天瞎捣鼓了一下，也重新认识了下强大的OS X系统。<br><br>改变的主要有以下几点：<br><br><li>使用<a href="https://www.iterm2.com" target="_blank" rel="external">iterm2</a>和个性化配置<a href="https://github.com/robbyrussell/oh-my-zsh/tree/master/themes/" target="_blank" rel="external">oh-my-zsh。</a></li><br><li>使用<a href="https://github.com/SamRothCA/Today-Scripts/releases" target="_blank" rel="external">Today-Scripts</a>，这是一款能在通知栏运行脚本程序的软件。</li><br><li>使用<a href="https://www.alfredapp.com" target="_blank" rel="external">Alfred</a>来替换系统自带的spotlight。</li><br>iTerm 2 相比自带的 Terminal 应用，有太多优点了。例如，可以设置主题，支持画面分割，各种使用的快捷键，以及快速唤出。配合 Oh My Zsh 使用，效果相当之炫酷。<br><br>当然你首先得安装Zsh和iTerm2。至于怎么安装，直接上官网或者去Github上面clone一下人家的项目就好。<br><br>在<a href="https://github.com/robbyrussell/oh-my-zsh/tree/master/themes/" target="_blank" rel="external">Themes</a>上面下载主题。安装好以后用vim打开.zshrc文件，在配置文件中将<br><code>ZSH_THEME=&quot;robbyrussell&quot;</code>改为：<br><code>ZSH_THEME=&quot;你想改的主题&quot;</code><br>然后打开你的终端看看效果吧。<br><br></p><br><p><br>我还使用了一个新的wight小程序，名字是Today－Scripts。它可以在通知栏运行程序脚本。安装完可以自己添加代码。官方的<a href"https:="" github.com="" samrothca="" today-scripts="" wiki#"="">wiki</a>给出了很多脚本,可以根据需要自己添加，当然你也可以自己写一些脚本来做一些更加Geek的事情。</p><br><p><br>最后强烈推荐一个小程序，名为Alfred，简直黑科技。用快捷键快速调用基本可以完全告别dock和鼠标，然而我并没有购买完整版，完整版甚至可以在搜索框中执行终端的指令，售价17.99欧元。<br></p><br><p><br>ps 我还是抽时间去弄一下markdown吧，Mou已经装好，HTML排版是在是不忍吐槽了。<br></p>
 
-<p><li>2.1</li></p>
-<p><li>What are the differences between int, long, long long, and short? Between an unsigned and a signed type? Between a float and a double?</li></p>
-<p><small>c++ primer原文如下：C++ guarantees short and int is at least 16 bits, long at least 32 bits, long long at least 64 bits.<br><br>The signed can represent positive numbers, negative numbers and zero, while unsigned can only represent numbers no less than zero.<br><br>The C and C++ standards do not specify the representation of float, double and long double. It is possible that all three implemented as IEEE double-precision. Nevertheless, for most architectures (gcc, MSVC; x86, x64, ARM) float is indeed a IEEE single-precision floating point number (binary32), and double is a IEEE double-precision floating point number (binary64).</small></p>
+          
+        
+      
+    </div>
 
-<p><li>2.2</li></p>
-<p><li>To calculate a mortgage payment, what types would you use for the rate, principal, and payment? Explain why you selected each type.</li></p>
-<p><small>太水了</small></p>
+    <div>
+      
+    </div>
 
-<p><li>2.3</li></p>
-<p><li>What output will the following code produce?</li><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">unsigned u=10,u2=42;</div><div class="line">std::cout&lt;&lt;u2-u&lt;&lt;std::endl;  //32</div><div class="line">std::cout&lt;&lt;u-u2&lt;&lt;std::endl;  //4294967264</div><div class="line">int i=10,i2=42;  </div><div class="line">std::cout&lt;&lt;i2-i&lt;&lt;std::endl;  //32</div><div class="line">std::cout&lt;&lt;i-i2&lt;&lt;std::endl;  //-32</div><div class="line">std::cout&lt;&lt;i-u&lt;&lt;std::endl;  //0</div><div class="line">std::cout&lt;&lt;u-i&lt;&lt;std::endl; //0</div></pre></td></tr></table></figure></p>
-<p><li>2.8</li></p>
-<p><li>Using escape sequences, write a program to print 2M followed by a newline. Modify the program to print 2, then a tab, then an M, followed by a newline.</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line">&#123;</div><div class="line">   <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="number">2</span>&lt;&lt;<span class="string">"\115\012"</span>;</div><div class="line">   <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="number">2</span>&lt;&lt;<span class="string">"\t\115\012"</span>;</div><div class="line">   <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><li>2.9</li></p>
-<p><li>Explain the following definitions. For those that are illegal, explain what’s wrong and how to correct it.<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(a) <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; <span class="keyword">int</span> input_value;</div><div class="line">(b) <span class="keyword">int</span> i = &#123; <span class="number">3.14</span> &#125;;</div><div class="line">(c) <span class="keyword">double</span> salary = wage = <span class="number">9999.99</span>;</div><div class="line">(d) <span class="keyword">int</span> i = <span class="number">3.14</span>;</div></pre></td></tr></table></figure></li></p>
-<p></p>
-<p><small>error:expect’(‘for funtion-style cast or type construction.</small></p><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> input_value=<span class="number">0</span>;</div><div class="line"><span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;input_value;</div></pre></td></tr></table></figure><br><br><p><small>warning: implicit conversion from ‘double’ to ‘int’ changes value from 3.14 to 3</small></p><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span> i=&#123;<span class="number">3.14</span>&#125;;</div></pre></td></tr></table></figure><br><br><p><small>error: use of undeclared identifier ‘wage’</small></p><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span> wage;</div><div class="line"><span class="keyword">double</span> salary = wage = <span class="number">9999.99</span>;</div></pre></td></tr></table></figure><br><br><li>2.10</li><br><li>What are the initial values, if any, of each of the following variables?</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">std</span>::<span class="built_in">string</span> global_str;</div><div class="line"><span class="keyword">int</span> global_int;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> local_int;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> local_str;</div><div class="line">&#125;</div></pre></td></tr></table></figure><br><br><p><small>global_str is global variable, so the value is empty string. global_int is global variable, so the value is zero. local_int is a local variable which is not uninitialized, so it has a undefined value. local_str is also a local variable which is not uninitialized, but it has a value that is defined by the class. So it is empty string. </small></p>
+    <div>
+      
+    </div>
 
-<p><li>2.13</li></p>
-<p><li>What is the value of j in the following program?</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">   <span class="keyword">int</span> i = <span class="number">100</span>;</div><div class="line">   <span class="keyword">int</span> j = i;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><small>j=100</small></p>
+    <footer class="post-footer">
+      
 
-<p><li>2.14</li></p>
-<p><li>Is the following program legal? If so, what values are printed?</li><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i = <span class="number">100</span>, sum = <span class="number">0</span>;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i!=<span class="number">10</span>;++i)</div><div class="line">    &#123;sum+=i&#125;;</div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;sum&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</div></pre></td></tr></table></figure></p>
-<p><small>Output:100 45</small></p><br><br><br><br><br><p><small>剩下的东西明天再搞吧，今天好烦，名字换成2.1了，就这么任性的决定了。</small></p>
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
 
 
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/10/02/2015-10-02-landscape/" itemprop="url">
+                  晨曦
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-02T11:46:46+08:00" content="2015-10-02">
+              2015-10-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/摄影/" itemprop="url" rel="index">
+                    <span itemprop="name">摄影</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/02/2015-10-02-landscape/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/02/2015-10-02-landscape/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/10/02/2015-10-02-landscape/" class="leancloud_visitors" data-flag-title="晨曦">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p></p><h1>晨曦</h1><p></p>
+<p>早晨四点半起床爬山去做日出的延时摄影，然而效果很不理想。随手附两张照片证明到此一游<br><br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1ewn7ys7uqlj31kw11xnb1.jpg"><br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1ewn7ytpzctj31kw11x7h7.jpg"><br>对了，今天我还要去重拍这个延时，我正好来试一试在网页中外链视频的办法。<br><br>晚安<br></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/10/01/2015-10-01-method/" itemprop="url">
+                  添加图片和代码高亮的方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-01T12:01:23+08:00" content="2015-10-01">
+              2015-10-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/01/2015-10-01-method/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/01/2015-10-01-method/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/10/01/2015-10-01-method/" class="leancloud_visitors" data-flag-title="添加图片和代码高亮的方法">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1>添加代码高亮</h1>
+
+<ul>
+<li>添加代码高亮的方法十分简单，jekyll自带语法高亮功能，你可以使用Pygment或Rouge，在文章中插入一段高亮的代码需要使用下面的Liquid标记（加在代码的两头）：<br>效果就是：<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//hello world demo</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"Hello World!\n"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line">`</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>好吧，其实有个小插曲，就是关于那个Liquid标记的显示问题。我发现只要在vim里给文本增加了程序代码，就会被解释掉。我尝试了&lt;code&gt;标签发现并没有什么卵用，于是一怒之下强行用了大括号的ASCII=_=，然后解决掉了（ASCII码可以在<a href="http://www.w3school.com.cn/tags/html_ref_ascii.asp" target="_blank" rel="external">w3schoo;</a>上面查）。</p>
+<p>添加图片貌似没遇到什么奇葩问题。Github提供的免费空间也是有限的，所以不建议大家把图片存放在自己的repo里。为了解决这个问题，需要使用外链图片。貌似Google出来的教程都是让你把图片外链放在什么photobucket上，其实呢，新浪微博也是可以作为外链的啦（￣▽￣），搞一个微博相册然后上传图片吧，传完以后右键Open Image In New Tab然后复制url。在md文件里按如下方式贴图，可以设置下大小。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"max-width:xxxpx;"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"yourlink"</span><span class="attr">alt</span>=<span class="string">"xx"</span><span class="attr">title</span>=<span class="string">"xx"</span><span class="attr">width</span>=<span class="string">"xx"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+<p>然后push刷新你的网页看看吧。</p>
 
           
         
@@ -1830,7 +1711,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

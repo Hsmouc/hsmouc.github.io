@@ -3,6 +3,114 @@
 
 
     
+  <url>
+    <loc>http://hsmouc.com/2015/11/16/2015-11-16-mfc/</loc>
+    <lastmod>2017-01-03T15:18:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>MFC代码--定时器实现运动</title>
+        <pubTime>2015-11-16T13:21:08.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+        <tag>MFC</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/11/17/2015-11-17-mfc/</loc>
+    <lastmod>2017-01-03T15:17:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>MFC代码--绘制函数曲线</title>
+        <pubTime>2015-11-17T13:21:08.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+        <tag>MFC</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/11/19/2015-11-19-mfc/</loc>
+    <lastmod>2017-01-03T15:17:33.000Z</lastmod>
+    <data>
+        <display>
+        <title>MFC代码--圆上点的计算</title>
+        <pubTime>2015-11-19T04:56:48.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+        <tag>MFC</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/12/09/2015-12-08-mfc/</loc>
+    <lastmod>2017-01-03T15:16:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>MFC代码--基于对话框的计算器设计</title>
+        <pubTime>2015-12-09T08:34:43.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+        <tag>MFC</tag>
+         
+         
+           
+             
+              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hsmouc.com/2015/12/12/2015-12-12-pi/</loc>
+    <lastmod>2017-01-03T15:16:19.000Z</lastmod>
+    <data>
+        <display>
+        <title>Raspberry Pi上手体验</title>
+        <pubTime>2015-12-12T03:40:25.000Z</pubTime>
+        
+        <tag>Pi</tag>
+         
+         
+           
+             
+              <breadCrumb title="嵌入式开发" url="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://hsmouc.com/2016/12/31/2016-12-31-pi/</loc>
@@ -15,26 +123,6 @@
         <tag>Pi</tag>
          
         <tag>Python</tag>
-         
-         
-           
-             
-              <breadCrumb title="嵌入式开发" url="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://hsmouc.com/2015/12/12/2015-12-12-pi/</loc>
-    <lastmod>2016-12-31T14:27:18.000Z</lastmod>
-    <data>
-        <display>
-        <title>Raspberry Pi上手体验</title>
-        <pubTime>2015-12-12T03:40:25.000Z</pubTime>
-        
-        <tag>Pi</tag>
          
          
            
@@ -188,94 +276,6 @@
            
              
               <breadCrumb title="渗透入侵" url="http://hsmouc.com/categories/%E6%B8%97%E9%80%8F%E5%85%A5%E4%BE%B5/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://hsmouc.com/2015/11/16/2015-11-16-mfc/</loc>
-    <lastmod>2016-10-22T15:41:40.000Z</lastmod>
-    <data>
-        <display>
-        <title>MFC POJ1</title>
-        <pubTime>2015-11-16T13:21:08.000Z</pubTime>
-        
-        <tag>C++</tag>
-         
-        <tag>MFC</tag>
-         
-         
-           
-             
-              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://hsmouc.com/2015/11/17/2015-11-17-mfc/</loc>
-    <lastmod>2016-10-22T15:41:32.000Z</lastmod>
-    <data>
-        <display>
-        <title>MFC POJ2</title>
-        <pubTime>2015-11-17T13:21:08.000Z</pubTime>
-        
-        <tag>C++</tag>
-         
-        <tag>MFC</tag>
-         
-         
-           
-             
-              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://hsmouc.com/2015/11/19/2015-11-19-mfc/</loc>
-    <lastmod>2016-10-22T15:41:28.000Z</lastmod>
-    <data>
-        <display>
-        <title>MFC POJ3</title>
-        <pubTime>2015-11-19T04:56:48.000Z</pubTime>
-        
-        <tag>C++</tag>
-         
-        <tag>MFC</tag>
-         
-         
-           
-             
-              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://hsmouc.com/2015/12/09/2015-12-08-mfc/</loc>
-    <lastmod>2016-10-22T15:41:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>MFC POJ4</title>
-        <pubTime>2015-12-09T08:34:43.000Z</pubTime>
-        
-        <tag>C++</tag>
-         
-        <tag>MFC</tag>
-         
-         
-           
-             
-              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
           
         </display>
     </data>
@@ -549,86 +549,6 @@
     </url>
 
     
-  <url>
-    <loc>http://hsmouc.com/2015/10/23/2015-10-23-cppcode4/</loc>
-    <lastmod>2015-12-17T14:26:47.000Z</lastmod>
-    <data>
-        <display>
-        <title>c++ primer 3</title>
-        <pubTime>2015-10-23T14:11:48.000Z</pubTime>
-        
-        <tag>C++</tag>
-         
-         
-           
-             
-              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-    
-  <url>
-    <loc>http://hsmouc.com/2015/10/15/2015-10-15-cppcode3/</loc>
-    <lastmod>2015-12-16T09:25:09.000Z</lastmod>
-    <data>
-        <display>
-        <title>c++ primer 2.2</title>
-        <pubTime>2015-10-15T13:21:08.000Z</pubTime>
-        
-        <tag>C++</tag>
-         
-         
-           
-             
-              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://hsmouc.com/2015/10/08/2015-10-08-cppcode1/</loc>
-    <lastmod>2015-12-15T16:36:20.000Z</lastmod>
-    <data>
-        <display>
-        <title>c++ primer 1</title>
-        <pubTime>2015-10-08T15:23:08.000Z</pubTime>
-        
-        <tag>C++</tag>
-         
-         
-           
-             
-              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://hsmouc.com/2015/10/09/2015-10-09-cppcode2/</loc>
-    <lastmod>2015-12-15T16:36:04.000Z</lastmod>
-    <data>
-        <display>
-        <title>c++ primer 2.1</title>
-        <pubTime>2015-10-09T15:25:11.000Z</pubTime>
-        
-        <tag>C++</tag>
-         
-         
-           
-             
-              <breadCrumb title="编程学习" url="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>http://hsmouc.com/2015/10/17/2015-10-17-backtotop/</loc>
