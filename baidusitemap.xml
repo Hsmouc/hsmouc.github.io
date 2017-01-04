@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://hsmouc.com/2016/03/06/2016-03-06-sqlmap/</loc>
+    <lastmod>2017-01-04T04:43:19.000Z</lastmod>
+    <data>
+        <display>
+        <title>利用sqlmap渗透某大学BBS</title>
+        <pubTime>2016-03-06T11:40:25.000Z</pubTime>
+        
+        <tag>sqlmap</tag>
+         
+         
+           
+             
+              <breadCrumb title="渗透入侵" url="http://hsmouc.com/categories/%E6%B8%97%E9%80%8F%E5%85%A5%E4%BE%B5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://hsmouc.com/2015/11/16/2015-11-16-mfc/</loc>
     <lastmod>2017-01-03T15:18:25.000Z</lastmod>
     <data>
@@ -378,26 +398,6 @@
            
              
               <breadCrumb title="嵌入式开发" url="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://hsmouc.com/2016/03/06/2016-03-06-sqlmap/</loc>
-    <lastmod>2016-10-22T15:40:47.000Z</lastmod>
-    <data>
-        <display>
-        <title>一桩由sqlmap引发的血案</title>
-        <pubTime>2016-03-06T11:40:25.000Z</pubTime>
-        
-        <tag>sqlmap</tag>
-         
-         
-           
-             
-              <breadCrumb title="渗透入侵" url="http://hsmouc.com/categories/%E6%B8%97%E9%80%8F%E5%85%A5%E4%BE%B5/"/>
           
         </display>
     </data>
