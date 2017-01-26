@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://hsmouc.com/about/index.html</loc>
+    
+    <lastmod>2017-01-26T04:44:11.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://hsmouc.com/2017/01/24/2017-01-24-summary/</loc>
     
     <lastmod>2017-01-24T00:44:01.000Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://hsmouc.com/freedom/index.html</loc>
     
     <lastmod>2017-01-21T11:45:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://hsmouc.com/about/index.html</loc>
-    
-    <lastmod>2017-01-08T11:27:45.000Z</lastmod>
     
   </url>
   
