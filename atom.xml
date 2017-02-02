@@ -647,11 +647,11 @@
   </entry>
   
   <entry>
-    <title>利用sqlmap渗透某大学BBS</title>
+    <title>Sqlmap部分参数说明</title>
     <link href="http://hsmouc.com/2016/03/06/2016-03-06-sqlmap/"/>
     <id>http://hsmouc.com/2016/03/06/2016-03-06-sqlmap/</id>
     <published>2016-03-06T11:40:25.000Z</published>
-    <updated>2017-01-04T04:43:19.000Z</updated>
+    <updated>2017-02-02T10:56:28.000Z</updated>
     
     <content type="html"><![CDATA[<ul>
 <li>sqlmap是一个开源的自动化渗透测试工具，被广泛用于发现SQL注入漏洞。sqlmap的使用几乎毫无技术含量。不过，对于一个杀手来说，他使用的刀只需要保证在任何情况下可靠还有一击毙命即可，至于刀上是否有繁复的装饰和是否仿制都是次要的。sqlmap就是注入的利器，可以高效的审计安全风险。<a id="more"></a> 

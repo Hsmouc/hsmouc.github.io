@@ -3,6 +3,26 @@
 
 
     
+  <url>
+    <loc>http://hsmouc.com/2016/03/06/2016-03-06-sqlmap/</loc>
+    <lastmod>2017-02-02T10:56:28.000Z</lastmod>
+    <data>
+        <display>
+        <title>Sqlmap部分参数说明</title>
+        <pubTime>2016-03-06T11:40:25.000Z</pubTime>
+        
+        <tag>sqlmap</tag>
+         
+         
+           
+             
+              <breadCrumb title="渗透入侵" url="http://hsmouc.com/categories/%E6%B8%97%E9%80%8F%E5%85%A5%E4%BE%B5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://hsmouc.com/2017/01/24/2017-01-24-summary/</loc>
@@ -25,26 +45,6 @@
 
     
     
-    
-  <url>
-    <loc>http://hsmouc.com/2016/03/06/2016-03-06-sqlmap/</loc>
-    <lastmod>2017-01-04T04:43:19.000Z</lastmod>
-    <data>
-        <display>
-        <title>利用sqlmap渗透某大学BBS</title>
-        <pubTime>2016-03-06T11:40:25.000Z</pubTime>
-        
-        <tag>sqlmap</tag>
-         
-         
-           
-             
-              <breadCrumb title="渗透入侵" url="http://hsmouc.com/categories/%E6%B8%97%E9%80%8F%E5%85%A5%E4%BE%B5/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>http://hsmouc.com/2015/11/16/2015-11-16-mfc/</loc>
