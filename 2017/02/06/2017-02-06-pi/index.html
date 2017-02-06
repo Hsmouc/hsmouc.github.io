@@ -1,0 +1,883 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="梦的小窝" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="在这篇文章里我用Python实现了一个简单的互补滤波器来做角度融合，实现姿态解算。用到的传感器是MPU-6050，使用树莓派的I2C总线读取传感器的底层数据。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="角度融合算法">
+<meta property="og:url" content="http://hsmouc.com/2017/02/06/2017-02-06-pi/index.html">
+<meta property="og:site_name" content="梦的小窝">
+<meta property="og:description" content="在这篇文章里我用Python实现了一个简单的互补滤波器来做角度融合，实现姿态解算。用到的传感器是MPU-6050，使用树莓派的I2C总线读取传感器的底层数据。">
+<meta property="og:image" content="http://ok4omea8a.bkt.clouddn.com/IMG_5309.JPG">
+<meta property="og:image" content="http://ok4omea8a.bkt.clouddn.com/MPU6050.jpg">
+<meta property="og:image" content="http://ok4omea8a.bkt.clouddn.com/plot1.jpg">
+<meta property="og:updated_time" content="2017-02-06T04:42:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="角度融合算法">
+<meta name="twitter:description" content="在这篇文章里我用Python实现了一个简单的互补滤波器来做角度融合，实现姿态解算。用到的传感器是MPU-6050，使用树莓派的I2C总线读取传感器的底层数据。">
+<meta name="twitter:image" content="http://ok4omea8a.bkt.clouddn.com/IMG_5309.JPG">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://hsmouc.com/2017/02/06/2017-02-06-pi/"/>
+
+
+  <title> 角度融合算法 | 梦的小窝 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-71542166-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">梦的小窝</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            友链
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                角度融合算法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-06T11:16:18+08:00" content="2017-02-06">
+              2017-02-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程学习/" itemprop="url" rel="index">
+                    <span itemprop="name">编程学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/06/2017-02-06-pi/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/06/2017-02-06-pi/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/02/06/2017-02-06-pi/" class="leancloud_visitors" data-flag-title="角度融合算法">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在这篇文章里我用Python实现了一个简单的互补滤波器来做角度融合，实现姿态解算。用到的传感器是<a href="https://www.invensense.com/products/motion-tracking/6-axis/mpu-6050/" target="_blank" rel="external">MPU-6050</a>，使用树莓派的I2C总线读取传感器的底层数据。</p>
+<a id="more"></a>
+<ul>
+<li>这篇文章的大部分内容来源于我这学期的期末作业，题目是<em>平衡车角度融合算法探究</em>。当时的方案是：<strong>单片机+模拟加速度陀螺仪传感器，C语言单片机编程</strong>。考虑到当时没有上位机所以无法观察滤波的效果，所以我尝试用<code>smbus</code>使用I2C总线读取数据，用<code>matplotlib</code>绘图检验滤波器的性能。</li>
+</ul>
+<h3 id="系统概述"><a href="#系统概述" class="headerlink" title="系统概述"></a>系统概述</h3><ul>
+<li>Raspberry 3 Model B ／ Ubuntu 16.04（ARM）</li>
+<li>MPU-6050</li>
+</ul>
+<p><img src="http://ok4omea8a.bkt.clouddn.com/IMG_5309.JPG" alt="系统图"></p>
+<p>MPU-6050和树莓派之间通过I2C总线相连，并由PI供电(5V)。</p>
+<p><img src="http://ok4omea8a.bkt.clouddn.com/MPU6050.jpg" alt="MPU-6050"></p>
+<h3 id="角度融合算法"><a href="#角度融合算法" class="headerlink" title="角度融合算法"></a>角度融合算法</h3><h4 id="加速度计"><a href="#加速度计" class="headerlink" title="加速度计"></a>加速度计</h4><blockquote>
+<p>加速度计测量的是加速度，为什么可以测量角度呢？   </p>
+</blockquote>
+<p>加速度计主要测量的是测量设备的受力情况，也就是三轴运动情况，设计原理适合于空间运动判断。我们把加速度计想象成一个正方体盒子，里面放着一颗直径和盒子边长相等的球体。假设我们把盒子放在水平桌面上，那么仅有垂直方向会受到球的挤压，这时传感器对应垂直方向的接口就会输出相对应的电压。也就是说，加速度传感器是一种力传感器。<br>既然加速度计可以感应轴上的压力大小，那么牛顿早在400年前提出得力学定律就可以派上用场了。我们现在要计算倾斜角。三轴可以确定一个空间位置，计算任意一个平面与夹角并不复杂，这里我只算一个轴的角度，所以我们只需要知道加速度计上两个方向的分力即可。</p>
+<h4 id="陀螺仪"><a href="#陀螺仪" class="headerlink" title="陀螺仪"></a>陀螺仪</h4><p>陀螺仪的作用是测角速度，我们很自然的联想到，若我这个角速度进行积分运算，就可以得到我们需要的角度了。</p>
+<h4 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h4><p>有资料提到陀螺仪的数据需要除以131，原因是芯片资料上有这个参数:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align:center">Conditions</th>
+<th style="text-align:right">TYP</th>
+<th style="text-align:right">Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sensitivity Scale Factor</td>
+<td style="text-align:center">FS_SEL=0</td>
+<td style="text-align:right">131</td>
+<td style="text-align:right">LSB</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:center">FS_SEL=1</td>
+<td style="text-align:right">65.5</td>
+<td style="text-align:right">LSB</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:center">FS_SEL=2</td>
+<td style="text-align:right">32.8</td>
+<td style="text-align:right">LSB</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:center">FS_SEL=3</td>
+<td style="text-align:right">16.4</td>
+<td style="text-align:right">LSB</td>
+</tr>
+</tbody>
+</table>
+<p>这里参考的文章是<a href="http://www.geek-workshop.com/thread-10172-1-1.html" target="_blank" rel="external">MPU6050数据采集及其意义和滤波</a>，其主要意义在于选择合适的量程。</p>
+<h4 id="为何要使用角度融合算法"><a href="#为何要使用角度融合算法" class="headerlink" title="为何要使用角度融合算法"></a>为何要使用角度融合算法</h4><p>你可能会问加速度计不是可以计算角度嘛，那为什么还要多此一举使用陀螺仪呢？要解决这个问题，首先要对这两种传感器有更深刻的理解。<br>被测物体在运动过程中难免会发生一些抖动，还是联想上文提到的盒子的模型，试想，若你的盒子在不停的振动，六个面的压力会如何变化？也就是说，在我们使用加速度传感器求角度的时候结果中包含了一些噪声，且加速度计动态响应慢。再看陀螺仪，这种传感器是用来测量角速度的，我们对它积分可以求出角度。然而由于自身的硬件特性，陀螺仪存在温度漂移，陀螺仪计算出的角度误差会随时间增大，我们同样不希望出现这种结果。</p>
+<h3 id="简单实用的互补滤波"><a href="#简单实用的互补滤波" class="headerlink" title="简单实用的互补滤波"></a>简单实用的互补滤波</h3><h3 id="设计实现"><a href="#设计实现" class="headerlink" title="设计实现"></a>设计实现</h3><h4 id="简单却实用的互补滤波"><a href="#简单却实用的互补滤波" class="headerlink" title="简单却实用的互补滤波"></a>简单却实用的互补滤波</h4><ul>
+<li>互补滤波的理论基础  </li>
+</ul>
+<p>首先我们先来复习一下两个概念：</p>
+<ol>
+<li>低通滤波器</li>
+<li>高通滤波器</li>
+<li>带通滤波器  </li>
+</ol>
+<blockquote>
+<p>低通滤波器（英语：Low-pass filter）容许低频信号通过，但减弱（或减少）频率高于截止频率的信号的通过。’低’和’高’频率的含义，是相对于滤波器设计者所选择的截止频率而言的。<br>高通滤波器则相反，而带通滤波器则是高通滤波器和低通滤波器的组合。</p>
+</blockquote>
+<p>互补滤波器其实就是一种带通滤波器的变种。</p>
+<ul>
+<li>积分器  </li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">angle += gyro*dt;</div></pre></td></tr></table></figure>
+<p>其中，<code>angle</code>为角度，<code>gyro</code>为陀螺仪角速度，<code>dt</code>为计算周期。<code>gyro*dt</code> 得到计算周期时间段内通过的角度，通过对该角度的积分（不断累加），得到系统运行以来的角度。  </p>
+<ul>
+<li>低通滤波器 </li>
+</ul>
+<p>低通滤波器的目标是过滤掉短期波动，让长期变化得以保留。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">angle = (<span class="number">0.98</span>)*angle_last + (<span class="number">0.02</span>)*x_acc;</div></pre></td></tr></table></figure>
+<p>其中，<code>angle</code>为当前角度，<code>angle_last</code>为前一次角度，<code>x_acc</code>为当前加速度计换算后的角度值。对<code>x_acc</code>进行低通滤波，让加速度计的长期变化得以保留，<code>angle</code>能追踪加速度计的长期变化。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>首先可以用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">i2cdetect -y <span class="number">1</span> <span class="comment">#0</span></div></pre></td></tr></table></figure>
+<p>来判断芯片的地址，MPU-6050的芯片地址是<code>0x68</code> ，用Python实现I2C 读写需要使用<a href="https://pypi.python.org/pypi/smbus-cffi/0.5.1" target="_blank" rel="external">smbus-cffi</a>，按照官网的教程安装即可。加速度计和陀螺仪的寄存器地址可以在<a href="http://www.invensense.com/wp-content/uploads/2015/02/MPU-6000-Register-Map1.pdf" target="_blank" rel="external">MPU-6050 Register Map and Descriptions - InvenSense</a>查到。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> smbus</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">import</span> math</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"></div><div class="line">bus = smbus.SMBus(<span class="number">1</span>)</div><div class="line"></div><div class="line">address = <span class="number">0x68</span></div><div class="line"></div><div class="line">ACCEL_XOUT_H_Addr = <span class="number">0x3B</span></div><div class="line">ACCEL_XOUT_L_Addr = <span class="number">0x3C</span></div><div class="line">ACCEL_ZOUT_H_Addr = <span class="number">0x3F</span></div><div class="line">ACCEL_ZOUT_L_Addr = <span class="number">0x40</span></div><div class="line">GYRO_YOUT_H_Addr = <span class="number">0x45</span></div><div class="line">GYRO_YOUT_L_Addr = <span class="number">0x46</span></div><div class="line"></div><div class="line">accel = <span class="number">0</span></div><div class="line">angle = <span class="number">0</span></div><div class="line">count = <span class="number">0</span></div><div class="line">PI = <span class="number">3.1415926</span></div><div class="line">Ydata_1 = []</div><div class="line">Ydata_2 = []</div><div class="line"></div><div class="line"><span class="comment"># 传感器数据处理</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sensor_data</span><span class="params">(addr_L,addr_H)</span>:</span></div><div class="line">        data_L = bus.read_byte_data(address,addr_L)</div><div class="line">        data_H = bus.read_byte_data(address,addr_H)</div><div class="line">        <span class="keyword">if</span> data_H &gt; <span class="number">128</span>:</div><div class="line">                <span class="keyword">return</span> (data_H - <span class="number">256</span>) * <span class="number">255</span> + data_L</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">return</span> data_H * <span class="number">255</span> + data_L</div><div class="line"></div><div class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">                accel = atan2(sensor_data(ACCEL_XOUT_L_Addr,ACCEL_XOUT_H_Addr),sensor_data(ACCEL_ZOUT_L_Addr,ACCEL_ZOUT_H_Addr))*<span class="number">180</span>/PI</div><div class="line">                angle = <span class="number">0.95</span>*(angle + <span class="number">0.1</span> * sensor_data(GYRO_YOUT_L_Addr,GYRO_YOUT_H_Addr)/<span class="number">131</span>)+<span class="number">0.05</span>*accel</div><div class="line">                count = count + <span class="number">1</span></div><div class="line">                time.sleep(<span class="number">0.1</span>) <span class="comment">#采样周期为0.1s</span></div><div class="line">        <span class="keyword">except</span> IOError: <span class="comment">#抛IOError异常不去管它继续执行</span></div><div class="line">                <span class="keyword">continue</span> </div><div class="line">        <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">print</span> angle,gyro</div><div class="line">                Ydata_1.append(accel)</div><div class="line">                Ydata_2.append(angle)</div><div class="line">                <span class="keyword">if</span> count == <span class="number">100</span>: <span class="comment">#采样100次</span></div><div class="line">                        <span class="keyword">break</span>  </div><div class="line"></div><div class="line">plt.plot(Ydata_1)</div><div class="line">plt.plot(Ydata_2) </div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p>程序运行的结果如下：<br><img src="http://ok4omea8a.bkt.clouddn.com/plot1.jpg" alt="角度曲线">绿色的曲线是加速度计得到的角度，而蓝色的线是经过互补滤波后得到的角度。从这个曲线上可以看出来互补滤波器的效果还是比较好的。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>我在最开始的时候并不明白所谓的卡尔曼滤波为何物，不过把它当作一个黑盒用也没有出现什么奇怪的问题。直到今天我仍然不懂卡尔曼滤波的原理，不过既然我们会互补滤波，那么为什么不用呢？仅仅需要一行代码，效果和卡尔曼滤波几乎完全相同，计算量要比卡尔曼滤波小的多。不过以后的专业课肯定会讲到各种滤波器，卡尔曼滤波这个坑估计迟早得跳吧(｡ì _ í｡)</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag">#Python</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/24/2017-01-24-summary/" rel="next" title="大三上学期总结">
+                <i class="fa fa-chevron-left"></i> 大三上学期总结
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/06/2017-02-06-pi/"
+           data-title="角度融合算法" data-url="http://hsmouc.com/2017/02/06/2017-02-06-pi/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww4.sinaimg.cn/large/005WMcFzjw1f91geowlt0j31d91d9qnl.jpg"
+               alt="Hsmouc" />
+          <p class="site-author-name" itemprop="name">Hsmouc</p>
+          <p class="site-description motion-element" itemprop="description">乱七八糟的个人学习生活记录</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统概述"><span class="nav-number">1.</span> <span class="nav-text">系统概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#角度融合算法"><span class="nav-number">2.</span> <span class="nav-text">角度融合算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#加速度计"><span class="nav-number">2.1.</span> <span class="nav-text">加速度计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#陀螺仪"><span class="nav-number">2.2.</span> <span class="nav-text">陀螺仪</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据处理"><span class="nav-number">2.3.</span> <span class="nav-text">数据处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为何要使用角度融合算法"><span class="nav-number">2.4.</span> <span class="nav-text">为何要使用角度融合算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单实用的互补滤波"><span class="nav-number">3.</span> <span class="nav-text">简单实用的互补滤波</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计实现"><span class="nav-number">4.</span> <span class="nav-text">设计实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单却实用的互补滤波"><span class="nav-number">4.1.</span> <span class="nav-text">简单却实用的互补滤波</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">5.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">6.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsmouc</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hsmouc"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("kKHlf4qV0AFaIXctFqFjGXIG-gzGzoHsz", "iIyqUvbAEGJmFXnlc7mAcSAg");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
