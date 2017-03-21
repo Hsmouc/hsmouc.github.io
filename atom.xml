@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hsmouc.com/"/>
-  <updated>2017-02-06T04:42:41.000Z</updated>
+  <updated>2017-03-21T08:15:50.000Z</updated>
   <id>http://hsmouc.com/</id>
   
   <author>
@@ -14,6 +14,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>热电偶学习笔记--原理与使用</title>
+    <link href="http://hsmouc.com/2017/03/21/2017-03-21-thermocouple/"/>
+    <id>http://hsmouc.com/2017/03/21/2017-03-21-thermocouple/</id>
+    <published>2017-03-21T03:36:18.000Z</published>
+    <updated>2017-03-21T08:15:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>这学期<strong>过程控制</strong>课介绍了热电偶的相关知识，相对于<strong>检测技术</strong>课程更偏向于热电偶的实际应用。这篇文章将会介绍热电偶的基本原理和使用方法，介绍如何使用K型热电偶的正向/反向公式，并用MATLAB绘制SEEBACK曲线。</p>
+<a id="more"></a>
+<h2 id="热电偶原理简介"><a href="#热电偶原理简介" class="headerlink" title="热电偶原理简介"></a>热电偶原理简介</h2><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><ul>
+<li>以下内容参考 <em>过程控制系统/清华大学出版社</em></li>
+</ul>
+<blockquote>
+<p>热电偶是一种感温元件，是一次仪表，它直接测量温度，并把温度信号转换成电动势信号。热电偶是由两根不同的导体组成的，当两端温度不同时就会有<strong>热电势</strong>产生。</p>
+</blockquote>
+<p><em>P.S：</em>热电势包括接触电势和温差电势两部分，由于温差电势比接触电势小得多，故主要考虑接触电势。<br><em>P.S：</em>接触电势是指两种不同材质的导体A，B接触时两边自由电子的密度不同，在交界面上产生电子相互扩散的电势。</p>
+<h3 id="三个结论"><a href="#三个结论" class="headerlink" title="三个结论"></a>三个结论</h3><ul>
+<li>热电偶的两个热电极必须是两种不同材料的均质导体，否则热电偶回路的总电动势为零。</li>
+<li>热电偶两接合点的温度必须不等，否则热电偶回路的总热电势为零。</li>
+<li>热电偶A，B产生的热电势只与两个接点温度有关，而与中间温度无关，与热电偶的材料有关，和热电偶的尺寸形状无关。</li>
+</ul>
+<h2 id="热电偶的应用"><a href="#热电偶的应用" class="headerlink" title="热电偶的应用"></a>热电偶的应用</h2><p>下面这张图是一个较为完整的热电偶测温系统，是我根据课堂笔记在<a href="https://www.draw.io" target="_blank" rel="external">Draw App</a>上面绘制的。这张图漏画了一个低通滤波器，主要是为了解决10KHz的射频干扰问题。<br><img src="http://ok4omea8a.bkt.clouddn.com/thermocouple.jpg" alt="测温系统"></p>
+<h3 id="补偿导线"><a href="#补偿导线" class="headerlink" title="补偿导线"></a>补偿导线</h3><p>因为热电偶一般都是贵金属，在远距离测量时为了节约成本所以需要补偿导线。补偿导线在一段温度范围内与所匹配的热电偶热电势标称值相同，而且价格比热电偶本身便宜很多，延长了热电偶的冷端。使用补偿导线的理论基础是中间温度定律。</p>
+<h3 id="滤波及放大器"><a href="#滤波及放大器" class="headerlink" title="滤波及放大器"></a>滤波及放大器</h3><ul>
+<li>上图测温系统应该有两处滤波，第一处在运放之前，使用低通滤波器消除射频干扰，经由运放后需要滤波器滤去工频50Hz的杂波干扰。</li>
+<li>使用的差分放大器需要满足<strong>高输入阻抗</strong>和<strong>低偏置电流</strong>两个特点。（大高输入阻抗可以有效减小流过热电偶的电流，这样就避免了热电偶自发热对测温准确度的影响）</li>
+</ul>
+<h3 id="热电偶分度表和正-反向公式使用"><a href="#热电偶分度表和正-反向公式使用" class="headerlink" title="热电偶分度表和正/反向公式使用"></a>热电偶分度表和正/反向公式使用</h3><p>首先推荐一个很有用的网站<a href="https://srdata.nist.gov/its90/download/download.html" target="_blank" rel="external">NIST</a>在这里可以查看各种型号的热电偶温度与电压的对应表。表格的样子如下：<br><img src="http://ok4omea8a.bkt.clouddn.com/table.png" alt="表格"><br>网站还给出了两个公式如下：<br><img src="http://ok4omea8a.bkt.clouddn.com/Function.png" alt="公式"><br>我们可以用MATLAB绘制“温度-输出热电势”，“输出热电势-温度”，“赛贝克(seeback)系数曲线”曲线。下面是MATLAB程序：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">a0 =  <span class="number">0.118597600000E+00</span></div><div class="line">a1 = <span class="number">-0.118343200000E-03</span></div><div class="line">a2 =  <span class="number">0.126968600000E+03</span></div><div class="line">c_i_1 = [<span class="number">0.000000000000E+00</span> <span class="number">0.394501280250E-01</span> <span class="number">0.236223735980E-04</span> <span class="number">-0.328589067840E-06</span> <span class="number">-0.499048287770E-08</span> <span class="number">-0.675090591730E-10</span> <span class="number">-0.574103274280E-12</span> <span class="number">-0.310888728940E-14</span> <span class="number">-0.104516093650E-16</span> <span class="number">-0.198892668780E-19</span> <span class="number">-0.163226974860E-22</span>]</div><div class="line">c_i_2 = [<span class="number">-0.176004136860E-01</span> <span class="number">0.389212049750E-01</span> <span class="number">0.185587700320E-04</span> <span class="number">-0.994575928740E-07</span> <span class="number">0.318409457190E-09</span> <span class="number">-0.560728448890E-12</span> <span class="number">0.560750590590E-15</span> <span class="number">-0.320207200030E-18</span> <span class="number">0.971511471520E-22</span> <span class="number">-0.121047212750E-25</span>]</div><div class="line">t_1 = <span class="number">-270</span>:<span class="number">0</span></div><div class="line">t_2 = <span class="number">1</span>:<span class="number">1370</span></div><div class="line">E_1 = <span class="number">0</span></div><div class="line">E_2 = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> i = <span class="number">1</span>:length(c_i_1)</div><div class="line">    E_1 = E_1 + c_i_1(i) * t_1.^(i<span class="number">-1</span>)</div><div class="line">end</div><div class="line"></div><div class="line"><span class="keyword">for</span> i = <span class="number">1</span>:length(c_i_2)</div><div class="line">    E_2 = E_2 + c_i_2(i) * t_2.^(i<span class="number">-1</span>)</div><div class="line">end</div><div class="line"></div><div class="line">E_2 = E_2 + a0*exp(a1 * (t_2 - a2).^<span class="number">2</span>)</div><div class="line">t = [t_1 t_2]</div><div class="line">E = [E_1 E_2]</div><div class="line"></div><div class="line"><span class="keyword">for</span> i = <span class="number">1</span>:length(E)<span class="number">-1</span></div><div class="line">    err(i) = E(i+<span class="number">1</span>)-E(i)</div><div class="line">end</div><div class="line"></div><div class="line">T = <span class="number">-270</span>:<span class="number">1369</span></div><div class="line">plot(T,err)</div><div class="line">plot(t,E)</div><div class="line">xlabel(<span class="string">'TEMPERATURE(?C)'</span>)</div><div class="line">ylabel(<span class="string">'SEEBECK COEFFICIENT -?V/?C'</span>)</div><div class="line">title(<span class="string">'THERMOCUPLE SEEBECK COEFFICIENT VERSUS TEMPERATURE'</span>)</div></pre></td></tr></table></figure>
+<p>以上是正向公式的使用和绘制SEEBACK曲线，下面是反向公式的使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">d_i = [-1.318058E+02 4.830222E+01 -1.646031E+00 5.464731E-02 -9.650715E-04 8.802193E-06 -3.110810E-08 0.000000E+00 0.000000E+00 0.000000E+00]</div><div class="line">t = 0</div><div class="line">E = 20.644:0.1:54.886</div><div class="line">E = 31.213</div><div class="line">for i = 1:10</div><div class="line">    t = t + d_i(i)*E.^(i-1) </div><div class="line">end</div><div class="line">plot(E,t)</div></pre></td></tr></table></figure>
+<p>这里给出的电压区间是<code>20.644V~54.886V</code>，其他区间程序同理，相应地更改<code>d_i</code>就可以了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这学期&lt;strong&gt;过程控制&lt;/strong&gt;课介绍了热电偶的相关知识，相对于&lt;strong&gt;检测技术&lt;/strong&gt;课程更偏向于热电偶的实际应用。这篇文章将会介绍热电偶的基本原理和使用方法，介绍如何使用K型热电偶的正向/反向公式，并用MATLAB绘制SEEBACK曲线。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="传感器" scheme="http://hsmouc.com/categories/%E4%BC%A0%E6%84%9F%E5%99%A8/"/>
+    
+    
+      <category term="MATLAB" scheme="http://hsmouc.com/tags/MATLAB/"/>
+    
+      <category term="Sensor" scheme="http://hsmouc.com/tags/Sensor/"/>
+    
+  </entry>
   
   <entry>
     <title>角度融合算法</title>
@@ -1141,69 +1190,6 @@ GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<sp
       &lt;h2 id=&quot;MFC的作业&quot;&gt;&lt;a href=&quot;#MFC的作业&quot; class=&quot;headerlink&quot; title=&quot;MFC的作业&quot;&gt;&lt;/a&gt;MFC的作业&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;编写一个计算器程序。使用该计算机使用编辑控件直接输入数据，并有加减乘除、平方根和倒数运算功能。&lt;/li&gt;
 &lt;li&gt;简要分析:用AppWizard生成一个基于对话框的应用程序框架，编辑对话框模版资源，添加一个编辑控件，添加8个按钮，设置下ID和Caption。
-    
-    </summary>
-    
-      <category term="编程学习" scheme="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="C++" scheme="http://hsmouc.com/tags/C/"/>
-    
-      <category term="MFC" scheme="http://hsmouc.com/tags/MFC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MFC代码--圆上点的计算</title>
-    <link href="http://hsmouc.com/2015/11/19/2015-11-19-mfc/"/>
-    <id>http://hsmouc.com/2015/11/19/2015-11-19-mfc/</id>
-    <published>2015-11-19T04:56:48.000Z</published>
-    <updated>2017-01-03T15:17:33.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="MFC的作业"><a href="#MFC的作业" class="headerlink" title="MFC的作业"></a>MFC的作业</h2><ul>
-<li>设计基于单文档/视图结构的程序。绘制2条圆形轨道，然后设计2个卫星（圆形代替），使其分别沿内外轨迹匀速行走。轨道路宽度、半径、颜色由轨道设定菜单加对话框指定；有开始、结束菜单；有高速、中速、低速三个菜单控制卫星速度；卫星颜色、标号由按下鼠标左键加对话框指定。</li>
-<li>简单分析：两个圆形轨道和卫星应该是用Ellipse()函数实现，匀速行走则是通过定时器来实现，至于菜单对话框什么的都不是很复杂。说白了这个题目并没有什么难度，只是说考察的点很多，比较繁琐。<a id="more"></a> 
-<h3 id="设计菜单"><a href="#设计菜单" class="headerlink" title="设计菜单"></a>设计菜单</h3>菜单包括:Status(Start/Stop)、Speed(High/Medium/Low)、Preferences(Width/Radii/Color)。<br>还有添加一个鼠标左键消息处理函数。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void CSatelliteView::OnStart() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	SetTimer(1,100,NULL);	&#125;void CSatelliteView::OnStop() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	KillTimer(1);	&#125;void CSatelliteView::OnHigh() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_speed = 1.0;	&#125;void CSatelliteView::OnMedium() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_speed = 0.5;	&#125;void CSatelliteView::OnLow() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_speed = 0.1;&#125;void CSatelliteView::OnWidth() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	Width dlgInput;	int nRet = dlgInput.DoModal();	if(nRet == IDOK)	&#123;		pDoc-&gt;m_widthDoc=dlgInput.m_width;		pDoc-&gt;m_widthDocx=dlgInput.m_widthx;		Invalidate();	&#125;	&#125;void CSatelliteView::OnRadii() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	Radii dlgInput;	int nRet = dlgInput.DoModal();	if(nRet == IDOK)	&#123;		pDoc-&gt;m_radiiDoc=dlgInput.m_radii;		pDoc-&gt;m_radiiDocx=dlgInput.m_radiix;		Invalidate();	&#125;		&#125;void CSatelliteView::OnColor() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	CColorDialog dlg;	if(dlg.DoModal() == IDOK)	&#123;		pDoc-&gt;m_orbitColor=dlg.GetColor();		Invalidate();	&#125;	&#125;void CSatelliteView::OnLButtonDown(UINT nFlags, CPoint point) &#123;	// TODO: Add your message handler code here and/or call default	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	CColorDialog dlg;	if(dlg.DoModal() == IDOK)	&#123;		pDoc-&gt;m_satelliteColor=dlg.GetColor();		Invalidate();	&#125;	CView::OnLButtonDown(nFlags, point);&#125;void CSatelliteView::OnTimer(UINT nIDEvent) &#123;	// TODO: Add your message handler code here and/or call default	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_angle += pDoc-&gt;m_speed;	Invalidate();	CView::OnTimer(nIDEvent);&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>代码并不是特别的复杂，只是比较繁琐，至于创建类，声明变量之类的就不一一赘述了。  </p>
-<h3 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h3><p>我做了一个响应式的布局，思路大概是先获得用户区的大小，然后算出中点。以该中点为圆心画出两个半径为用户指定的同心圆。注意画笔的选择，画刷选择为空，否则大圆会覆盖小圆。<br>通过公式计算出两个圆上的点来确定卫星的圆心，然后以卫星的圆心画半径为定值的圆，通过定时器不断重绘从而让它运动起来。<br>详细的代码如下:</p>
-<pre><code class="c++"><span class="keyword">void</span> CSatelliteView::OnDraw(CDC* pDC)
-{
-    CSatelliteDoc* pDoc = GetDocument();
-    ASSERT_VALID(pDoc);
-    CRect rectClient;
-    GetClientRect(&amp;rectClient);
-    <span class="keyword">double</span> x,y;
-    x=(rectClient.right-rectClient.left)/<span class="number">2</span>;
-    y=(rectClient.bottom-rectClient.top)/<span class="number">2</span>;
-    pDC-&gt;SelectStockObject(NULL_BRUSH);
-    CPen newPen;
-    CPen newPenx;
-    CPen newPen_satellite;
-    newPen.CreatePen(PS_SOLID,pDoc-&gt;m_widthDoc,pDoc-&gt;m_orbitColor);
-    newPen_satellite.CreatePen(PS_SOLID,<span class="number">2</span>,pDoc-&gt;m_satelliteColor);
-    newPenx.CreatePen(PS_SOLID,pDoc-&gt;m_widthDocx,pDoc-&gt;m_orbitColor);
-    CPen *poldPen;
-    poldPen=pDC-&gt;SelectObject(&amp;newPen);
-    pDC-&gt;Ellipse(x-pDoc-&gt;m_radiiDoc,y-pDoc-&gt;m_radiiDoc,x+pDoc-&gt;m_radiiDoc,y+pDoc-&gt;m_radiiDoc);
-    poldPen=pDC-&gt;SelectObject(&amp;newPenx);
-    pDC-&gt;Ellipse(x-pDoc-&gt;m_radiiDocx,y-pDoc-&gt;m_radiiDocx,x+pDoc-&gt;m_radiiDocx,y+pDoc-&gt;m_radiiDocx);
-    poldPen=pDC-&gt;SelectObject(&amp;newPen_satellite);
-    pDC-&gt;Ellipse(x+pDoc-&gt;m_radiiDoc*<span class="built_in">cos</span>(pDoc-&gt;m_angle)<span class="number">-15</span>,y+pDoc-&gt;m_radiiDoc*<span class="built_in">sin</span>(pDoc-&gt;m_angle)<span class="number">-15</span>,x+pDoc-&gt;m_radiiDoc*<span class="built_in">cos</span>(pDoc-&gt;m_angle)+<span class="number">15</span>,y+pDoc-&gt;m_radiiDoc*<span class="built_in">sin</span>(pDoc-&gt;m_angle)+<span class="number">15</span>);
-    pDC-&gt;Ellipse(x+pDoc-&gt;m_radiiDocx*<span class="built_in">cos</span>(pDoc-&gt;m_angle)<span class="number">-15</span>,y+pDoc-&gt;m_radiiDocx*<span class="built_in">sin</span>(pDoc-&gt;m_angle)<span class="number">-15</span>,x+pDoc-&gt;m_radiiDocx*<span class="built_in">cos</span>(pDoc-&gt;m_angle)+<span class="number">15</span>,y+pDoc-&gt;m_radiiDocx*<span class="built_in">sin</span>(pDoc-&gt;m_angle)+<span class="number">15</span>);
-    <span class="comment">// <span class="doctag">TODO:</span> add draw code for native data here</span>
-}
-</code></pre>
-<p>我觉得我写的简直乱到一定程度了-_-#   </p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>这个程序几乎是一气呵成的，编译一遍通过简直感人。但是这个程序还是有很多细节有待完善，比如说设置初始值的问题。个人认为用户在打开这个程序的时候应该是两个卫星在跑而不是一片空白，用户根据自己的个性化需求更改一些参数，这样看起来会更友好一些。单论MFC的文档/视图结构的话貌似并没什么太复杂的内容，整个就是一个大模版，只要你循规蹈矩，解出这些水题也就是时间问题吧=_=</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;MFC的作业&quot;&gt;&lt;a href=&quot;#MFC的作业&quot; class=&quot;headerlink&quot; title=&quot;MFC的作业&quot;&gt;&lt;/a&gt;MFC的作业&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;设计基于单文档/视图结构的程序。绘制2条圆形轨道，然后设计2个卫星（圆形代替），使其分别沿内外轨迹匀速行走。轨道路宽度、半径、颜色由轨道设定菜单加对话框指定；有开始、结束菜单；有高速、中速、低速三个菜单控制卫星速度；卫星颜色、标号由按下鼠标左键加对话框指定。&lt;/li&gt;
-&lt;li&gt;简单分析：两个圆形轨道和卫星应该是用Ellipse()函数实现，匀速行走则是通过定时器来实现，至于菜单对话框什么的都不是很复杂。说白了这个题目并没有什么难度，只是说考察的点很多，比较繁琐。
     
     </summary>
     
