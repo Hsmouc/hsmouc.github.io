@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://hsmouc.com/"/>
+  <link href="https://hsmouc.com/"/>
   <updated>2017-03-21T08:15:50.000Z</updated>
-  <id>http://hsmouc.com/</id>
+  <id>https://hsmouc.com/</id>
   
   <author>
     <name>Hsmouc</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>热电偶学习笔记--原理与使用</title>
-    <link href="http://hsmouc.com/2017/03/21/2017-03-21-thermocouple/"/>
-    <id>http://hsmouc.com/2017/03/21/2017-03-21-thermocouple/</id>
+    <link href="https://hsmouc.com/2017/03/21/2017-03-21-thermocouple/"/>
+    <id>https://hsmouc.com/2017/03/21/2017-03-21-thermocouple/</id>
     <published>2017-03-21T03:36:18.000Z</published>
     <updated>2017-03-21T08:15:50.000Z</updated>
     
@@ -55,19 +55,19 @@
     
     </summary>
     
-      <category term="传感器" scheme="http://hsmouc.com/categories/%E4%BC%A0%E6%84%9F%E5%99%A8/"/>
+      <category term="传感器" scheme="https://hsmouc.com/categories/%E4%BC%A0%E6%84%9F%E5%99%A8/"/>
     
     
-      <category term="MATLAB" scheme="http://hsmouc.com/tags/MATLAB/"/>
+      <category term="MATLAB" scheme="https://hsmouc.com/tags/MATLAB/"/>
     
-      <category term="Sensor" scheme="http://hsmouc.com/tags/Sensor/"/>
+      <category term="Sensor" scheme="https://hsmouc.com/tags/Sensor/"/>
     
   </entry>
   
   <entry>
     <title>角度融合算法</title>
-    <link href="http://hsmouc.com/2017/02/06/2017-02-06-pi/"/>
-    <id>http://hsmouc.com/2017/02/06/2017-02-06-pi/</id>
+    <link href="https://hsmouc.com/2017/02/06/2017-02-06-pi/"/>
+    <id>https://hsmouc.com/2017/02/06/2017-02-06-pi/</id>
     <published>2017-02-06T03:16:18.000Z</published>
     <updated>2017-02-06T04:42:41.000Z</updated>
     
@@ -165,17 +165,17 @@
     
     </summary>
     
-      <category term="编程学习" scheme="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
+      <category term="编程学习" scheme="https://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="Python" scheme="http://hsmouc.com/tags/Python/"/>
+      <category term="Python" scheme="https://hsmouc.com/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title>大三上学期总结</title>
-    <link href="http://hsmouc.com/2017/01/24/2017-01-24-summary/"/>
-    <id>http://hsmouc.com/2017/01/24/2017-01-24-summary/</id>
+    <link href="https://hsmouc.com/2017/01/24/2017-01-24-summary/"/>
+    <id>https://hsmouc.com/2017/01/24/2017-01-24-summary/</id>
     <published>2017-01-23T23:29:18.000Z</published>
     <updated>2017-01-24T00:44:01.000Z</updated>
     
@@ -202,17 +202,17 @@
     
     </summary>
     
-      <category term="杂项" scheme="http://hsmouc.com/categories/%E6%9D%82%E9%A1%B9/"/>
+      <category term="杂项" scheme="https://hsmouc.com/categories/%E6%9D%82%E9%A1%B9/"/>
     
     
-      <category term="summary" scheme="http://hsmouc.com/tags/summary/"/>
+      <category term="summary" scheme="https://hsmouc.com/tags/summary/"/>
     
   </entry>
   
   <entry>
     <title>基于卷积神经网络(CNN)的智能循迹小车</title>
-    <link href="http://hsmouc.com/2016/12/31/2016-12-31-pi/"/>
-    <id>http://hsmouc.com/2016/12/31/2016-12-31-pi/</id>
+    <link href="https://hsmouc.com/2016/12/31/2016-12-31-pi/"/>
+    <id>https://hsmouc.com/2016/12/31/2016-12-31-pi/</id>
     <published>2016-12-31T13:12:15.000Z</published>
     <updated>2017-01-01T06:20:32.000Z</updated>
     
@@ -260,19 +260,19 @@
     
     </summary>
     
-      <category term="嵌入式开发" scheme="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+      <category term="嵌入式开发" scheme="https://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Pi" scheme="http://hsmouc.com/tags/Pi/"/>
+      <category term="Pi" scheme="https://hsmouc.com/tags/Pi/"/>
     
-      <category term="Python" scheme="http://hsmouc.com/tags/Python/"/>
+      <category term="Python" scheme="https://hsmouc.com/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title>使用Raspberry Pi制作循迹小车</title>
-    <link href="http://hsmouc.com/2016/12/06/2016-12-6-pi/"/>
-    <id>http://hsmouc.com/2016/12/06/2016-12-6-pi/</id>
+    <link href="https://hsmouc.com/2016/12/06/2016-12-6-pi/"/>
+    <id>https://hsmouc.com/2016/12/06/2016-12-6-pi/</id>
     <published>2016-12-06T05:12:15.000Z</published>
     <updated>2016-12-06T05:01:30.000Z</updated>
     
@@ -318,19 +318,19 @@
     
     </summary>
     
-      <category term="嵌入式开发" scheme="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+      <category term="嵌入式开发" scheme="https://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Pi" scheme="http://hsmouc.com/tags/Pi/"/>
+      <category term="Pi" scheme="https://hsmouc.com/tags/Pi/"/>
     
-      <category term="C" scheme="http://hsmouc.com/tags/C/"/>
+      <category term="C" scheme="https://hsmouc.com/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>基于RFID和Raspberry Pi的雨伞租赁系统设计</title>
-    <link href="http://hsmouc.com/2016/11/26/2016-11-26-pi/"/>
-    <id>http://hsmouc.com/2016/11/26/2016-11-26-pi/</id>
+    <link href="https://hsmouc.com/2016/11/26/2016-11-26-pi/"/>
+    <id>https://hsmouc.com/2016/11/26/2016-11-26-pi/</id>
     <published>2016-11-26T13:22:35.000Z</published>
     <updated>2016-12-06T04:13:43.000Z</updated>
     
@@ -403,19 +403,19 @@
     
     </summary>
     
-      <category term="嵌入式开发" scheme="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+      <category term="嵌入式开发" scheme="https://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Pi" scheme="http://hsmouc.com/tags/Pi/"/>
+      <category term="Pi" scheme="https://hsmouc.com/tags/Pi/"/>
     
-      <category term="C" scheme="http://hsmouc.com/tags/C/"/>
+      <category term="C" scheme="https://hsmouc.com/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>六足机器人技术报告</title>
-    <link href="http://hsmouc.com/2016/10/22/2016-10-22-robot/"/>
-    <id>http://hsmouc.com/2016/10/22/2016-10-22-robot/</id>
+    <link href="https://hsmouc.com/2016/10/22/2016-10-22-robot/"/>
+    <id>https://hsmouc.com/2016/10/22/2016-10-22-robot/</id>
     <published>2016-10-22T12:15:23.000Z</published>
     <updated>2016-10-23T15:51:53.000Z</updated>
     
@@ -448,19 +448,19 @@
     
     </summary>
     
-      <category term="嵌入式开发" scheme="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+      <category term="嵌入式开发" scheme="https://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="C" scheme="http://hsmouc.com/tags/C/"/>
+      <category term="C" scheme="https://hsmouc.com/tags/C/"/>
     
-      <category term="robot" scheme="http://hsmouc.com/tags/robot/"/>
+      <category term="robot" scheme="https://hsmouc.com/tags/robot/"/>
     
   </entry>
   
   <entry>
     <title>美国游玩小记</title>
-    <link href="http://hsmouc.com/2016/08/12/2016-08-12-the%20USA/"/>
-    <id>http://hsmouc.com/2016/08/12/2016-08-12-the USA/</id>
+    <link href="https://hsmouc.com/2016/08/12/2016-08-12-the%20USA/"/>
+    <id>https://hsmouc.com/2016/08/12/2016-08-12-the USA/</id>
     <published>2016-08-12T13:55:13.000Z</published>
     <updated>2016-10-23T15:51:23.000Z</updated>
     
@@ -479,17 +479,17 @@
     
     </summary>
     
-      <category term="杂项" scheme="http://hsmouc.com/categories/%E6%9D%82%E9%A1%B9/"/>
+      <category term="杂项" scheme="https://hsmouc.com/categories/%E6%9D%82%E9%A1%B9/"/>
     
     
-      <category term="travel" scheme="http://hsmouc.com/tags/travel/"/>
+      <category term="travel" scheme="https://hsmouc.com/tags/travel/"/>
     
   </entry>
   
   <entry>
     <title>基于89C51的计算器设计</title>
-    <link href="http://hsmouc.com/2016/05/19/2016-05-19-Calculator/"/>
-    <id>http://hsmouc.com/2016/05/19/2016-05-19-Calculator/</id>
+    <link href="https://hsmouc.com/2016/05/19/2016-05-19-Calculator/"/>
+    <id>https://hsmouc.com/2016/05/19/2016-05-19-Calculator/</id>
     <published>2016-05-19T13:55:13.000Z</published>
     <updated>2016-10-22T15:40:13.000Z</updated>
     
@@ -525,17 +525,17 @@
     
     </summary>
     
-      <category term="嵌入式开发" scheme="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+      <category term="嵌入式开发" scheme="https://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="C" scheme="http://hsmouc.com/tags/C/"/>
+      <category term="C" scheme="https://hsmouc.com/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>基于MFC框架的贪吃蛇程序</title>
-    <link href="http://hsmouc.com/2016/04/13/2016-04-13-mfc/"/>
-    <id>http://hsmouc.com/2016/04/13/2016-04-13-mfc/</id>
+    <link href="https://hsmouc.com/2016/04/13/2016-04-13-mfc/"/>
+    <id>https://hsmouc.com/2016/04/13/2016-04-13-mfc/</id>
     <published>2016-04-13T07:34:43.000Z</published>
     <updated>2016-10-22T15:40:20.000Z</updated>
     
@@ -749,19 +749,19 @@
     
     </summary>
     
-      <category term="编程学习" scheme="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
+      <category term="编程学习" scheme="https://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="C++" scheme="http://hsmouc.com/tags/C/"/>
+      <category term="C++" scheme="https://hsmouc.com/tags/C/"/>
     
-      <category term="MFC" scheme="http://hsmouc.com/tags/MFC/"/>
+      <category term="MFC" scheme="https://hsmouc.com/tags/MFC/"/>
     
   </entry>
   
   <entry>
     <title>基于89C51的电子时钟设计</title>
-    <link href="http://hsmouc.com/2016/04/12/2016-04-12-clock/"/>
-    <id>http://hsmouc.com/2016/04/12/2016-04-12-clock/</id>
+    <link href="https://hsmouc.com/2016/04/12/2016-04-12-clock/"/>
+    <id>https://hsmouc.com/2016/04/12/2016-04-12-clock/</id>
     <published>2016-04-12T12:34:43.000Z</published>
     <updated>2016-10-22T15:40:35.000Z</updated>
     
@@ -796,17 +796,17 @@
     
     </summary>
     
-      <category term="嵌入式开发" scheme="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+      <category term="嵌入式开发" scheme="https://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="C" scheme="http://hsmouc.com/tags/C/"/>
+      <category term="C" scheme="https://hsmouc.com/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>Sqlmap部分参数说明</title>
-    <link href="http://hsmouc.com/2016/03/06/2016-03-06-sqlmap/"/>
-    <id>http://hsmouc.com/2016/03/06/2016-03-06-sqlmap/</id>
+    <link href="https://hsmouc.com/2016/03/06/2016-03-06-sqlmap/"/>
+    <id>https://hsmouc.com/2016/03/06/2016-03-06-sqlmap/</id>
     <published>2016-03-06T11:40:25.000Z</published>
     <updated>2017-02-02T10:56:28.000Z</updated>
     
@@ -854,17 +854,17 @@
     
     </summary>
     
-      <category term="渗透入侵" scheme="http://hsmouc.com/categories/%E6%B8%97%E9%80%8F%E5%85%A5%E4%BE%B5/"/>
+      <category term="渗透入侵" scheme="https://hsmouc.com/categories/%E6%B8%97%E9%80%8F%E5%85%A5%E4%BE%B5/"/>
     
     
-      <category term="sqlmap" scheme="http://hsmouc.com/tags/sqlmap/"/>
+      <category term="sqlmap" scheme="https://hsmouc.com/tags/sqlmap/"/>
     
   </entry>
   
   <entry>
     <title>使用tor隐藏自己的踪迹和深网</title>
-    <link href="http://hsmouc.com/2016/03/06/2016-03-13-tor/"/>
-    <id>http://hsmouc.com/2016/03/06/2016-03-13-tor/</id>
+    <link href="https://hsmouc.com/2016/03/06/2016-03-13-tor/"/>
+    <id>https://hsmouc.com/2016/03/06/2016-03-13-tor/</id>
     <published>2016-03-06T11:40:25.000Z</published>
     <updated>2016-10-22T15:40:42.000Z</updated>
     
@@ -899,17 +899,17 @@
     
     </summary>
     
-      <category term="渗透入侵" scheme="http://hsmouc.com/categories/%E6%B8%97%E9%80%8F%E5%85%A5%E4%BE%B5/"/>
+      <category term="渗透入侵" scheme="https://hsmouc.com/categories/%E6%B8%97%E9%80%8F%E5%85%A5%E4%BE%B5/"/>
     
     
-      <category term="tor" scheme="http://hsmouc.com/tags/tor/"/>
+      <category term="tor" scheme="https://hsmouc.com/tags/tor/"/>
     
   </entry>
   
   <entry>
     <title>娱乐向---Raspberry Pi搭建家庭影音娱乐系统</title>
-    <link href="http://hsmouc.com/2016/02/27/2016-02-27-pi/"/>
-    <id>http://hsmouc.com/2016/02/27/2016-02-27-pi/</id>
+    <link href="https://hsmouc.com/2016/02/27/2016-02-27-pi/"/>
+    <id>https://hsmouc.com/2016/02/27/2016-02-27-pi/</id>
     <published>2016-02-27T06:46:15.000Z</published>
     <updated>2016-10-22T15:40:51.000Z</updated>
     
@@ -943,17 +943,17 @@
     
     </summary>
     
-      <category term="嵌入式开发" scheme="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+      <category term="嵌入式开发" scheme="https://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Pi" scheme="http://hsmouc.com/tags/Pi/"/>
+      <category term="Pi" scheme="https://hsmouc.com/tags/Pi/"/>
     
   </entry>
   
   <entry>
     <title>centos搭建LNMP服务器</title>
-    <link href="http://hsmouc.com/2016/02/19/2016-02-19-vps/"/>
-    <id>http://hsmouc.com/2016/02/19/2016-02-19-vps/</id>
+    <link href="https://hsmouc.com/2016/02/19/2016-02-19-vps/"/>
+    <id>https://hsmouc.com/2016/02/19/2016-02-19-vps/</id>
     <published>2016-02-19T06:20:15.000Z</published>
     <updated>2016-10-22T15:40:56.000Z</updated>
     
@@ -1002,17 +1002,17 @@
     
     </summary>
     
-      <category term="服务器" scheme="http://hsmouc.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <category term="服务器" scheme="https://hsmouc.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
     
-      <category term="Linux" scheme="http://hsmouc.com/tags/Linux/"/>
+      <category term="Linux" scheme="https://hsmouc.com/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>centos搭建服务器－安装apache</title>
-    <link href="http://hsmouc.com/2016/02/16/2016-02-16-vps/"/>
-    <id>http://hsmouc.com/2016/02/16/2016-02-16-vps/</id>
+    <link href="https://hsmouc.com/2016/02/16/2016-02-16-vps/"/>
+    <id>https://hsmouc.com/2016/02/16/2016-02-16-vps/</id>
     <published>2016-02-16T02:40:25.000Z</published>
     <updated>2016-10-22T15:41:01.000Z</updated>
     
@@ -1040,17 +1040,17 @@
     
     </summary>
     
-      <category term="操作系统" scheme="http://hsmouc.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="https://hsmouc.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="Linux" scheme="http://hsmouc.com/tags/Linux/"/>
+      <category term="Linux" scheme="https://hsmouc.com/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>通过python控制Pi的GPIO</title>
-    <link href="http://hsmouc.com/2015/12/17/2015-12-17-pi/"/>
-    <id>http://hsmouc.com/2015/12/17/2015-12-17-pi/</id>
+    <link href="https://hsmouc.com/2015/12/17/2015-12-17-pi/"/>
+    <id>https://hsmouc.com/2015/12/17/2015-12-17-pi/</id>
     <published>2015-12-17T02:40:25.000Z</published>
     <updated>2016-10-22T15:41:06.000Z</updated>
     
@@ -1077,19 +1077,19 @@ GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<sp
     
     </summary>
     
-      <category term="嵌入式开发" scheme="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+      <category term="嵌入式开发" scheme="https://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Pi" scheme="http://hsmouc.com/tags/Pi/"/>
+      <category term="Pi" scheme="https://hsmouc.com/tags/Pi/"/>
     
-      <category term="Python" scheme="http://hsmouc.com/tags/Python/"/>
+      <category term="Python" scheme="https://hsmouc.com/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title>Raspberry Pi开启SSH和VNC</title>
-    <link href="http://hsmouc.com/2015/12/13/2015-12-13-pi/"/>
-    <id>http://hsmouc.com/2015/12/13/2015-12-13-pi/</id>
+    <link href="https://hsmouc.com/2015/12/13/2015-12-13-pi/"/>
+    <id>https://hsmouc.com/2015/12/13/2015-12-13-pi/</id>
     <published>2015-12-13T02:40:25.000Z</published>
     <updated>2016-10-22T15:41:10.000Z</updated>
     
@@ -1113,17 +1113,17 @@ GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<sp
     
     </summary>
     
-      <category term="嵌入式开发" scheme="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+      <category term="嵌入式开发" scheme="https://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Pi" scheme="http://hsmouc.com/tags/Pi/"/>
+      <category term="Pi" scheme="https://hsmouc.com/tags/Pi/"/>
     
   </entry>
   
   <entry>
     <title>Raspberry Pi上手体验</title>
-    <link href="http://hsmouc.com/2015/12/12/2015-12-12-pi/"/>
-    <id>http://hsmouc.com/2015/12/12/2015-12-12-pi/</id>
+    <link href="https://hsmouc.com/2015/12/12/2015-12-12-pi/"/>
+    <id>https://hsmouc.com/2015/12/12/2015-12-12-pi/</id>
     <published>2015-12-12T03:40:25.000Z</published>
     <updated>2017-01-03T15:16:19.000Z</updated>
     
@@ -1161,17 +1161,17 @@ GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<sp
     
     </summary>
     
-      <category term="嵌入式开发" scheme="http://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+      <category term="嵌入式开发" scheme="https://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Pi" scheme="http://hsmouc.com/tags/Pi/"/>
+      <category term="Pi" scheme="https://hsmouc.com/tags/Pi/"/>
     
   </entry>
   
   <entry>
     <title>MFC代码--基于对话框的计算器设计</title>
-    <link href="http://hsmouc.com/2015/12/09/2015-12-08-mfc/"/>
-    <id>http://hsmouc.com/2015/12/09/2015-12-08-mfc/</id>
+    <link href="https://hsmouc.com/2015/12/09/2015-12-08-mfc/"/>
+    <id>https://hsmouc.com/2015/12/09/2015-12-08-mfc/</id>
     <published>2015-12-09T08:34:43.000Z</published>
     <updated>2017-01-03T15:16:36.000Z</updated>
     
@@ -1193,12 +1193,12 @@ GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<sp
     
     </summary>
     
-      <category term="编程学习" scheme="http://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
+      <category term="编程学习" scheme="https://hsmouc.com/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="C++" scheme="http://hsmouc.com/tags/C/"/>
+      <category term="C++" scheme="https://hsmouc.com/tags/C/"/>
     
-      <category term="MFC" scheme="http://hsmouc.com/tags/MFC/"/>
+      <category term="MFC" scheme="https://hsmouc.com/tags/MFC/"/>
     
   </entry>
   
