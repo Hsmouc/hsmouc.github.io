@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hsmouc.com/2016/10/22/2016-10-22-robot/</loc>
+    
+    <lastmod>2017-03-27T04:33:18.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hsmouc.com/2016/11/26/2016-11-26-pi/</loc>
+    
+    <lastmod>2017-03-27T04:25:17.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hsmouc.com/2016/12/06/2016-12-6-pi/</loc>
     
     <lastmod>2017-03-27T04:20:25.000Z</lastmod>
@@ -110,20 +124,6 @@
     <loc>https://hsmouc.com/2015/12/12/2015-12-12-pi/</loc>
     
     <lastmod>2017-01-03T15:16:19.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hsmouc.com/2016/11/26/2016-11-26-pi/</loc>
-    
-    <lastmod>2016-12-06T04:13:43.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hsmouc.com/2016/10/22/2016-10-22-robot/</loc>
-    
-    <lastmod>2016-10-23T15:51:53.000Z</lastmod>
     
   </url>
   
