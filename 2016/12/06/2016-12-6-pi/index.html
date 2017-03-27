@@ -95,15 +95,15 @@
 <meta property="og:url" content="https://hsmouc.com/2016/12/06/2016-12-6-pi/index.html">
 <meta property="og:site_name" content="梦的小窝">
 <meta property="og:description" content="最近一直在做树莓派相关的东西，终极目标是用它做一个使用cnn卷积神经网络算法的人工智能小车。这个坑很大需要好多时间来填，万里长征第一步就是训练数据的采集。在这篇文章里介绍了通过Python和CV2视觉库实现自动驾驶。">
-<meta property="og:image" content="http://ww2.sinaimg.cn/large/005WMcFzjw1fagt8pswuzj31kw16o4bg.jpg">
-<meta property="og:image" content="http://ww2.sinaimg.cn/large/005WMcFzjw1fagt5vvlf2j31kw16oh8r.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005WMcFzjw1fagyoqqoi0j30sf0lzdkj.jpg">
-<meta property="og:image" content="http://ww2.sinaimg.cn/large/005WMcFzjw1fagywx9vqxj30sg0lydjy.jpg">
-<meta property="og:updated_time" content="2016-12-06T05:01:30.000Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1a1lju5oj31kw16o4bg.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1a277lydj31kw16oh8r.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1a2tua9zj30sf0lzdkj.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1a3kqtjpj30sg0lydjy.jpg">
+<meta property="og:updated_time" content="2017-03-27T04:20:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Raspberry Pi制作循迹小车">
 <meta name="twitter:description" content="最近一直在做树莓派相关的东西，终极目标是用它做一个使用cnn卷积神经网络算法的人工智能小车。这个坑很大需要好多时间来填，万里长征第一步就是训练数据的采集。在这篇文章里介绍了通过Python和CV2视觉库实现自动驾驶。">
-<meta name="twitter:image" content="http://ww2.sinaimg.cn/large/005WMcFzjw1fagt8pswuzj31kw16o4bg.jpg">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1a1lju5oj31kw16o4bg.jpg">
 
 
 
@@ -419,7 +419,7 @@
 <li>电池与稳压电路</li>
 <li>舵机</li>
 <li>车模<h3 id="电机-舵机控制方案"><a href="#电机-舵机控制方案" class="headerlink" title="电机/舵机控制方案"></a>电机/舵机控制方案</h3></li>
-<li><p>说明一下，因为去年参加了飞思卡尔比赛，所以车模直接使用了飞思卡尔比赛的C车，电机是由NXP公司的MKL25单片机控制的。且给的是固定速度，也就是说由Raspberry Pi控制转向，单片机控制速度，两者之间并没有耦合关系，是完全独立的系统。<br><img src="http://ww2.sinaimg.cn/large/005WMcFzjw1fagt8pswuzj31kw16o4bg.jpg" alt="整车"><br><em>因为Pi貌似只能提供软件PWM，也就是说PWM波的频率越高，CPU使用越多。示波器实测频率极限大约为5KHz，电机要求频率为10KHz,所以不使用Pi来控制电机。</em>   </p>
+<li><p>说明一下，因为去年参加了飞思卡尔比赛，所以车模直接使用了飞思卡尔比赛的C车，电机是由NXP公司的MKL25单片机控制的。且给的是固定速度，也就是说由Raspberry Pi控制转向，单片机控制速度，两者之间并没有耦合关系，是完全独立的系统。<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1a1lju5oj31kw16o4bg.jpg" alt="整车"><br><em>因为Pi貌似只能提供软件PWM，也就是说PWM波的频率越高，CPU使用越多。示波器实测频率极限大约为5KHz，电机要求频率为10KHz,所以不使用Pi来控制电机。</em>   </p>
 <blockquote>
 <p>Each pin activated in softPWM mode uses approximately 0.5% of the CPU.  </p>
 </blockquote>
@@ -427,7 +427,7 @@
 <li><p>舵机由树莓派提供100Hz的PWM波控制。</p>
 </li>
 </ul>
-<h3 id="供电方案"><a href="#供电方案" class="headerlink" title="供电方案"></a>供电方案</h3><p>所有的设备由7.2V电池提供电力，树莓派需降压到5V，舵机需降压到5.7V。<br><em>tips:Pi的开机电流比较大，实测AMS11175.0稳压芯片提供的5V电压无法保证Pi正常开机，所以需要大电流稳压芯片</em><br><img src="http://ww2.sinaimg.cn/large/005WMcFzjw1fagt5vvlf2j31kw16oh8r.jpg" alt="稳压电路与电机驱动"></p>
+<h3 id="供电方案"><a href="#供电方案" class="headerlink" title="供电方案"></a>供电方案</h3><p>所有的设备由7.2V电池提供电力，树莓派需降压到5V，舵机需降压到5.7V。<br><em>tips:Pi的开机电流比较大，实测AMS11175.0稳压芯片提供的5V电压无法保证Pi正常开机，所以需要大电流稳压芯片</em><br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1a277lydj31kw16oh8r.jpg" alt="稳压电路与电机驱动"></p>
 <h3 id="图像采集方案"><a href="#图像采集方案" class="headerlink" title="图像采集方案"></a>图像采集方案</h3><p>车上搭载了支持UVC协议的数字摄像头，具体的型号我也记不清了。在某宝上搜索UVC摄像头即可。摄像头与Raspberry Pi之间使用USB连接，我们使用的摄像头640*480分辨率，但是实测帧数较低，可能是Pi本身性能有限，代码拍照间隔大约为0.1s。</p>
 <h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="粗糙但可靠的方案"><a href="#粗糙但可靠的方案" class="headerlink" title="粗糙但可靠的方案"></a>粗糙但可靠的方案</h3><ul>
 <li>思路<br>摄像头采集图像流，使用Python定时器的功能每0.1s处理一次图像。赛道为白色，赛道外部为蓝色，通过图像的灰度差来判断赛道边界。取图像的中线，按640*480的分辨率取第320行。设置一个灰度阈值，从320行的第240个像素点左右找灰度跳变处并记录坐标，左右边界坐标相加取平均与240作差即可获得与赛道中线的偏差。</li>
@@ -441,8 +441,8 @@
 <h3 id="精致但不可靠的方案"><a href="#精致但不可靠的方案" class="headerlink" title="精致但不可靠的方案"></a>精致但不可靠的方案</h3><h4 id="霍夫线-HoughLine-变换"><a href="#霍夫线-HoughLine-变换" class="headerlink" title="霍夫线(HoughLine)变换"></a>霍夫线(HoughLine)变换</h4><p>霍夫线变换是一种用来寻找直线的方法，在opencv中相关函数为<code>HoughLines</code>和<code>HoughLinesP</code></p>
 <h4 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h4><p>既然霍夫线变换可以寻找图片中的直线，那么我们可以利用这种算法提取赛道边缘并得出边缘线和车身前进方向的夹角，以此判断前进方向与赛道中线的偏差。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> cv2.cv <span class="keyword">as</span> cv</div><div class="line"><span class="keyword">import</span> math</div><div class="line"></div><div class="line">im=cv.LoadImage(<span class="string">'img/213.jpg'</span>, cv.CV_LOAD_IMAGE_GRAYSCALE)</div><div class="line"></div><div class="line">pi = math.pi</div><div class="line">x = <span class="number">0</span></div><div class="line">dst = cv.CreateImage(cv.GetSize(im), <span class="number">8</span>, <span class="number">1</span>)</div><div class="line"></div><div class="line">cv.Canny(im, dst, <span class="number">200</span>, <span class="number">200</span>)</div><div class="line">cv.Threshold(dst, dst, <span class="number">100</span>, <span class="number">255</span>, cv.CV_THRESH_BINARY)</div><div class="line"></div><div class="line">color_dst_standard = cv.CreateImage(cv.GetSize(im), <span class="number">8</span>, <span class="number">3</span>)</div><div class="line">cv.CvtColor(im, color_dst_standard, cv.CV_GRAY2BGR)<span class="comment">#Create output image in RGB to put red lines</span></div><div class="line"></div><div class="line">lines = cv.HoughLines2(dst, cv.CreateMemStorage(<span class="number">0</span>), cv.CV_HOUGH_STANDARD, <span class="number">1</span>, pi/<span class="number">180</span>, <span class="number">90</span>, <span class="number">80</span>, <span class="number">200</span>)</div><div class="line">old = lines[<span class="number">0</span>][<span class="number">1</span>]*<span class="number">180</span>/pi</div><div class="line"><span class="keyword">for</span> (rho, theta) <span class="keyword">in</span> lines[:<span class="number">100</span>]:</div><div class="line">    err = theta*<span class="number">180</span>/pi - old</div><div class="line">    <span class="keyword">if</span> abs(err) &gt; <span class="number">3</span>:</div><div class="line">        x = x + theta*<span class="number">180</span>/pi</div><div class="line">    old = theta*<span class="number">180</span>/pi</div><div class="line">    a = math.cos(theta) </div><div class="line">    b = math.sin(theta)</div><div class="line">    x0 = a * rho</div><div class="line">    y0 = b * rho</div><div class="line">    pt1 = (cv.Round(x0 + <span class="number">1000</span>*(-b)), cv.Round(y0 + <span class="number">1000</span>*(a)))</div><div class="line">    pt2 = (cv.Round(x0 - <span class="number">1000</span>*(-b)), cv.Round(y0 - <span class="number">1000</span>*(a)))</div><div class="line">    cv.Line(color_dst_standard, pt1, pt2, cv.CV_RGB(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>), <span class="number">2</span>, <span class="number">4</span>)</div><div class="line"></div><div class="line"><span class="keyword">print</span> x</div><div class="line">cv.ShowImage(<span class="string">"Hough Standard"</span>, color_dst_standard)</div><div class="line">cv.WaitKey(<span class="number">0</span>)</div></pre></td></tr></table></figure></p>
 <p>这里载入了一张已经拍摄好的赛道图片，提取直线并绘图，运行结果如下：  </p>
-<p><img src="http://ww1.sinaimg.cn/large/005WMcFzjw1fagyoqqoi0j30sf0lzdkj.jpg" alt="screenshot"><br>可以清楚地看到赛道的两边被描绘出来，由<code>theta</code>值计算出角度。</p>
-<h4 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h4><p><img src="http://ww2.sinaimg.cn/large/005WMcFzjw1fagywx9vqxj30sg0lydjy.jpg" alt="screenshot"><br>尽管<code>HoughLines</code>函数提供了阈值，最长线，最短线的设置，想获得准确的路线信息还是很困难。测试场地的干扰实在太多，很难消除周边环境的影响，最终在测试了各种情况后，放弃了这种方法。<br>另外霍夫线变换对直线的提取对于树莓派的CPU来说实在是太吃力了，增加了系统的控制周期，导致系统的动态性能很差。</p>
+<p><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1a2tua9zj30sf0lzdkj.jpg" alt="screenshot"><br>可以清楚地看到赛道的两边被描绘出来，由<code>theta</code>值计算出角度。</p>
+<h4 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h4><p><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1a3kqtjpj30sg0lydjy.jpg" alt="screenshot"><br>尽管<code>HoughLines</code>函数提供了阈值，最长线，最短线的设置，想获得准确的路线信息还是很困难。测试场地的干扰实在太多，很难消除周边环境的影响，最终在测试了各种情况后，放弃了这种方法。<br>另外霍夫线变换对直线的提取对于树莓派的CPU来说实在是太吃力了，增加了系统的控制周期，导致系统的动态性能很差。</p>
 
       
     </div>
