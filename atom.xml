@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hsmouc.com/"/>
-  <updated>2017-04-01T15:19:48.000Z</updated>
+  <updated>2017-04-01T15:22:17.000Z</updated>
   <id>https://hsmouc.com/</id>
   
   <author>
@@ -20,15 +20,15 @@
     <link href="https://hsmouc.com/2017/04/01/2017-04-01-regressionbykeras/"/>
     <id>https://hsmouc.com/2017/04/01/2017-04-01-regressionbykeras/</id>
     <published>2017-04-01T13:11:18.000Z</published>
-    <updated>2017-04-01T15:19:48.000Z</updated>
+    <updated>2017-04-01T15:22:17.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>Can machines think? –AM Turing</p>
 </blockquote>
 <ul>
-<li>写在文前：最近在学机器学习的相关知识，由于相关文档和更新速度的关系选择了当前较为流行的<a href="https://keras.io/" target="_blank" rel="external">Keras</a>，一个基于python的深度学习框架。学校正在进行一个基于深度学习/强化学习(reinforcement learning)控制水下滑翔机的项目。由于众所周知的原因代码和数据要求保密，所以这篇文章将水下滑翔机作为问题背景介绍一下用Keras和Sequential模型处理回归问题。<a id="more"></a>
-</li>
+<li>写在文前：最近在学机器学习的相关知识，由于相关文档和更新速度的关系选择了当前较为流行的<a href="https://keras.io/" target="_blank" rel="external">Keras</a>，一个基于python的深度学习框架。学校正在进行一个基于深度学习/强化学习(reinforcement learning)控制水下滑翔机的项目。由于众所周知的原因代码和数据要求保密，所以这篇文章将水下滑翔机作为问题背景介绍一下用Keras和Sequential模型处理回归问题。</li>
 </ul>
+<a id="more"></a>
 <h2 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h2><p>水下滑翔机(Underwater glider)是通过两个方向上的可动质量块改变横滚角度和航向角度的，同时角度和滑翔机的深度和油量也有关系。现在我们想利用已知的可动质量块/深度／油量数据预测滑翔机的姿态。我们可以建立一个三输入两输出的Sequential模型，利用已有数据和神经网络算法解决这个问题。下面用两个例子说明怎么使用Keras较好地做回归。</p>
 <h2 id="Regression的两个例子"><a href="#Regression的两个例子" class="headerlink" title="Regression的两个例子"></a>Regression的两个例子</h2><p>下面的内容包括利用Keras拟合一个单输入单输出的函数和一个双输入单输出的函数。</p>
 <h3 id="单输入单输出函数拟合"><a href="#单输入单输出函数拟合" class="headerlink" title="单输入单输出函数拟合"></a>单输入单输出函数拟合</h3><p>这里使用的函数为：<br>$$y=cos(arctan(x))$$<br><code>Sequential</code>是多个网络层的线性堆叠。在这个问题中，我们输入量是一个一阶张量，所以可以通过<code>input_dim</code>来指定输入维度。接下来我们可以建立一个最简单的全连接网络，最后一层的<code>Dense</code>维度同样为1。同时由于输出量有正有负，使用<code>tanh</code>作为激活函数。全部代码如下： </p>
@@ -52,7 +52,8 @@
 &lt;p&gt;Can machines think? –AM Turing&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ul&gt;
-&lt;li&gt;写在文前：最近在学机器学习的相关知识，由于相关文档和更新速度的关系选择了当前较为流行的&lt;a href=&quot;https://keras.io/&quot;&gt;Keras&lt;/a&gt;，一个基于python的深度学习框架。学校正在进行一个基于深度学习/强化学习(reinforcement learning)控制水下滑翔机的项目。由于众所周知的原因代码和数据要求保密，所以这篇文章将水下滑翔机作为问题背景介绍一下用Keras和Sequential模型处理回归问题。
+&lt;li&gt;写在文前：最近在学机器学习的相关知识，由于相关文档和更新速度的关系选择了当前较为流行的&lt;a href=&quot;https://keras.io/&quot;&gt;Keras&lt;/a&gt;，一个基于python的深度学习框架。学校正在进行一个基于深度学习/强化学习(reinforcement learning)控制水下滑翔机的项目。由于众所周知的原因代码和数据要求保密，所以这篇文章将水下滑翔机作为问题背景介绍一下用Keras和Sequential模型处理回归问题。&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
