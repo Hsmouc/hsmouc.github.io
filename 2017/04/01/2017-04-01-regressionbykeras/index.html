@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="MATLAB,Sensor," />
+  <meta name="keywords" content="Python,Keras," />
 
 
 
@@ -89,20 +89,29 @@
 
 
 
-<meta name="description" content="这学期过程控制课介绍了热电偶的相关知识，相对于检测技术课程更偏向于热电偶的实际应用。这篇文章将会介绍热电偶的基本原理和使用方法，介绍如何使用K型热电偶的正向/反向公式，并用MATLAB绘制SEEBACK曲线。">
+<meta name="description" content="Can machines think? –AM Turing
+
+
+写在文前：最近在学机器学习的相关知识，由于相关文档和更新速度的关系选择了当前较为流行的Keras，一个基于python的深度学习框架。学校正在进行一个基于深度学习/强化学习(reinforcement learning)控制水下滑翔机的项目。由于众所周知的原因代码和数据要求保密，所以这篇文章将水下滑翔机作为问题背景介绍一下用Ker">
 <meta property="og:type" content="article">
-<meta property="og:title" content="热电偶学习笔记--原理与使用">
-<meta property="og:url" content="https://hsmouc.com/2017/03/21/2017-03-21-thermocouple/index.html">
+<meta property="og:title" content="神经网络库Keras解决Regression问题">
+<meta property="og:url" content="https://hsmouc.com/2017/04/01/2017-04-01-regressionbykeras/index.html">
 <meta property="og:site_name" content="梦的小窝">
-<meta property="og:description" content="这学期过程控制课介绍了热电偶的相关知识，相对于检测技术课程更偏向于热电偶的实际应用。这篇文章将会介绍热电偶的基本原理和使用方法，介绍如何使用K型热电偶的正向/反向公式，并用MATLAB绘制SEEBACK曲线。">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe19lcaky2j30ho088jrm.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe19m7d06jj30hz0fuafl.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe19mqb8rkj30ku0jumze.jpg">
-<meta property="og:updated_time" content="2017-03-27T04:04:20.000Z">
+<meta property="og:description" content="Can machines think? –AM Turing
+
+
+写在文前：最近在学机器学习的相关知识，由于相关文档和更新速度的关系选择了当前较为流行的Keras，一个基于python的深度学习框架。学校正在进行一个基于深度学习/强化学习(reinforcement learning)控制水下滑翔机的项目。由于众所周知的原因代码和数据要求保密，所以这篇文章将水下滑翔机作为问题背景介绍一下用Ker">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe7k69ci03j30qh0iz0u0.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe7kqqgy8vj30cq0730su.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe7l7uflunj30r10joq4t.jpg">
+<meta property="og:updated_time" content="2017-04-01T15:19:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="热电偶学习笔记--原理与使用">
-<meta name="twitter:description" content="这学期过程控制课介绍了热电偶的相关知识，相对于检测技术课程更偏向于热电偶的实际应用。这篇文章将会介绍热电偶的基本原理和使用方法，介绍如何使用K型热电偶的正向/反向公式，并用MATLAB绘制SEEBACK曲线。">
-<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe19lcaky2j30ho088jrm.jpg">
+<meta name="twitter:title" content="神经网络库Keras解决Regression问题">
+<meta name="twitter:description" content="Can machines think? –AM Turing
+
+
+写在文前：最近在学机器学习的相关知识，由于相关文档和更新速度的关系选择了当前较为流行的Keras，一个基于python的深度学习框架。学校正在进行一个基于深度学习/强化学习(reinforcement learning)控制水下滑翔机的项目。由于众所周知的原因代码和数据要求保密，所以这篇文章将水下滑翔机作为问题背景介绍一下用Ker">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe7k69ci03j30qh0iz0u0.jpg">
 
 
 
@@ -130,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="https://hsmouc.com/2017/03/21/2017-03-21-thermocouple/"/>
+  <link rel="canonical" href="https://hsmouc.com/2017/04/01/2017-04-01-regressionbykeras/"/>
 
 
 
 
 
-  <title> 热电偶学习笔记--原理与使用 | 梦的小窝 </title>
+  <title> 神经网络库Keras解决Regression问题 | 梦的小窝 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -294,7 +303,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://hsmouc.com/2017/03/21/2017-03-21-thermocouple/">
+    <link itemprop="mainEntityOfPage" href="https://hsmouc.com/2017/04/01/2017-04-01-regressionbykeras/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hsmouc">
@@ -315,7 +324,7 @@
             
             
               
-                热电偶学习笔记--原理与使用
+                神经网络库Keras解决Regression问题
               
             
           </h1>
@@ -330,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-21T11:36:18+08:00">
-                2017-03-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-01T21:11:18+08:00">
+                2017-04-01
               </time>
             
 
@@ -353,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/传感器/" itemprop="url" rel="index">
-                    <span itemprop="name">传感器</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -371,8 +380,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/21/2017-03-21-thermocouple/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/03/21/2017-03-21-thermocouple/" itemprop="commentCount"></span>
+                <a href="/2017/04/01/2017-04-01-regressionbykeras/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/04/01/2017-04-01-regressionbykeras/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -380,7 +389,7 @@
 
           
           
-             <span id="/2017/03/21/2017-03-21-thermocouple/" class="leancloud_visitors" data-flag-title="热电偶学习笔记--原理与使用">
+             <span id="/2017/04/01/2017-04-01-regressionbykeras/" class="leancloud_visitors" data-flag-title="神经网络库Keras解决Regression问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -409,31 +418,28 @@
       
 
       
-        <p>这学期<strong>过程控制</strong>课介绍了热电偶的相关知识，相对于<strong>检测技术</strong>课程更偏向于热电偶的实际应用。这篇文章将会介绍热电偶的基本原理和使用方法，介绍如何使用K型热电偶的正向/反向公式，并用MATLAB绘制SEEBACK曲线。</p>
-<a id="more"></a>
-<h2 id="热电偶原理简介"><a href="#热电偶原理简介" class="headerlink" title="热电偶原理简介"></a>热电偶原理简介</h2><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><ul>
-<li>以下内容参考 <em>过程控制系统/清华大学出版社</em></li>
-</ul>
-<blockquote>
-<p>热电偶是一种感温元件，是一次仪表，它直接测量温度，并把温度信号转换成电动势信号。热电偶是由两根不同的导体组成的，当两端温度不同时就会有<strong>热电势</strong>产生。</p>
+        <blockquote>
+<p>Can machines think? –AM Turing</p>
 </blockquote>
-<p><em>P.S：</em>热电势包括接触电势和温差电势两部分，由于温差电势比接触电势小得多，故主要考虑接触电势。<br><em>P.S：</em>接触电势是指两种不同材质的导体A，B接触时两边自由电子的密度不同，在交界面上产生电子相互扩散的电势。</p>
-<h3 id="三个结论"><a href="#三个结论" class="headerlink" title="三个结论"></a>三个结论</h3><ul>
-<li>热电偶的两个热电极必须是两种不同材料的均质导体，否则热电偶回路的总电动势为零。</li>
-<li>热电偶两接合点的温度必须不等，否则热电偶回路的总热电势为零。</li>
-<li>热电偶A，B产生的热电势只与两个接点温度有关，而与中间温度无关，与热电偶的材料有关，和热电偶的尺寸形状无关。</li>
+<ul>
+<li>写在文前：最近在学机器学习的相关知识，由于相关文档和更新速度的关系选择了当前较为流行的<a href="https://keras.io/" target="_blank" rel="external">Keras</a>，一个基于python的深度学习框架。学校正在进行一个基于深度学习/强化学习(reinforcement learning)控制水下滑翔机的项目。由于众所周知的原因代码和数据要求保密，所以这篇文章将水下滑翔机作为问题背景介绍一下用Keras和Sequential模型处理回归问题。<a id="more"></a>
+</li>
 </ul>
-<h2 id="热电偶的应用"><a href="#热电偶的应用" class="headerlink" title="热电偶的应用"></a>热电偶的应用</h2><p>下面这张图是一个较为完整的热电偶测温系统，是我根据课堂笔记在<a href="https://www.draw.io" target="_blank" rel="external">Draw App</a>上面绘制的。这张图漏画了一个低通滤波器，主要是为了解决10KHz的射频干扰问题。<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe19lcaky2j30ho088jrm.jpg" alt="测温系统"></p>
-<h3 id="补偿导线"><a href="#补偿导线" class="headerlink" title="补偿导线"></a>补偿导线</h3><p>因为热电偶一般都是贵金属，在远距离测量时为了节约成本所以需要补偿导线。补偿导线在一段温度范围内与所匹配的热电偶热电势标称值相同，而且价格比热电偶本身便宜很多，延长了热电偶的冷端。使用补偿导线的理论基础是中间温度定律。</p>
-<h3 id="滤波及放大器"><a href="#滤波及放大器" class="headerlink" title="滤波及放大器"></a>滤波及放大器</h3><ul>
-<li>上图测温系统应该有两处滤波，第一处在运放之前，使用低通滤波器消除射频干扰，经由运放后需要滤波器滤去工频50Hz的杂波干扰。</li>
-<li>使用的差分放大器需要满足<strong>高输入阻抗</strong>和<strong>低偏置电流</strong>两个特点。（大高输入阻抗可以有效减小流过热电偶的电流，这样就避免了热电偶自发热对测温准确度的影响）</li>
-</ul>
-<h3 id="热电偶分度表和正-反向公式使用"><a href="#热电偶分度表和正-反向公式使用" class="headerlink" title="热电偶分度表和正/反向公式使用"></a>热电偶分度表和正/反向公式使用</h3><p>首先推荐一个很有用的网站<a href="https://srdata.nist.gov/its90/download/download.html" target="_blank" rel="external">NIST</a>在这里可以查看各种型号的热电偶温度与电压的对应表。表格的样子如下：<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe19m7d06jj30hz0fuafl.jpg" alt="表格"><br>网站还给出了两个公式如下：<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe19mqb8rkj30ku0jumze.jpg" alt="公式"><br>我们可以用MATLAB绘制“温度-输出热电势”，“输出热电势-温度”，“赛贝克(seeback)系数曲线”曲线。下面是MATLAB程序：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">a0 =  <span class="number">0.118597600000E+00</span></div><div class="line">a1 = <span class="number">-0.118343200000E-03</span></div><div class="line">a2 =  <span class="number">0.126968600000E+03</span></div><div class="line">c_i_1 = [<span class="number">0.000000000000E+00</span> <span class="number">0.394501280250E-01</span> <span class="number">0.236223735980E-04</span> <span class="number">-0.328589067840E-06</span> <span class="number">-0.499048287770E-08</span> <span class="number">-0.675090591730E-10</span> <span class="number">-0.574103274280E-12</span> <span class="number">-0.310888728940E-14</span> <span class="number">-0.104516093650E-16</span> <span class="number">-0.198892668780E-19</span> <span class="number">-0.163226974860E-22</span>]</div><div class="line">c_i_2 = [<span class="number">-0.176004136860E-01</span> <span class="number">0.389212049750E-01</span> <span class="number">0.185587700320E-04</span> <span class="number">-0.994575928740E-07</span> <span class="number">0.318409457190E-09</span> <span class="number">-0.560728448890E-12</span> <span class="number">0.560750590590E-15</span> <span class="number">-0.320207200030E-18</span> <span class="number">0.971511471520E-22</span> <span class="number">-0.121047212750E-25</span>]</div><div class="line">t_1 = <span class="number">-270</span>:<span class="number">0</span></div><div class="line">t_2 = <span class="number">1</span>:<span class="number">1370</span></div><div class="line">E_1 = <span class="number">0</span></div><div class="line">E_2 = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> i = <span class="number">1</span>:length(c_i_1)</div><div class="line">    E_1 = E_1 + c_i_1(i) * t_1.^(i<span class="number">-1</span>)</div><div class="line">end</div><div class="line"></div><div class="line"><span class="keyword">for</span> i = <span class="number">1</span>:length(c_i_2)</div><div class="line">    E_2 = E_2 + c_i_2(i) * t_2.^(i<span class="number">-1</span>)</div><div class="line">end</div><div class="line"></div><div class="line">E_2 = E_2 + a0*exp(a1 * (t_2 - a2).^<span class="number">2</span>)</div><div class="line">t = [t_1 t_2]</div><div class="line">E = [E_1 E_2]</div><div class="line"></div><div class="line"><span class="keyword">for</span> i = <span class="number">1</span>:length(E)<span class="number">-1</span></div><div class="line">    err(i) = E(i+<span class="number">1</span>)-E(i)</div><div class="line">end</div><div class="line"></div><div class="line">T = <span class="number">-270</span>:<span class="number">1369</span></div><div class="line">plot(T,err)</div><div class="line">plot(t,E)</div><div class="line">xlabel(<span class="string">'TEMPERATURE(?C)'</span>)</div><div class="line">ylabel(<span class="string">'SEEBECK COEFFICIENT -?V/?C'</span>)</div><div class="line">title(<span class="string">'THERMOCUPLE SEEBECK COEFFICIENT VERSUS TEMPERATURE'</span>)</div></pre></td></tr></table></figure>
-<p>以上是正向公式的使用和绘制SEEBACK曲线，下面是反向公式的使用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">d_i = [-1.318058E+02 4.830222E+01 -1.646031E+00 5.464731E-02 -9.650715E-04 8.802193E-06 -3.110810E-08 0.000000E+00 0.000000E+00 0.000000E+00]</div><div class="line">t = 0</div><div class="line">E = 20.644:0.1:54.886</div><div class="line">E = 31.213</div><div class="line">for i = 1:10</div><div class="line">    t = t + d_i(i)*E.^(i-1) </div><div class="line">end</div><div class="line">plot(E,t)</div></pre></td></tr></table></figure>
-<p>这里给出的电压区间是<code>20.644V~54.886V</code>，其他区间程序同理，相应地更改<code>d_i</code>就可以了。</p>
+<h2 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h2><p>水下滑翔机(Underwater glider)是通过两个方向上的可动质量块改变横滚角度和航向角度的，同时角度和滑翔机的深度和油量也有关系。现在我们想利用已知的可动质量块/深度／油量数据预测滑翔机的姿态。我们可以建立一个三输入两输出的Sequential模型，利用已有数据和神经网络算法解决这个问题。下面用两个例子说明怎么使用Keras较好地做回归。</p>
+<h2 id="Regression的两个例子"><a href="#Regression的两个例子" class="headerlink" title="Regression的两个例子"></a>Regression的两个例子</h2><p>下面的内容包括利用Keras拟合一个单输入单输出的函数和一个双输入单输出的函数。</p>
+<h3 id="单输入单输出函数拟合"><a href="#单输入单输出函数拟合" class="headerlink" title="单输入单输出函数拟合"></a>单输入单输出函数拟合</h3><p>这里使用的函数为：<br>$$y=cos(arctan(x))$$<br><code>Sequential</code>是多个网络层的线性堆叠。在这个问题中，我们输入量是一个一阶张量，所以可以通过<code>input_dim</code>来指定输入维度。接下来我们可以建立一个最简单的全连接网络，最后一层的<code>Dense</code>维度同样为1。同时由于输出量有正有负，使用<code>tanh</code>作为激活函数。全部代码如下： </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> keras</div><div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Input,Dense,Activation,Reshape,Flatten,Dropout</div><div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential,Model</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"></div><div class="line">X_in = np.linspace(<span class="number">-10.</span>,<span class="number">10.</span>,<span class="number">1000</span>)</div><div class="line"><span class="keyword">print</span> X_in</div><div class="line">Y_in = np.cos(np.tanh(X_in))</div><div class="line"></div><div class="line">X_verify = np.linspace(<span class="number">-10.</span>,<span class="number">10.</span>,<span class="number">1000</span>)</div><div class="line">Y_verify = np.cos(np.tanh(X_verify))</div><div class="line"></div><div class="line">m = Sequential()      </div><div class="line">m.add(Dense(<span class="number">128</span>,kernel_initializer=<span class="string">'uniform'</span>, input_dim=<span class="number">1</span>))</div><div class="line">m.add(Activation(<span class="string">'relu'</span>))</div><div class="line">m.add(Dense(<span class="number">64</span>,activation=<span class="string">'relu'</span>))</div><div class="line">m.add(Dense(<span class="number">1</span>,activation=<span class="string">'tanh'</span>))</div><div class="line">m.summary()</div><div class="line">m.compile(optimizer=<span class="string">'sgd'</span>,loss=<span class="string">'mean_absolute_error'</span>, metric=[<span class="string">'accuracy'</span>])</div><div class="line">m.fit(X_in,Y_in,epochs=<span class="number">1000</span>,batch_size=<span class="number">64</span>)</div><div class="line"></div><div class="line">y_verify = m.predict(X_verify)</div><div class="line">x = np.linspace(<span class="number">1</span>,len(y_verify),len(y_verify))</div><div class="line">line_predict, = plt.plot(x,y_verify,label=<span class="string">"perdict value"</span>)</div><div class="line">line_theoretical, = plt.plot(x,Y_verify,label=<span class="string">"theoretical value"</span>)</div><div class="line">plt.legend(handles=[line_predict,line_theoretical])</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p>代码大约分为三个部分，首先使用<code>np.linspace</code>生成数据，接下来将生成的<code>x</code>和计算得到的<code>y</code>扔进建好的模型里并<code>fit</code>。最后使用<code>matplotlib</code>绘图，观察预测值和真实值。得到的图像如下：<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe7k69ci03j30qh0iz0u0.jpg" alt="运行结果"></p>
+<p><em>Tips</em>：在做这个的时候发现了几个小问题：  </p>
+<ol>
+<li><code>batch_size</code>不宜过小，不然在数据集上不收敛</li>
+<li>要有足量的数据用于训练，否则容易欠拟合，误差极大</li>
+<li>准确来说应该分训练集和测试集验证模型的泛化性能，我没干是因为懒</li>
+</ol>
+<h3 id="双输入单输出函数拟合"><a href="#双输入单输出函数拟合" class="headerlink" title="双输入单输出函数拟合"></a>双输入单输出函数拟合</h3><p>这里使用的函数是：<br>$$z=sin(\sqrt{x^2+y^2})$$<br>解决这个问题我们需要引入一个<code>Merge</code>层将多个<code>Sequential</code>合并到一个输出，结构如下图所示，图片来自<a href="https://keras-cn.readthedocs.io/en/latest/getting_started/sequential_model/" target="_blank" rel="external">Keras中文文档</a><br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe7kqqgy8vj30cq0730su.jpg" alt=""><br>在这个问题中，我们要将两个一维张量输入模型，需添加一个<code>LSTM</code>层，但是我发现这个所谓的<code>LSTM</code>层并不能传入一个一维张量，要求数据的<code>shape</code>必须是二维或以上，不知道是我的打开方式不对还是其他原因，这里存在疑问。为了解决这个问题，我就把输入的两个一维张量<code>reshape</code>了。下面是代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> keras</div><div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Input,Flatten,Dense,LSTM,merge</div><div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential,Model</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</div><div class="line"><span class="keyword">from</span>  mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"></div><div class="line">fig = plt.figure()</div><div class="line">ax = fig.gca(projection=<span class="string">'3d'</span>)</div><div class="line"></div><div class="line">x = np.arange(<span class="number">-10.</span>,<span class="number">10.</span>,<span class="number">0.01</span>)</div><div class="line">y = np.arange(<span class="number">-10.</span>,<span class="number">10.</span>,<span class="number">0.01</span>)</div><div class="line">z = np.sin(np.sqrt(x**<span class="number">2</span>+y**<span class="number">2</span>))</div><div class="line"></div><div class="line">x = x.reshape(<span class="number">-1</span>,<span class="number">1</span>,<span class="number">1</span>)</div><div class="line">y = y.reshape(<span class="number">-1</span>,<span class="number">1</span>,<span class="number">1</span>)</div><div class="line"></div><div class="line">x_train_a=Input(shape=(<span class="number">1</span>,<span class="number">1</span>))</div><div class="line">x_train_b=Input(shape=(<span class="number">1</span>,<span class="number">1</span>))</div><div class="line">shared_lstm = LSTM(<span class="number">64</span>)</div><div class="line"></div><div class="line">encoded_a = shared_lstm(x_train_a)</div><div class="line">encoded_b = shared_lstm(x_train_b)</div><div class="line"></div><div class="line"></div><div class="line">merged_vector = merge([encoded_a,encoded_b],mode=<span class="string">'concat'</span>,concat_axis=<span class="number">-1</span>)</div><div class="line"></div><div class="line">model = Dense(<span class="number">128</span>,activation=<span class="string">'relu'</span>)(merged_vector)</div><div class="line">model = Dense(<span class="number">64</span>,activation=<span class="string">'relu'</span>)(model)</div><div class="line">predictions = Dense(<span class="number">1</span>,activation=<span class="string">'tanh'</span>)(model)</div><div class="line">m = Model(input=[x_train_a,x_train_b],output = predictions)</div><div class="line">m.compile(optimizer=<span class="string">'sgd'</span>,loss=<span class="string">'mean_absolute_error'</span>,metric=[<span class="string">'accuracy'</span>])</div><div class="line">m.summary()</div><div class="line"></div><div class="line">m.fit([x,y],z,epochs=<span class="number">1600</span>,batch_size=<span class="number">256</span>)</div><div class="line"></div><div class="line">z_verify = m.predict([x,y])</div><div class="line">z_verify = z_verify.reshape(<span class="number">-1</span>)</div><div class="line">x = x.reshape(<span class="number">-1</span>)</div><div class="line">y = y.reshape(<span class="number">-1</span>)</div><div class="line">line_predict, = ax.plot(x,y,z_verify,label=<span class="string">'predict value'</span>)</div><div class="line">line_theoretical, = ax.plot(x,y,z,label=<span class="string">'theoretical value'</span>)</div><div class="line">plt.legend(handles=[line_predict,line_theoretical])</div><div class="line"></div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p>这个模型和前面提到的是一样的，实现的效果基本上令人满意。程序结构和上一个基本相同，分为三个部分：生成数据，训练数据，验证数据。下面是程序运行的结果图，使用<code>Matplotlib</code>绘制：<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe7l7uflunj30r10joq4t.jpg" alt="运行结果"></p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>嗯，没什么总结的，就这样。愚人节快乐(/ω＼)</p>
 
       
     </div>
@@ -463,9 +469,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/MATLAB/" rel="tag"># MATLAB</a>
+            <a href="/tags/Python/" rel="tag"># Python</a>
           
-            <a href="/tags/Sensor/" rel="tag"># Sensor</a>
+            <a href="/tags/Keras/" rel="tag"># Keras</a>
           
         </div>
       
@@ -478,8 +484,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/06/2017-02-06-pi/" rel="next" title="角度融合算法">
-                <i class="fa fa-chevron-left"></i> 角度融合算法
+              <a href="/2017/03/21/2017-03-21-thermocouple/" rel="next" title="热电偶学习笔记--原理与使用">
+                <i class="fa fa-chevron-left"></i> 热电偶学习笔记--原理与使用
               </a>
             
           </div>
@@ -487,10 +493,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/01/2017-04-01-regressionbykeras/" rel="prev" title="神经网络库Keras解决Regression问题">
-                神经网络库Keras解决Regression问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -639,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#热电偶原理简介"><span class="nav-number">1.</span> <span class="nav-text">热电偶原理简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理"><span class="nav-number">1.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三个结论"><span class="nav-number">1.2.</span> <span class="nav-text">三个结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#热电偶的应用"><span class="nav-number">2.</span> <span class="nav-text">热电偶的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#补偿导线"><span class="nav-number">2.1.</span> <span class="nav-text">补偿导线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#滤波及放大器"><span class="nav-number">2.2.</span> <span class="nav-text">滤波及放大器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#热电偶分度表和正-反向公式使用"><span class="nav-number">2.3.</span> <span class="nav-text">热电偶分度表和正/反向公式使用</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题背景"><span class="nav-number">1.</span> <span class="nav-text">问题背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Regression的两个例子"><span class="nav-number">2.</span> <span class="nav-text">Regression的两个例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单输入单输出函数拟合"><span class="nav-number">2.1.</span> <span class="nav-text">单输入单输出函数拟合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双输入单输出函数拟合"><span class="nav-number">2.2.</span> <span class="nav-text">双输入单输出函数拟合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">3.</span> <span class="nav-text">小结</span></a></li></ol></div>
             
 
           </div>
@@ -777,9 +779,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'rice-cake';
-      var disqus_identifier = '2017/03/21/2017-03-21-thermocouple/';
+      var disqus_identifier = '2017/04/01/2017-04-01-regressionbykeras/';
 
-      var disqus_title = "热电偶学习笔记--原理与使用";
+      var disqus_title = "神经网络库Keras解决Regression问题";
 
 
       function run_disqus_script(disqus_script) {
