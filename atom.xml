@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hsmouc.com/"/>
-  <updated>2017-04-03T02:15:18.000Z</updated>
+  <updated>2017-04-03T08:28:42.000Z</updated>
   <id>https://hsmouc.com/</id>
   
   <author>
@@ -14,6 +14,79 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>状态空间法/MATLAB解高阶微分方程</title>
+    <link href="https://hsmouc.com/2017/04/03/2017-04-03-matlab/"/>
+    <id>https://hsmouc.com/2017/04/03/2017-04-03-matlab/</id>
+    <published>2017-04-03T02:36:18.000Z</published>
+    <updated>2017-04-03T08:28:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>MATLAB提供了两种微分方程的求解方法，一种是可以求解析解的<code>dsolve(eqn1,eqn2, ...)</code>，还有一种就是求数值解的<code>[TOUT,YOUT] = ode45(ODEFUN,TSPAN,Y0)</code>。这篇文章主要讲用<code>ode45</code>解高阶微分方程，其中用到了控制理论中的状态空间表示法。</p>
+<a id="more"></a>
+<h2 id="题目">题目</h2>
+<p>设系统的微分方程为： <span class="math display">\[\dddot{y}+3\ddot{y}+2\dot{y}+y=\dddot{u}+2\ddot{u}+u \]</span> 求系统的状态方程描述，并用MATLAB解微分方程。其中：<span class="math inline">\(u=sin(t)\)</span>,初值为： <span class="math inline">\(y=1,\ddot{y}=0,\ddot{y}=0\)</span>.</p>
+<h2 id="系统的状态空间描述">系统的状态空间描述</h2>
+<p>系统微分方程为 <span class="math display">\[\dddot{y}+3\ddot{y}+2\dot{y}+y=\dddot{u}+2\ddot{u}+u \]</span> 系数<span class="math inline">\(a_1=3,a_2=2,a_1=1,b_0=0,b_1=1,b_2=2,b_3=1\)</span>. 求出：</p>
+<p><span class="math display">\[
+\left\{ 
+\begin{array}{ll}
+    \beta_0 = b_0 = 0 &amp; \\
+    \beta_1 = b_1 - a_1\beta_0 = 1 &amp; \\
+    \beta_2 = b_2 - a_1\beta_1 - a_2\beta_0 = -1 
+\end{array} 
+\right.  
+\]</span></p>
+<p>状态变量为： <span class="math display">\[
+\left  
+\{ \begin{array}{ll}
+    x_1 = y &amp;  \\
+    x_2 = \dot{y} - u &amp; \\
+    x_3 = \ddot{y} - \dot{u} + u
+\end{array}\right.  
+\]</span></p>
+<p>解出系统的状态方程为<br>
+<span class="math display">\[  
+\begin{bmatrix}
+    \dot{x_1}\\ \dot{x_2}\\ \dot{x_3}
+\end{bmatrix}=  
+\begin{bmatrix}
+    0 &amp; 1 &amp; 0\\
+    0 &amp; 0 &amp; 1\\
+     -1 &amp; -2 &amp; -3 
+\end{bmatrix}
+\begin{bmatrix}
+    x_1 \\x_2 \\x_3 
+\end{bmatrix}
++
+\begin{bmatrix}
+    1 \\ -1 \\ 2 \\
+\end{bmatrix}u  
+\]</span></p>
+<h2 id="使用matlab解微分方程">使用MATLAB解微分方程</h2>
+<p>使用ode45求解高阶常微分方程需要做降阶处理，使用该系统的状态方程构造函数，代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">dydt</span> = <span class="title">odefcn</span><span class="params">(t,y,matrixA,matrixB)</span></span></div><div class="line">    dydt = <span class="built_in">zeros</span>(<span class="number">3</span>,<span class="number">1</span>);</div><div class="line">    dydt = matrixA*[y(<span class="number">1</span>);y(<span class="number">2</span>);y(<span class="number">3</span>)]+matrixB*<span class="built_in">sin</span>(t)</div></pre></td></tr></table></figure>
+<p>其中<span class="math inline">\(u(t) = sin(t)\)</span>是已知条件。 代入矩阵参数，初值，时间求微分方程的数值解，并绘制<span class="math inline">\(y\)</span>关于变量<span class="math inline">\(t\)</span>的曲线，代码如下:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">clear all</div><div class="line">A = [<span class="number">0</span> <span class="number">1</span> <span class="number">0</span>;<span class="number">0</span> <span class="number">0</span> <span class="number">1</span>;<span class="number">-1</span> <span class="number">-2</span> <span class="number">-3</span>]</div><div class="line">B = [<span class="number">1</span>;<span class="number">-1</span>;<span class="number">2</span>]</div><div class="line">tspan = [<span class="number">0</span> <span class="number">10</span>]</div><div class="line">y0 = [<span class="number">1</span> <span class="number">0</span> <span class="number">-1</span>]</div><div class="line">[t,y] = ode45(@(t,y) odefcn(t,y,A,B), tspan, y0)</div><div class="line">plot(t,y(:,<span class="number">1</span>),<span class="string">'-o'</span>)</div><div class="line">legend(<span class="string">'y'</span>)</div><div class="line">title(<span class="string">'Solutions of Differential Equation'</span>)</div></pre></td></tr></table></figure>
+<p>绘制出的曲线如下所示：<br>
+<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe9kdkej65j30mv0gv75m.jpg" alt="solutions"></p>
+<p><em>P.S:</em>这里<code>obe45</code>的输入<span class="math inline">\(t\)</span>对应时间区间，而<span class="math inline">\(y\)</span>实际上是我们自己选择的状态变量<span class="math inline">\(x\)</span>而非题干中给出的<span class="math inline">\(y\)</span>。若想画出<span class="math inline">\(\dot{y}\)</span>的曲线，则要根据状态空间方程:<span class="math inline">\(x_2 = \dot{y} - u\)</span>，解出<span class="math inline">\(\dot{y} = u + x_2\)</span>；同理可求<span class="math inline">\(\ddot{y}\)</span>.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;MATLAB提供了两种微分方程的求解方法，一种是可以求解析解的&lt;code&gt;dsolve(eqn1,eqn2, ...)&lt;/code&gt;，还有一种就是求数值解的&lt;code&gt;[TOUT,YOUT] = ode45(ODEFUN,TSPAN,Y0)&lt;/code&gt;。这篇文章主要讲用&lt;code&gt;ode45&lt;/code&gt;解高阶微分方程，其中用到了控制理论中的状态空间表示法。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="杂项" scheme="https://hsmouc.com/categories/%E6%9D%82%E9%A1%B9/"/>
+    
+    
+      <category term="MATLAB" scheme="https://hsmouc.com/tags/MATLAB/"/>
+    
+      <category term="LaTeX" scheme="https://hsmouc.com/tags/LaTeX/"/>
+    
+  </entry>
   
   <entry>
     <title>神经网络库Keras解决Regression问题</title>
@@ -858,6 +931,51 @@
   </entry>
   
   <entry>
+    <title>使用tor隐藏自己的踪迹和深网</title>
+    <link href="https://hsmouc.com/2016/03/06/2016-03-13-tor/"/>
+    <id>https://hsmouc.com/2016/03/06/2016-03-13-tor/</id>
+    <published>2016-03-06T11:40:25.000Z</published>
+    <updated>2017-03-27T04:51:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="tor是什么"><a href="#tor是什么" class="headerlink" title="tor是什么"></a>tor是什么</h3><p>官方的介绍简单翻译下：   </p>
+<blockquote>
+<p>tor是一个免费软件和开放的网络，可以帮助你防御网络流量嗅探(一种会威胁个人自由和隐私的网络监视)。用tor可以保护商业机密，社会激进分子，军事机密，和一些学者的研究成果。</p>
+</blockquote>
+<p>（渣翻译请自行体会其中重点）<br>来自<a href="https://www.torproject.org/" target="_blank" rel="external">torproject.org</a><br> <a id="more"></a> </p>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><h4 id="配置Vidalia"><a href="#配置Vidalia" class="headerlink" title="配置Vidalia"></a>配置Vidalia</h4><p>据我所知，有三种办法使用tor:   </p>
+<ol>
+<li>使用tor的命令行版(比较复杂)  </li>
+<li>使用Vidalia(GUI版本，目前已经停止维护)  </li>
+<li>使用tor browser(最简单)  </li>
+</ol>
+<p>我使用的是Vidalia，可以在这个地方下载<a href="https://dist.torproject.org/vidalia-bundles/" target="_blank" rel="external">Vidalia</a>，貌似没有for Linux？<br>Vidalia的配置比较简单，前提是可以科学上网，因为万能的某长城貌似已经全面封锁了tor。<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1ayhisyaj30e50fdabl.jpg" alt="screenshot"><br>选择Settings,<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1az4ldrhj30kg0k2act.jpg" alt="screenshot"><br>选择我使用代理连接互联网，这里我的本地1080端口运行的是shadowsocks的代理。并选择我的ISP提供商封锁了tor网络的连接，并添加网桥.<br>注意，网桥可以向bridges@torproject.org发送一封内容为get bridges的邮件获得。<br>其他的设置不用管，点connect，洋葱变绿时说明连接上了tor。   </p>
+<h4 id="配置chrome"><a href="#配置chrome" class="headerlink" title="配置chrome"></a>配置chrome</h4><p>强推一个插件SwitchyOmega,可以快速在切换浏览器代理设置。<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1azt9zy2j313w0g5n02.jpg" alt=""></p>
+<p>左侧+New Profile，如图配置9050端口即可。<br>访问下面这个页面看看配置是否成功:<a href="https://check.torproject.org/" target="_blank" rel="external">checktor</a></p>
+<p>###Deep Web(深网)<br>使用tor代理，访问下面的页面试试：<a href="http://zqktlwi4fecvo6ri.onion/wiki/" target="_blank" rel="external">The Hidden Wiki</a><br>是的，这里充满各种违法的信息，比特币洗钱，军火交易，假身份……这就是人们常说的地下黑产聚集地，这就是deep web。你可以找到各种各样的信息，会遇到各种各样疯狂的人。这里高度自治，如果你足够强大也可以与之对抗。<br>一个挺不错的聊天室链接<a href="http://tetatl6umgbmtv27.onion/" target="_blank" rel="external">chat with stangers</a>，在这里我遇到了无所事事的美国年轻黑客，对中国文化很感兴趣；也偶遇了做运维的美国大叔，耐心的给我讲解perl……有两点要注意:</p>
+<ol>
+<li>不要泄露个人信息</li>
+<li>英语要好，lol</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;tor是什么&quot;&gt;&lt;a href=&quot;#tor是什么&quot; class=&quot;headerlink&quot; title=&quot;tor是什么&quot;&gt;&lt;/a&gt;tor是什么&lt;/h3&gt;&lt;p&gt;官方的介绍简单翻译下：   &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;tor是一个免费软件和开放的网络，可以帮助你防御网络流量嗅探(一种会威胁个人自由和隐私的网络监视)。用tor可以保护商业机密，社会激进分子，军事机密，和一些学者的研究成果。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;（渣翻译请自行体会其中重点）&lt;br&gt;来自&lt;a href=&quot;https://www.torproject.org/&quot;&gt;torproject.org&lt;/a&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="渗透入侵" scheme="https://hsmouc.com/categories/%E6%B8%97%E9%80%8F%E5%85%A5%E4%BE%B5/"/>
+    
+    
+      <category term="tor" scheme="https://hsmouc.com/tags/tor/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Sqlmap部分参数说明</title>
     <link href="https://hsmouc.com/2016/03/06/2016-03-06-sqlmap/"/>
     <id>https://hsmouc.com/2016/03/06/2016-03-06-sqlmap/</id>
@@ -912,51 +1030,6 @@
     
     
       <category term="sqlmap" scheme="https://hsmouc.com/tags/sqlmap/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用tor隐藏自己的踪迹和深网</title>
-    <link href="https://hsmouc.com/2016/03/06/2016-03-13-tor/"/>
-    <id>https://hsmouc.com/2016/03/06/2016-03-13-tor/</id>
-    <published>2016-03-06T11:40:25.000Z</published>
-    <updated>2017-03-27T04:51:29.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="tor是什么"><a href="#tor是什么" class="headerlink" title="tor是什么"></a>tor是什么</h3><p>官方的介绍简单翻译下：   </p>
-<blockquote>
-<p>tor是一个免费软件和开放的网络，可以帮助你防御网络流量嗅探(一种会威胁个人自由和隐私的网络监视)。用tor可以保护商业机密，社会激进分子，军事机密，和一些学者的研究成果。</p>
-</blockquote>
-<p>（渣翻译请自行体会其中重点）<br>来自<a href="https://www.torproject.org/" target="_blank" rel="external">torproject.org</a><br> <a id="more"></a> </p>
-<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><h4 id="配置Vidalia"><a href="#配置Vidalia" class="headerlink" title="配置Vidalia"></a>配置Vidalia</h4><p>据我所知，有三种办法使用tor:   </p>
-<ol>
-<li>使用tor的命令行版(比较复杂)  </li>
-<li>使用Vidalia(GUI版本，目前已经停止维护)  </li>
-<li>使用tor browser(最简单)  </li>
-</ol>
-<p>我使用的是Vidalia，可以在这个地方下载<a href="https://dist.torproject.org/vidalia-bundles/" target="_blank" rel="external">Vidalia</a>，貌似没有for Linux？<br>Vidalia的配置比较简单，前提是可以科学上网，因为万能的某长城貌似已经全面封锁了tor。<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1ayhisyaj30e50fdabl.jpg" alt="screenshot"><br>选择Settings,<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1az4ldrhj30kg0k2act.jpg" alt="screenshot"><br>选择我使用代理连接互联网，这里我的本地1080端口运行的是shadowsocks的代理。并选择我的ISP提供商封锁了tor网络的连接，并添加网桥.<br>注意，网桥可以向bridges@torproject.org发送一封内容为get bridges的邮件获得。<br>其他的设置不用管，点connect，洋葱变绿时说明连接上了tor。   </p>
-<h4 id="配置chrome"><a href="#配置chrome" class="headerlink" title="配置chrome"></a>配置chrome</h4><p>强推一个插件SwitchyOmega,可以快速在切换浏览器代理设置。<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1azt9zy2j313w0g5n02.jpg" alt=""></p>
-<p>左侧+New Profile，如图配置9050端口即可。<br>访问下面这个页面看看配置是否成功:<a href="https://check.torproject.org/" target="_blank" rel="external">checktor</a></p>
-<p>###Deep Web(深网)<br>使用tor代理，访问下面的页面试试：<a href="http://zqktlwi4fecvo6ri.onion/wiki/" target="_blank" rel="external">The Hidden Wiki</a><br>是的，这里充满各种违法的信息，比特币洗钱，军火交易，假身份……这就是人们常说的地下黑产聚集地，这就是deep web。你可以找到各种各样的信息，会遇到各种各样疯狂的人。这里高度自治，如果你足够强大也可以与之对抗。<br>一个挺不错的聊天室链接<a href="http://tetatl6umgbmtv27.onion/" target="_blank" rel="external">chat with stangers</a>，在这里我遇到了无所事事的美国年轻黑客，对中国文化很感兴趣；也偶遇了做运维的美国大叔，耐心的给我讲解perl……有两点要注意:</p>
-<ol>
-<li>不要泄露个人信息</li>
-<li>英语要好，lol</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;tor是什么&quot;&gt;&lt;a href=&quot;#tor是什么&quot; class=&quot;headerlink&quot; title=&quot;tor是什么&quot;&gt;&lt;/a&gt;tor是什么&lt;/h3&gt;&lt;p&gt;官方的介绍简单翻译下：   &lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;tor是一个免费软件和开放的网络，可以帮助你防御网络流量嗅探(一种会威胁个人自由和隐私的网络监视)。用tor可以保护商业机密，社会激进分子，军事机密，和一些学者的研究成果。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;（渣翻译请自行体会其中重点）&lt;br&gt;来自&lt;a href=&quot;https://www.torproject.org/&quot;&gt;torproject.org&lt;/a&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="渗透入侵" scheme="https://hsmouc.com/categories/%E6%B8%97%E9%80%8F%E5%85%A5%E4%BE%B5/"/>
-    
-    
-      <category term="tor" scheme="https://hsmouc.com/tags/tor/"/>
     
   </entry>
   
@@ -1164,54 +1237,6 @@ GPIOs <span class="number">0</span><span class="number">-53</span>, platform/<sp
     
       &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Raspberry装好了，显示器也搞定了，玩了整整一天(☆_☆)，发现了一个小问题：我的桌面不够大呀！！！显示器，树莓，笔记本电脑，外卖，概率作业不够放了怎么破，立马想到看过可以通过SSH和VNC的方式访问Pi，来试试吧！  &lt;/p&gt;
-    
-    </summary>
-    
-      <category term="嵌入式开发" scheme="https://hsmouc.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="Pi" scheme="https://hsmouc.com/tags/Pi/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Raspberry Pi上手体验</title>
-    <link href="https://hsmouc.com/2015/12/12/2015-12-12-pi/"/>
-    <id>https://hsmouc.com/2015/12/12/2015-12-12-pi/</id>
-    <published>2015-12-12T03:40:25.000Z</published>
-    <updated>2017-01-03T15:16:19.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>生日快到了，女票送了一个树莓ψ(｀∇´)ψ,好开心，简单写下使用体验吧。<a id="more"></a> 
-<h2 id="Raspberry-Pi简介"><a href="#Raspberry-Pi简介" class="headerlink" title="Raspberry Pi简介"></a>Raspberry Pi简介</h2>树莓派（英语：Raspberry Pi），是一款基于Linux系統的只有信用卡大小的单片机电脑。它由英国的树莓派基金会所开发，目的是以低价硬件及自由软件刺激在学校的基本电脑科学教育。配备有Broadcom出产的ARM架构700MHz BCM2836处理器，1G内存，还有一些必须的接口。<br>除了电脑上都有的接口，树莓派还有GPIO的拓展接口，这为工科狗实现一些很有意思的想法提供了巨大的空间，比如四轴飞行器，智能小车什么的。先留个坑，以后再填吧。<h2 id="系统的安装"><a href="#系统的安装" class="headerlink" title="系统的安装"></a>系统的安装</h2></li>
-</ul>
-<ol>
-<li>在Pi的官网上下载系统镜像<a href="https://www.raspberrypi.org/downloads" target="_blank" rel="external">(下载页面)</a>,我选择的是Raspbian(名字Raspberry+Debian233),解压后得到一个.img镜像。 </li>
-<li>插入TF卡，用df命令查看当前挂载的卷：<br><code>df -h</code><br>确认设备<br><code>diskutil list</code><br>确定一下你的TF卡是哪个。</li>
-<li>卸载TF卡上的分区<br><code>diskutil unmount /dev/disk2   // /dev/disk2是我的TF卡</code></li>
-<li>将系统刷入卡中<br>把当前目录切换到要装载的系统镜像的所在目录<br><code>sudo dd bs=4m if=2015-11-21-raspbian-jessie.img of=/dev/rdisk2</code><br>输入密码后不会出现任何提示，要等上几分钟，别着急用ctrl+c结束。</li>
-<li>卸载设备<br><code>diskutil unmountDisk /dev/disk2</code>    </li>
-</ol>
-<h2 id="Pi的开机配置"><a href="#Pi的开机配置" class="headerlink" title="Pi的开机配置"></a>Pi的开机配置</h2><h3 id="语言和键盘"><a href="#语言和键盘" class="headerlink" title="语言和键盘"></a>语言和键盘</h3><p>把HDMI，鼠标键盘电源线接好，然后它居然直接出现了桌面，难道是我的人品太好（ ｉ <em> ｉ ）。<br>激动的点开终端，咦，怎么有些键不能用=</em>=<br>别慌，Pi是腐国的产品，默认的是英式键盘的键位，我们使用的大部分都是美式键盘。所以我们简单的配置下:<br>终端输入<br><code>raspi-config</code><br>选<code>Internationalisation opntions</code><br>选<code>I3 Change Keyboard Layout</code><br>选<code>Generic 101-key  PC</code><br>选<code>Other</code><br>选<code>English(US)</code><br>选<code>English(US) - English(US,alternative international)</code><br>后面都选择确定，键盘上下键选择，tab切换选项，enter确定。<br>注意！！！我不建议大家把Pi的系统语言改成中文的，至于为什么大家试一试就知道了，字体炸裂……<br>注:编码需要选择下，UTF-8，原因大家都懂。给个<a href="http://www.guokr.com/post/520901/" target="_blank" rel="external">果壳</a>的参考，我就不多写了。  </p>
-<h3 id="安装中文输入法"><a href="#安装中文输入法" class="headerlink" title="安装中文输入法"></a>安装中文输入法</h3><p><code>sudo apt-get -y install ttf-wqy-zenhei</code></p>
-<h3 id="安装VIM"><a href="#安装VIM" class="headerlink" title="安装VIM"></a>安装VIM</h3><p>好吧，这步大家可以跳过，我有强迫症:-)<br><code>sudo apt-get install -y vim</code><br>简单配置下代码高亮<br>在～目录下新建.vimrc文件，写入下面的内容:  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">set nu</div><div class="line">syntax on</div><div class="line">set tabstop=4</div></pre></td></tr></table></figure>
-<h2 id="配置watchdog"><a href="#配置watchdog" class="headerlink" title="配置watchdog"></a>配置watchdog</h2><p>Pi的看门狗防止程序死循环，设置好就能让Pi在当机的时候自动重启。 </p>
-<ol>
-<li>启动硬件看门狗模块<br><code>sudo modprobe bcm2708_wdog</code></li>
-<li>编辑/etc/modules,启动时自加载模块<br><code>sudo vim /etc/modules</code><br>在文件的最后加上<br><code>bcm2708_wdog</code></li>
-<li>启动与配置watchdog<br>启动watchdog<br><code>sudo /etc/init.d/watchdog start</code><br>编辑配置文件<br><code>sudo vim /etc/watchdog.conf</code><br>把<code>#watchdog-device =/dev/watchdog</code>前面的<code>#</code>删去<br>重新启动watchdog<br><code>sudo /etc/init.d/watchdog restart</code><br>还可以监控芯片温度什么，过热自动重启之类。<h2 id="一些小插曲和随手拍的图"><a href="#一些小插曲和随手拍的图" class="headerlink" title="一些小插曲和随手拍的图"></a>一些小插曲和随手拍的图</h2></li>
-</ol>
-<ul>
-<li>中间有个小小的意外，我随手装了个多媒体系统试试效果，XBMC，就是这货，装完重启直接进不了系统了233。简单分析了下原因，貌似是显存分配不足，应该要在安装前配置下内存的分配。这个小插曲直接导致了我决定今晚赶紧把今天做的配置记录下来。这样一块用来折腾的Pi估计以后要经常重刷系统了=_=  </li>
-<li>桌面上的显示器是一块笔记本的屏，我又在万能的某宝上买了块驱动版，我现在打算买个相框把屏幕裱起来。话说不加壳的屏真的是好薄啊，看起来很有逼格。<br><img src="http://ww2.sinaimg.cn/mw690/005WMcFzjw1eyx9x5jdvej32io1w0e81.jpg" alt=""><br><img src="http://ww3.sinaimg.cn/mw690/005WMcFzjw1eyx9wypk1rj32io1w0npd.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1eyx9whbb85j32io1w01kx.jpg" alt=""></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;生日快到了，女票送了一个树莓ψ(｀∇´)ψ,好开心，简单写下使用体验吧。
     
     </summary>
     
