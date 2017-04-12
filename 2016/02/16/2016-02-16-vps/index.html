@@ -409,20 +409,22 @@
 
       
         <ul>
-<li>好久都没更新博客里面的文章了，快要开学了发现寒假自己什么都没搞出来啊啊啊……最蛋疼的是学校的智能车比赛的网站，要实现论坛的功能。学校的服务器现在又不让用，只好在我自己的VPS上搭建一个简易的服务器来测试了。这是我开始自己搭服务器过程的记录，可能会有点乱……<a id="more"></a> </li>
+<li>好久都没更新博客里面的文章了，快要开学了发现寒假自己什么都没搞出来啊啊啊……最蛋疼的是学校的智能车比赛的网站，要实现论坛的功能。学校的服务器现在又不让用，只好在我自己的VPS上搭建一个简易的服务器来测试了。这是我开始自己搭服务器过程的记录，可能会有点乱…… <a id="more"></a></li>
 <li>我在本地使用的是Mac OS X，远程服务器运行的是centos-6 x86系统。这个VPS是在<a href="https://bandwagonhost.com/" target="_blank" rel="external">Bandwagon</a>上购买的，可以使用shadowsocks科学上网(咦，我好像说了什么不该说的)。</li>
 </ul>
-<h2 id="LAMP环境"><a href="#LAMP环境" class="headerlink" title="LAMP环境"></a>LAMP环境</h2><p>所谓LAMP就是Linux+apache+MySQL+PHP，我目前只装好了apache……不然怎么能是万里长征第一步～</p>
-<h3 id="安装Apache"><a href="#安装Apache" class="headerlink" title="安装Apache"></a>安装Apache</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum install httpd</div><div class="line">chkconfig --level 235 httpd on</div><div class="line">/etc/init.d/httpd start</div></pre></td></tr></table></figure>
-<p>安装完后在浏览器中输入远程服务器的IP地址，看到这样的画面就说明安装成功了。<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bc8lac8j31700rh15c.jpg" alt="屏幕快照"></p>
-<h3 id="配置ssh"><a href="#配置ssh" class="headerlink" title="配置ssh"></a>配置ssh</h3><p>配置ssh的目的在于方便的上传和下载文件，更加流畅的终端输入体验……<br>在终端中输入如下命令:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install openssh-server</div></pre></td></tr></table></figure></p>
-<p>安装完成后启动sshd服务:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/sshd start</div></pre></td></tr></table></figure></p>
-<p>设置开机启动:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig sshd on</div></pre></td></tr></table></figure></p>
-<p>我在本地使用:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh root@138.128.197.11</div></pre></td></tr></table></figure></p>
-<p>报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh: connect to host 138.128.197.11 port 22: Connection refused</div></pre></td></tr></table></figure></p>
-<p>我用<code>netstat -antp |grep sshd</code>命令查看了一下，系统的响应是这样的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tcp        0      0 0.0.0.0:22           0.0.0.0:*                   LISTEN      3746/sshd</div></pre></td></tr></table></figure></p>
-<p>问题应该是出在了ssh的隧道没有对公网开放<br>修改ssh的配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/ssh/sshd_config</div></pre></td></tr></table></figure></p>
-<p>把<code>ListenAddress 0.0.0.0</code>改为<code>ListenAddress 138.128.197.11</code>这个是我远程服务器的IP，重新启动ssh服务发现无法启动，终端提示要先定义端口，我并不知道为什么……在刚刚那行配置前加上<code>port 22</code>然后<code>service sshd restart</code>，居然就成功了<br>附上成功后的图<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bcvn914j313r0p0167.jpg" alt="屏幕快照"> </p>
+<h2 id="lamp环境">LAMP环境</h2>
+<p>所谓LAMP就是Linux+apache+MySQL+PHP，我目前只装好了apache……不然怎么能是万里长征第一步～ ### 安装Apache <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum install httpd</div><div class="line">chkconfig --level 235 httpd on</div><div class="line">/etc/init.d/httpd start</div></pre></td></tr></table></figure></p>
+<p>安装完后在浏览器中输入远程服务器的IP地址，看到这样的画面就说明安装成功了。<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bc8lac8j31700rh15c.jpg" alt="屏幕快照"> ### 配置ssh 配置ssh的目的在于方便的上传和下载文件，更加流畅的终端输入体验……<br>
+在终端中输入如下命令: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install openssh-server</div></pre></td></tr></table></figure></p>
+<p>安装完成后启动sshd服务: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/sshd start</div></pre></td></tr></table></figure></p>
+<p>设置开机启动: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig sshd on</div></pre></td></tr></table></figure></p>
+<p>我在本地使用: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh root@138.128.197.11</div></pre></td></tr></table></figure></p>
+<p>报错 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh: connect to host 138.128.197.11 port 22: Connection refused</div></pre></td></tr></table></figure></p>
+<p>我用<code>netstat -antp |grep sshd</code>命令查看了一下，系统的响应是这样的 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tcp        0      0 0.0.0.0:22           0.0.0.0:*                   LISTEN      3746/sshd</div></pre></td></tr></table></figure></p>
+<p>问题应该是出在了ssh的隧道没有对公网开放<br>
+修改ssh的配置文件 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/ssh/sshd_config</div></pre></td></tr></table></figure></p>
+<p>把<code>ListenAddress 0.0.0.0</code>改为<code>ListenAddress 138.128.197.11</code>这个是我远程服务器的IP，重新启动ssh服务发现无法启动，终端提示要先定义端口，我并不知道为什么……在刚刚那行配置前加上<code>port 22</code>然后<code>service sshd restart</code>，居然就成功了<br>
+附上成功后的图 <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bcvn914j313r0p0167.jpg" alt="屏幕快照"></p>
 
       
     </div>
@@ -556,7 +558,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -626,7 +628,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LAMP环境"><span class="nav-number">1.</span> <span class="nav-text">LAMP环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Apache"><span class="nav-number">1.1.</span> <span class="nav-text">安装Apache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置ssh"><span class="nav-number">1.2.</span> <span class="nav-text">配置ssh</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#lamp环境"><span class="nav-number">1.</span> <span class="nav-text">LAMP环境</span></a></li></ol></div>
             
 
           </div>

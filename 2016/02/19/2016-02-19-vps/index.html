@@ -89,19 +89,22 @@
 
 
 
-<meta name="description" content="我们首先来看一张图片:    
+<meta name="description" content="我们首先来看一张图片:
+
 前天折腾完apache，顺便装好了MySQL和PHP，放了一个Discuz!的开源论坛程序，什么乱七八糟权限都没管，全是弱密码。刚准备写个博纪念一下，发现我VPS被人黑了……无奈只好重新安装一遍centos。在vagarlee的建议下，我吸取上一次的教训，使用更轻量的Nginx来替代Apache。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="centos搭建LNMP服务器">
 <meta property="og:url" content="https://hsmouc.com/2016/02/19/2016-02-19-vps/index.html">
 <meta property="og:site_name" content="梦的小窝">
-<meta property="og:description" content="我们首先来看一张图片:    
+<meta property="og:description" content="我们首先来看一张图片:
+
 前天折腾完apache，顺便装好了MySQL和PHP，放了一个Discuz!的开源论坛程序，什么乱七八糟权限都没管，全是弱密码。刚准备写个博纪念一下，发现我VPS被人黑了……无奈只好重新安装一遍centos。在vagarlee的建议下，我吸取上一次的教训，使用更轻量的Nginx来替代Apache。">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bag01fhj313t0odagt.jpg">
 <meta property="og:updated_time" content="2017-03-27T05:01:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos搭建LNMP服务器">
-<meta name="twitter:description" content="我们首先来看一张图片:    
+<meta name="twitter:description" content="我们首先来看一张图片:
+
 前天折腾完apache，顺便装好了MySQL和PHP，放了一个Discuz!的开源论坛程序，什么乱七八糟权限都没管，全是弱密码。刚准备写个博纪念一下，发现我VPS被人黑了……无奈只好重新安装一遍centos。在vagarlee的建议下，我吸取上一次的教训，使用更轻量的Nginx来替代Apache。">
 <meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bag01fhj313t0odagt.jpg">
 
@@ -411,40 +414,43 @@
 
       
         <ul>
-<li>我们首先来看一张图片:<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bag01fhj313t0odagt.jpg" alt="Fuck DDOS">    </li>
-<li>前天折腾完apache，顺便装好了MySQL和PHP，放了一个Discuz!的开源论坛程序，什么乱七八糟权限都没管，全是弱密码。刚准备写个博纪念一下，发现我VPS被人黑了……无奈只好重新安装一遍centos。在<a href="http://lyeec.me" target="_blank" rel="external">vagarlee</a>的建议下，我吸取上一次的教训，使用更轻量的Nginx来替代Apache。<a id="more"></a> 
-<h3 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h3>在使用yum安装Nginx的时候有一些小小的麻烦,需要自己建立一个<code>nginx.repo</code>的软件源配置文件。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/yum.repo.d/nginx.repo</div></pre></td></tr></table></figure>
+<li>我们首先来看一张图片:<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bag01fhj313t0odagt.jpg" alt="Fuck DDOS"><br>
 </li>
+<li>前天折腾完apache，顺便装好了MySQL和PHP，放了一个Discuz!的开源论坛程序，什么乱七八糟权限都没管，全是弱密码。刚准备写个博纪念一下，发现我VPS被人黑了……无奈只好重新安装一遍centos。在<a href="http://lyeec.me" target="_blank" rel="external">vagarlee</a>的建议下，我吸取上一次的教训，使用更轻量的Nginx来替代Apache。 <a id="more"></a> ### 安装Nginx 在使用yum安装Nginx的时候有一些小小的麻烦,需要自己建立一个<code>nginx.repo</code>的软件源配置文件。 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/yum.repo.d/nginx.repo</div></pre></td></tr></table></figure></li>
 </ul>
-<p>在其中填写如下内容:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[nginx]</div><div class="line">name=nginx repo</div><div class="line">baseurl=http://nginx.org/packages/centos/$releasever/$basearch/</div><div class="line">gpgcheck=0</div><div class="line">enabled=1</div></pre></td></tr></table></figure></p>
-<p>保存，使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install nginx</div></pre></td></tr></table></figure></p>
-<p>nginx安装完成。<br>启动Nginx服务:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/nginx start</div></pre></td></tr></table></figure></p>
-<p>这个时候访问VPS的IP地址应该就能出现Nginx的欢迎页面了。</p>
-<h3 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server mysql mysql-deve</div></pre></td></tr></table></figure>
-<p>我第一次安装MySQl的时候想当然只安装了mysql，并没有安装mysql-server导致数据库无法使用，mysql-server是一个服务端，需要安装。<br>启用MySQl服务:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld start</div></pre></td></tr></table></figure></p>
-<p>这时候会出现长长的提示信息，恭喜数据库安装成功。<br>接下来我们给数据库设置管理员账号和密码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysqladmin -u root password &apos;yourpassword&apos;</div></pre></td></tr></table></figure></p>
-<h3 id="安装PHP"><a href="#安装PHP" class="headerlink" title="安装PHP"></a>安装PHP</h3><p>这一步比较简单，直接使用yum:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php-fpm php-mysql</div></pre></td></tr></table></figure></p>
+<p>在其中填写如下内容: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[nginx]</div><div class="line">name=nginx repo</div><div class="line">baseurl=http://nginx.org/packages/centos/$releasever/$basearch/</div><div class="line">gpgcheck=0</div><div class="line">enabled=1</div></pre></td></tr></table></figure></p>
+<p>保存，使用 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install nginx</div></pre></td></tr></table></figure></p>
+<p>nginx安装完成。<br>
+启动Nginx服务: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/nginx start</div></pre></td></tr></table></figure></p>
+<p>这个时候访问VPS的IP地址应该就能出现Nginx的欢迎页面了。 ### 安装MySQL</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server mysql mysql-deve</div></pre></td></tr></table></figure>
+<p>我第一次安装MySQl的时候想当然只安装了mysql，并没有安装mysql-server导致数据库无法使用，mysql-server是一个服务端，需要安装。<br>
+启用MySQl服务: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld start</div></pre></td></tr></table></figure></p>
+<p>这时候会出现长长的提示信息，恭喜数据库安装成功。<br>
+接下来我们给数据库设置管理员账号和密码: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysqladmin -u root password &apos;yourpassword&apos;</div></pre></td></tr></table></figure></p>
+<h3 id="安装php">安装PHP</h3>
+<p>这一步比较简单，直接使用yum: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php-fpm php-mysql</div></pre></td></tr></table></figure></p>
 <ul>
 <li>至此，LNMP环境的软件包已经全部安装完成，下面就是简单的配置阶段。</li>
 </ul>
-<h3 id="配置PHP"><a href="#配置PHP" class="headerlink" title="配置PHP"></a>配置PHP</h3><p>更改下面的文件:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/php.ini</div></pre></td></tr></table></figure></p>
-<p>将1改为0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cgi.fix_pathinfo = 0</div></pre></td></tr></table></figure></p>
-<p>这儿有一段英文解释，来自<a href="www.digitalocean.com">digitalocean</a>:</p>
-<blockquote>
-<p>If this number is kept as a 1, the php interpreter will do its best to process the file that is as near to the requested file as possible. This is a possible security risk. If this number is set to 0, conversely, the interpreter will only process the exact file path—a much safer alternative.</p>
-</blockquote>
-<h3 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h3><p>主要是改一下Nginx.conf这个文件夹里的配置文件:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/nginx/conf.d/default.conf</div></pre></td></tr></table></figure></p>
-<p>改成了这样:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">server&#123;</div><div class="line"></div><div class="line">    listen       80;</div><div class="line">    server_name  localhost;</div><div class="line"></div><div class="line">    #charset koi8-r;</div><div class="line">    #access_log  /var/log/nginx/log/host.access.log  main;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        root   /usr/share/nginx/html;</div><div class="line">        index  index.html index.htm index.php;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    #error_page  404              /404.html;</div><div class="line"></div><div class="line">    # redirect server error pages to the static page /50x.html</div><div class="line">    #</div><div class="line">    error_page   500 502 503 504  /50x.html;</div><div class="line">    location = /50x.html &#123;</div><div class="line">        root   /usr/share/nginx/html;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # proxy the PHP scripts to Apache listening on 127.0.0.1:80</div><div class="line">    #</div><div class="line">    #location ~ \.php$ &#123;</div><div class="line">    #    proxy_pass   http://127.0.0.1;</div><div class="line">    #&#125;</div><div class="line"></div><div class="line">    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</div><div class="line">    #</div><div class="line">    location ~ \.php$ &#123;</div><div class="line">        root           /usr/share/nginx/html;</div><div class="line">        fastcgi_pass   127.0.0.1:9000;</div><div class="line">        fastcgi_index  index.php;</div><div class="line">        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</div><div class="line">        include        fastcgi_params;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="配置php">配置PHP</h3>
+<p>更改下面的文件: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/php.ini</div></pre></td></tr></table></figure></p>
+<p>将1改为0 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cgi.fix_pathinfo = 0</div></pre></td></tr></table></figure></p>
+<p>这儿有一段英文解释，来自<a href="www.digitalocean.com">digitalocean</a>: &gt;If this number is kept as a 1, the php interpreter will do its best to process the file that is as near to the requested file as possible. This is a possible security risk. If this number is set to 0, conversely, the interpreter will only process the exact file path—a much safer alternative.</p>
+<h3 id="配置nginx">配置Nginx</h3>
+<p>主要是改一下Nginx.conf这个文件夹里的配置文件: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/nginx/conf.d/default.conf</div></pre></td></tr></table></figure></p>
+<p>改成了这样: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">server&#123;</div><div class="line"></div><div class="line">    listen       80;</div><div class="line">    server_name  localhost;</div><div class="line"></div><div class="line">    #charset koi8-r;</div><div class="line">    #access_log  /var/log/nginx/log/host.access.log  main;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        root   /usr/share/nginx/html;</div><div class="line">        index  index.html index.htm index.php;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    #error_page  404              /404.html;</div><div class="line"></div><div class="line">    # redirect server error pages to the static page /50x.html</div><div class="line">    #</div><div class="line">    error_page   500 502 503 504  /50x.html;</div><div class="line">    location = /50x.html &#123;</div><div class="line">        root   /usr/share/nginx/html;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # proxy the PHP scripts to Apache listening on 127.0.0.1:80</div><div class="line">    #</div><div class="line">    #location ~ \.php$ &#123;</div><div class="line">    #    proxy_pass   http://127.0.0.1;</div><div class="line">    #&#125;</div><div class="line"></div><div class="line">    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</div><div class="line">    #</div><div class="line">    location ~ \.php$ &#123;</div><div class="line">        root           /usr/share/nginx/html;</div><div class="line">        fastcgi_pass   127.0.0.1:9000;</div><div class="line">        fastcgi_index  index.php;</div><div class="line">        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</div><div class="line">        include        fastcgi_params;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
 <ul>
 <li>改<code>server_name</code>后面的地址为<code>localhost</code></li>
 <li>改<code>location</code>中的<code>root</code>地址为<code>/usr/share/nginx/html</code></li>
-<li>在index        index.html        index.htm后加上index.php</li>
+<li>在index index.html index.htm后加上index.php</li>
 <li>把<code>&quot;location ~ \.php$ {&quot;,</code>前的注释去了，改<code>fastcgi_param</code>后面的内容为<code>SCRIPT_FILENAME  $document_root</code></li>
 </ul>
-<p>保存退出后打开php-fpm的配置:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/php-fpm.d/www.conf</div></pre></td></tr></table></figure></p>
-<p>找到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">; Unix user/group of processes</div><div class="line">; Note: The user is mandatory. If the group is not set, the default user&apos;s group</div><div class="line">;	will be used.</div><div class="line">; RPM: apache Choosed to be able to access some dir as httpd</div><div class="line">user = nginx</div><div class="line">; RPM: Keep a group allowed to write in log dir.</div><div class="line">group = nginx</div></pre></td></tr></table></figure></p>
-<p>改成<code>User=nginx</code>，<code>group=nginx</code><br>重新启动php-fpm即可</p>
-<h3 id="参考的文档"><a href="#参考的文档" class="headerlink" title="参考的文档"></a>参考的文档</h3><p><a href="http://nginx.org/en/docs/" target="_blank" rel="external">Nginx官方文档</a><br><a href="https://support.rackspace.com/how-to/installing-nginx-and-php-fpm-setup-for-nginx/" target="_blank" rel="external">Installing Nginx and php-fpm - Setup For Nginx</a><br><a href="https://www.nginx.com/resources/wiki/start/topics/examples/phpfcgi/" target="_blank" rel="external">Nginx -PHP FastCGI Example</a></p>
+<p>保存退出后打开php-fpm的配置: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/php-fpm.d/www.conf</div></pre></td></tr></table></figure></p>
+<p>找到 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">; Unix user/group of processes</div><div class="line">; Note: The user is mandatory. If the group is not set, the default user&apos;s group</div><div class="line">;	will be used.</div><div class="line">; RPM: apache Choosed to be able to access some dir as httpd</div><div class="line">user = nginx</div><div class="line">; RPM: Keep a group allowed to write in log dir.</div><div class="line">group = nginx</div></pre></td></tr></table></figure></p>
+<p>改成<code>User=nginx</code>，<code>group=nginx</code> 重新启动php-fpm即可 ### 参考的文档 <a href="http://nginx.org/en/docs/" target="_blank" rel="external">Nginx官方文档</a><br>
+<a href="https://support.rackspace.com/how-to/installing-nginx-and-php-fpm-setup-for-nginx/" target="_blank" rel="external">Installing Nginx and php-fpm - Setup For Nginx</a><br>
+<a href="https://www.nginx.com/resources/wiki/start/topics/examples/phpfcgi/" target="_blank" rel="external">Nginx -PHP FastCGI Example</a></p>
 
       
     </div>
@@ -578,7 +584,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -648,7 +654,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Nginx"><span class="nav-number">1.</span> <span class="nav-text">安装Nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装MySQL"><span class="nav-number">2.</span> <span class="nav-text">安装MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装PHP"><span class="nav-number">3.</span> <span class="nav-text">安装PHP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置PHP"><span class="nav-number">4.</span> <span class="nav-text">配置PHP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Nginx"><span class="nav-number">5.</span> <span class="nav-text">配置Nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考的文档"><span class="nav-number">6.</span> <span class="nav-text">参考的文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装php"><span class="nav-number">1.</span> <span class="nav-text">安装PHP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置php"><span class="nav-number">2.</span> <span class="nav-text">配置PHP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置nginx"><span class="nav-number">3.</span> <span class="nav-text">配置Nginx</span></a></li></ol></div>
             
 
           </div>
