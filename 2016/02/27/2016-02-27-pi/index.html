@@ -99,7 +99,7 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b6eh5xuj30j60c5ac0.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b77u8hdj30hs0vkada.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b7pd3csj30hs0vk3zh.jpg">
-<meta property="og:updated_time" content="2017-03-27T04:59:10.000Z">
+<meta property="og:updated_time" content="2017-05-16T18:04:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="娱乐向---Raspberry Pi搭建家庭影音娱乐系统">
 <meta name="twitter:description" content="Raspberry Pi比较入门的玩法就是用它来实现电视机机顶盒的一些功能，大家都知道树莓派上有大名鼎鼎的XBMC影音播放系统，安装完后完全可以当作网络机顶盒使用。但是我今天不会介绍XBMC，在我的方案里我通过树莓派将iPhone的音频直接输出到电视上，另外使用omxplayer进行视频播放。">
@@ -364,8 +364,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/嵌入式开发/" itemprop="url" rel="index">
-                    <span itemprop="name">嵌入式开发</span>
+                  <a href="/categories/Embedded-System/" itemprop="url" rel="index">
+                    <span itemprop="name">Embedded System</span>
                   </a>
                 </span>
 
@@ -421,26 +421,23 @@
 
       
         <ul>
-<li>Raspberry Pi比较入门的玩法就是用它来实现电视机机顶盒的一些功能，大家都知道树莓派上有大名鼎鼎的XBMC影音播放系统，安装完后完全可以当作网络机顶盒使用。但是我今天不会介绍XBMC，在我的方案里我通过树莓派将iPhone的音频直接输出到电视上，另外使用omxplayer进行视频播放。<a id="more"></a> 
-<h3 id="安装和配置无线网卡"><a href="#安装和配置无线网卡" class="headerlink" title="安装和配置无线网卡"></a>安装和配置无线网卡</h3>至于为什么要配置无线网卡，答案很简单—-电视机旁边没网线。我这儿正好有一块Ralink公司生产的RT2571无线网卡，把它连接到树莓派上，效果如图～ 因为我没鼠标和键盘，就只好先拿网线连路由用ssh配置无限网卡啦。<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b5fuongj30j60pk78p.jpg" alt="连接了RT2571的树莓派"><br>接下来使用:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dmesg | grep usb</div></pre></td></tr></table></figure>
-</li>
+<li>Raspberry Pi比较入门的玩法就是用它来实现电视机机顶盒的一些功能，大家都知道树莓派上有大名鼎鼎的XBMC影音播放系统，安装完后完全可以当作网络机顶盒使用。但是我今天不会介绍XBMC，在我的方案里我通过树莓派将iPhone的音频直接输出到电视上，另外使用omxplayer进行视频播放。 <a id="more"></a> ### 安装和配置无线网卡 至于为什么要配置无线网卡，答案很简单—电视机旁边没网线。我这儿正好有一块Ralink公司生产的RT2571无线网卡，把它连接到树莓派上，效果如图～ 因为我没鼠标和键盘，就只好先拿网线连路由用ssh配置无限网卡啦。<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b5fuongj30j60pk78p.jpg" alt="连接了RT2571的树莓派"> 接下来使用: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dmesg | grep usb</div></pre></td></tr></table></figure></li>
 </ul>
-<p>看下无线网卡识别是否正常，找到输出的信息中有这些:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[    3.340509] usb 1-1.3: Product: 54M.USB.......</div><div class="line">[    3.346769] usb 1-1.3: Manufacturer: Ralink</div></pre></td></tr></table></figure></p>
-<p>说明网卡已经正确识别，测试下能否搜索到无线信号:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo iwlist wlan0 scan</div></pre></td></tr></table></figure></p>
-<p>结果见下图:<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b6eh5xuj30j60c5ac0.jpg" alt="screenshot"><br>接下来配置无线网卡，使用vim打开网络配置文件:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim /etc/network/interfaces</div></pre></td></tr></table></figure></p>
-<p>我的配置文件像这样:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"># interfaces(5) file used by ifup(8) and ifdown(8)</div><div class="line"># Please note that this file is written to be used with dhcpcd</div><div class="line"># For static IP, consult /etc/dhcpcd.conf and &apos;man dhcpcd.conf&apos;</div><div class="line"># Include files from /etc/network/interfaces.d:</div><div class="line">source-directory /etc/network/interfaces.d</div><div class="line">auto lo</div><div class="line">#iface lo inet loopback</div><div class="line">iface eth0 inet dhcp</div><div class="line">auto wlan0</div><div class="line">allow-hotplug wlan0</div><div class="line"># iface wlan0 inet manual</div><div class="line"># wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf</div><div class="line"># iface default inet dhcp</div><div class="line">iface wlan0 inet dhcp</div><div class="line">wpa-ssid &quot;yourssid&quot;</div><div class="line">wpa-psk &quot;password&quot;</div></pre></td></tr></table></figure></p>
-<p>将其中的<code>wpa-ssid</code>和<code>wpa-psk</code>换成你的无线网络名和密码即可。<br>一般来说重新启动下树莓派无线网络即可自动连接。</p>
-<h3 id="Shairport让树莓派支持AirPlay"><a href="#Shairport让树莓派支持AirPlay" class="headerlink" title="Shairport让树莓派支持AirPlay"></a>Shairport让树莓派支持AirPlay</h3><p>首先介绍下AirPlay，内容来源<a href="https://support.apple.com/zh-cn/HT204289" target="_blank" rel="external">Apple support</a>:  </p>
-<blockquote>
-<p>借助 AirPlay，您可以将音乐、照片和视频流化到 Apple TV，或者将音乐流化到 AirPort Express 或已启用 AirPlay 的扬声器。借助 AirPlay 镜像，您可以在 Apple TV 上显示 iOS 屏幕。  </p>
-</blockquote>
-<p>我们通过一个开源软件shairport让树莓派支持Apple的AirPlay。你可以提前连接独立声卡和音响。至于为什么需要独立声卡，你可以插上耳机感受下树莓派的底噪，音质感人～</p>
-<h4 id="安装shairport及其依赖包"><a href="#安装shairport及其依赖包" class="headerlink" title="安装shairport及其依赖包"></a>安装shairport及其依赖包</h4><p>在终端执行如下命令:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install  libao-dev libssl-dev git avahi-utils libwww-perl</div><div class="line">sudo apt-get install libcrypt-openssl-rsa-perl libio-socket-inet6-perl  libmodule-build-perl</div></pre></td></tr></table></figure></p>
-<p>然后在合适的地方建个文件夹，cd到文件夹目录接着:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/njh/perl-net-sdp.git</div><div class="line">cd perl-net-sdp</div><div class="line">perl Build.PL</div><div class="line">./Build</div><div class="line">./Build test</div><div class="line">sudo ./Build install</div><div class="line">cd ..</div><div class="line">git clone https://github.com/abrasive/shairport.git</div><div class="line">cd shairport</div><div class="line">make</div></pre></td></tr></table></figure></p>
-<p>运行shairport:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./shairport -a &quot;raspberry pi&quot;</div></pre></td></tr></table></figure></p>
-<p>之后在iPhone或者iPad上就可以看到这个AirPlay的选项，如图:<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b77u8hdj30hs0vkada.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b7pd3csj30hs0vk3zh.jpg" alt=""><br>享受音乐吧(☆_☆)</p>
-<h3 id="omxplayer播放器"><a href="#omxplayer播放器" class="headerlink" title="omxplayer播放器"></a>omxplayer播放器</h3><p>omxplayer是没有图形界面的，只能通过命令行来操作，不过它麻雀虽小五脏具全。<br>在终端中直接输入omxplayer就会出现相关的帮助信息，还给出了示例。在这里我就不介绍它的具体用法了。   </p>
-<h3 id="一点心得"><a href="#一点心得" class="headerlink" title="一点心得"></a>一点心得</h3><p>因为开源硬件得天独厚的软件生态，树莓派可DIY的东西被无限延伸。操作起来也并不像人们想象的那么复杂，不是计算机相关专业的同学们也可以快速上手。在我这次的尝试中发现了一些小小的问题。可能是树莓派制作成本的限制，其音频输出相当的糟糕，干扰非常严重。想用树莓派直接用HDMI连接电视做高清机顶盒的同学们一定记得给树莓配上一块独立声卡，HDMI的音频输出也是相当糟糕=)</p>
+<p>看下无线网卡识别是否正常，找到输出的信息中有这些: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[    3.340509] usb 1-1.3: Product: 54M.USB.......</div><div class="line">[    3.346769] usb 1-1.3: Manufacturer: Ralink</div></pre></td></tr></table></figure></p>
+<p>说明网卡已经正确识别，测试下能否搜索到无线信号: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo iwlist wlan0 scan</div></pre></td></tr></table></figure></p>
+<p>结果见下图: <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b6eh5xuj30j60c5ac0.jpg" alt="screenshot"> 接下来配置无线网卡，使用vim打开网络配置文件: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim /etc/network/interfaces</div></pre></td></tr></table></figure></p>
+<p>我的配置文件像这样: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"># interfaces(5) file used by ifup(8) and ifdown(8)</div><div class="line"># Please note that this file is written to be used with dhcpcd</div><div class="line"># For static IP, consult /etc/dhcpcd.conf and &apos;man dhcpcd.conf&apos;</div><div class="line"># Include files from /etc/network/interfaces.d:</div><div class="line">source-directory /etc/network/interfaces.d</div><div class="line">auto lo</div><div class="line">#iface lo inet loopback</div><div class="line">iface eth0 inet dhcp</div><div class="line">auto wlan0</div><div class="line">allow-hotplug wlan0</div><div class="line"># iface wlan0 inet manual</div><div class="line"># wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf</div><div class="line"># iface default inet dhcp</div><div class="line">iface wlan0 inet dhcp</div><div class="line">wpa-ssid &quot;yourssid&quot;</div><div class="line">wpa-psk &quot;password&quot;</div></pre></td></tr></table></figure></p>
+<p>将其中的<code>wpa-ssid</code>和<code>wpa-psk</code>换成你的无线网络名和密码即可。 一般来说重新启动下树莓派无线网络即可自动连接。 ### Shairport让树莓派支持AirPlay 首先介绍下AirPlay，内容来源<a href="https://support.apple.com/zh-cn/HT204289" target="_blank" rel="external">Apple support</a>:<br>
+&gt; 借助 AirPlay，您可以将音乐、照片和视频流化到 Apple TV，或者将音乐流化到 AirPort Express 或已启用 AirPlay 的扬声器。借助 AirPlay 镜像，您可以在 Apple TV 上显示 iOS 屏幕。</p>
+<p>我们通过一个开源软件shairport让树莓派支持Apple的AirPlay。你可以提前连接独立声卡和音响。至于为什么需要独立声卡，你可以插上耳机感受下树莓派的底噪，音质感人～ #### 安装shairport及其依赖包 在终端执行如下命令: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install  libao-dev libssl-dev git avahi-utils libwww-perl</div><div class="line">sudo apt-get install libcrypt-openssl-rsa-perl libio-socket-inet6-perl  libmodule-build-perl</div></pre></td></tr></table></figure></p>
+<p>然后在合适的地方建个文件夹，cd到文件夹目录接着: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/njh/perl-net-sdp.git</div><div class="line">cd perl-net-sdp</div><div class="line">perl Build.PL</div><div class="line">./Build</div><div class="line">./Build test</div><div class="line">sudo ./Build install</div><div class="line">cd ..</div><div class="line">git clone https://github.com/abrasive/shairport.git</div><div class="line">cd shairport</div><div class="line">make</div></pre></td></tr></table></figure></p>
+<p>运行shairport: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./shairport -a &quot;raspberry pi&quot;</div></pre></td></tr></table></figure></p>
+<p>之后在iPhone或者iPad上就可以看到这个AirPlay的选项，如图: <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b77u8hdj30hs0vkada.jpg"> <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b7pd3csj30hs0vk3zh.jpg"> 享受音乐吧(☆_☆)</p>
+<h3 id="omxplayer播放器">omxplayer播放器</h3>
+<p>omxplayer是没有图形界面的，只能通过命令行来操作，不过它麻雀虽小五脏具全。<br>
+在终端中直接输入omxplayer就会出现相关的帮助信息，还给出了示例。在这里我就不介绍它的具体用法了。</p>
+<h3 id="一点心得">一点心得</h3>
+<p>因为开源硬件得天独厚的软件生态，树莓派可DIY的东西被无限延伸。操作起来也并不像人们想象的那么复杂，不是计算机相关专业的同学们也可以快速上手。在我这次的尝试中发现了一些小小的问题。可能是树莓派制作成本的限制，其音频输出相当的糟糕，干扰非常严重。想用树莓派直接用HDMI连接电视做高清机顶盒的同学们一定记得给树莓配上一块独立声卡，HDMI的音频输出也是相当糟糕=)</p>
 
       
     </div>
@@ -493,8 +490,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/03/06/2016-03-13-tor/" rel="prev" title="使用tor隐藏自己的踪迹和深网">
-                使用tor隐藏自己的踪迹和深网 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/03/06/2016-03-06-sqlmap/" rel="prev" title="Sqlmap部分参数说明">
+                Sqlmap部分参数说明 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -574,7 +571,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -585,7 +582,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -596,7 +593,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -644,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装和配置无线网卡"><span class="nav-number">1.</span> <span class="nav-text">安装和配置无线网卡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shairport让树莓派支持AirPlay"><span class="nav-number">2.</span> <span class="nav-text">Shairport让树莓派支持AirPlay</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装shairport及其依赖包"><span class="nav-number">2.1.</span> <span class="nav-text">安装shairport及其依赖包</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#omxplayer播放器"><span class="nav-number">3.</span> <span class="nav-text">omxplayer播放器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一点心得"><span class="nav-number">4.</span> <span class="nav-text">一点心得</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#omxplayer播放器"><span class="nav-number">1.</span> <span class="nav-text">omxplayer播放器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一点心得"><span class="nav-number">2.</span> <span class="nav-text">一点心得</span></a></li></ol></div>
             
 
           </div>

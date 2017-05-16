@@ -89,7 +89,7 @@
 
 
 
-<meta name="description" content="Can machines think? —AM Turing
+<meta name="description" content="Can machines think? –AM Turing
 
 
 写在文前：最近在学机器学习的相关知识，由于相关文档和更新速度的关系选择了当前较为流行的Keras，一个基于python的深度学习框架。学校正在进行一个基于深度学习/强化学习(reinforcement learning)控制水下滑翔机的项目。由于众所周知的原因代码和数据要求保密，所以这篇文章将水下滑翔机作为问题背景介绍一下用Ker">
@@ -97,7 +97,7 @@
 <meta property="og:title" content="神经网络库Keras解决Regression问题">
 <meta property="og:url" content="https://hsmouc.com/2017/04/01/2017-04-01-regressionbykeras/index.html">
 <meta property="og:site_name" content="梦的小窝">
-<meta property="og:description" content="Can machines think? —AM Turing
+<meta property="og:description" content="Can machines think? –AM Turing
 
 
 写在文前：最近在学机器学习的相关知识，由于相关文档和更新速度的关系选择了当前较为流行的Keras，一个基于python的深度学习框架。学校正在进行一个基于深度学习/强化学习(reinforcement learning)控制水下滑翔机的项目。由于众所周知的原因代码和数据要求保密，所以这篇文章将水下滑翔机作为问题背景介绍一下用Ker">
@@ -105,10 +105,10 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe7kqqgy8vj30cq0730su.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe7l7uflunj30r10joq4t.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe99tifihfj30sp0ngq51.jpg">
-<meta property="og:updated_time" content="2017-04-03T02:15:18.000Z">
+<meta property="og:updated_time" content="2017-05-16T18:07:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="神经网络库Keras解决Regression问题">
-<meta name="twitter:description" content="Can machines think? —AM Turing
+<meta name="twitter:description" content="Can machines think? –AM Turing
 
 
 写在文前：最近在学机器学习的相关知识，由于相关文档和更新速度的关系选择了当前较为流行的Keras，一个基于python的深度学习框架。学校正在进行一个基于深度学习/强化学习(reinforcement learning)控制水下滑翔机的项目。由于众所周知的原因代码和数据要求保密，所以这篇文章将水下滑翔机作为问题背景介绍一下用Ker">
@@ -373,8 +373,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
+                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Science</span>
                   </a>
                 </span>
 
@@ -430,33 +430,42 @@
 
       
         <blockquote>
-<p>Can machines think? —AM Turing</p>
+<p>Can machines think? –AM Turing</p>
 </blockquote>
 <ul>
 <li>写在文前：最近在学机器学习的相关知识，由于相关文档和更新速度的关系选择了当前较为流行的<a href="https://keras.io/" target="_blank" rel="external">Keras</a>，一个基于python的深度学习框架。学校正在进行一个基于深度学习/强化学习(reinforcement learning)控制水下滑翔机的项目。由于众所周知的原因代码和数据要求保密，所以这篇文章将水下滑翔机作为问题背景介绍一下用Keras和Sequential模型处理回归问题。</li>
 </ul>
 <a id="more"></a>
-<h2 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h2><p>水下滑翔机(Underwater glider)是通过两个方向上的可动质量块改变横滚角度和航向角度的，同时角度和滑翔机的深度和油量也有关系。现在我们想利用已知的可动质量块/深度／油量数据预测滑翔机的姿态。我们可以建立一个三输入两输出的Sequential模型，利用已有数据和神经网络算法解决这个问题。下面用两个例子说明怎么使用Keras较好地做回归。</p>
-<h2 id="Regression的两个例子"><a href="#Regression的两个例子" class="headerlink" title="Regression的两个例子"></a>Regression的两个例子</h2><p>下面的内容包括利用Keras拟合一个单输入单输出的函数和一个双输入单输出的函数。</p>
-<h3 id="单输入单输出函数拟合"><a href="#单输入单输出函数拟合" class="headerlink" title="单输入单输出函数拟合"></a>单输入单输出函数拟合</h3><p>这里使用的函数为：  </p>
-<script type="math/tex; mode=display">y=cos(arctan(x))</script><p><code>Sequential</code>是多个网络层的线性堆叠。在这个问题中，我们输入量是一个一阶张量，所以可以通过<code>input_dim</code>来指定输入维度。接下来我们可以建立一个最简单的全连接网络，最后一层的<code>Dense</code>维度同样为1。同时由于输出量有正有负，使用<code>tanh</code>作为激活函数。全部代码如下： </p>
+<h2 id="问题背景">问题背景</h2>
+<p>水下滑翔机(Underwater glider)是通过两个方向上的可动质量块改变横滚角度和航向角度的，同时角度和滑翔机的深度和油量也有关系。现在我们想利用已知的可动质量块/深度／油量数据预测滑翔机的姿态。我们可以建立一个三输入两输出的Sequential模型，利用已有数据和神经网络算法解决这个问题。下面用两个例子说明怎么使用Keras较好地做回归。</p>
+<h2 id="regression的两个例子">Regression的两个例子</h2>
+<p>下面的内容包括利用Keras拟合一个单输入单输出的函数和一个双输入单输出的函数。</p>
+<h3 id="单输入单输出函数拟合">单输入单输出函数拟合</h3>
+<p>这里使用的函数为：<br>
+<span class="math display">\[y=cos(arctan(x))\]</span><br>
+<code>Sequential</code>是多个网络层的线性堆叠。在这个问题中，我们输入量是一个一阶张量，所以可以通过<code>input_dim</code>来指定输入维度。接下来我们可以建立一个最简单的全连接网络，最后一层的<code>Dense</code>维度同样为1。同时由于输出量有正有负，使用<code>tanh</code>作为激活函数。全部代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> keras</div><div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Input,Dense,Activation,Reshape,Flatten,Dropout</div><div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential,Model</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"></div><div class="line">X_in = np.linspace(<span class="number">-10.</span>,<span class="number">10.</span>,<span class="number">1000</span>)</div><div class="line"><span class="keyword">print</span> X_in</div><div class="line">Y_in = np.cos(np.tanh(X_in))</div><div class="line"></div><div class="line">X_verify = np.linspace(<span class="number">-10.</span>,<span class="number">10.</span>,<span class="number">1000</span>)</div><div class="line">Y_verify = np.cos(np.tanh(X_verify))</div><div class="line"></div><div class="line">m = Sequential()      </div><div class="line">m.add(Dense(<span class="number">128</span>,kernel_initializer=<span class="string">'uniform'</span>, input_dim=<span class="number">1</span>))</div><div class="line">m.add(Activation(<span class="string">'relu'</span>))</div><div class="line">m.add(Dense(<span class="number">64</span>,activation=<span class="string">'relu'</span>))</div><div class="line">m.add(Dense(<span class="number">1</span>,activation=<span class="string">'tanh'</span>))</div><div class="line">m.summary()</div><div class="line">m.compile(optimizer=<span class="string">'sgd'</span>,loss=<span class="string">'mean_absolute_error'</span>, metric=[<span class="string">'accuracy'</span>])</div><div class="line">m.fit(X_in,Y_in,epochs=<span class="number">1000</span>,batch_size=<span class="number">64</span>)</div><div class="line"></div><div class="line">y_verify = m.predict(X_verify)</div><div class="line">x = np.linspace(<span class="number">1</span>,len(y_verify),len(y_verify))</div><div class="line">line_predict, = plt.plot(x,y_verify,label=<span class="string">"perdict value"</span>)</div><div class="line">line_theoretical, = plt.plot(x,Y_verify,label=<span class="string">"theoretical value"</span>)</div><div class="line">plt.legend(handles=[line_predict,line_theoretical])</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
-<p>代码大约分为三个部分，首先使用<code>np.linspace</code>生成数据，接下来将生成的<code>x</code>和计算得到的<code>y</code>扔进建好的模型里并<code>fit</code>。最后使用<code>matplotlib</code>绘图，观察预测值和真实值。得到的图像如下：<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe7k69ci03j30qh0iz0u0.jpg" alt="运行结果"></p>
-<p><em>Tips</em>：在做这个的时候发现了几个小问题：  </p>
-<ol>
+<p>代码大约分为三个部分，首先使用<code>np.linspace</code>生成数据，接下来将生成的<code>x</code>和计算得到的<code>y</code>扔进建好的模型里并<code>fit</code>。最后使用<code>matplotlib</code>绘图，观察预测值和真实值。得到的图像如下： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe7k69ci03j30qh0iz0u0.jpg" alt="运行结果"></p>
+<p><em>Tips</em>：在做这个的时候发现了几个小问题：</p>
+<ol style="list-style-type: decimal">
 <li><code>batch_size</code>不宜过小，不然在数据集上不收敛</li>
 <li>要有足量的数据用于训练，否则容易欠拟合，误差极大</li>
 <li>准确来说应该分训练集和测试集验证模型的泛化性能，我没干是因为懒</li>
 </ol>
-<h3 id="双输入单输出函数拟合"><a href="#双输入单输出函数拟合" class="headerlink" title="双输入单输出函数拟合"></a>双输入单输出函数拟合</h3><p>这里使用的函数是：  </p>
-<script type="math/tex; mode=display">z=sin(\sqrt{x^2+y^2})</script><p>解决这个问题我们需要引入一个<code>Merge</code>层将多个<code>Sequential</code>合并到一个输出，结构如下图所示，图片来自<a href="https://keras-cn.readthedocs.io/en/latest/getting_started/sequential_model/" target="_blank" rel="external">Keras中文文档</a><br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe7kqqgy8vj30cq0730su.jpg" alt=""><br>在这个问题中，我们要将两个一维张量输入模型，需添加一个<code>LSTM</code>层，但是我发现这个所谓的<code>LSTM</code>层并不能传入一个一维张量，要求数据的<code>shape</code>必须是二维或以上，不知道是我的打开方式不对还是其他原因，这里存在疑问。为了解决这个问题，我就把输入的两个一维张量<code>reshape</code>了。下面是代码：</p>
+<h3 id="双输入单输出函数拟合">双输入单输出函数拟合</h3>
+<p>这里使用的函数是：<br>
+<span class="math display">\[z=sin(\sqrt{x^2+y^2})\]</span> 解决这个问题我们需要引入一个<code>Merge</code>层将多个<code>Sequential</code>合并到一个输出，结构如下图所示，图片来自<a href="https://keras-cn.readthedocs.io/en/latest/getting_started/sequential_model/" target="_blank" rel="external">Keras中文文档</a> <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe7kqqgy8vj30cq0730su.jpg"> 在这个问题中，我们要将两个一维张量输入模型，需添加一个<code>LSTM</code>层，但是我发现这个所谓的<code>LSTM</code>层并不能传入一个一维张量，要求数据的<code>shape</code>必须是二维或以上，不知道是我的打开方式不对还是其他原因，这里存在疑问。为了解决这个问题，我就把输入的两个一维张量<code>reshape</code>了。下面是代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> keras</div><div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Input,Flatten,Dense,LSTM,merge</div><div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential,Model</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</div><div class="line"><span class="keyword">from</span>  mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"></div><div class="line">fig = plt.figure()</div><div class="line">ax = fig.gca(projection=<span class="string">'3d'</span>)</div><div class="line"></div><div class="line">x = np.arange(<span class="number">-10.</span>,<span class="number">10.</span>,<span class="number">0.01</span>)</div><div class="line">y = np.arange(<span class="number">-10.</span>,<span class="number">10.</span>,<span class="number">0.01</span>)</div><div class="line">z = np.sin(np.sqrt(x**<span class="number">2</span>+y**<span class="number">2</span>))</div><div class="line"></div><div class="line">x = x.reshape(<span class="number">-1</span>,<span class="number">1</span>,<span class="number">1</span>)</div><div class="line">y = y.reshape(<span class="number">-1</span>,<span class="number">1</span>,<span class="number">1</span>)</div><div class="line"></div><div class="line">x_train_a=Input(shape=(<span class="number">1</span>,<span class="number">1</span>))</div><div class="line">x_train_b=Input(shape=(<span class="number">1</span>,<span class="number">1</span>))</div><div class="line">shared_lstm = LSTM(<span class="number">64</span>)</div><div class="line"></div><div class="line">encoded_a = shared_lstm(x_train_a)</div><div class="line">encoded_b = shared_lstm(x_train_b)</div><div class="line"></div><div class="line"></div><div class="line">merged_vector = merge([encoded_a,encoded_b],mode=<span class="string">'concat'</span>,concat_axis=<span class="number">-1</span>)</div><div class="line"></div><div class="line">model = Dense(<span class="number">128</span>,activation=<span class="string">'relu'</span>)(merged_vector)</div><div class="line">model = Dense(<span class="number">64</span>,activation=<span class="string">'relu'</span>)(model)</div><div class="line">predictions = Dense(<span class="number">1</span>,activation=<span class="string">'tanh'</span>)(model)</div><div class="line">m = Model(input=[x_train_a,x_train_b],output = predictions)</div><div class="line">m.compile(optimizer=<span class="string">'sgd'</span>,loss=<span class="string">'mean_absolute_error'</span>,metric=[<span class="string">'accuracy'</span>])</div><div class="line">m.summary()</div><div class="line"></div><div class="line">m.fit([x,y],z,epochs=<span class="number">1600</span>,batch_size=<span class="number">256</span>)</div><div class="line"></div><div class="line">z_verify = m.predict([x,y])</div><div class="line">z_verify = z_verify.reshape(<span class="number">-1</span>)</div><div class="line">x = x.reshape(<span class="number">-1</span>)</div><div class="line">y = y.reshape(<span class="number">-1</span>)</div><div class="line">line_predict, = ax.plot(x,y,z_verify,label=<span class="string">'predict value'</span>)</div><div class="line">line_theoretical, = ax.plot(x,y,z,label=<span class="string">'theoretical value'</span>)</div><div class="line">plt.legend(handles=[line_predict,line_theoretical])</div><div class="line"></div><div class="line">plt.show()</div></pre></td></tr></table></figure>
-<p>这个模型和前面提到的是一样的，实现的效果基本上令人满意。程序结构和上一个基本相同，分为三个部分：生成数据，训练数据，验证数据。下面是程序运行的结果图，使用<code>Matplotlib</code>绘制：<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe7l7uflunj30r10joq4t.jpg" alt="运行结果"></p>
-<h3 id="单输入双输出函数拟合"><a href="#单输入双输出函数拟合" class="headerlink" title="单输入双输出函数拟合"></a>单输入双输出函数拟合</h3><p>这里使用了两个函数：  </p>
-<script type="math/tex; mode=display">y=cos(arctan(x))</script><script type="math/tex; mode=display">y=sin(x)</script><p>在这个问题中我们需要增加一个输出层，代码如下：</p>
+<p>这个模型和前面提到的是一样的，实现的效果基本上令人满意。程序结构和上一个基本相同，分为三个部分：生成数据，训练数据，验证数据。下面是程序运行的结果图，使用<code>Matplotlib</code>绘制： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe7l7uflunj30r10joq4t.jpg" alt="运行结果"></p>
+<h3 id="单输入双输出函数拟合">单输入双输出函数拟合</h3>
+<p>这里使用了两个函数：<br>
+<span class="math display">\[y=cos(arctan(x))\]</span> <span class="math display">\[y=sin(x)\]</span><br>
+在这个问题中我们需要增加一个输出层，代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> keras</div><div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Input,Dense,Activation,Reshape,Flatten,Dropout</div><div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential,Model</div><div class="line"><span class="keyword">from</span> keras.callbacks <span class="keyword">import</span> EarlyStopping</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"></div><div class="line">X_in = np.linspace(<span class="number">-10.</span>,<span class="number">10.</span>,<span class="number">2000</span>)</div><div class="line">Y_inA = np.cos(np.tanh(X_in))</div><div class="line">Y_inB = np.sin(X_in)</div><div class="line"></div><div class="line">Y_verifyA = np.cos(np.tanh(X_in))</div><div class="line">Y_verifyB = np.sin(X_in)</div><div class="line"></div><div class="line">X_in = X_in.reshape(<span class="number">-1</span>,<span class="number">1</span>,<span class="number">1</span>)</div><div class="line">Y_inA = Y_inA.reshape(<span class="number">-1</span>,<span class="number">1</span>,<span class="number">1</span>)</div><div class="line">Y_inB = Y_inB.reshape(<span class="number">-1</span>,<span class="number">1</span>,<span class="number">1</span>)</div><div class="line"></div><div class="line">inputs = Input(shape=(<span class="number">1</span>,<span class="number">1</span>))</div><div class="line">m = Dense(<span class="number">64</span>,activation=<span class="string">'relu'</span>)(inputs)</div><div class="line">m = Dense(<span class="number">64</span>,activation=<span class="string">'relu'</span>)(m)</div><div class="line">outputA = Dense(<span class="number">1</span>,activation=<span class="string">'tanh'</span>)(m)</div><div class="line">outputB = Dense(<span class="number">1</span>,activation=<span class="string">'tanh'</span>)(m)</div><div class="line"></div><div class="line">m = Model(inputs=[inputs], outputs=[outputA, outputB])</div><div class="line">m.compile(optimizer=<span class="string">'adam'</span>,loss=<span class="string">'mean_absolute_error'</span>,metric=[<span class="string">'accuracy'</span>])</div><div class="line">m.summary()</div><div class="line">early_stopping = EarlyStopping(monitor=<span class="string">'loss'</span>, patience=<span class="number">15</span>)</div><div class="line">m.fit(X_in,[Y_inA,Y_inB],epochs=<span class="number">1000</span>,batch_size=<span class="number">128</span>,callbacks=[early_stopping])</div><div class="line"></div><div class="line">[y_verifyA,y_verifyB] = m.predict(X_in)</div><div class="line">y_verifyA = y_verifyA.reshape(<span class="number">-1</span>)</div><div class="line">y_verifyB = y_verifyB.reshape(<span class="number">-1</span>)</div><div class="line"></div><div class="line">x = np.linspace(<span class="number">1</span>,len(y_verifyA),len(y_verifyA))</div><div class="line">p1 = plt.subplot(<span class="number">211</span>)</div><div class="line">p2 = plt.subplot(<span class="number">212</span>)</div><div class="line">line_predictA, = p1.plot(x,y_verifyA,label=<span class="string">"predict value A"</span>)</div><div class="line">line_theoreticalA, = p1.plot(x,Y_verifyA,label=<span class="string">"theoretical value A"</span>)</div><div class="line">p1.legend(handles=[line_predictA,line_theoreticalA])</div><div class="line">line_predictB, = p2.plot(x,y_verifyB,label=<span class="string">"predict value B"</span>)</div><div class="line">line_theoreticalB, = p2.plot(x,Y_verifyB,label=<span class="string">"theoretical value B"</span>)</div><div class="line">p2.legend(handles=[line_predictB,line_theoreticalB])</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
-<p>这个说起来并没有什么难的，值的一提的是，在解决这个问题的时候顺便学会了<code>early_stopping</code>的使用。两个参数一个是<code>monitor</code>，监视<code>loss</code>就可以；另一个参数<code>patience</code>填入一个整数<code>x</code>，若训练过程中<code>monitor</code>监视的值不减小<code>x</code>次，那么就提前结束训练。这样<code>epoch</code>就可以往大了设置了。<br>程序运行的结果如下图所示：<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe99tifihfj30sp0ngq51.jpg" alt="运行结果"></p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>嗯，没什么总结的，就这样。愚人节快乐(/ω＼)</p>
+<p>这个说起来并没有什么难的，值的一提的是，在解决这个问题的时候顺便学会了<code>early_stopping</code>的使用。两个参数一个是<code>monitor</code>，监视<code>loss</code>就可以；另一个参数<code>patience</code>填入一个整数<code>x</code>，若训练过程中<code>monitor</code>监视的值不减小<code>x</code>次，那么就提前结束训练。这样<code>epoch</code>就可以往大了设置了。<br>
+程序运行的结果如下图所示： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe99tifihfj30sp0ngq51.jpg" alt="运行结果"></p>
+<h2 id="小结">小结</h2>
+<p>嗯，没什么总结的，就这样。愚人节快乐(/ω＼)</p>
 
       
     </div>
@@ -592,7 +601,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -603,7 +612,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -614,7 +623,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -662,7 +671,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题背景"><span class="nav-number">1.</span> <span class="nav-text">问题背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Regression的两个例子"><span class="nav-number">2.</span> <span class="nav-text">Regression的两个例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单输入单输出函数拟合"><span class="nav-number">2.1.</span> <span class="nav-text">单输入单输出函数拟合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双输入单输出函数拟合"><span class="nav-number">2.2.</span> <span class="nav-text">双输入单输出函数拟合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单输入双输出函数拟合"><span class="nav-number">2.3.</span> <span class="nav-text">单输入双输出函数拟合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">3.</span> <span class="nav-text">小结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题背景"><span class="nav-number">1.</span> <span class="nav-text">问题背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#regression的两个例子"><span class="nav-number">2.</span> <span class="nav-text">Regression的两个例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单输入单输出函数拟合"><span class="nav-number">2.1.</span> <span class="nav-text">单输入单输出函数拟合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双输入单输出函数拟合"><span class="nav-number">2.2.</span> <span class="nav-text">双输入单输出函数拟合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单输入双输出函数拟合"><span class="nav-number">2.3.</span> <span class="nav-text">单输入双输出函数拟合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">3.</span> <span class="nav-text">小结</span></a></li></ol></div>
             
 
           </div>

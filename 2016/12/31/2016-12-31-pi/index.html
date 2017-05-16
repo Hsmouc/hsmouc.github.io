@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe19xvcvutj31400p0dpd.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe19yqdm5lj30o20k8te7.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe19z9h2a1j30m80goab4.jpg">
-<meta property="og:updated_time" content="2017-03-27T04:17:02.000Z">
+<meta property="og:updated_time" content="2017-05-16T18:07:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于卷积神经网络(CNN)的智能循迹小车">
 <meta name="twitter:description" content="上篇文章讲到了用树莓派和openCV库来做简单的循迹，在这篇文章里我们将尝试用树莓派做一些更酷的事情。我们不希望给小车具体的规则(explicitly programmed)去做循迹，而是让它自己从已有的数据集(包括图像与转向角)学习如何循迹，没错这就是机器学习。">
@@ -363,8 +363,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/嵌入式开发/" itemprop="url" rel="index">
-                    <span itemprop="name">嵌入式开发</span>
+                  <a href="/categories/Embedded-System/" itemprop="url" rel="index">
+                    <span itemprop="name">Embedded System</span>
                   </a>
                 </span>
 
@@ -420,36 +420,37 @@
 
       
         <ul>
-<li><p>上篇文章讲到了用树莓派和openCV库来做简单的循迹，在这篇文章里我们将尝试用树莓派做一些更酷的事情。我们不希望给小车具体的规则(explicitly programmed)去做循迹，而是让它自己从已有的数据集(包括图像与转向角)学习如何循迹，没错这就是机器学习。</p>
-<a id="more"></a> 
-<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3></li>
-<li>首要要提到的是，我还有一些坑没有填完，这条路并没有完全走通。还没有解决的问题是：<strong>我使用的Google Tensorflow不支持ARM架构的CPU，所以理论上没有办法在树莓派上训练和使用神经网络算法。</strong><br>模型是在x64的ubuntu上训练出来的。在这篇文章里不会详细介绍机器学习以及卷积神经网络算法的原理，而是侧重于说明功能的实现。<h4 id="硬件要求"><a href="#硬件要求" class="headerlink" title="硬件要求"></a>硬件要求</h4></li>
+<li>上篇文章讲到了用树莓派和openCV库来做简单的循迹，在这篇文章里我们将尝试用树莓派做一些更酷的事情。我们不希望给小车具体的规则(explicitly programmed)去做循迹，而是让它自己从已有的数据集(包括图像与转向角)学习如何循迹，没错这就是机器学习。</li>
 </ul>
-<ol>
-<li>Raspberry Pi 3</li>
-<li>至少4GB内存的计算机 Intel x64架构<h4 id="软件部分"><a href="#软件部分" class="headerlink" title="软件部分"></a>软件部分</h4></li>
-<li>Python 2.7</li>
-<li>Google Tensorflow/TFlearn</li>
-<li>OS:ubuntu ARM 16.04/ubuntu x64 16.04<h4 id="总体思路"><a href="#总体思路" class="headerlink" title="总体思路"></a>总体思路</h4>循迹赛道上篇文章介绍过这里不再附图解释。<br>第一部分是数据的采集，思路是利用Python的定时器按固定周期拍照，拍完照片做两件事情：</li>
-</ol>
-<ul>
-<li>处理图像，灰度化由阈值判断赛道边界，并求出合理转向角。</li>
-<li>储存图像和转向角。<br>第二部分是由采集的数据训练神经网络，并观察误差情况。<br>第三部分则是使用模型，将摄像头实时拍到的图像传进模型，并有模型预测出转向情况，操纵舵机转向。</li>
-</ul>
-<h4 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h4><h5 id="训练数据采集"><a href="#训练数据采集" class="headerlink" title="训练数据采集"></a>训练数据采集</h5><p>第一部分图像的处理并求转向角在前一篇文章中已经介绍。所以在这里只补充一下数据的存储规则。<br>数据的存储规则是我自己订的，独一无二。好吧，我承认它很傻:-I。机器学习界广泛使用的数据存储格式是<code>.csv</code>，可是我是一个Python渣呀，我的具体代码是这样子的：</p>
+<p><a id="more"></a> ### 概述 - 首要要提到的是，我还有一些坑没有填完，这条路并没有完全走通。还没有解决的问题是：<strong>我使用的Google Tensorflow不支持ARM架构的CPU，所以理论上没有办法在树莓派上训练和使用神经网络算法。</strong><br>
+模型是在x64的ubuntu上训练出来的。在这篇文章里不会详细介绍机器学习以及卷积神经网络算法的原理，而是侧重于说明功能的实现。 #### 硬件要求 1. Raspberry Pi 3 2. 至少4GB内存的计算机 Intel x64架构 #### 软件部分 1. Python 2.7 2. Google Tensorflow/TFlearn 3. OS:ubuntu ARM 16.04/ubuntu x64 16.04 #### 总体思路 循迹赛道上篇文章介绍过这里不再附图解释。<br>
+第一部分是数据的采集，思路是利用Python的定时器按固定周期拍照，拍完照片做两件事情： - 处理图像，灰度化由阈值判断赛道边界，并求出合理转向角。 - 储存图像和转向角。<br>
+第二部分是由采集的数据训练神经网络，并观察误差情况。<br>
+第三部分则是使用模型，将摄像头实时拍到的图像传进模型，并有模型预测出转向情况，操纵舵机转向。</p>
+<h4 id="具体实现">具体实现</h4>
+<h5 id="训练数据采集">训练数据采集</h5>
+<p>第一部分图像的处理并求转向角在前一篇文章中已经介绍。所以在这里只补充一下数据的存储规则。<br>
+数据的存储规则是我自己订的，独一无二。好吧，我承认它很傻:-I。机器学习界广泛使用的数据存储格式是<code>.csv</code>，可是我是一个Python渣呀，我的具体代码是这样子的：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">fn = <span class="string">'img/'</span>+str(i)+<span class="string">'_'</span>+str(err)+<span class="string">'.jpg'</span></div><div class="line">cv2.imwrite(fn, im)</div></pre></td></tr></table></figure>
-<p>这两行代码每个处理周期跑一遍，会在<code>img</code>文件夹下创建一张图，命名规则为序号+下划线+转向偏差，图像格式为<code>.jpg</code>，到时候我们把数据输入网络的时候只要用正则表达式把它们分一下不就行了嘛。有了输入和输出我们就可以训练我们的模型了。<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe19xvcvutj31400p0dpd.jpg" alt="效果图"></p>
-<h5 id="训练数据读取"><a href="#训练数据读取" class="headerlink" title="训练数据读取"></a>训练数据读取</h5><p>首先我们通过正则表达式来提取转向角的数据，我们要做的就是获取这个文件夹里所以的文件名，然后按照下划线前面部分的序号对后面的转向数据排序。具体代码如下: </p>
+<p>这两行代码每个处理周期跑一遍，会在<code>img</code>文件夹下创建一张图，命名规则为序号+下划线+转向偏差，图像格式为<code>.jpg</code>，到时候我们把数据输入网络的时候只要用正则表达式把它们分一下不就行了嘛。有了输入和输出我们就可以训练我们的模型了。 <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe19xvcvutj31400p0dpd.jpg" alt="效果图"></p>
+<h5 id="训练数据读取">训练数据读取</h5>
+<p>首先我们通过正则表达式来提取转向角的数据，我们要做的就是获取这个文件夹里所以的文件名，然后按照下划线前面部分的序号对后面的转向数据排序。具体代码如下:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">img_rows, img_cols, img_depth = <span class="number">640</span>, <span class="number">480</span>, <span class="number">1</span></div><div class="line">array_len = <span class="number">1000</span> <span class="comment">#图像总数</span></div><div class="line">yArray = [<span class="number">0</span>]* array_len</div><div class="line">files=os.listdir(<span class="string">"/home/hsm/Desktop/img"</span>)</div><div class="line">files.sort()</div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(array_len):</div><div class="line">	files_re_a = re.split(<span class="string">r'\.'</span>, files[i])</div><div class="line">	files_re_b = re.split(<span class="string">r'\_'</span>, files_re_a[<span class="number">0</span>])</div><div class="line">	yArray[int(files_re_b[<span class="number">0</span>])<span class="number">-1</span>] = int(files_re_b[<span class="number">1</span>])</div><div class="line"></div><div class="line">Y_data = np.asarray(yArray)</div><div class="line">Y_train = Y_data.reshape(array_len,<span class="number">1</span>);</div><div class="line">Y_train = Y_train.astype(<span class="string">'float32'</span>)</div><div class="line">Y_train /= <span class="number">240</span>  <span class="comment">#归一化处理数据</span></div></pre></td></tr></table></figure>
-<p><code>re.split</code>函数可以切分字符串，我对文件名进行了两次切分，提取出了序号信息和转向信息。<br>完成转向信息的提取后，图像的数组就很容易构建，具体代码如下:</p>
+<p><code>re.split</code>函数可以切分字符串，我对文件名进行了两次切分，提取出了序号信息和转向信息。<br>
+完成转向信息的提取后，图像的数组就很容易构建，具体代码如下:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">img_num = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(array_len):</div><div class="line">    i = i + <span class="number">1</span></div><div class="line">    fn = <span class="string">'/home/hsm/Desktop/imgonly/'</span> + str(i) + <span class="string">'.jpg'</span></div><div class="line">    im=cv2.imread(fn,<span class="number">0</span>)</div><div class="line">    img_num.append(im)</div><div class="line"></div><div class="line">X_data=np.asarray(img_num)</div><div class="line"></div><div class="line"><span class="comment">#print X_data.shape</span></div><div class="line"></div><div class="line">X_train= X_data.reshape(array_len,img_rows,img_cols,<span class="number">1</span>)</div><div class="line">X_train = X_train.astype(<span class="string">'float32'</span>)</div><div class="line">X_train /= <span class="number">255</span></div></pre></td></tr></table></figure>
 <p>这里漏了一步，刚才提到我们图像命名非常的不科学，那么如何通过openCV按顺序读取它们并转换为灰度数组呢？我把刚才的图像文件夹复制了一份，并用macOS下的批量重命名工具将它们处理成按序号命名的图像了。</p>
-<h5 id="CNN卷积神经网络的建立与训练"><a href="#CNN卷积神经网络的建立与训练" class="headerlink" title="CNN卷积神经网络的建立与训练"></a>CNN卷积神经网络的建立与训练</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">net = tflearn.input_data(shape=[None, img_rows, img_cols, img_depth], name=&apos;input&apos;)</div><div class="line"></div><div class="line">net = tflearn.conv_2d(net, 8, [4, 5], strides=2, activation=&apos;relu&apos;)</div><div class="line"></div><div class="line">net = tflearn.conv_2d(net, 8, [4, 5], strides=2, activation=&apos;relu&apos;)</div><div class="line"></div><div class="line">net = tflearn.conv_2d(net, 16, [4, 5], strides=2, activation=&apos;relu&apos;)</div><div class="line"></div><div class="line">net = tflearn.conv_2d(net, 32, [2, 2], activation=&apos;relu&apos;)</div><div class="line"></div><div class="line">net = tflearn.fully_connected(net, 128, activation=&apos;relu&apos;)</div><div class="line"></div><div class="line">net = tflearn.dropout(net, 0.8)</div><div class="line"></div><div class="line">net = tflearn.fully_connected(net, 64, activation=&apos;relu&apos;)</div><div class="line">net = tflearn.dropout(net, 0.8)</div><div class="line"></div><div class="line">net = tflearn.fully_connected(net, 32, activation=&apos;relu&apos;)</div><div class="line">net = tflearn.dropout(net, 0.8)</div><div class="line"></div><div class="line">net = tflearn.fully_connected(net, 8, activation=&apos;relu&apos;)</div><div class="line">net = tflearn.dropout(net, 0.8)</div><div class="line"></div><div class="line">net = tflearn.fully_connected(net, 1, activation=&apos;tanh&apos;)</div><div class="line"></div><div class="line">net = tflearn.regression(net, loss=&apos;mean_square&apos;, metric=&apos;accuracy&apos;, learning_rate=1e-4, name=&apos;target&apos;)</div><div class="line"></div><div class="line">model = tflearn.DNN(net)</div><div class="line"></div><div class="line">model.fit(X_train, Y_train, n_epoch=10, batch_size=8,show_metric=True)</div><div class="line"></div><div class="line">model.save(&quot;/home/hsm/Desktop/model1/model1.tfl&quot;)</div></pre></td></tr></table></figure>
-<p>这里就不多做解释了，有兴趣的读者可以参考TFlearn的官方文档，写的非常详细，最后将训练好的模型存到指定的位置方便下次使用。<br>训练的过程：<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe19yqdm5lj30o20k8te7.jpg" alt="训练过程"><br>这里显示的精确度为1并不可靠。至于之前为什么强调内存问题，由于模型的训练非常吃内存，实测训练2770张图片，<code>batch_size</code>参数设为16将占用大约12GB内存，事实上我是用32GB内存的电脑训练的。</p>
-<h5 id="模型的使用和检验"><a href="#模型的使用和检验" class="headerlink" title="模型的使用和检验"></a>模型的使用和检验</h5><p>代码大概是这样，仍然需要先将要测试的图片读进来并且<code>reshape</code>一下，调用<code>model.predict</code>预测转向角。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">result = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(array_len):</div><div class="line">	pred = model.predict([X_in[i]])</div><div class="line">	result.append(pred[<span class="number">0</span>][<span class="number">0</span>])</div><div class="line"><span class="keyword">print</span> result</div><div class="line">y = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, array_len<span class="number">-1</span>):</div><div class="line">	y.append(Y_train[i][<span class="number">0</span>])</div><div class="line"><span class="keyword">print</span> y</div></pre></td></tr></table></figure></p>
-<p>为了更加方便的观察预测值和准确值的吻合情况，我使用了matplotlib库来绘图，画出来的曲线如下:<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe19z9h2a1j30m80goab4.jpg" alt=""><br>看起来有一些简陋，因为快期末考试了没时间画细致的图，所以先原谅我没有图例。横轴是图片的序号，纵轴是转向角，范围从-1到1。绿色的线是准确值，蓝色的线是模型的预测值，总体来看效果还不错。</p>
-<h3 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h3><p>我至今仍然不确定Tensorflow是否可以在ARM架构的CPU上运行，如果不行的话，我的解决方案大概有这么两个：</p>
-<ol>
+<h5 id="cnn卷积神经网络的建立与训练">CNN卷积神经网络的建立与训练</h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">net = tflearn.input_data(shape=[None, img_rows, img_cols, img_depth], name=&apos;input&apos;)</div><div class="line"></div><div class="line">net = tflearn.conv_2d(net, 8, [4, 5], strides=2, activation=&apos;relu&apos;)</div><div class="line"></div><div class="line">net = tflearn.conv_2d(net, 8, [4, 5], strides=2, activation=&apos;relu&apos;)</div><div class="line"></div><div class="line">net = tflearn.conv_2d(net, 16, [4, 5], strides=2, activation=&apos;relu&apos;)</div><div class="line"></div><div class="line">net = tflearn.conv_2d(net, 32, [2, 2], activation=&apos;relu&apos;)</div><div class="line"></div><div class="line">net = tflearn.fully_connected(net, 128, activation=&apos;relu&apos;)</div><div class="line"></div><div class="line">net = tflearn.dropout(net, 0.8)</div><div class="line"></div><div class="line">net = tflearn.fully_connected(net, 64, activation=&apos;relu&apos;)</div><div class="line">net = tflearn.dropout(net, 0.8)</div><div class="line"></div><div class="line">net = tflearn.fully_connected(net, 32, activation=&apos;relu&apos;)</div><div class="line">net = tflearn.dropout(net, 0.8)</div><div class="line"></div><div class="line">net = tflearn.fully_connected(net, 8, activation=&apos;relu&apos;)</div><div class="line">net = tflearn.dropout(net, 0.8)</div><div class="line"></div><div class="line">net = tflearn.fully_connected(net, 1, activation=&apos;tanh&apos;)</div><div class="line"></div><div class="line">net = tflearn.regression(net, loss=&apos;mean_square&apos;, metric=&apos;accuracy&apos;, learning_rate=1e-4, name=&apos;target&apos;)</div><div class="line"></div><div class="line">model = tflearn.DNN(net)</div><div class="line"></div><div class="line">model.fit(X_train, Y_train, n_epoch=10, batch_size=8,show_metric=True)</div><div class="line"></div><div class="line">model.save(&quot;/home/hsm/Desktop/model1/model1.tfl&quot;)</div></pre></td></tr></table></figure>
+<p>这里就不多做解释了，有兴趣的读者可以参考TFlearn的官方文档，写的非常详细，最后将训练好的模型存到指定的位置方便下次使用。<br>
+训练的过程： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe19yqdm5lj30o20k8te7.jpg" alt="训练过程"> 这里显示的精确度为1并不可靠。至于之前为什么强调内存问题，由于模型的训练非常吃内存，实测训练2770张图片，<code>batch_size</code>参数设为16将占用大约12GB内存，事实上我是用32GB内存的电脑训练的。</p>
+<h5 id="模型的使用和检验">模型的使用和检验</h5>
+<p>代码大概是这样，仍然需要先将要测试的图片读进来并且<code>reshape</code>一下，调用<code>model.predict</code>预测转向角。 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">result = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(array_len):</div><div class="line">	pred = model.predict([X_in[i]])</div><div class="line">	result.append(pred[<span class="number">0</span>][<span class="number">0</span>])</div><div class="line"><span class="keyword">print</span> result</div><div class="line">y = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, array_len<span class="number">-1</span>):</div><div class="line">	y.append(Y_train[i][<span class="number">0</span>])</div><div class="line"><span class="keyword">print</span> y</div></pre></td></tr></table></figure></p>
+<p>为了更加方便的观察预测值和准确值的吻合情况，我使用了matplotlib库来绘图，画出来的曲线如下:<br>
+<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe19z9h2a1j30m80goab4.jpg"> 看起来有一些简陋，因为快期末考试了没时间画细致的图，所以先原谅我没有图例。横轴是图片的序号，纵轴是转向角，范围从-1到1。绿色的线是准确值，蓝色的线是模型的预测值，总体来看效果还不错。</p>
+<h3 id="存在的问题">存在的问题</h3>
+<p>我至今仍然不确定Tensorflow是否可以在ARM架构的CPU上运行，如果不行的话，我的解决方案大概有这么两个：</p>
+<ol style="list-style-type: decimal">
 <li>换用Intel的小型一体机，不但满足x64架构的条件，而且数据处理能力也比我们现在使用的树莓派强上百倍。</li>
 <li>Python网络编程，通过WLAN将Pi采集的图片发到我的笔记本上，调用模型计算出转弯角度再将数据发回去。这个方案不是不行，不过貌似比较复杂。</li>
 </ol>
@@ -589,7 +590,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -600,7 +601,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -611,7 +612,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -659,7 +660,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#硬件要求"><span class="nav-number">1.1.</span> <span class="nav-text">硬件要求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#软件部分"><span class="nav-number">1.2.</span> <span class="nav-text">软件部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总体思路"><span class="nav-number">1.3.</span> <span class="nav-text">总体思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体实现"><span class="nav-number">1.4.</span> <span class="nav-text">具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#训练数据采集"><span class="nav-number">1.4.1.</span> <span class="nav-text">训练数据采集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#训练数据读取"><span class="nav-number">1.4.2.</span> <span class="nav-text">训练数据读取</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CNN卷积神经网络的建立与训练"><span class="nav-number">1.4.3.</span> <span class="nav-text">CNN卷积神经网络的建立与训练</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#模型的使用和检验"><span class="nav-number">1.4.4.</span> <span class="nav-text">模型的使用和检验</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存在的问题"><span class="nav-number">2.</span> <span class="nav-text">存在的问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#具体实现"><span class="nav-number">1.</span> <span class="nav-text">具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#训练数据采集"><span class="nav-number">1.1.</span> <span class="nav-text">训练数据采集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#训练数据读取"><span class="nav-number">1.2.</span> <span class="nav-text">训练数据读取</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cnn卷积神经网络的建立与训练"><span class="nav-number">1.3.</span> <span class="nav-text">CNN卷积神经网络的建立与训练</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#模型的使用和检验"><span class="nav-number">1.4.</span> <span class="nav-text">模型的使用和检验</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存在的问题"><span class="nav-number"></span> <span class="nav-text">存在的问题</span></a></div>
             
 
           </div>
