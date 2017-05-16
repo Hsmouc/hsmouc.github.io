@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Wi-Fi,ARP," />
+  <meta name="keywords" content="ARP,Wi-Fi," />
 
 
 
@@ -422,24 +422,23 @@
 
       
         <ul>
-<li>还是写在文前：使用aircrack-ng成功截取握手包之后并破解路由器密码以后，让我们来思考黑客可能会做些什么。还是和以前一样，不要攻击邻居家的路由器，不要设法窃取别人的密码，这样是非法的。 <a id="more"></a> ### 了解ARP欺骗攻击<br>
-让攻击者获得局域网上的封包甚至篡改封包。原理是让送至特定IP地址的流量被错误的送到攻击者所取代的地方。<br>
+<li>还是写在文前：使用aircrack-ng成功截取握手包之后并破解路由器密码以后，让我们来思考黑客可能会做些什么。还是和以前一样，不要攻击邻居家的路由器，不要设法窃取别人的密码，这样是非法的。<a id="more"></a> 
+<h3 id="了解ARP欺骗攻击"><a href="#了解ARP欺骗攻击" class="headerlink" title="了解ARP欺骗攻击"></a>了解ARP欺骗攻击</h3>让攻击者获得局域网上的封包甚至篡改封包。原理是让送至特定IP地址的流量被错误的送到攻击者所取代的地方。    <ol>
+<li><em>被动式封包嗅探</em><br>通过对无线网络的通讯内容进行监控，利用获取的数据包来获得用户名和密码等敏感信息。我等下要演示的就是这种攻击。   </li>
+<li><em>中间人攻击</em><br>指攻击者与通讯的两端分别建立独立的联系，并交换其所收到的数据，使通讯的两端认为他们正在通过一个私密的连接与对方直接对话，但事实上整个会话都被攻击者完全控制。在中间人攻击中，攻击者可以拦截通讯双方的通话并插入新的内容。</li>
+</ol>
 </li>
 </ul>
-<ol style="list-style-type: decimal">
-<li><em>被动式封包嗅探</em><br>
-通过对无线网络的通讯内容进行监控，利用获取的数据包来获得用户名和密码等敏感信息。我等下要演示的就是这种攻击。<br>
+<h3 id="我的实验"><a href="#我的实验" class="headerlink" title="我的实验"></a>我的实验</h3><p>由于我用的macbook网卡不支持开热点，在淘宝上买了块RT2571网卡，更换了好几个驱动并没有成功。所以我至今还没有使用aireply-ng等等工具。所以我打算先黑一下自己的电脑，等网卡搞定了再去黑我的iPhone。</p>
+<h4 id="Wireshark简介"><a href="#Wireshark简介" class="headerlink" title="Wireshark简介"></a>Wireshark简介</h4><p>本来想介绍很多东西的，但是想想大家应该也能Google到，我就不多说了。在这里特别推荐一本书，叫《Wireshark 网络分析就是这么简单》。</p>
+<h4 id="两种方法"><a href="#两种方法" class="headerlink" title="两种方法"></a>两种方法</h4><ol>
+<li>airport+Wireshark<br>还是网卡支持的原因，在Wireshark里无法调到混杂模式。于是我先在终端中输入<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo airport en0 sniff x <span class="comment">//x表示信道</span></div></pre></td></tr></table></figure>
 </li>
-<li><em>中间人攻击</em><br>
-指攻击者与通讯的两端分别建立独立的联系，并交换其所收到的数据，使通讯的两端认为他们正在通过一个私密的连接与对方直接对话，但事实上整个会话都被攻击者完全控制。在中间人攻击中，攻击者可以拦截通讯双方的通话并插入新的内容。</li>
 </ol>
-<h3 id="我的实验">我的实验</h3>
-<p>由于我用的macbook网卡不支持开热点，在淘宝上买了块RT2571网卡，更换了好几个驱动并没有成功。所以我至今还没有使用aireply-ng等等工具。所以我打算先黑一下自己的电脑，等网卡搞定了再去黑我的iPhone。 #### Wireshark简介 本来想介绍很多东西的，但是想想大家应该也能Google到，我就不多说了。在这里特别推荐一本书，叫《Wireshark 网络分析就是这么简单》。 #### 两种方法 1. airport+Wireshark<br>
-还是网卡支持的原因，在Wireshark里无法调到混杂模式。于是我先在终端中输入 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo airport en0 sniff x <span class="comment">//x表示信道</span></div></pre></td></tr></table></figure></p>
-<p>接着在Wireshark里打开包，随意分析了一下学校开放路由的包内容。Statistic－&gt;http－&gt;request,然后我看到了这个： <img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exac8o6x23j31400p0n5d.jpg"> 我就这么毫无防备的看到了大家在看什么-_-# 2. 如果我的Mac是一个热点<br>
-事情好像突然严肃了起来。这样就意味着所有连接到我电脑的设备的数据包都会被我看到，并不需要通过ARP欺骗或者从网关克隆这样的手段，一切好像变的简单了起来。 我打算先上四张图（图片均加万恶马赛克）: <img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaah59hz6j310m01rmxn.jpg"> <img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaah8jeoxj30ku0fwgwn.jpg"> <img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaahdoqyfj30ku0fwn79.jpg"> <img src="http://ww3.sinaimg.cn/mw690/005WMcFzjw1exaahalk0fj30ku0fwk0j.jpg"> 我拿我们学校的网站试了一试，结果自己被吓到了……<br>
-我尝试了三个网站：校园信息网站／校园教务处网站／校园支付网站。我分别在这三个网站上登录，并用Wireshark抓取数据包。在Filter中输入http并用control+f输入POST，打开数据包查看内容，截图大家都看到了:校园支付和校园信息的登录信息都使用了明码，而由湖南青果软件公司负责的教务信息系统则使用了MD5加密。虽然MD5加密也可以通过暴力美学的方式破解，但是难度很大，<br>
-### 一点总结 话说做完整个测试我的内心是崩溃的。平时连了多少未知的Wi-Fi呢？仔细一想还真的是有些后怕。或许那些hacker就默默的蹲在麦当劳或者星巴克的某个角落，等着一个个无知的鱼儿上钩。或者黑客攻下了你的路由器，篡改MAC地址，发动ARP欺骗攻击和中间人攻击，事情恐怕就不是蹭网那么简单了。还是提出一些建议吧。其实对于普通用户来说我并不建议大家绑定MAC地址啊，关闭SSID广播啊之类的办法，其实把路由器的无线密码设置的复杂一些，不要使用默认的路由器登录密码，也不要乱连开放的无线网，这就基本足够了。我的理解就是:你的数据值多少钱，你就应该花多少钱保护它，就这样。</p>
+<p>接着在Wireshark里打开包，随意分析了一下学校开放路由的包内容。Statistic－&gt;http－&gt;request,然后我看到了这个：<br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exac8o6x23j31400p0n5d.jpg" alt=""><br>我就这么毫无防备的看到了大家在看什么-_-#</p>
+<ol>
+<li>如果我的Mac是一个热点<br>事情好像突然严肃了起来。这样就意味着所有连接到我电脑的设备的数据包都会被我看到，并不需要通过ARP欺骗或者从网关克隆这样的手段，一切好像变的简单了起来。<br>我打算先上四张图（图片均加万恶马赛克）:<br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaah59hz6j310m01rmxn.jpg" alt=""><br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaah8jeoxj30ku0fwgwn.jpg" alt=""><br><img src="http://ww4.sinaimg.cn/mw690/005WMcFzjw1exaahdoqyfj30ku0fwn79.jpg" alt=""><br><img src="http://ww3.sinaimg.cn/mw690/005WMcFzjw1exaahalk0fj30ku0fwk0j.jpg" alt=""><br>我拿我们学校的网站试了一试，结果自己被吓到了……<br>我尝试了三个网站：校园信息网站／校园教务处网站／校园支付网站。我分别在这三个网站上登录，并用Wireshark抓取数据包。在Filter中输入http并用control+f输入POST，打开数据包查看内容，截图大家都看到了:校园支付和校园信息的登录信息都使用了明码，而由湖南青果软件公司负责的教务信息系统则使用了MD5加密。虽然MD5加密也可以通过暴力美学的方式破解，但是难度很大，  <h3 id="一点总结"><a href="#一点总结" class="headerlink" title="一点总结"></a>一点总结</h3>话说做完整个测试我的内心是崩溃的。平时连了多少未知的Wi-Fi呢？仔细一想还真的是有些后怕。或许那些hacker就默默的蹲在麦当劳或者星巴克的某个角落，等着一个个无知的鱼儿上钩。或者黑客攻下了你的路由器，篡改MAC地址，发动ARP欺骗攻击和中间人攻击，事情恐怕就不是蹭网那么简单了。还是提出一些建议吧。其实对于普通用户来说我并不建议大家绑定MAC地址啊，关闭SSID广播啊之类的办法，其实把路由器的无线密码设置的复杂一些，不要使用默认的路由器登录密码，也不要乱连开放的无线网，这就基本足够了。我的理解就是:你的数据值多少钱，你就应该花多少钱保护它，就这样。</li>
+</ol>
 
       
     </div>
@@ -469,9 +468,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Wi-Fi/" rel="tag"># Wi-Fi</a>
-          
             <a href="/tags/ARP/" rel="tag"># ARP</a>
+          
+            <a href="/tags/Wi-Fi/" rel="tag"># Wi-Fi</a>
           
         </div>
       
@@ -575,7 +574,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -586,7 +585,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -597,7 +596,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -645,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#我的实验"><span class="nav-number">1.</span> <span class="nav-text">我的实验</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#了解ARP欺骗攻击"><span class="nav-number">1.</span> <span class="nav-text">了解ARP欺骗攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的实验"><span class="nav-number">2.</span> <span class="nav-text">我的实验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Wireshark简介"><span class="nav-number">2.1.</span> <span class="nav-text">Wireshark简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两种方法"><span class="nav-number">2.2.</span> <span class="nav-text">两种方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一点总结"><span class="nav-number">3.</span> <span class="nav-text">一点总结</span></a></li></ol></div>
             
 
           </div>

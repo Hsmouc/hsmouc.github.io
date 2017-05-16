@@ -420,65 +420,29 @@
 
       
         <ul>
-<li>生日快到了，女票送了一个树莓ψ(｀∇´)ψ,好开心，简单写下使用体验吧。 <a id="more"></a> ## Raspberry Pi简介 树莓派（英语：Raspberry Pi），是一款基于Linux系統的只有信用卡大小的单片机电脑。它由英国的树莓派基金会所开发，目的是以低价硬件及自由软件刺激在学校的基本电脑科学教育。配备有Broadcom出产的ARM架构700MHz BCM2836处理器，1G内存，还有一些必须的接口。<br>
-除了电脑上都有的接口，树莓派还有GPIO的拓展接口，这为工科狗实现一些很有意思的想法提供了巨大的空间，比如四轴飞行器，智能小车什么的。先留个坑，以后再填吧。 ## 系统的安装</li>
+<li>生日快到了，女票送了一个树莓ψ(｀∇´)ψ,好开心，简单写下使用体验吧。<a id="more"></a> 
+<h2 id="Raspberry-Pi简介"><a href="#Raspberry-Pi简介" class="headerlink" title="Raspberry Pi简介"></a>Raspberry Pi简介</h2>树莓派（英语：Raspberry Pi），是一款基于Linux系統的只有信用卡大小的单片机电脑。它由英国的树莓派基金会所开发，目的是以低价硬件及自由软件刺激在学校的基本电脑科学教育。配备有Broadcom出产的ARM架构700MHz BCM2836处理器，1G内存，还有一些必须的接口。<br>除了电脑上都有的接口，树莓派还有GPIO的拓展接口，这为工科狗实现一些很有意思的想法提供了巨大的空间，比如四轴飞行器，智能小车什么的。先留个坑，以后再填吧。<h2 id="系统的安装"><a href="#系统的安装" class="headerlink" title="系统的安装"></a>系统的安装</h2></li>
 </ul>
-<ol style="list-style-type: decimal">
-<li>在Pi的官网上下载系统镜像<a href="https://www.raspberrypi.org/downloads" target="_blank" rel="external">(下载页面)</a>,我选择的是Raspbian(名字Raspberry+Debian233),解压后得到一个.img镜像。</li>
-<li>插入TF卡，用df命令查看当前挂载的卷：<br>
-<code>df -h</code><br>
-确认设备<br>
-<code>diskutil list</code><br>
-确定一下你的TF卡是哪个。</li>
-<li>卸载TF卡上的分区<br>
-<code>diskutil unmount /dev/disk2   // /dev/disk2是我的TF卡</code></li>
-<li>将系统刷入卡中 把当前目录切换到要装载的系统镜像的所在目录 <code>sudo dd bs=4m if=2015-11-21-raspbian-jessie.img of=/dev/rdisk2</code><br>
-输入密码后不会出现任何提示，要等上几分钟，别着急用ctrl+c结束。</li>
-<li>卸载设备<br>
-<code>diskutil unmountDisk /dev/disk2</code></li>
+<ol>
+<li>在Pi的官网上下载系统镜像<a href="https://www.raspberrypi.org/downloads" target="_blank" rel="external">(下载页面)</a>,我选择的是Raspbian(名字Raspberry+Debian233),解压后得到一个.img镜像。 </li>
+<li>插入TF卡，用df命令查看当前挂载的卷：<br><code>df -h</code><br>确认设备<br><code>diskutil list</code><br>确定一下你的TF卡是哪个。</li>
+<li>卸载TF卡上的分区<br><code>diskutil unmount /dev/disk2   // /dev/disk2是我的TF卡</code></li>
+<li>将系统刷入卡中<br>把当前目录切换到要装载的系统镜像的所在目录<br><code>sudo dd bs=4m if=2015-11-21-raspbian-jessie.img of=/dev/rdisk2</code><br>输入密码后不会出现任何提示，要等上几分钟，别着急用ctrl+c结束。</li>
+<li>卸载设备<br><code>diskutil unmountDisk /dev/disk2</code>    </li>
 </ol>
-<h2 id="pi的开机配置">Pi的开机配置</h2>
-<h3 id="语言和键盘">语言和键盘</h3>
-<p>把HDMI，鼠标键盘电源线接好，然后它居然直接出现了桌面，难道是我的人品太好（ ｉ _ ｉ ）。<br>
-激动的点开终端，咦，怎么有些键不能用=_=<br>
-别慌，Pi是腐国的产品，默认的是英式键盘的键位，我们使用的大部分都是美式键盘。所以我们简单的配置下:<br>
-终端输入 <code>raspi-config</code> 选<code>Internationalisation opntions</code><br>
-选<code>I3 Change Keyboard Layout</code><br>
-选<code>Generic 101-key  PC</code><br>
-选<code>Other</code><br>
-选<code>English(US)</code><br>
-选<code>English(US) - English(US,alternative international)</code><br>
-后面都选择确定，键盘上下键选择，tab切换选项，enter确定。<br>
-注意！！！我不建议大家把Pi的系统语言改成中文的，至于为什么大家试一试就知道了，字体炸裂……<br>
-注:编码需要选择下，UTF-8，原因大家都懂。给个<a href="http://www.guokr.com/post/520901/" target="_blank" rel="external">果壳</a>的参考，我就不多写了。<br>
-### 安装中文输入法 <code>sudo apt-get -y install ttf-wqy-zenhei</code> ### 安装VIM 好吧，这步大家可以跳过，我有强迫症:-)<br>
-<code>sudo apt-get install -y vim</code><br>
-简单配置下代码高亮<br>
-在～目录下新建.vimrc文件，写入下面的内容:</p>
+<h2 id="Pi的开机配置"><a href="#Pi的开机配置" class="headerlink" title="Pi的开机配置"></a>Pi的开机配置</h2><h3 id="语言和键盘"><a href="#语言和键盘" class="headerlink" title="语言和键盘"></a>语言和键盘</h3><p>把HDMI，鼠标键盘电源线接好，然后它居然直接出现了桌面，难道是我的人品太好（ ｉ <em> ｉ ）。<br>激动的点开终端，咦，怎么有些键不能用=</em>=<br>别慌，Pi是腐国的产品，默认的是英式键盘的键位，我们使用的大部分都是美式键盘。所以我们简单的配置下:<br>终端输入<br><code>raspi-config</code><br>选<code>Internationalisation opntions</code><br>选<code>I3 Change Keyboard Layout</code><br>选<code>Generic 101-key  PC</code><br>选<code>Other</code><br>选<code>English(US)</code><br>选<code>English(US) - English(US,alternative international)</code><br>后面都选择确定，键盘上下键选择，tab切换选项，enter确定。<br>注意！！！我不建议大家把Pi的系统语言改成中文的，至于为什么大家试一试就知道了，字体炸裂……<br>注:编码需要选择下，UTF-8，原因大家都懂。给个<a href="http://www.guokr.com/post/520901/" target="_blank" rel="external">果壳</a>的参考，我就不多写了。  </p>
+<h3 id="安装中文输入法"><a href="#安装中文输入法" class="headerlink" title="安装中文输入法"></a>安装中文输入法</h3><p><code>sudo apt-get -y install ttf-wqy-zenhei</code></p>
+<h3 id="安装VIM"><a href="#安装VIM" class="headerlink" title="安装VIM"></a>安装VIM</h3><p>好吧，这步大家可以跳过，我有强迫症:-)<br><code>sudo apt-get install -y vim</code><br>简单配置下代码高亮<br>在～目录下新建.vimrc文件，写入下面的内容:  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">set nu</div><div class="line">syntax on</div><div class="line">set tabstop=4</div></pre></td></tr></table></figure>
-<h2 id="配置watchdog">配置watchdog</h2>
-<p>Pi的看门狗防止程序死循环，设置好就能让Pi在当机的时候自动重启。</p>
-<ol style="list-style-type: decimal">
-<li>启动硬件看门狗模块<br>
-<code>sudo modprobe bcm2708_wdog</code></li>
-<li>编辑/etc/modules,启动时自加载模块<br>
-<code>sudo vim /etc/modules</code><br>
-在文件的最后加上<br>
-<code>bcm2708_wdog</code></li>
-<li>启动与配置watchdog<br>
-启动watchdog<br>
-<code>sudo /etc/init.d/watchdog start</code><br>
-编辑配置文件<br>
-<code>sudo vim /etc/watchdog.conf</code><br>
-把<code>#watchdog-device =/dev/watchdog</code>前面的<code>#</code>删去<br>
-重新启动watchdog<br>
-<code>sudo /etc/init.d/watchdog restart</code><br>
-还可以监控芯片温度什么，过热自动重启之类。 ## 一些小插曲和随手拍的图</li>
+<h2 id="配置watchdog"><a href="#配置watchdog" class="headerlink" title="配置watchdog"></a>配置watchdog</h2><p>Pi的看门狗防止程序死循环，设置好就能让Pi在当机的时候自动重启。 </p>
+<ol>
+<li>启动硬件看门狗模块<br><code>sudo modprobe bcm2708_wdog</code></li>
+<li>编辑/etc/modules,启动时自加载模块<br><code>sudo vim /etc/modules</code><br>在文件的最后加上<br><code>bcm2708_wdog</code></li>
+<li>启动与配置watchdog<br>启动watchdog<br><code>sudo /etc/init.d/watchdog start</code><br>编辑配置文件<br><code>sudo vim /etc/watchdog.conf</code><br>把<code>#watchdog-device =/dev/watchdog</code>前面的<code>#</code>删去<br>重新启动watchdog<br><code>sudo /etc/init.d/watchdog restart</code><br>还可以监控芯片温度什么，过热自动重启之类。<h2 id="一些小插曲和随手拍的图"><a href="#一些小插曲和随手拍的图" class="headerlink" title="一些小插曲和随手拍的图"></a>一些小插曲和随手拍的图</h2></li>
 </ol>
 <ul>
-<li>中间有个小小的意外，我随手装了个多媒体系统试试效果，XBMC，就是这货，装完重启直接进不了系统了233。简单分析了下原因，貌似是显存分配不足，应该要在安装前配置下内存的分配。这个小插曲直接导致了我决定今晚赶紧把今天做的配置记录下来。这样一块用来折腾的Pi估计以后要经常重刷系统了=_=<br>
-</li>
-<li>桌面上的显示器是一块笔记本的屏，我又在万能的某宝上买了块驱动版，我现在打算买个相框把屏幕裱起来。话说不加壳的屏真的是好薄啊，看起来很有逼格。 <img src="http://ww2.sinaimg.cn/mw690/005WMcFzjw1eyx9x5jdvej32io1w0e81.jpg"> <img src="http://ww3.sinaimg.cn/mw690/005WMcFzjw1eyx9wypk1rj32io1w0npd.jpg"> <img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1eyx9whbb85j32io1w01kx.jpg"></li>
+<li>中间有个小小的意外，我随手装了个多媒体系统试试效果，XBMC，就是这货，装完重启直接进不了系统了233。简单分析了下原因，貌似是显存分配不足，应该要在安装前配置下内存的分配。这个小插曲直接导致了我决定今晚赶紧把今天做的配置记录下来。这样一块用来折腾的Pi估计以后要经常重刷系统了=_=  </li>
+<li>桌面上的显示器是一块笔记本的屏，我又在万能的某宝上买了块驱动版，我现在打算买个相框把屏幕裱起来。话说不加壳的屏真的是好薄啊，看起来很有逼格。<br><img src="http://ww2.sinaimg.cn/mw690/005WMcFzjw1eyx9x5jdvej32io1w0e81.jpg" alt=""><br><img src="http://ww3.sinaimg.cn/mw690/005WMcFzjw1eyx9wypk1rj32io1w0npd.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/mw690/005WMcFzjw1eyx9whbb85j32io1w01kx.jpg" alt=""></li>
 </ul>
 
       
@@ -613,7 +577,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -624,7 +588,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -635,7 +599,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -683,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pi的开机配置"><span class="nav-number">1.</span> <span class="nav-text">Pi的开机配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语言和键盘"><span class="nav-number">1.1.</span> <span class="nav-text">语言和键盘</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置watchdog"><span class="nav-number">2.</span> <span class="nav-text">配置watchdog</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Raspberry-Pi简介"><span class="nav-number">1.</span> <span class="nav-text">Raspberry Pi简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统的安装"><span class="nav-number">2.</span> <span class="nav-text">系统的安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pi的开机配置"><span class="nav-number">3.</span> <span class="nav-text">Pi的开机配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语言和键盘"><span class="nav-number">3.1.</span> <span class="nav-text">语言和键盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装中文输入法"><span class="nav-number">3.2.</span> <span class="nav-text">安装中文输入法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装VIM"><span class="nav-number">3.3.</span> <span class="nav-text">安装VIM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置watchdog"><span class="nav-number">4.</span> <span class="nav-text">配置watchdog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些小插曲和随手拍的图"><span class="nav-number">5.</span> <span class="nav-text">一些小插曲和随手拍的图</span></a></li></ol></div>
             
 
           </div>

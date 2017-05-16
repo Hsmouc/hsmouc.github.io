@@ -89,21 +89,18 @@
 
 
 
-<meta name="description" content="python GPIO集成库
-我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835 C Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。">
+<meta name="description" content="python GPIO集成库我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835    C    Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="通过python控制Pi的GPIO">
 <meta property="og:url" content="https://hsmouc.com/2015/12/17/2015-12-17-pi/index.html">
 <meta property="og:site_name" content="梦的小窝">
-<meta property="og:description" content="python GPIO集成库
-我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835 C Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。">
+<meta property="og:description" content="python GPIO集成库我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835    C    Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1be2lv6oj30fu0cjjue.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bf7dc37j31kw16oncv.jpg">
 <meta property="og:updated_time" content="2017-03-27T05:06:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="通过python控制Pi的GPIO">
-<meta name="twitter:description" content="python GPIO集成库
-我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835 C Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。">
+<meta name="twitter:description" content="python GPIO集成库我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835    C    Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。">
 <meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1be2lv6oj30fu0cjjue.jpg">
 
 
@@ -421,23 +418,21 @@
       
 
       
-        <h2 id="python-gpio集成库">python GPIO集成库</h2>
-<p>我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835 C Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。 <a id="more"></a> ## 让LED闪烁 在这个实验中，我只是简单的控制了一个GPIO口，输出一个方波信号，占空比50%，这样就可以让一个LED小灯闪烁。</p>
+        <h2 id="python-GPIO集成库"><a href="#python-GPIO集成库" class="headerlink" title="python GPIO集成库"></a>python GPIO集成库</h2><p>我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835    C    Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。<br> <a id="more"></a> </p>
+<h2 id="让LED闪烁"><a href="#让LED闪烁" class="headerlink" title="让LED闪烁"></a>让LED闪烁</h2><p>在这个实验中，我只是简单的控制了一个GPIO口，输出一个方波信号，占空比50%，这样就可以让一个LED小灯闪烁。  </p>
 <ul>
-<li>连接实验电路 在单片机学习中，掌握好各个引脚的功能是非常重要的，要根据电路的连接来写相关的控制程序。在Pi中我们可以使用<code>GPIO readall</code>来列出所有的引脚，便于我们下一步操作。 <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1be2lv6oj30fu0cjjue.jpg" alt="引脚图"><br>
-然后将LED，电阻串联起来，LED正端接GPIO口，负接地。记得用杜邦线，拿着导线乱碰很可能导致引脚短路，损坏Pi。<br>
+<li>连接实验电路<br>在单片机学习中，掌握好各个引脚的功能是非常重要的，要根据电路的连接来写相关的控制程序。在Pi中我们可以使用<code>GPIO readall</code>来列出所有的引脚，便于我们下一步操作。<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1be2lv6oj30fu0cjjue.jpg" alt="引脚图"><br>然后将LED，电阻串联起来，LED正端接GPIO口，负接地。记得用杜邦线，拿着导线乱碰很可能导致引脚短路，损坏Pi。   </li>
+<li>Python代码部分<br>新建LED.py文件，加入以下代码:   <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> RPi.GPIO <span class="keyword">as</span> GPIO</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">blink</span><span class="params">(pin)</span>:</span></div><div class="line">        GPIO.output(pin,GPIO.HIGH)</div><div class="line">        time.sleep(<span class="number">1</span>)</div><div class="line">		GPIO.output(pin,GPIO.LOW)</div><div class="line">        time.sleep(<span class="number">1</span>)</div><div class="line">        <span class="keyword">return</span></div><div class="line">GPIO.setmode(GPIO.BOARD)</div><div class="line">GPIO.setup(<span class="number">7</span>,GPIO.OUT）</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">50</span>):</div><div class="line">        blink(<span class="number">7</span>)</div><div class="line">GPIO.cleanup()</div></pre></td></tr></table></figure>
 </li>
-<li>Python代码部分 新建LED.py文件，加入以下代码:<br>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> RPi.GPIO <span class="keyword">as</span> GPIO</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">blink</span><span class="params">(pin)</span>:</span></div><div class="line">        GPIO.output(pin,GPIO.HIGH)</div><div class="line">        time.sleep(<span class="number">1</span>)</div><div class="line">		GPIO.output(pin,GPIO.LOW)</div><div class="line">        time.sleep(<span class="number">1</span>)</div><div class="line">        <span class="keyword">return</span></div><div class="line">GPIO.setmode(GPIO.BOARD)</div><div class="line">GPIO.setup(<span class="number">7</span>,GPIO.OUT）</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">50</span>):</div><div class="line">        blink(<span class="number">7</span>)</div><div class="line">GPIO.cleanup()</div></pre></td></tr></table></figure></li>
 </ul>
-<p>然后执行下试试吧～ <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bf7dc37j31kw16oncv.jpg" alt="点亮的LED"> 图是随手拍的，桌上的电阻都有点大了，亮起来不明显。建议大家还是串上一个阻值合适的电阻，GPIO输出的电压幅值好像是1V。当然大家就不要作死把发光二极管直接接在3.3V和GND之间了，不要问我是怎么知道的+_+，我炸了一个。<br>
-可以通过:</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">pi@raspberrypi:~/Desktop $ sudo cat /sys/kernel/debug/gpio
-GPIOs <span class="dv">0</span>-<span class="dv">53</span>, platform/3f200000.gpio, pinctrl-bcm2835:
- gpio-<span class="dv">35</span>  (?                   ) in  hi
- gpio-<span class="dv">47</span>  (?                   ) out lo</code></pre></div>
+<p>然后执行下试试吧～<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bf7dc37j31kw16oncv.jpg" alt="点亮的LED"><br>图是随手拍的，桌上的电阻都有点大了，亮起来不明显。建议大家还是串上一个阻值合适的电阻，GPIO输出的电压幅值好像是1V。当然大家就不要作死把发光二极管直接接在3.3V和GND之间了，不要问我是怎么知道的+_+，我炸了一个。<br>可以通过:   </p>
+<pre><code class="lang-c">pi@raspberrypi:~/Desktop $ sudo cat /sys/kernel/debug/gpio
+GPIOs 0-53, platform/3f200000.gpio, pinctrl-bcm2835:
+ gpio-35  (?                   ) in  hi
+ gpio-47  (?                   ) out lo
+</code></pre>
 <p>来查看引脚状态。</p>
-<p>最后说两句题外话吧: 其实系里还是挺关心我们的，想要什么小零件基本都能提供。模电老师还给我们每个人准备了一个小器件包，里面有面包版，各种电容电阻什么的。虽然都不是什么精贵的东西，但看到宿舍里有各种各样的小元件和各种工具，总有一种迷之幸福感。万用表好像也可以向系里申请了，还是希望系里越来越好吧（≧∇≦）</p>
+<p>最后说两句题外话吧:<br>其实系里还是挺关心我们的，想要什么小零件基本都能提供。模电老师还给我们每个人准备了一个小器件包，里面有面包版，各种电容电阻什么的。虽然都不是什么精贵的东西，但看到宿舍里有各种各样的小元件和各种工具，总有一种迷之幸福感。万用表好像也可以向系里申请了，还是希望系里越来越好吧（≧∇≦）</p>
 
       
     </div>
@@ -573,7 +568,7 @@ GPIOs <span class="dv">0</span>-<span class="dv">53</span>, platform/3f200000.gp
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -584,7 +579,7 @@ GPIOs <span class="dv">0</span>-<span class="dv">53</span>, platform/3f200000.gp
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -595,7 +590,7 @@ GPIOs <span class="dv">0</span>-<span class="dv">53</span>, platform/3f200000.gp
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -643,7 +638,7 @@ GPIOs <span class="dv">0</span>-<span class="dv">53</span>, platform/3f200000.gp
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python-gpio集成库"><span class="nav-number">1.</span> <span class="nav-text">python GPIO集成库</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python-GPIO集成库"><span class="nav-number">1.</span> <span class="nav-text">python GPIO集成库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#让LED闪烁"><span class="nav-number">2.</span> <span class="nav-text">让LED闪烁</span></a></li></ol></div>
             
 
           </div>

@@ -89,18 +89,18 @@
 
 
 
-<meta name="description" content="电子系统设计实验课–计算器这篇文章是我电子系统设计课的第一次大作业报告。老师要求从六个题目当中选一个做项目，我选择的是看起来最复杂的一个。因为其他的项目貌似只要修改我之前的万能电子钟的代码就好，简易计算器这个项目算是从零开始啦。">
+<meta name="description" content="电子系统设计实验课—计算器这篇文章是我电子系统设计课的第一次大作业报告。老师要求从六个题目当中选一个做项目，我选择的是看起来最复杂的一个。因为其他的项目貌似只要修改我之前的万能电子钟的代码就好，简易计算器这个项目算是从零开始啦。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于89C51的计算器设计">
 <meta property="og:url" content="https://hsmouc.com/2016/05/19/2016-05-19-Calculator/index.html">
 <meta property="og:site_name" content="梦的小窝">
-<meta property="og:description" content="电子系统设计实验课–计算器这篇文章是我电子系统设计课的第一次大作业报告。老师要求从六个题目当中选一个做项目，我选择的是看起来最复杂的一个。因为其他的项目貌似只要修改我之前的万能电子钟的代码就好，简易计算器这个项目算是从零开始啦。">
+<meta property="og:description" content="电子系统设计实验课—计算器这篇文章是我电子系统设计课的第一次大作业报告。老师要求从六个题目当中选一个做项目，我选择的是看起来最复杂的一个。因为其他的项目貌似只要修改我之前的万能电子钟的代码就好，简易计算器这个项目算是从零开始啦。">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1atq3g7vj31740s4amf.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1au592ztj31kw16ok9y.jpg">
 <meta property="og:updated_time" content="2017-03-27T04:46:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于89C51的计算器设计">
-<meta name="twitter:description" content="电子系统设计实验课–计算器这篇文章是我电子系统设计课的第一次大作业报告。老师要求从六个题目当中选一个做项目，我选择的是看起来最复杂的一个。因为其他的项目貌似只要修改我之前的万能电子钟的代码就好，简易计算器这个项目算是从零开始啦。">
+<meta name="twitter:description" content="电子系统设计实验课—计算器这篇文章是我电子系统设计课的第一次大作业报告。老师要求从六个题目当中选一个做项目，我选择的是看起来最复杂的一个。因为其他的项目貌似只要修改我之前的万能电子钟的代码就好，简易计算器这个项目算是从零开始啦。">
 <meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1atq3g7vj31740s4amf.jpg">
 
 
@@ -418,7 +418,7 @@
       
 
       
-        <h2 id="电子系统设计实验课–计算器"><a href="#电子系统设计实验课–计算器" class="headerlink" title="电子系统设计实验课–计算器"></a>电子系统设计实验课–计算器</h2><p>这篇文章是我电子系统设计课的第一次大作业报告。老师要求从六个题目当中选一个做项目，我选择的是看起来最复杂的一个。因为其他的项目貌似只要修改我之前的万能电子钟的代码就好，简易计算器这个项目算是从零开始啦。<br> <a id="more"></a>  </p>
+        <h2 id="电子系统设计实验课—计算器"><a href="#电子系统设计实验课—计算器" class="headerlink" title="电子系统设计实验课—计算器"></a>电子系统设计实验课—计算器</h2><p>这篇文章是我电子系统设计课的第一次大作业报告。老师要求从六个题目当中选一个做项目，我选择的是看起来最复杂的一个。因为其他的项目貌似只要修改我之前的万能电子钟的代码就好，简易计算器这个项目算是从零开始啦。<br> <a id="more"></a>  </p>
 <h3 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h3><p>单片机读键值和LCD显示的方法我们再熟悉不过了。这些都有已经构建好的底层文件，直接调用接口函数就好了。读键值的函数作用是有键按下，则返回一个unsigned char型数。所以我们首先需要做一次转换，目的是我定义一个键，按下它就为1或者2或者3等等，便于下一步的计算。第二个问题是，当我们依次按下了键1、键2，单片机会读入的值是1，接着又读入2，我们实际需要计算的值为12。我进行了第二次转换，即将上次读回的值乘10加这次读回的值。我们把完整的一次计算过程大致分为四步：输入第一个数，输入运算符号，输入第二个数，按等于号显示结果。  </p>
 <h3 id="目前实现的功能和问题"><a href="#目前实现的功能和问题" class="headerlink" title="目前实现的功能和问题"></a>目前实现的功能和问题</h3><p>功能:    </p>
 <ol>
@@ -575,7 +575,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -586,7 +586,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -597,7 +597,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -645,7 +645,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#电子系统设计实验课–计算器"><span class="nav-number">1.</span> <span class="nav-text">电子系统设计实验课–计算器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计思路"><span class="nav-number">1.1.</span> <span class="nav-text">设计思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目前实现的功能和问题"><span class="nav-number">1.2.</span> <span class="nav-text">目前实现的功能和问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件电路和实现效果图"><span class="nav-number">1.3.</span> <span class="nav-text">硬件电路和实现效果图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码部分"><span class="nav-number">1.4.</span> <span class="nav-text">代码部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一部分：底层-硬件-软件接口"><span class="nav-number">1.4.1.</span> <span class="nav-text">第一部分：底层/硬件-软件接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户层"><span class="nav-number">1.4.2.</span> <span class="nav-text">用户层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">1.5.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#电子系统设计实验课—计算器"><span class="nav-number">1.</span> <span class="nav-text">电子系统设计实验课—计算器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计思路"><span class="nav-number">1.1.</span> <span class="nav-text">设计思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目前实现的功能和问题"><span class="nav-number">1.2.</span> <span class="nav-text">目前实现的功能和问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件电路和实现效果图"><span class="nav-number">1.3.</span> <span class="nav-text">硬件电路和实现效果图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码部分"><span class="nav-number">1.4.</span> <span class="nav-text">代码部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一部分：底层-硬件-软件接口"><span class="nav-number">1.4.1.</span> <span class="nav-text">第一部分：底层/硬件-软件接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户层"><span class="nav-number">1.4.2.</span> <span class="nav-text">用户层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">1.5.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
             
 
           </div>

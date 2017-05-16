@@ -419,198 +419,198 @@
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>SnakeDoc.h和SnakeDoc.cpp中的变量声明与初始化如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">class CSnakeDoc : public CDocument</div><div class="line">&#123;</div><div class="line">protected: // create from serialization only</div><div class="line">	CSnakeDoc();</div><div class="line">	DECLARE_DYNCREATE(CSnakeDoc)</div><div class="line"></div><div class="line">// Attributes</div><div class="line">public:</div><div class="line">	struct&#123;</div><div class="line">	int body_x;</div><div class="line">	int body_y;</div><div class="line">	int direction;</div><div class="line">	int length;</div><div class="line">	&#125;snake[100];</div><div class="line"></div><div class="line">	struct&#123;</div><div class="line">	int food_x;</div><div class="line">	int food_y;</div><div class="line">	bool isfood;</div><div class="line">	&#125;food;</div><div class="line"></div><div class="line">	bool startFlag;</div><div class="line">	... //省略</div><div class="line">&#125;</div><div class="line">// Operations</div><div class="line">BOOL CSnakeDoc::OnNewDocument()</div><div class="line">&#123;</div><div class="line">	if (!CDocument::OnNewDocument())</div><div class="line">		return FALSE;</div><div class="line">	snake[0].body_x = 10;</div><div class="line">	snake[0].body_y = 10;</div><div class="line">	snake[1].body_x = 11;</div><div class="line">	snake[1].body_y = 10;</div><div class="line">	snake[2].body_x = 12;</div><div class="line">	snake[2].body_y = 10;</div><div class="line">	snake[0].direction = 3;</div><div class="line">	snake[0].length = 3;</div><div class="line">	food.isfood = true;</div><div class="line">	startFlag = false;</div><div class="line"></div><div class="line">	// TODO: add reinitialization code here</div><div class="line">	// (SDI documents will reuse this document)</div><div class="line"></div><div class="line">	return TRUE;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>蛇和食物用两个结构体来表示，snake[]结构体中包含了蛇的坐标和蛇身的长度(蛇是用方块组成，简单来说length表示构成蛇的方块数)。food结构体中包含了食物的坐标和食物是否出现的状态。   </p>
 <p>视图类中的代码是这样的:  </p>
-<pre><code class="c++"><span class="keyword">void</span> CSnakeView::OnDraw(CDC* pDC)
+<pre><code class="lang-c++">void CSnakeView::OnDraw(CDC* pDC)
 {
     CSnakeDoc* pDoc = GetDocument();
     ASSERT_VALID(pDoc);
-    pDC-&gt;TextOut(<span class="number">20</span>,<span class="number">20</span>,<span class="string">"Hsmouc"</span>);
-    pDC-&gt;TextOut(<span class="number">20</span>,<span class="number">50</span>,<span class="string">"Ocean University of China"</span>);
-    CBrush DrawBrush=(RGB(<span class="number">130</span>,<span class="number">130</span>,<span class="number">0</span>));
+    pDC-&gt;TextOut(20,20,&quot;Hsmouc&quot;);
+    pDC-&gt;TextOut(20,50,&quot;Ocean University of China&quot;);
+    CBrush DrawBrush=(RGB(130,130,0));
     CBrush *Drawbrush=pDC-&gt;SelectObject(&amp;DrawBrush);
-    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span> ; i++){
-        pDC-&gt;Rectangle(pDoc-&gt;snake[i].body_x*<span class="number">20</span>,pDoc-&gt;snake[i].body_y*<span class="number">20</span>,(pDoc-&gt;snake[i].body_x+<span class="number">1</span>)*<span class="number">20</span>,(pDoc-&gt;snake[i].body_y+<span class="number">1</span>)*<span class="number">20</span>);
+    for(int i = 0 ; i &lt;= pDoc-&gt;snake[0].length-1 ; i++){
+        pDC-&gt;Rectangle(pDoc-&gt;snake[i].body_x*20,pDoc-&gt;snake[i].body_y*20,(pDoc-&gt;snake[i].body_x+1)*20,(pDoc-&gt;snake[i].body_y+1)*20);
 
     }
     pDC-&gt;SelectObject(DrawBrush);
-    <span class="comment">// <span class="doctag">TODO:</span> add draw code for native data here</span>
+    // TODO: add draw code for native data here
 }
-<span class="keyword">void</span> CSnakeView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) 
+void CSnakeView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) 
 {
-    <span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span>
+    // TODO: Add your message handler code here and/or call default
     CSnakeDoc* pDoc = GetDocument();
     ASSERT_VALID(pDoc);
-    <span class="keyword">switch</span>(nChar){
-        <span class="keyword">case</span> VK_UP:
-            <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].direction != <span class="number">2</span>){
-                pDoc-&gt;snake[<span class="number">0</span>].direction = <span class="number">1</span>;
+    switch(nChar){
+        case VK_UP:
+            if(pDoc-&gt;snake[0].direction != 2){
+                pDoc-&gt;snake[0].direction = 1;
             }
-            <span class="keyword">break</span>;
-        <span class="keyword">case</span> VK_DOWN:
-            <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].direction != <span class="number">1</span>){
-                pDoc-&gt;snake[<span class="number">0</span>].direction = <span class="number">2</span>;
+            break;
+        case VK_DOWN:
+            if(pDoc-&gt;snake[0].direction != 1){
+                pDoc-&gt;snake[0].direction = 2;
             }
-            <span class="keyword">break</span>;
-        <span class="keyword">case</span> VK_LEFT:
-            <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].direction != <span class="number">4</span>){
-                pDoc-&gt;snake[<span class="number">0</span>].direction = <span class="number">3</span>;
+            break;
+        case VK_LEFT:
+            if(pDoc-&gt;snake[0].direction != 4){
+                pDoc-&gt;snake[0].direction = 3;
             }
-            <span class="keyword">break</span>;
-        <span class="keyword">case</span> VK_RIGHT:
-            <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].direction != <span class="number">3</span>){
-                pDoc-&gt;snake[<span class="number">0</span>].direction = <span class="number">4</span>;
+            break;
+        case VK_RIGHT:
+            if(pDoc-&gt;snake[0].direction != 3){
+                pDoc-&gt;snake[0].direction = 4;
             }
-            <span class="keyword">break</span>;
+            break;
     }
     CView::OnKeyDown(nChar, nRepCnt, nFlags);
 }
 
-<span class="keyword">void</span> CSnakeView::OnTimer(UINT nIDEvent) 
+void CSnakeView::OnTimer(UINT nIDEvent) 
 {
-    <span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default</span>
+    // TODO: Add your message handler code here and/or call default
     CDC *pDC = GetDC();
     CSnakeDoc* pDoc = GetDocument();
     ASSERT_VALID(pDoc);
     CRect rectClient;
     GetClientRect(&amp;rectClient);
-    <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].body_x*<span class="number">20</span> &lt;= rectClient.left || pDoc-&gt;snake[<span class="number">0</span>].body_x*<span class="number">20</span> &gt;= rectClient.right || pDoc-&gt;snake[<span class="number">0</span>].body_y*<span class="number">20</span> &lt;= rectClient.top || pDoc-&gt;snake[<span class="number">0</span>].body_y*<span class="number">20</span> &gt;= rectClient.bottom){
-        KillTimer(<span class="number">1</span>);
-        AfxMessageBox(<span class="string">"233"</span>);
+    if(pDoc-&gt;snake[0].body_x*20 &lt;= rectClient.left || pDoc-&gt;snake[0].body_x*20 &gt;= rectClient.right || pDoc-&gt;snake[0].body_y*20 &lt;= rectClient.top || pDoc-&gt;snake[0].body_y*20 &gt;= rectClient.bottom){
+        KillTimer(1);
+        AfxMessageBox(&quot;233&quot;);
         InvalidateRect(rectClient);
         pDoc-&gt;gameReset();
     }
-    <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].length &gt; <span class="number">3</span>){
-        <span class="keyword">for</span>(<span class="keyword">int</span> temp = pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span> ; temp &gt; <span class="number">0</span> ; temp--){
-            <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].body_x*<span class="number">20</span>==pDoc-&gt;snake[temp].body_x*<span class="number">20</span> &amp;&amp; pDoc-&gt;snake[<span class="number">0</span>].body_y*<span class="number">20</span> == pDoc-&gt;snake[temp].body_y*<span class="number">20</span>){
-                KillTimer(<span class="number">1</span>);
-                AfxMessageBox(<span class="string">"233"</span>);
+    if(pDoc-&gt;snake[0].length &gt; 3){
+        for(int temp = pDoc-&gt;snake[0].length-1 ; temp &gt; 0 ; temp--){
+            if(pDoc-&gt;snake[0].body_x*20==pDoc-&gt;snake[temp].body_x*20 &amp;&amp; pDoc-&gt;snake[0].body_y*20 == pDoc-&gt;snake[temp].body_y*20){
+                KillTimer(1);
+                AfxMessageBox(&quot;233&quot;);
                 InvalidateRect(rectClient);
                 pDoc-&gt;gameReset();
             }
         }
     }
     pDC-&gt;SelectStockObject(WHITE_PEN);
-    pDC-&gt;Rectangle(pDoc-&gt;snake[pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span>].body_x*<span class="number">20</span>,pDoc-&gt;snake[pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span>].body_y*<span class="number">20</span>,(pDoc-&gt;snake[pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span>].body_x+<span class="number">1</span>)*<span class="number">20</span>,(pDoc-&gt;snake[pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span>].body_y+<span class="number">1</span>)*<span class="number">20</span>);
-    <span class="keyword">for</span>(<span class="keyword">int</span> i=pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span> ; i &gt; <span class="number">0</span> ; i--){
-        pDoc-&gt;snake[i].body_x = pDoc-&gt;snake[i<span class="number">-1</span>].body_x;
-        pDoc-&gt;snake[i].body_y = pDoc-&gt;snake[i<span class="number">-1</span>].body_y;
+    pDC-&gt;Rectangle(pDoc-&gt;snake[pDoc-&gt;snake[0].length-1].body_x*20,pDoc-&gt;snake[pDoc-&gt;snake[0].length-1].body_y*20,(pDoc-&gt;snake[pDoc-&gt;snake[0].length-1].body_x+1)*20,(pDoc-&gt;snake[pDoc-&gt;snake[0].length-1].body_y+1)*20);
+    for(int i=pDoc-&gt;snake[0].length-1 ; i &gt; 0 ; i--){
+        pDoc-&gt;snake[i].body_x = pDoc-&gt;snake[i-1].body_x;
+        pDoc-&gt;snake[i].body_y = pDoc-&gt;snake[i-1].body_y;
     }
-    <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].direction==<span class="number">1</span>){
-        pDoc-&gt;snake[<span class="number">0</span>].body_y--;
+    if(pDoc-&gt;snake[0].direction==1){
+        pDoc-&gt;snake[0].body_y--;
     }
-    <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].direction==<span class="number">2</span>){
-        pDoc-&gt;snake[<span class="number">0</span>].body_y++;
+    if(pDoc-&gt;snake[0].direction==2){
+        pDoc-&gt;snake[0].body_y++;
     }
-    <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].direction==<span class="number">3</span>){
-        pDoc-&gt;snake[<span class="number">0</span>].body_x--;
+    if(pDoc-&gt;snake[0].direction==3){
+        pDoc-&gt;snake[0].body_x--;
     }
-    <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].direction==<span class="number">4</span>){
-        pDoc-&gt;snake[<span class="number">0</span>].body_x++;
+    if(pDoc-&gt;snake[0].direction==4){
+        pDoc-&gt;snake[0].body_x++;
     }
     pDC-&gt;SelectStockObject(BLACK_PEN);
 
-    CBrush DrawBrush = (RGB(<span class="number">130</span>,<span class="number">130</span>,<span class="number">0</span>));
+    CBrush DrawBrush = (RGB(130,130,0));
     CBrush *Drawbrush = pDC-&gt;SelectObject(&amp;DrawBrush);
-    pDC-&gt;Rectangle(pDoc-&gt;snake[<span class="number">0</span>].body_x*<span class="number">20</span>,pDoc-&gt;snake[<span class="number">0</span>].body_y*<span class="number">20</span>,(pDoc-&gt;snake[<span class="number">0</span>].body_x+<span class="number">1</span>)*<span class="number">20</span>,(pDoc-&gt;snake[<span class="number">0</span>].body_y+<span class="number">1</span>)*<span class="number">20</span>);
+    pDC-&gt;Rectangle(pDoc-&gt;snake[0].body_x*20,pDoc-&gt;snake[0].body_y*20,(pDoc-&gt;snake[0].body_x+1)*20,(pDoc-&gt;snake[0].body_y+1)*20);
     pDC-&gt;SelectObject(DrawBrush);
-    <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].body_x*<span class="number">20</span> == pDoc-&gt;food.food_x*<span class="number">20</span> &amp;&amp; pDoc-&gt;snake[<span class="number">0</span>].body_y*<span class="number">20</span> == pDoc-&gt;food.food_y*<span class="number">20</span>)
+    if(pDoc-&gt;snake[0].body_x*20 == pDoc-&gt;food.food_x*20 &amp;&amp; pDoc-&gt;snake[0].body_y*20 == pDoc-&gt;food.food_y*20)
     {
-        pDoc-&gt;snake[<span class="number">0</span>].length++;
-        pDoc-&gt;food.isfood = <span class="literal">true</span>;
-        pDoc-&gt;snake[pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span>].body_x = pDoc-&gt;snake[pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-2</span>].body_x;
-        pDoc-&gt;snake[pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span>].body_y = pDoc-&gt;snake[pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-2</span>].body_y;
+        pDoc-&gt;snake[0].length++;
+        pDoc-&gt;food.isfood = true;
+        pDoc-&gt;snake[pDoc-&gt;snake[0].length-1].body_x = pDoc-&gt;snake[pDoc-&gt;snake[0].length-2].body_x;
+        pDoc-&gt;snake[pDoc-&gt;snake[0].length-1].body_y = pDoc-&gt;snake[pDoc-&gt;snake[0].length-2].body_y;
     }
-    <span class="keyword">if</span>(pDoc-&gt;food.isfood == <span class="literal">true</span>)
+    if(pDoc-&gt;food.isfood == true)
     {
-        srand((<span class="keyword">unsigned</span>)time(<span class="literal">NULL</span>));
-        <span class="keyword">do</span>{
-            <span class="keyword">for</span>(<span class="keyword">int</span> temp=pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span> ; temp &gt;= <span class="number">0</span> ; temp--)
-                <span class="keyword">if</span>(pDoc-&gt;snake[<span class="number">0</span>].body_x*<span class="number">20</span> == pDoc-&gt;snake[temp].body_x*<span class="number">20</span> &amp;&amp; pDoc-&gt;snake[<span class="number">0</span>].body_y*<span class="number">20</span> == pDoc-&gt;snake[temp].body_y*<span class="number">20</span>){
-                    pDoc-&gt;food.food_x=rand()%<span class="number">25</span>;
-                    pDoc-&gt;food.food_y=rand()%<span class="number">25</span>;
-                    <span class="keyword">for</span>(temp=pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span> ; temp &gt;= <span class="number">0</span> ; temp--){
-                        <span class="keyword">if</span>(pDoc-&gt;food.food_x*<span class="number">20</span> == pDoc-&gt;snake[temp].body_x*<span class="number">20</span> &amp;&amp; pDoc-&gt;food.food_y*<span class="number">20</span> == pDoc-&gt;snake[temp].body_y*<span class="number">20</span>){
-                            temp = pDoc-&gt;snake[<span class="number">0</span>].length<span class="number">-1</span>;
-                            pDoc-&gt;food.food_x=rand()%<span class="number">25</span>;
-                            pDoc-&gt;food.food_y=rand()%<span class="number">25</span>;
+        srand((unsigned)time(NULL));
+        do{
+            for(int temp=pDoc-&gt;snake[0].length-1 ; temp &gt;= 0 ; temp--)
+                if(pDoc-&gt;snake[0].body_x*20 == pDoc-&gt;snake[temp].body_x*20 &amp;&amp; pDoc-&gt;snake[0].body_y*20 == pDoc-&gt;snake[temp].body_y*20){
+                    pDoc-&gt;food.food_x=rand()%25;
+                    pDoc-&gt;food.food_y=rand()%25;
+                    for(temp=pDoc-&gt;snake[0].length-1 ; temp &gt;= 0 ; temp--){
+                        if(pDoc-&gt;food.food_x*20 == pDoc-&gt;snake[temp].body_x*20 &amp;&amp; pDoc-&gt;food.food_y*20 == pDoc-&gt;snake[temp].body_y*20){
+                            temp = pDoc-&gt;snake[0].length-1;
+                            pDoc-&gt;food.food_x=rand()%25;
+                            pDoc-&gt;food.food_y=rand()%25;
                         }
                     }
                 }
-        }<span class="keyword">while</span>(pDoc-&gt;food.food_x*<span class="number">20</span> &lt; <span class="number">50</span> || pDoc-&gt;food.food_y*<span class="number">20</span> &lt; <span class="number">50</span> || pDoc-&gt;food.food_x*<span class="number">20</span> &gt; rectClient.right<span class="number">-100</span> || pDoc-&gt;food.food_y*<span class="number">20</span> &gt; rectClient.right<span class="number">-100</span>);
-        pDC-&gt;Rectangle(pDoc-&gt;food.food_x*<span class="number">20</span>,pDoc-&gt;food.food_y*<span class="number">20</span>,(pDoc-&gt;food.food_x+<span class="number">1</span>)*<span class="number">20</span>,(pDoc-&gt;food.food_y+<span class="number">1</span>)*<span class="number">20</span>);
-        pDoc-&gt;food.isfood = <span class="literal">false</span>;
+        }while(pDoc-&gt;food.food_x*20 &lt; 50 || pDoc-&gt;food.food_y*20 &lt; 50 || pDoc-&gt;food.food_x*20 &gt; rectClient.right-100 || pDoc-&gt;food.food_y*20 &gt; rectClient.right-100);
+        pDC-&gt;Rectangle(pDoc-&gt;food.food_x*20,pDoc-&gt;food.food_y*20,(pDoc-&gt;food.food_x+1)*20,(pDoc-&gt;food.food_y+1)*20);
+        pDoc-&gt;food.isfood = false;
     }
     CView::OnTimer(nIDEvent);
 }
-<span class="keyword">void</span> CSnakeView::OnLButtonDown(UINT nFlags, CPoint point) 
+void CSnakeView::OnLButtonDown(UINT nFlags, CPoint point) 
 {
-    <span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here and/or call default    </span>
+    // TODO: Add your message handler code here and/or call default    
     CView::OnLButtonDown(nFlags, point);
 }
 
-<span class="keyword">void</span> CSnakeView::OnEasy() 
+void CSnakeView::OnEasy() 
 {
-    <span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>
+    // TODO: Add your command handler code here
     CSnakeDoc* pDoc = GetDocument();
     ASSERT_VALID(pDoc);
-    <span class="keyword">if</span>(pDoc-&gt;startFlag == <span class="literal">true</span>){
-        SetTimer(<span class="number">1</span>,<span class="number">400</span>,<span class="literal">NULL</span>);
+    if(pDoc-&gt;startFlag == true){
+        SetTimer(1,400,NULL);
     }
 }
 
-<span class="keyword">void</span> CSnakeView::OnCrazy() 
+void CSnakeView::OnCrazy() 
 {
-    <span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>
+    // TODO: Add your command handler code here
     CSnakeDoc* pDoc = GetDocument();
     ASSERT_VALID(pDoc);
-    <span class="keyword">if</span>(pDoc-&gt;startFlag == <span class="literal">true</span>){
-        SetTimer(<span class="number">1</span>,<span class="number">100</span>,<span class="literal">NULL</span>);
+    if(pDoc-&gt;startFlag == true){
+        SetTimer(1,100,NULL);
     }
 }
 
-<span class="keyword">void</span> CSnakeView::OnHard() 
+void CSnakeView::OnHard() 
 {
-    <span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>
+    // TODO: Add your command handler code here
     CSnakeDoc* pDoc = GetDocument();
     ASSERT_VALID(pDoc);
-    <span class="keyword">if</span>(pDoc-&gt;startFlag == <span class="literal">true</span>){
-        SetTimer(<span class="number">1</span>,<span class="number">200</span>,<span class="literal">NULL</span>);
+    if(pDoc-&gt;startFlag == true){
+        SetTimer(1,200,NULL);
     }
 }
 
-<span class="keyword">void</span> CSnakeView::OnNormol() 
+void CSnakeView::OnNormol() 
 {
-    <span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>
+    // TODO: Add your command handler code here
     CSnakeDoc* pDoc = GetDocument();
     ASSERT_VALID(pDoc);
-    <span class="keyword">if</span>(pDoc-&gt;startFlag == <span class="literal">true</span>){
-        SetTimer(<span class="number">1</span>,<span class="number">300</span>,<span class="literal">NULL</span>);
+    if(pDoc-&gt;startFlag == true){
+        SetTimer(1,300,NULL);
     }
 }
 
-<span class="keyword">void</span> CSnakeView::OnStart() 
+void CSnakeView::OnStart() 
 {
-    <span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>
+    // TODO: Add your command handler code here
     CSnakeDoc* pDoc = GetDocument();
     ASSERT_VALID(pDoc);
-    pDoc-&gt;startFlag = <span class="literal">true</span>;
-    SetTimer(<span class="number">1</span>,<span class="number">300</span>,<span class="literal">NULL</span>); <span class="comment">//normal    </span>
+    pDoc-&gt;startFlag = true;
+    SetTimer(1,300,NULL); //normal    
 }
 
 
 
-<span class="keyword">void</span> CSnakeView::OnPause() 
+void CSnakeView::OnPause() 
 {
-    <span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>
-    KillTimer(<span class="number">1</span>);    
+    // TODO: Add your command handler code here
+    KillTimer(1);    
 }
 
 
 
-<span class="keyword">void</span> CSnakeView::OnStop() 
+void CSnakeView::OnStop() 
 {
-    <span class="comment">// <span class="doctag">TODO:</span> Add your command handler code here</span>
-    AfxMessageBox(<span class="string">"Have a nice day!"</span>);
-    ASSERT(AfxGetApp()-&gt;m_pMainWnd != <span class="literal">NULL</span>);
+    // TODO: Add your command handler code here
+    AfxMessageBox(&quot;Have a nice day!&quot;);
+    ASSERT(AfxGetApp()-&gt;m_pMainWnd != NULL);
     AfxGetApp()-&gt;m_pMainWnd-&gt;SendMessage(WM_CLOSE);
 
 }
@@ -752,7 +752,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -763,7 +763,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -774,7 +774,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

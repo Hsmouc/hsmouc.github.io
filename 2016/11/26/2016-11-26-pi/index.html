@@ -453,7 +453,7 @@
 <li>借还是还？</li>
 <li>能借给他不？  </li>
 </ol>
-<p>首先我们分析第一个问题：判断用户身份由很多种方法，我们选择了较为经济的一种方式—在食堂，水房，门禁随处可见的射频读卡技术。我们只需要阅读购买的RFID读卡模块的使用文档，由串口即可获得ID的信息，通过比对ID，第一个问题解决了。<br>第二个问题看似很无脑，但事实上正是为了可靠的解决第二个问题，我们需要多写50行左右的代码使用数据库。解释下使用数据库的原因：数据库的数据是存在硬盘(Raspi是SD卡)里的，而程序运行过程中开辟的空间是存在RAM里面的。如果我们不能把用户的借出归还标志存入磁盘，断电重启系统后会丢失数据。举个例子：老王昨天借了把伞，借完就停电了。第二天准备去还伞的老王看到机器又扔给他一把伞。这显然是需要避免的情况。而数据库技术很好的解决了这个问题。<br>第三个问题讲的是规则设定。在我们的系统中借伞时间超过两天则会被视为违规，取消你借伞的权利。为了便于课上演示，在实际程序中我调用的系统时间是分钟级，也就是借伞超过两分钟你就被ban了。  </p>
+<p>首先我们分析第一个问题：判断用户身份由很多种方法，我们选择了较为经济的一种方式—-在食堂，水房，门禁随处可见的射频读卡技术。我们只需要阅读购买的RFID读卡模块的使用文档，由串口即可获得ID的信息，通过比对ID，第一个问题解决了。<br>第二个问题看似很无脑，但事实上正是为了可靠的解决第二个问题，我们需要多写50行左右的代码使用数据库。解释下使用数据库的原因：数据库的数据是存在硬盘(Raspi是SD卡)里的，而程序运行过程中开辟的空间是存在RAM里面的。如果我们不能把用户的借出归还标志存入磁盘，断电重启系统后会丢失数据。举个例子：老王昨天借了把伞，借完就停电了。第二天准备去还伞的老王看到机器又扔给他一把伞。这显然是需要避免的情况。而数据库技术很好的解决了这个问题。<br>第三个问题讲的是规则设定。在我们的系统中借伞时间超过两天则会被视为违规，取消你借伞的权利。为了便于课上演示，在实际程序中我调用的系统时间是分钟级，也就是借伞超过两分钟你就被ban了。  </p>
 <h3 id="数据库的设计"><a href="#数据库的设计" class="headerlink" title="数据库的设计"></a>数据库的设计</h3><p>数据库选用了比较流行的MySQL，具有良好的C语言接口。下面是数据库的建立过程：<br>首先在终端中连接数据库，并创建umbrella_db的数据库。 </p>
 <p><code>mysql -u root -p</code><br><code>create database umbrella_db</code>;   </p>
 <p>由于下面的这个语句比较长，所以我们写一个小小的脚本来生成users表，建立<code>createtable.sql</code>文件，内容为:  </p>
@@ -616,7 +616,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -627,7 +627,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -638,7 +638,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

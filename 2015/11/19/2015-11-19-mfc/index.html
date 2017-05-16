@@ -90,24 +90,21 @@
 
 
 <meta name="description" content="MFC的作业
-
 设计基于单文档/视图结构的程序。绘制2条圆形轨道，然后设计2个卫星（圆形代替），使其分别沿内外轨迹匀速行走。轨道路宽度、半径、颜色由轨道设定菜单加对话框指定；有开始、结束菜单；有高速、中速、低速三个菜单控制卫星速度；卫星颜色、标号由按下鼠标左键加对话框指定。
-简单分析：两个圆形轨道和卫星应该是用Ellipse()函数实现，匀速行走则是通过定时器来实现，至于菜单对话框什么的都不是很复">
+简单分析：两个圆形轨道和卫星应该是用Ellipse()函数实现，匀速行走则是通过定时器来实现，至于菜单对话框什么的都不是很复杂">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MFC代码--圆上点的计算">
 <meta property="og:url" content="https://hsmouc.com/2015/11/19/2015-11-19-mfc/index.html">
 <meta property="og:site_name" content="梦的小窝">
 <meta property="og:description" content="MFC的作业
-
 设计基于单文档/视图结构的程序。绘制2条圆形轨道，然后设计2个卫星（圆形代替），使其分别沿内外轨迹匀速行走。轨道路宽度、半径、颜色由轨道设定菜单加对话框指定；有开始、结束菜单；有高速、中速、低速三个菜单控制卫星速度；卫星颜色、标号由按下鼠标左键加对话框指定。
-简单分析：两个圆形轨道和卫星应该是用Ellipse()函数实现，匀速行走则是通过定时器来实现，至于菜单对话框什么的都不是很复">
+简单分析：两个圆形轨道和卫星应该是用Ellipse()函数实现，匀速行走则是通过定时器来实现，至于菜单对话框什么的都不是很复杂">
 <meta property="og:updated_time" content="2017-01-03T15:17:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MFC代码--圆上点的计算">
 <meta name="twitter:description" content="MFC的作业
-
 设计基于单文档/视图结构的程序。绘制2条圆形轨道，然后设计2个卫星（圆形代替），使其分别沿内外轨迹匀速行走。轨道路宽度、半径、颜色由轨道设定菜单加对话框指定；有开始、结束菜单；有高速、中速、低速三个菜单控制卫星速度；卫星颜色、标号由按下鼠标左键加对话框指定。
-简单分析：两个圆形轨道和卫星应该是用Ellipse()函数实现，匀速行走则是通过定时器来实现，至于菜单对话框什么的都不是很复">
+简单分析：两个圆形轨道和卫星应该是用Ellipse()函数实现，匀速行走则是通过定时器来实现，至于菜单对话框什么的都不是很复杂">
 
 
 
@@ -424,45 +421,43 @@
       
 
       
-        <h2 id="mfc的作业">MFC的作业</h2>
-<ul>
+        <h2 id="MFC的作业"><a href="#MFC的作业" class="headerlink" title="MFC的作业"></a>MFC的作业</h2><ul>
 <li>设计基于单文档/视图结构的程序。绘制2条圆形轨道，然后设计2个卫星（圆形代替），使其分别沿内外轨迹匀速行走。轨道路宽度、半径、颜色由轨道设定菜单加对话框指定；有开始、结束菜单；有高速、中速、低速三个菜单控制卫星速度；卫星颜色、标号由按下鼠标左键加对话框指定。</li>
-<li>简单分析：两个圆形轨道和卫星应该是用Ellipse()函数实现，匀速行走则是通过定时器来实现，至于菜单对话框什么的都不是很复杂。说白了这个题目并没有什么难度，只是说考察的点很多，比较繁琐。 <a id="more"></a> ### 设计菜单 菜单包括:Status(Start/Stop)、Speed(High/Medium/Low)、Preferences(Width/Radii/Color)。<br>
-还有添加一个鼠标左键消息处理函数。 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void CSatelliteView::OnStart() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	SetTimer(1,100,NULL);	&#125;void CSatelliteView::OnStop() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	KillTimer(1);	&#125;void CSatelliteView::OnHigh() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_speed = 1.0;	&#125;void CSatelliteView::OnMedium() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_speed = 0.5;	&#125;void CSatelliteView::OnLow() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_speed = 0.1;&#125;void CSatelliteView::OnWidth() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	Width dlgInput;	int nRet = dlgInput.DoModal();	if(nRet == IDOK)	&#123;		pDoc-&gt;m_widthDoc=dlgInput.m_width;		pDoc-&gt;m_widthDocx=dlgInput.m_widthx;		Invalidate();	&#125;	&#125;void CSatelliteView::OnRadii() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	Radii dlgInput;	int nRet = dlgInput.DoModal();	if(nRet == IDOK)	&#123;		pDoc-&gt;m_radiiDoc=dlgInput.m_radii;		pDoc-&gt;m_radiiDocx=dlgInput.m_radiix;		Invalidate();	&#125;		&#125;void CSatelliteView::OnColor() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	CColorDialog dlg;	if(dlg.DoModal() == IDOK)	&#123;		pDoc-&gt;m_orbitColor=dlg.GetColor();		Invalidate();	&#125;	&#125;void CSatelliteView::OnLButtonDown(UINT nFlags, CPoint point) &#123;	// TODO: Add your message handler code here and/or call default	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	CColorDialog dlg;	if(dlg.DoModal() == IDOK)	&#123;		pDoc-&gt;m_satelliteColor=dlg.GetColor();		Invalidate();	&#125;	CView::OnLButtonDown(nFlags, point);&#125;void CSatelliteView::OnTimer(UINT nIDEvent) &#123;	// TODO: Add your message handler code here and/or call default	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_angle += pDoc-&gt;m_speed;	Invalidate();	CView::OnTimer(nIDEvent);&#125;</div></pre></td></tr></table></figure></li>
+<li>简单分析：两个圆形轨道和卫星应该是用Ellipse()函数实现，匀速行走则是通过定时器来实现，至于菜单对话框什么的都不是很复杂。说白了这个题目并没有什么难度，只是说考察的点很多，比较繁琐。<a id="more"></a> 
+<h3 id="设计菜单"><a href="#设计菜单" class="headerlink" title="设计菜单"></a>设计菜单</h3>菜单包括:Status(Start/Stop)、Speed(High/Medium/Low)、Preferences(Width/Radii/Color)。<br>还有添加一个鼠标左键消息处理函数。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void CSatelliteView::OnStart() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc=GetDocument();	ASSERT_VALID(pDoc);	SetTimer(1,100,NULL);	&#125;void CSatelliteView::OnStop() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	KillTimer(1);	&#125;void CSatelliteView::OnHigh() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_speed = 1.0;	&#125;void CSatelliteView::OnMedium() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_speed = 0.5;	&#125;void CSatelliteView::OnLow() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_speed = 0.1;&#125;void CSatelliteView::OnWidth() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	Width dlgInput;	int nRet = dlgInput.DoModal();	if(nRet == IDOK)	&#123;		pDoc-&gt;m_widthDoc=dlgInput.m_width;		pDoc-&gt;m_widthDocx=dlgInput.m_widthx;		Invalidate();	&#125;	&#125;void CSatelliteView::OnRadii() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	Radii dlgInput;	int nRet = dlgInput.DoModal();	if(nRet == IDOK)	&#123;		pDoc-&gt;m_radiiDoc=dlgInput.m_radii;		pDoc-&gt;m_radiiDocx=dlgInput.m_radiix;		Invalidate();	&#125;		&#125;void CSatelliteView::OnColor() &#123;	// TODO: Add your command handler code here	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	CColorDialog dlg;	if(dlg.DoModal() == IDOK)	&#123;		pDoc-&gt;m_orbitColor=dlg.GetColor();		Invalidate();	&#125;	&#125;void CSatelliteView::OnLButtonDown(UINT nFlags, CPoint point) &#123;	// TODO: Add your message handler code here and/or call default	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	CColorDialog dlg;	if(dlg.DoModal() == IDOK)	&#123;		pDoc-&gt;m_satelliteColor=dlg.GetColor();		Invalidate();	&#125;	CView::OnLButtonDown(nFlags, point);&#125;void CSatelliteView::OnTimer(UINT nIDEvent) &#123;	// TODO: Add your message handler code here and/or call default	CSatelliteDoc *pDoc = GetDocument();	ASSERT_VALID(pDoc);	pDoc-&gt;m_angle += pDoc-&gt;m_speed;	Invalidate();	CView::OnTimer(nIDEvent);&#125;</div></pre></td></tr></table></figure>
+</li>
 </ul>
-<p>代码并不是特别的复杂，只是比较繁琐，至于创建类，声明变量之类的就不一一赘述了。</p>
-<h3 id="绘图">绘图</h3>
-<p>我做了一个响应式的布局，思路大概是先获得用户区的大小，然后算出中点。以该中点为圆心画出两个半径为用户指定的同心圆。注意画笔的选择，画刷选择为空，否则大圆会覆盖小圆。<br>
-通过公式计算出两个圆上的点来确定卫星的圆心，然后以卫星的圆心画半径为定值的圆，通过定时器不断重绘从而让它运动起来。<br>
-详细的代码如下:</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> CSatelliteView::OnDraw(CDC* pDC)
+<p>代码并不是特别的复杂，只是比较繁琐，至于创建类，声明变量之类的就不一一赘述了。  </p>
+<h3 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h3><p>我做了一个响应式的布局，思路大概是先获得用户区的大小，然后算出中点。以该中点为圆心画出两个半径为用户指定的同心圆。注意画笔的选择，画刷选择为空，否则大圆会覆盖小圆。<br>通过公式计算出两个圆上的点来确定卫星的圆心，然后以卫星的圆心画半径为定值的圆，通过定时器不断重绘从而让它运动起来。<br>详细的代码如下:</p>
+<pre><code class="lang-c++">void CSatelliteView::OnDraw(CDC* pDC)
 {
     CSatelliteDoc* pDoc = GetDocument();
     ASSERT_VALID(pDoc);
     CRect rectClient;
     GetClientRect(&amp;rectClient);
-    <span class="dt">double</span> x,y;
-    x=(rectClient.right-rectClient.left)/<span class="dv">2</span>;
-    y=(rectClient.bottom-rectClient.top)/<span class="dv">2</span>;
+    double x,y;
+    x=(rectClient.right-rectClient.left)/2;
+    y=(rectClient.bottom-rectClient.top)/2;
     pDC-&gt;SelectStockObject(NULL_BRUSH);
     CPen newPen;
     CPen newPenx;
     CPen newPen_satellite;
-    newPen.CreatePen(PS_SOLID,pDoc-&gt;<span class="va">m_widthDoc</span>,pDoc-&gt;<span class="va">m_orbitColor</span>);
-    newPen_satellite.CreatePen(PS_SOLID,<span class="dv">2</span>,pDoc-&gt;<span class="va">m_satelliteColor</span>);
-    newPenx.CreatePen(PS_SOLID,pDoc-&gt;<span class="va">m_widthDocx</span>,pDoc-&gt;<span class="va">m_orbitColor</span>);
+    newPen.CreatePen(PS_SOLID,pDoc-&gt;m_widthDoc,pDoc-&gt;m_orbitColor);
+    newPen_satellite.CreatePen(PS_SOLID,2,pDoc-&gt;m_satelliteColor);
+    newPenx.CreatePen(PS_SOLID,pDoc-&gt;m_widthDocx,pDoc-&gt;m_orbitColor);
     CPen *poldPen;
     poldPen=pDC-&gt;SelectObject(&amp;newPen);
-    pDC-&gt;Ellipse(x-pDoc-&gt;<span class="va">m_radiiDoc</span>,y-pDoc-&gt;<span class="va">m_radiiDoc</span>,x+pDoc-&gt;<span class="va">m_radiiDoc</span>,y+pDoc-&gt;<span class="va">m_radiiDoc</span>);
+    pDC-&gt;Ellipse(x-pDoc-&gt;m_radiiDoc,y-pDoc-&gt;m_radiiDoc,x+pDoc-&gt;m_radiiDoc,y+pDoc-&gt;m_radiiDoc);
     poldPen=pDC-&gt;SelectObject(&amp;newPenx);
-    pDC-&gt;Ellipse(x-pDoc-&gt;<span class="va">m_radiiDocx</span>,y-pDoc-&gt;<span class="va">m_radiiDocx</span>,x+pDoc-&gt;<span class="va">m_radiiDocx</span>,y+pDoc-&gt;<span class="va">m_radiiDocx</span>);
+    pDC-&gt;Ellipse(x-pDoc-&gt;m_radiiDocx,y-pDoc-&gt;m_radiiDocx,x+pDoc-&gt;m_radiiDocx,y+pDoc-&gt;m_radiiDocx);
     poldPen=pDC-&gt;SelectObject(&amp;newPen_satellite);
-    pDC-&gt;Ellipse(x+pDoc-&gt;<span class="va">m_radiiDoc</span>*cos(pDoc-&gt;<span class="va">m_angle</span>)<span class="dv">-15</span>,y+pDoc-&gt;<span class="va">m_radiiDoc</span>*sin(pDoc-&gt;<span class="va">m_angle</span>)<span class="dv">-15</span>,x+pDoc-&gt;<span class="va">m_radiiDoc</span>*cos(pDoc-&gt;<span class="va">m_angle</span>)<span class="dv">+15</span>,y+pDoc-&gt;<span class="va">m_radiiDoc</span>*sin(pDoc-&gt;<span class="va">m_angle</span>)<span class="dv">+15</span>);
-    pDC-&gt;Ellipse(x+pDoc-&gt;<span class="va">m_radiiDocx</span>*cos(pDoc-&gt;<span class="va">m_angle</span>)<span class="dv">-15</span>,y+pDoc-&gt;<span class="va">m_radiiDocx</span>*sin(pDoc-&gt;<span class="va">m_angle</span>)<span class="dv">-15</span>,x+pDoc-&gt;<span class="va">m_radiiDocx</span>*cos(pDoc-&gt;<span class="va">m_angle</span>)<span class="dv">+15</span>,y+pDoc-&gt;<span class="va">m_radiiDocx</span>*sin(pDoc-&gt;<span class="va">m_angle</span>)<span class="dv">+15</span>);
-    <span class="co">// </span><span class="al">TODO</span><span class="co">: add draw code for native data here</span>
-}</code></pre></div>
-<p>我觉得我写的简直乱到一定程度了-<em>-#<br>
-### 小结 这个程序几乎是一气呵成的，编译一遍通过简直感人。但是这个程序还是有很多细节有待完善，比如说设置初始值的问题。个人认为用户在打开这个程序的时候应该是两个卫星在跑而不是一片空白，用户根据自己的个性化需求更改一些参数，这样看起来会更友好一些。单论MFC的文档/视图结构的话貌似并没什么太复杂的内容，整个就是一个大模版，只要你循规蹈矩，解出这些水题也就是时间问题吧=</em>=</p>
+    pDC-&gt;Ellipse(x+pDoc-&gt;m_radiiDoc*cos(pDoc-&gt;m_angle)-15,y+pDoc-&gt;m_radiiDoc*sin(pDoc-&gt;m_angle)-15,x+pDoc-&gt;m_radiiDoc*cos(pDoc-&gt;m_angle)+15,y+pDoc-&gt;m_radiiDoc*sin(pDoc-&gt;m_angle)+15);
+    pDC-&gt;Ellipse(x+pDoc-&gt;m_radiiDocx*cos(pDoc-&gt;m_angle)-15,y+pDoc-&gt;m_radiiDocx*sin(pDoc-&gt;m_angle)-15,x+pDoc-&gt;m_radiiDocx*cos(pDoc-&gt;m_angle)+15,y+pDoc-&gt;m_radiiDocx*sin(pDoc-&gt;m_angle)+15);
+    // TODO: add draw code for native data here
+}
+</code></pre>
+<p>我觉得我写的简直乱到一定程度了-_-#   </p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>这个程序几乎是一气呵成的，编译一遍通过简直感人。但是这个程序还是有很多细节有待完善，比如说设置初始值的问题。个人认为用户在打开这个程序的时候应该是两个卫星在跑而不是一片空白，用户根据自己的个性化需求更改一些参数，这样看起来会更友好一些。单论MFC的文档/视图结构的话貌似并没什么太复杂的内容，整个就是一个大模版，只要你循规蹈矩，解出这些水题也就是时间问题吧=_=</p>
 
       
     </div>
@@ -598,7 +593,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -609,7 +604,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -620,7 +615,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -668,7 +663,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mfc的作业"><span class="nav-number">1.</span> <span class="nav-text">MFC的作业</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#绘图"><span class="nav-number">1.1.</span> <span class="nav-text">绘图</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MFC的作业"><span class="nav-number">1.</span> <span class="nav-text">MFC的作业</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计菜单"><span class="nav-number">1.1.</span> <span class="nav-text">设计菜单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绘图"><span class="nav-number">1.2.</span> <span class="nav-text">绘图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">1.3.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
             
 
           </div>
