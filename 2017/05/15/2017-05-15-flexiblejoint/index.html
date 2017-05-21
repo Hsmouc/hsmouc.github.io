@@ -107,7 +107,7 @@ P.S. 这篇文章的原排版系统为LaTeX，在ShareLaTeX上可以导出PDF格
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1ffn3i6k4l2j30fk0dp0tg.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1ffn3jpjjb2j30hs0f9jrq.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1ffn3jqufepj30hs0f4tb2.jpg">
-<meta property="og:updated_time" content="2017-05-16T18:08:08.000Z">
+<meta property="og:updated_time" content="2017-05-21T10:00:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单自由度弹性关节机器人控制系统分析与设计">
 <meta name="twitter:description" content="这篇文章是现代控制理论课程设计的前半部分，主要研究了单自由度弹性关节系统的工程背景，动力学建模；控制系统方面包括状态方程建立，状态转移矩阵计算，零输入给定初值MATLAB与Python Tkinter模型仿真，状态方程与传递函数之间的转换，系统能观性和能控性的讨论。
@@ -670,6 +670,104 @@ CA^{n-1} \\
 \end{vmatrix}
  = \frac{k^2}{J_l^2}
 \]</span> 由于<span class="math inline">\(J_l\neq 0\)</span>，所以当且仅当<span class="math inline">\(k = 0\)</span>时系统不能观测。</p>
+<h3 id="能控规范型和能观测规范型">能控规范型和能观测规范型</h3>
+<h4 id="单输入-单输出系统的能控规范型">单输入-单输出系统的能控规范型</h4>
+单自由度弹性关节机器人系统的能控性矩阵： <span class="math display">\[Q_k = 
+\begin{bmatrix}
+0 &amp; 0 &amp; 0 &amp; \frac{k}{J_lJ_m} \\
+0 &amp; 0 &amp; \frac{k}{J_lJ_m} &amp;  -\frac{B_lk}{J_mJ_l^2} - \frac{B_mk}{J_lJ_m^2} \\
+0 &amp; \frac{1}{J_m} &amp; -\frac{B_m}{J_m^2} &amp;-\frac{k}{J_m^2} - \frac{B_m^2}{J_m^3} \\
+\frac{1}{J_m} &amp; -\frac{B_m}{J_m^2} &amp; -\frac{k}{J_m^2} -\frac{B_m^2}{J_m^3} &amp; \frac{B_m k}{J_m^3} + \frac{B_m k}{J_m^3} - \frac{B_m^3}{J_m^4} \\
+\end{bmatrix}
+\]</span><br>
+为非奇异，则存在非奇异变换： <span class="math display">\[\widehat{X}=PX\]</span><br>
+或<br>
+<span class="math display">\[X=P^{-1}\widehat{X}\]</span><br>
+系统可化为能控规范型，即 <span class="math display">\[P_1=
+\begin{bmatrix}
+0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{bmatrix}Q_k^{-1}
+\]</span> 求得 <span class="math display">\[P_1 = 
+\begin{bmatrix}
+\frac{J_lJ_m}{k} &amp; 0 &amp; 0 &amp; 0\\
+\end{bmatrix}
+\]</span> 变换矩阵为 <span class="math display">\[ P = 
+\begin{bmatrix}
+P_1     \\
+P_1A    \\
+P_1A^2  \\
+P_1A^3  \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+\frac{J_lJ_m}{k} &amp; 0 &amp; 0 &amp; 0     \\
+0 &amp; \frac{J_lJ_m}{k} &amp; 0 &amp; 0     \\
+-J_m &amp; -\frac{B_lJ_m}{k} &amp; J_m &amp; 0\\
+\frac{B_l J_m}{J_l} &amp; \frac{J_m B_L^2}{J_l k}-J_m &amp; -\frac{B_l J_m}{J_l} &amp; J_m \\
+\end{bmatrix}
+\]</span> 因此 <span class="math display">\[ \widehat{A} = PAP^{-1}=
+\begin{bmatrix}
+0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; -\frac{k(B_l + B_m)}{J_l J_m} &amp; -\frac{(J_l k + J_m k + B_l B_m)}{(J_l k + J_m k + B_l B_m)} &amp; -\frac{B_l J_m + B_m J_l}{J_l*J_m} \\
+\end{bmatrix} \qquad \widehat{B} = PB = 
+\begin{bmatrix}
+0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{bmatrix}^T
+\]</span> 故可将状态方程化为能控规范性 {
+<span class="math display">\[\begin{array}{ll}
+    \dot{\widehat{X}} = \widehat{A}\widehat{X}+\widehat{B}u \\
+    y = \widehat{C}\widehat{X}
+\end{array}\]</span>
+<p>.</p>
+<h4 id="单输入-单输出系统的能观测规范型">单输入-单输出系统的能观测规范型</h4>
+<p>单自由度弹性关节机器人系统的能观测性矩阵： <span class="math display">\[Q_g^T =
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 \\
+-\frac{k}{J_l} &amp; -\frac{B_l}{J_l} &amp; \frac{k}{J_l} &amp; 0 \\
+\frac{B_lk}{J_l^2} &amp; \frac{B_l^2}{J_l^2} - \frac{k}{J_l} &amp; -\frac{B_lk}{J_l^2} &amp; \frac{k}{J_l}\\
+\end{bmatrix}
+\]</span><br>
+为非奇异，则存在非奇异变换： <span class="math display">\[X(t)=T\widehat{X}(t)\]</span><br>
+或 <span class="math display">\[\widehat{X}(t)=T^{-1}X(t)\]</span> 系统可化为能控规范型，即 <span class="math display">\[T_1 = (Q_g^T)^{-1}
+\begin{bmatrix}
+0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{bmatrix}^T
+\]</span></p>
+求得 <span class="math display">\[T_1 = 
+\begin{bmatrix}
+0 &amp; 0 &amp; 0 &amp; \frac{J_l}{k} \\
+\end{bmatrix}^T
+\]</span><br>
+变换矩阵为 <span class="math display">\[T = 
+\begin{bmatrix}
+T_1 &amp; A T_1 &amp; A^2 T_1 &amp; A^3 T_1 \\
+\end{bmatrix} = 
+\begin{bmatrix}
+0 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 0 &amp; 1 &amp; -\frac{B_l}{J_l}-\frac{B_m}{J_m}\\
+0 &amp; \frac{J_l}{k} &amp; -\frac{B_m J_l}{J_m*k} &amp; \frac{B_m^2 J_l}{J_m^2 k}-\frac{J_l}{J_m} \\
+\frac{J_l}{k} &amp; -\frac{B_m J_l}{J_m k} &amp; \frac{B_m^2 J_l}{J_m^2 k}-\frac{J_l}{J_m} &amp; \frac{k B_m J_l + k B_m J_m^2 - J_m B_m^3}{k J_m^3} \\
+\end{bmatrix}
+\]</span><br>
+因此 <span class="math display">\[\widehat{A} = T^{-1}AT =
+\begin{bmatrix}
+0 &amp; 0 &amp; 0 &amp; 0 \\
+1 &amp; 0 &amp; 0 &amp; -\frac{k(B_l + B_m)}{J_l J_m} \\
+0 &amp; 1 &amp; 0 &amp; -\frac{(J_l k + J_m k + B_l B_m}{J_l J_m} \\
+0 &amp; 0 &amp; 1 &amp; -\frac{B_l J_m + B_m J_l}{J_l J_m}]
+\end{bmatrix} \qquad \widehat{C} = CT = 
+\begin{bmatrix}
+ 0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{bmatrix}
+\]</span> 故可将状态方程化为能观测规范性 {
+<span class="math display">\[\begin{array}{ll}
+    \dot{\widehat{X}} = \widehat{A}\widehat{X}+\widehat{B}u \\
+    y = \widehat{C}\widehat{X}
+\end{array}\]</span>
+<p>.</p>
 
       
     </div>
@@ -871,7 +969,7 @@ CA^{n-1} \\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#工程背景"><span class="nav-number">1.</span> <span class="nav-text">工程背景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工业机器人概述"><span class="nav-number">1.1.</span> <span class="nav-text">工业机器人概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#机器人柔性设计"><span class="nav-number">1.2.</span> <span class="nav-text">机器人柔性设计</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动力学建模"><span class="nav-number">2.</span> <span class="nav-text">动力学建模</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制系统分析"><span class="nav-number">3.</span> <span class="nav-text">控制系统分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#微分方程转化状态方程"><span class="nav-number">3.1.</span> <span class="nav-text">微分方程转化状态方程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#零输入给定初值状态方程仿真"><span class="nav-number">3.2.</span> <span class="nav-text">零输入给定初值状态方程仿真</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ode45方法求解基于matlab"><span class="nav-number">3.2.1.</span> <span class="nav-text">ODE45方法求解(基于MATLAB)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵指数方法求解基于matlab"><span class="nav-number">3.2.2.</span> <span class="nav-text">矩阵指数方法求解(基于MATLAB)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#matlab程序运行结果"><span class="nav-number">3.2.3.</span> <span class="nav-text">MATLAB程序运行结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统仿真动画基于python-tkinter"><span class="nav-number">3.2.4.</span> <span class="nav-text">系统仿真动画(基于Python Tkinter)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码功能"><span class="nav-number">3.2.4.1.</span> <span class="nav-text">代码功能：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行环境"><span class="nav-number">3.2.4.2.</span> <span class="nav-text">运行环境：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码说明"><span class="nav-number">3.2.4.3.</span> <span class="nav-text">代码说明:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态方程转化为传递函数"><span class="nav-number">3.2.5.</span> <span class="nav-text">状态方程转化为传递函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能观性与能控性讨论"><span class="nav-number">3.2.6.</span> <span class="nav-text">能观性与能控性讨论</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#能控性讨论"><span class="nav-number">3.2.6.1.</span> <span class="nav-text">能控性讨论</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#能观性讨论"><span class="nav-number">3.2.6.2.</span> <span class="nav-text">能观性讨论</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#工程背景"><span class="nav-number">1.</span> <span class="nav-text">工程背景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工业机器人概述"><span class="nav-number">1.1.</span> <span class="nav-text">工业机器人概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#机器人柔性设计"><span class="nav-number">1.2.</span> <span class="nav-text">机器人柔性设计</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动力学建模"><span class="nav-number">2.</span> <span class="nav-text">动力学建模</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制系统分析"><span class="nav-number">3.</span> <span class="nav-text">控制系统分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#微分方程转化状态方程"><span class="nav-number">3.1.</span> <span class="nav-text">微分方程转化状态方程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#零输入给定初值状态方程仿真"><span class="nav-number">3.2.</span> <span class="nav-text">零输入给定初值状态方程仿真</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ode45方法求解基于matlab"><span class="nav-number">3.2.1.</span> <span class="nav-text">ODE45方法求解(基于MATLAB)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵指数方法求解基于matlab"><span class="nav-number">3.2.2.</span> <span class="nav-text">矩阵指数方法求解(基于MATLAB)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#matlab程序运行结果"><span class="nav-number">3.2.3.</span> <span class="nav-text">MATLAB程序运行结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统仿真动画基于python-tkinter"><span class="nav-number">3.2.4.</span> <span class="nav-text">系统仿真动画(基于Python Tkinter)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码功能"><span class="nav-number">3.2.4.1.</span> <span class="nav-text">代码功能：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行环境"><span class="nav-number">3.2.4.2.</span> <span class="nav-text">运行环境：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码说明"><span class="nav-number">3.2.4.3.</span> <span class="nav-text">代码说明:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态方程转化为传递函数"><span class="nav-number">3.2.5.</span> <span class="nav-text">状态方程转化为传递函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能观性与能控性讨论"><span class="nav-number">3.2.6.</span> <span class="nav-text">能观性与能控性讨论</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#能控性讨论"><span class="nav-number">3.2.6.1.</span> <span class="nav-text">能控性讨论</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#能观性讨论"><span class="nav-number">3.2.6.2.</span> <span class="nav-text">能观性讨论</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能控规范型和能观测规范型"><span class="nav-number">3.2.7.</span> <span class="nav-text">能控规范型和能观测规范型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#单输入-单输出系统的能控规范型"><span class="nav-number">3.2.7.1.</span> <span class="nav-text">单输入-单输出系统的能控规范型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单输入-单输出系统的能观测规范型"><span class="nav-number">3.2.7.2.</span> <span class="nav-text">单输入-单输出系统的能观测规范型</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
