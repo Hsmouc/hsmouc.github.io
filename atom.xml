@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hsmouc.com/"/>
-  <updated>2017-05-21T10:00:55.000Z</updated>
+  <updated>2017-07-16T09:27:13.000Z</updated>
   <id>https://hsmouc.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://hsmouc.com/2017/05/15/2017-05-15-flexiblejoint/"/>
     <id>https://hsmouc.com/2017/05/15/2017-05-15-flexiblejoint/</id>
     <published>2017-05-15T11:21:18.000Z</published>
-    <updated>2017-05-21T10:00:55.000Z</updated>
+    <updated>2017-07-16T09:27:13.000Z</updated>
     
     <content type="html"><![CDATA[<ul>
 <li>这篇文章是现代控制理论课程设计的前半部分，主要研究了单自由度弹性关节系统的工程背景，动力学建模；控制系统方面包括状态方程建立，状态转移矩阵计算，零输入给定初值<code>MATLAB</code>与<code>Python Tkinter</code>模型仿真，状态方程与传递函数之间的转换，系统能观性和能控性的讨论。</li>
@@ -359,6 +359,126 @@ T_1 &amp; A T_1 &amp; A^2 T_1 &amp; A^3 T_1 \\
     y = \widehat{C}\widehat{X}
 \end{array}\]</span>
 <p>.</p>
+<h1 id="控制系统设计">控制系统设计</h1>
+<p>系统给出的参数为<span class="math inline">\(J_m=2,J_l=10,B_m=0.5,B_l=1,k=111\)</span> ## 开环阶跃响应仿真 使用MATLAB将系统的状态空间方程转换为传递函数形式，并观察阶跃响应，代码如下：<br>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[num_1,den_1] = ss2tf(A,B,C(<span class="number">1</span>,:),D);sys_1 = tf(num_1,den_1);</div><div class="line">[num_2,den_2] = ss2tf(A,B,C(<span class="number">2</span>,:),D);sys_2 = tf(num_2,den_2);</div><div class="line">[num_3,den_3] = ss2tf(A,B,C(<span class="number">3</span>,:),D);sys_3 = tf(num_3,den_3);</div><div class="line">[num_4,den_4] = ss2tf(A,B,C(<span class="number">4</span>,:),D);sys_4 = tf(num_4,den_4);</div><div class="line">t = (<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">40</span>)';</div><div class="line">[y1, ~, ~, ysd1] = step(sys_1,t);[y2, ~, ~, ysd2] = step(sys_2,t);</div><div class="line">[y3, ~, ~, ysd3] = step(sys_3,t);[y4, ~, ~, ysd4] = step(sys_4,t);</div><div class="line">subplot(<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>)</div><div class="line">plot(t, y1, <span class="string">':b'</span>,t, y3, <span class="string">'r'</span>);legend(<span class="string">'\theta_l'</span>,<span class="string">'\theta_m'</span>);</div><div class="line">title(<span class="string">'Step Response(\theta)'</span>)</div><div class="line">subplot(<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>)</div><div class="line">plot(t, y2, <span class="string">':m'</span>,t, y4, <span class="string">'y'</span>);legend(<span class="string">'\omega_l'</span>,<span class="string">'\omega_m'</span>);</div><div class="line">title(<span class="string">'Step Response(\omega)'</span>)</div></pre></td></tr></table></figure></p>
+<p><em>Notes: 这里将输出矩阵<span class="math inline">\(C\)</span>改为了四阶单位矩阵，这样可以观察系统各状态的阶跃响应情况。</em></p>
+<p><strong>阶跃响应曲线</strong> <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fhlu3fkavcj30ns0jywg5.jpg" alt="单自由度弹性关节阶跃响应曲线"></p>
+<p>由阶跃响应曲线可以看出，电机和负载的转速基本保持同步，但二者相互影响；从角速度曲线上可以看出二者的角速度都存在锯齿，一段时间后保持稳定。电机和负载的转速均线性增加。</p>
+<h2 id="状态反馈控制器设计">状态反馈控制器设计</h2>
+<h3 id="根据性能指标要求确定系统主导极点">根据性能指标要求确定系统主导极点</h3>
+这是一个主导极点问题。在稳定的高阶系统中，对于其时间响应起主导作用的闭环极点为主导极点，远离原点的极点所对应的响应影响很小，离虚轴最近且邻近没有零点的极点，其对应的暂态响应分量衰减最慢，幅值也大。正是如此，将本例中讨论的四阶系统近似为二阶系统分析。<br>
+系统要求的性能指标为超调量<span class="math inline">\(\sigma \le 5\%\)</span>;调节时间$ t_s 0.5s<span class="math inline">\(; 系统频宽\)</span>BW 10$。<br>
+由超调量定义公式得到欠阻尼典型二阶系统的超调量为: <span class="math display">\[\sigma \% = \frac{c(t_p)-1}{1}\times 100\% = e^{-\pi \xi/\sqrt{1-\xi^2}}\times 100\%\]</span><br>
+超调量<span class="math inline">\(\sigma \le 5\%\)</span>，取超调量为<span class="math inline">\(1.52\%\)</span>,解得<span class="math inline">\(\xi = 0.8\)</span>。<br>
+由调节时间公式: <span class="math display">\[t_s \approx \frac{4}{\xi \omega_n}\]</span><br>
+调节时间间$ t_s 0.5s$，取调节时间为<span class="math inline">\(0.5s\)</span>,解得<span class="math inline">\(\omega_n = 10\)</span><br>
+由典型二阶系统的带宽频率公式： <span class="math display">\[BW = \omega_n\sqrt{(1-2\xi^2)+\sqrt{(1-2\xi^2)^2+1}}\]</span><br>
+验证得出系统的带宽为<span class="math inline">\(8.7090\)</span>。 由典型二阶欠阻尼系统的关系式： <span class="math display">\[s_{1,2}=-\xi\omega_n=\pm j\omega_n\sqrt{1-\xi^2}\]</span> <span class="math display">\[s^2+2\xi\omega_n s+\omega_n^2=0\]</span><br>
+得出配置的闭环主导极点为： <span class="math display">\[s_{1,2} = -8\pm 6j\]</span><br>
+远极点应选择使它和原点的距离大于<span class="math inline">\(5\mid s_1 \mid\)</span>的点，所以确定希望的极点为：<br>
+{
+<span class="math display">\[\begin{array}{ll}
+    s_1 = -8 + 6j \\
+    s_2 = -8 - 6j \\
+    s_3 = -50 \\
+    s_4 = -60 \\
+\end{array}\]</span>
+<p>.</p>
+<h3 id="确定状态反馈矩阵widehatk">确定状态反馈矩阵<span class="math inline">\(\widehat{K}\)</span></h3>
+<p>受控系统的特征多项式为 <span class="math display">\[f(s)=s^4+0.35s^3+66.625s^2+8.325s;\qquad a_1=0.35\quad a_2=66.625\quad a_3=8.325\quad a_4 =0\]</span> 由希望的极点构成的特征多项式为 <span class="math display">\[f^*(s)=(s+50)(s+60)(s+8-6j)(s+8+6j) = s^4 + 126s^3 + 4860s^2 + 59000s + 300000\]</span> <span class="math display">\[a_1^* = 126 \quad a_2^* = 4860 \quad a_3^* = 59000 \quad a_4^* = 300000
+\]</span><br>
+于是状态反馈矩阵<span class="math inline">\(\widehat{K}\)</span>为 <span class="math display">\[K=
+\begin{bmatrix}
+300000 &amp; 58991.675 &amp; 4793.375 &amp; 125.65\\
+\end{bmatrix}\]</span> 若需将其转化为能控规范性反馈矩阵可按<span class="math inline">\(\widehat{K} = KP\)</span></p>
+<h3 id="确定输入放大系数l">确定输入放大系数<span class="math inline">\(L\)</span></h3>
+<p>已知闭环传递函数为 <span class="math display">\[W_K(s)=\frac{5.55L}{s^4 + 126 s^3 + 4860 s^2 + 59000 s + 300000}\]</span><br>
+要求跟踪信号阶跃信号的误差<span class="math inline">\(e_p = 0\)</span>，有<br>
+<span class="math display">\[e_p = 0 = \lim\limits_{t\rightarrow{\infty}}[1-y(t)]=\lim\limits_{s\rightarrow{\infty}}s[\frac{1}{s}-\frac{W_K(s)}{s}]=\lim\limits_{s\rightarrow{\infty}}[1-W_K(s)] = \frac{300000-5.55L}{300000}=0\]</span><br>
+解得<br>
+<span class="math display">\[L = 54055\]</span></p>
+<h3 id="matlab阶跃响应仿真">MATLAB阶跃响应仿真</h3>
+<p>使用MATLAB进行极点配置及绘制单位阶跃响应曲线的代码如下：<br>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">point = [<span class="number">-8</span>+<span class="number">6</span>i <span class="number">-8</span><span class="number">-6</span>i <span class="number">-50</span> <span class="number">-60</span>];</div><div class="line">k =place(A,B,point);</div><div class="line">A = A - B*k;</div><div class="line">[num,den] = ss2tf(A,B,C,D);</div><div class="line">sys = tf(<span class="number">54055</span>*num,den);</div><div class="line">t = (<span class="number">0</span>:<span class="number">0.01</span>:<span class="number">1</span>)';</div><div class="line">[y, ~, ~, ysd] = step(sys,t);</div><div class="line">plot(t, y, <span class="string">'*r'</span>);axis([<span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1.2</span>]);</div><div class="line">title(<span class="string">'Step Response(\theta)'</span>)</div></pre></td></tr></table></figure></p>
+<p>绘制出的阶跃响应曲线如下图所示： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fhlu82s1pqj30fk0dpgmi.jpg" alt="系统配置极点后的阶跃响应曲线"></p>
+<p>并使用MATLAB计算超调量及调节时间，可用以下代码： <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">overshoot = max(y) - y(<span class="keyword">end</span>)</div><div class="line">ts = t(max(<span class="built_in">find</span>(<span class="built_in">abs</span>(y<span class="number">-1</span>)&gt;<span class="number">0.05</span>)))</div></pre></td></tr></table></figure></p>
+<p>解出超调量为<span class="math inline">\(1.46\%\)</span>，调节时间为<span class="math inline">\(0.37s\)</span>，符合之前设置的性能指标要求。</p>
+<h2 id="带观测器状态反馈闭环系统">带观测器状态反馈闭环系统</h2>
+由于并非所有的状态变量都能够被测量到。因此，为了实现状态反馈控制律，就必须利用已知信息<span class="math inline">\((y,u)\)</span>，通过模型来对系统的状态变量进行估计。 ### 观测器极点位置选择 观测器极点的选取通常使观测器的响应比系统的响应要快得多，一个经验法则是选择观测器的响应至少为系统响应的<span class="math inline">\(2\sim 5\)</span>倍。观测器的极点位于所期望的闭环极点的左边，所以后者在响应中起主导作用。 根据以上规律，选择观测器极点为：<br>
+{
+<span class="math display">\[\begin{array}{ll}
+    s_1 = -70 \\
+    s_2 = -71 \\
+    s_3 = -72 \\
+    s_4 = -73 \\
+\end{array}\]</span>
+<p>.</p>
+<h3 id="确定观测器方程">确定观测器方程</h3>
+<p>设观测器增益为<span class="math inline">\(G = [g_2 g_1]^T\)</span>，观测器期望的多项式为 <span class="math display">\[a^*(s)=(s+70)(s+71)(s+72)(s+73)\]</span> 观测器的特征多项式为： <span class="math display">\[det[sI-(A-GC)]\]</span> 可求观测器方程： <span class="math display">\[\dot{\widehat{x}}=(A-G C)\widehat{x}+B u+G y\]</span>  带观测器的状态反馈系统可以用分块矩阵表示： <span class="math display">\[
+\begin{pmat}[{.}]
+\dot{x} \cr \-
+\dot{x} - \dot{\widetilde{x}} \cr 
+\end{pmat}=
+\begin{pmat}[{|}]
+A-B K &amp; BK \cr \-
+0 &amp; A-G C \cr
+\end{pmat}
+\begin{pmat}[{.}]
+X \cr \-
+X - \widetilde{X} \cr
+\end{pmat}
++ 
+\begin{pmat}[{.}]
+B \cr \-
+0 \cr
+\end{pmat}
+u
+\]</span> <span class="math display">\[y=
+\begin{pmat}[{|}]
+C &amp; 0 \cr
+\end{pmat}
+\begin{pmat}[{.}]
+X \cr \-
+X - \bar{X} \cr
+\end{pmat}
+\]</span> ### MATLAB阶跃响应仿真 用MATLAB分别计算状态反馈矩阵和观测器反馈矩阵，构造分块矩阵并绘制阶跃响应曲线，代码如下：<br>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">pointK = [<span class="number">-8</span>+<span class="number">6</span>i <span class="number">-8</span><span class="number">-6</span>i <span class="number">-50</span> <span class="number">-60</span>];pointG = [<span class="number">-70</span> <span class="number">-71</span> <span class="number">-72</span> <span class="number">-73</span>];</div><div class="line">K =place(A,B,pointK);G = place(A',C',pointG)';</div><div class="line">A_ = [A-B*K           B*K;zeros(size(A))    A-G*C];B_ = [B;zeros(size(B))];</div><div class="line">C_ = [C zeros(size(C))];D_ = <span class="number">0</span>;</div><div class="line">sys = ss(A_,<span class="number">54055</span>*B_,C_,D_);</div><div class="line">t = (<span class="number">0</span>:<span class="number">0.01</span>:<span class="number">1</span>)';u = <span class="built_in">ones</span>(<span class="built_in">size</span>(t));</div><div class="line">[y,x] = lsim(sys,u,t);</div><div class="line">plot(t, y,<span class="string">'*b'</span>);axis([<span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1.2</span>]);</div><div class="line">title(<span class="string">'Step Response(\theta)'</span>);</div><div class="line">overshoot = max(y) - y(<span class="keyword">end</span>)</div><div class="line">t_ = t(max(<span class="built_in">find</span>(<span class="built_in">abs</span>(y<span class="number">-1</span>)&gt;<span class="number">0.05</span>)))</div></pre></td></tr></table></figure></p>
+<div class="figure">
+<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fhlub1yra0j30fk0dpjsb.jpg" alt="带观测器状态反馈闭环系统阶跃响应曲线">
+<p class="caption">带观测器状态反馈闭环系统阶跃响应曲线</p>
+</div>
+<p>这个响应结果几乎和之前没有采用观测器时的结果完全一致。这是因为我们假设的观测器模型与实际系统模型相同（包括有相同的初始条件）。所以，在最小的控制信号代价下，所有的设计要求都得到了满足，无需再次设计。</p>
+<h2 id="观测器期望极点比较性验证">观测器期望极点比较性验证</h2>
+<p>在本例中，真实状态是无法观测的，但由于在MATLAB仿真中设置的观测器模型与系统模型完全相同，初值也相同，所以任意配置极点都能保证系统状态的准确估计。为了验证观测器极点位置对观测器逼近被估计状态速度的影响，可设置一个观测器初值误差，观察系统的响应情况。<br>
+由此。将观测器初值设置为<span class="math inline">\([1\quad0 \quad 0 \quad 0]\)</span>，即负载转角初值未测准，误差<span class="math inline">\(1rad\)</span>。 分别配置观测器极点为</p>
+P_1 = {
+<span class="math display">\[\begin{array}{ll}
+s_1 = -12 \\
+s_2 = -13 \\
+s_3 = -14 \\
+s_4 = -15 \\
+\end{array}\]</span>
+. P_2 = {
+<span class="math display">\[\begin{array}{ll}
+s_1 = -42 \\
+s_2 = -43 \\
+s_3 = -44 \\
+s_4 = -45 \\
+\end{array}\]</span>
+. P_3 = {
+<span class="math display">\[\begin{array}{ll}
+s_1 = -72 \\
+s_2 = -73 \\
+s_3 = -74 \\
+s_4 = -75 \\ 
+\end{array}\]</span>
+<p>.</p>
+<p>使用以下代码配置初值，并分析阶跃响应情况： <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[y,x] = lsim(A_,<span class="number">54055</span>*B_,C_,D_,u,t,[<span class="number">0</span>;<span class="number">0</span>;<span class="number">0</span>;<span class="number">0</span>;<span class="number">1</span>;<span class="number">0</span>;<span class="number">0</span>;<span class="number">0</span>]);</div></pre></td></tr></table></figure></p>
+<p>得到的观测器响应曲线如下图所示： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fhlucs81b1j30fk0dpab5.jpg" alt="观测器响应曲线"></p>
+<p>根据经典控制理论，我们知道闭环极点离开虚轴的距离越大，系统的调节时间越短。以上仿真的结果和理论是一致的，由图可以看出配置<span class="math inline">\(P_3\)</span>极点，观测器的估计收敛速度最快。</p>
+<p><strong>系统的阶跃响应情况</strong> <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fhludzffqsj30fk0dp400.jpg" alt="电机和负载的转角变化情况"> <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fhluecdlyij30fk0dpgn5.jpg" alt="电机和负载的角速度变化情况"></p>
+<p>在初值误差相同的情况下，观测器闭环极点距离虚轴越远，响应速度越快，跟随性能越好。但是相对地，超调量也会增加。这同时也表征了观测器快速性和抗干扰性的矛盾。观测器的最大响应速度受到控制系统中的噪声和灵敏性的限制。为了保证系统有足够的抗扰性能，通常设计<span class="math inline">\(G\)</span>使观测器比被估系统稍微快些就可以了。</p>
 ]]></content>
     
     <summary type="html">
