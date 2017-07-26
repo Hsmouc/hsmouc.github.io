@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hsmouc.com/"/>
-  <updated>2017-07-16T09:27:13.000Z</updated>
+  <updated>2017-07-26T06:03:20.000Z</updated>
   <id>https://hsmouc.com/</id>
   
   <author>
@@ -14,6 +14,131 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>我又双叒叕写了个电子钟</title>
+    <link href="https://hsmouc.com/2017/07/16/2017-07-16-sopcclock/"/>
+    <id>https://hsmouc.com/2017/07/16/2017-07-16-sopcclock/</id>
+    <published>2017-07-16T13:55:13.000Z</published>
+    <updated>2017-07-26T06:03:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>这篇文章基本上是SoPC的课程设计报告，要求是使用SoPC EDA实验板开发一个电子钟，使用OLED显示时间，并支持按键修改时间。本文包括SoPC系统硬件消抖器的开发，定时中断与硬件中断的实现等内容。最终实现效果如下图所示 <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fhx8t3ke7ej32io1w07vj.jpg" alt="电子钟显示效果"><a id="more"></a></p>
+<h1 id="课程eda实验平台介绍">课程EDA实验平台介绍</h1>
+<h2 id="edasopc概述">EDA,SoPC概述</h2>
+<p>作为可编程逻辑应用的核心方向，EDA和SoPC是目前电子设计的两个热门领域。EDA是电子设计自动化(Electronic Design Automation)的缩写。EDA技术就是以计算机为工具，设计者在EDA软件平台上，用硬件描述语言HDL完成设计文件，然后由计算机自动地完成逻辑编译、化简、分割、综合、优化、布局、布线和仿真，直至对于特定目标芯片的适配编译、逻辑映射和编程下载等工作，最后通过这些芯片演示出所需要的设计结果。<br>
+而SoC(System on Chip)一般来说被称为系统级芯片，也称为片上系统。它是一个有专用目标的集成电路，包含完整系统并有嵌入软件的全部内容。而SoPC(System on a Programmable chip)技术则可以使设计人员充分利用FPGA的逻辑单元以及植入FPGA内部的储存模块，并使用FPGA制造厂商提供的软核处理器，设计出可灵活裁剪、扩充、可升级的嵌入式处理系统。</p>
+<h2 id="eda实验板功能">EDA实验板功能</h2>
+<p>EDA实验板采用了Cyclone II 2C35 FPGA。它具有672个引脚，33,216 个逻辑单元 。FPGA引脚连接各个功能模块，方便对各个模块的控制和通信。对于简单的实验，在EDA实验板上开发了四个拨动开关，四个按键，四个LED灯，旋转编码器。对于用于比较系统的实验，EDA实验板提供了SDRAM、FLASH、128*64点阵OLED显示屏、日历时钟芯片。 对于需要处理各种通信的实验，EDA实验板提供了各种标准化的接口方案，如RS-232、RS-485、PS/2。对于较大较高级的设计项目，EDA实验板提供了USB2.0主从设备、10/100M以太网、红外端口、SD记忆卡、CAN总线。对于娱乐需求，EDA实验板还提供了音频编解码器，8位AD/DA，FM芯片。最后，其它扩展变可通过EDA实验板上的两个40针的扩展槽连接。<br>
+## EDA实验板硬件说明 1. FPGA - Cyclone II EP2C35F484C8 FPGA - EPCS16串行配置芯片 2. I/O设备 - RS-232、RS-485、PS/2 - 10/100以太网、USB主从控制器 - IrDA 、CAN - FM、音频解码芯片、8-BIT ADC/DAC 3. 开关、LED、显示、时钟 - 实时日历时钟芯片 - OLED显示屏 4. 储存器 - 8-Mbyte Flash - 32-Mbyte SDRAM <span class="math inline">\(\times\)</span> 2 - SD Card</p>
+<p>EDA实验板硬件设计如下图所示： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fhp9tj8ipgj30cx0ao7bb.jpg" alt="EDA实验板硬件设计示意图"></p>
+<h2 id="电子钟设计要求和系统硬件资源">电子钟设计要求和系统硬件资源</h2>
+<h3 id="电子钟设计要求">电子钟设计要求</h3>
+<p>基于课程EDA实验平台，开展基于SoPC技术的电子钟设计：</p>
+<ul>
+<li>在OLED显示屏上显示日期和时间，走时准确；</li>
+<li>可区分闰年，各月天数无错误；</li>
+<li>配置3个按键，用以调整时间；</li>
+<li>调整时间时闪烁当前调整的位；</li>
+</ul>
+<h3 id="系统硬件资源">系统硬件资源</h3>
+<p>电子钟所需的硬件资源可分为外围器件和SoPC硬件系统模块两个部分，下面分别叙述：</p>
+<h4 id="系统所需外围硬件">系统所需外围硬件</h4>
+<table>
+<thead>
+<tr class="header">
+<th align="center">外围器件</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">按键</td>
+<td align="left">电子钟设置功能键</td>
+</tr>
+<tr class="even">
+<td align="center">OLED屏幕</td>
+<td align="left">电子钟显示屏幕</td>
+</tr>
+<tr class="odd">
+<td align="center">FLASH</td>
+<td align="left">储存软、硬件程序</td>
+</tr>
+<tr class="even">
+<td align="center">SDRAM</td>
+<td align="left">程序运行内存</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sopc硬件系统模块">SoPC硬件系统模块</h4>
+<p>SoPC硬件系统模块包括以下部分：Nios II CPU、定时器、按键PIO、OLED接口、AVALON三态桥、外部SDRAM接口，外部Flash接口、EPCS串行Flash控制器、JTAG UART。</p>
+<h1 id="系统硬件设计">系统硬件设计</h1>
+<p>这部分主要设计基于FPGA的SoPC整体硬件系统，主要包括PIO接口模块，存储模块、配置模块等。外围接口电路主要包括系统的OLED屏幕接口电路，储存系统接口电路，晶振电路、按键电路等部分。该系统的整体单元结构如下图所示： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fhx61dgafej30j80ert9j.jpg" alt="电子钟硬件系统整体结构框图"></p>
+<h2 id="键盘接口电路设计">键盘接口电路设计</h2>
+<p>在本例中键盘接口电路比较简单，并未通过串电容的方式来进行硬件消抖。之后将详细介绍基于FPGA设计D触发器消抖电路的方法，EDA实验板上的基础键盘电路如下所示： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fhx66nn1f9j311i0a0gmr.jpg" alt="SoPC系统与键盘接口电路图"></p>
+<h2 id="oled接口电路设计">OLED接口电路设计</h2>
+<p>LCD接口电路连接采用SSD1305Z型OLED模块，显示的内容为<span class="math inline">\(128\times64\)</span>，它属于点阵型液晶模块，能够显示数字、字母和一些符号。有对比度、背光调节等功能。SoPC系统与LCD接口电路如下图所示： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fhx67rb866j30we0cfwha.jpg" alt="SoPC系统与LCD接口电路图"></p>
+<h2 id="基于nios-ii软核和fpga的嵌入式sopc系统配置与调试">基于Nios II软核和FPGA的嵌入式SoPC系统配置与调试</h2>
+<h3 id="nios-2系统简介">Nios 2系统简介</h3>
+<p>Nios II是一种新型嵌入式处理器。具体来说，它是CPU软核，为Altera公司的FPGA提供了一种嵌入式系统解决方案，几乎可以用在所有Altera公司设计制造的FPGA芯片上。Nios II处理器及其外设模块程序大部分是用硬件描述语言(HDL)或C语言进行编程设计。<br>
+Nios II处理器包括Nios II CPU模块、Avalon交换总线，系统外设和片内用户逻辑，系统中的外设，如SDRAM控制器、程序储存器、数据储存器、UART、通用I/O等都是由FPGA内部的逻辑和RAM资源实现的。<br>
+Nios II是可以灵活配置的软核处理器，可以灵活地设计或者配置外设接口，满足设计和应用要求，使用嵌入式软核Nios II有以下特点：</p>
+<ul>
+<li>CPU可以根据需要定制，灵活便捷；</li>
+<li>有丰富的外围接口，接口的类型和数量可以灵活定制；</li>
+<li>总线的连接不同于传统的CPU，其总线分布在FPGA的内部，因此不存在PCB布线中由于总线拥挤而难以走线；</li>
+<li>采用Avalon总线结构，其结构不同于传统意义上的共享式总线，在要连接的每一个主、从端口之间都建立了点到点的连接关系，则不同主、从端口之间可以同时进行通信，提高了Avalon总线的性能和效率。</li>
+<li>可以在同一块FPGA内定制多个Nios II软核进行多处理器并行工作，提高处理性能。</li>
+</ul>
+<h3 id="基于fpga的键盘消抖硬件设计">基于FPGA的键盘消抖硬件设计</h3>
+<p>前文已经提到，由于按键本身机械性能并不优异，导致在按键按下或松开时抖动较为严重，很容易出现误操作的情况，影响用户体验。为了避免以上问题，必须对机械按键进行消抖处理。<br>
+常见的消抖方法有硬件和软件消抖两种；SoPC系统的优势就在于用户不但可以自由设计软件，还能最大程度上定制自己需要的硬件，减少代码量，提高系统运行效率。消抖即为消除在一段时间按键的反复作用。考虑到D触发器配合合适的时钟频率即可滤去一些在短时间反复跳变的电平，而长时间存在的电平会被保留下来。综上所述，可通过FPGA构造相应的D触发器按键消抖电路。具体做法如下：<br>
+首先需要为D触发器电路提供合适的时钟信号。而为Nios II软核提供的是<span class="math inline">\(50MHz\)</span>时钟，必须对其进行分频。由于大部分人的按键速度都在<span class="math inline">\(0.1s\)</span>以上，所以选择<span class="math inline">\(400Hz\)</span>时钟信号，使用四个D触发器串行连接，对一个按键作用的电平连续校验四次，将四次校验的结果输入<span class="math inline">\(xor\)</span>逻辑，若四次校验的结果相同则认为按键产生了一个可靠动作。<br>
+根据以上描述，直接在Block Diagram中放置响应的元件，组成D触发器消抖阵列，并通过VHDL语言设计分频器；D触发器消抖电路如下图所示： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fhx6e2l6k3j30i505nmxb.jpg" alt="使用D触发器的消抖电路"> 分频器代码如下： <figure class="highlight vhdl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">library</span> IEEE;</div><div class="line"><span class="keyword">use</span> IEEE.STD_LOGIC_1164.<span class="keyword">all</span>;</div><div class="line"><span class="keyword">use</span> IEEE.NUMERIC_STD.<span class="keyword">all</span>;</div><div class="line"></div><div class="line"><span class="keyword">entity</span> frqdivide <span class="keyword">is</span></div><div class="line">  <span class="keyword">port</span> (</div><div class="line">    clk_50Mhz : <span class="keyword">in</span>  <span class="built_in">std_logic</span>;</div><div class="line">    rst       : <span class="keyword">in</span>  <span class="built_in">std_logic</span>;</div><div class="line">    clk_400Hz   : <span class="keyword">out</span> <span class="built_in">std_logic</span>);</div><div class="line"><span class="keyword">end</span> frqdivide;</div><div class="line"></div><div class="line"><span class="keyword">architecture</span> Behavioral <span class="keyword">of</span> frqdivide <span class="keyword">is</span></div><div class="line">  <span class="keyword">signal</span> prescaler : <span class="built_in">unsigned</span>(<span class="number">23</span> <span class="keyword">downto</span> <span class="number">0</span>);</div><div class="line">  <span class="keyword">signal</span> clk_400Hz_i : <span class="built_in">std_logic</span>;</div><div class="line">  <span class="keyword">begin</span></div><div class="line">    gen_clk : <span class="keyword">process</span> (clk_50Mhz, rst)</div><div class="line">    <span class="keyword">begin</span></div><div class="line">      <span class="keyword">if</span> rst = <span class="string">'1'</span> <span class="keyword">then</span></div><div class="line">        clk_400Hz_i   &lt;= <span class="string">'0'</span>;</div><div class="line">        prescaler   &lt;= (<span class="keyword">others</span> =&gt; <span class="string">'0'</span>);</div><div class="line">      <span class="keyword">elsif</span> rising_edge(clk_50Mhz) <span class="keyword">then</span></div><div class="line">    	<span class="keyword">if</span> prescaler = X<span class="string">"186A"</span> <span class="keyword">then</span></div><div class="line">        	prescaler   &lt;= (<span class="keyword">others</span> =&gt; <span class="string">'0'</span>);</div><div class="line">        clk_400Hz_i   &lt;= <span class="keyword">not</span> clk_400Hz_i;</div><div class="line">      <span class="keyword">else</span></div><div class="line">        prescaler &lt;= prescaler + <span class="string">"1"</span>;</div><div class="line">      <span class="keyword">end</span> <span class="keyword">if</span>;</div><div class="line">    <span class="keyword">end</span> <span class="keyword">if</span>;</div><div class="line"><span class="keyword">end</span> <span class="keyword">process</span> gen_clk;</div><div class="line">clk_400Hz &lt;= clk_400Hz_i;</div><div class="line"><span class="keyword">end</span> Behavioral;</div></pre></td></tr></table></figure></p>
+<h3 id="nios-ii软核配置">Nios II软核配置</h3>
+<p>创建Nios II系统模块需要SoPC Builder，它是Quartus II中的一个工具，使用SoPC Builder可以创建一个Nios II系统模块，或者创建多主从设备SoPC模块。</p>
+<ul>
+<li><p>加入CPU核Nios II Processor Nios II CPU有三种不同的类型可以选择，分别是经济型，标准型和快速型，在本设计中，板载的FPGA芯片完全支持快速型Nios II核，资源足够，所以选快速型。</p></li>
+<li>加入定时器Timer 将定时器的组件名称设置为timer0，这个定时器是为了实现时钟的核心功能加入的。在之后的软件设计中，将使用定时器中断，每<span class="math inline">\(1s\)</span>触发一次。 <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fhx6lq4fmhj30mu0ggabu.jpg" alt="Altera Nios II核设置页面"></li>
+<li>加入PIO功能 在电子钟设计中，使用按键来调整时间。由于需要使用按键中断，必须选择Generate IRQ，并选择下降沿中断。这样可以有利于后期软件层面设计的代码简化，即可以方便地在中断服务函数里实现按键功能。</li>
+<li>加入外部Flash 在组件中加入Flash Memory Interface(CFI)，选择地址线宽度为23，数据线宽度为8，并设置处理器对Flash的读写时序；加入EPCS Serial Flash Controller，可用于CPU对EPCS Flash存储器的读写，可通过此控制器将编译的生成的SOF文件和CPU运行的其他代码存在EPCS器件中，以减少系统的整体硬件组成。</li>
+<li>加入用户定制外设 OLED模块为用户自定义外设，需要添加以作为电子钟的显示屏幕。</li>
+<li><p>加入Avalon三态总线桥 Nios II CPU与SDRAM，Flash，和用户自定义组件相连接都需要Avalon三态总线桥。<br>
+配置完成的Nios II CPU内核如下图所示：<br>
+<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fhx6np6wrxj30ky0e3wgi.jpg" alt="配置完成的Nios II核"> 在Quartus II中将已经配置好的Nios II核加入设计的顶层设计文件，并连接外设与CPU的接口。 <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fhx6pl4xjaj30l80l4myt.jpg" alt="电子钟系统顶层原理图设计"></p></li>
+</ul>
+<h1 id="系统软件设计">系统软件设计</h1>
+<h2 id="代码框架">代码框架</h2>
+<p>系统的软件可分为两个部分，分别是Nios II EDS辅助构建的板级支持包，指的是使所给操作系统能够适配于所给设备主板的一套特定的支持代码（软件）实现。它通常包含了以基础支持代码来加载操作系统的引导程序（英语：bootloader），以及主板上所有设备的驱动程序}，和我编写的电子钟应用层代码。应用层代码分为三块，分别为电子钟时间计算服务；电子钟时间显示服务；电子钟按键功能服务；代码的框架结构如下所示： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fhx6tw839ij30pd0b20ts.jpg" alt="电子钟系统代码结构设计"> ## 代码数据结构 在电子钟代码设计中对多种变量进行了封装，便于提高代码可读性与规范性，结构化的数据使得数据的引用变得简单。考虑到电子钟设计中主要考虑时间计算与设置问题，于是针对时间计算和时间设置功能构造两个结构体，在time.h文件中定义，两个结构体的定义如下：<br>
+<strong>时间结构体：</strong>由年、月、日、时、分、秒六个变量构成，均为无符号整型； <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> year; </div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> month;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> day;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> hour;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> minute;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> second;</div><div class="line">&#125;clockTypeDef;</div><div class="line">clockTypeDef clock;</div></pre></td></tr></table></figure></p>
+<p><strong>时间设置结构体：</strong>由是否设置时间标志，和设置时间位置两个变量构成，为无符号整型和整型； <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> isTimeSet;</div><div class="line">    <span class="keyword">int</span> blinkPos;</div><div class="line">&#125;setTypeDef;</div><div class="line">setTypeDef <span class="built_in">set</span>;</div></pre></td></tr></table></figure></p>
+<h2 id="代码核心功能设计">代码核心功能设计</h2>
+<p>由于板级支持包的代码由Nios II EDS自动生成，在此不再展开。以下将从电子钟走时实现和时间调整功能两个方面介绍电子钟系统的代码。 ### 走时实现 电子钟实现走时通常有以下两种途径：第一种是通过软件延时实现的，根据CPU的晶振频率计算每秒理论可执行的指令数，使用循环的方法占用CPU资源以达到定时器的效果，这种方法在软件上易于实施，不用配置中断，但是缺点在于耗费CPU资源，计时时间不准。另一种是用过中断实现的，通过配置CPU定时器中断并编写中断服务函数，这样即可实现精准计时的效果。在本设计中采用定时器中断方法实现走时。<br>
+电子钟定时中断配置函数如下，在主函数中调用，写寄存器设定周期为1秒，运行，并注册中断。需要注意的是注册中断函数在Nios II EDS 11.0版本中已经由alt_isr_register更改为alt_ic_isr_register，函数结构改变，传入的参数发生了一些变化。 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">initTimer</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">     IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER0_BASE, <span class="number">0x00</span>);</div><div class="line">     IOWR_ALTERA_AVALON_TIMER_PERIODL(TIMER0_BASE,<span class="number">50000000</span>);</div><div class="line">     IOWR_ALTERA_AVALON_TIMER_PERIODH(TIMER0_BASE, <span class="number">50000000</span> &gt;&gt; <span class="number">16</span>);</div><div class="line">     IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER0_BASE, <span class="number">0x07</span>);</div><div class="line">     alt_ic_isr_register(TIMER0_IRQ_INTERRUPT_CONTROLLER_ID,</div><div class="line">    		 	 	 TIMER0_IRQ, isrTimer0, <span class="literal">NULL</span>,<span class="number">0x0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>定时中断的服务函数主要作用是调用时间计算函数，如下所示： <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">isrTimer0</span><span class="params">()</span> </span>&#123;</div><div class="line">    timeCalculate();</div><div class="line">    timeDisplay();</div><div class="line">    IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER0_BASE, <span class="number">0x00</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>时间计算函数较长，参见附录完整代码，其效果为每调用一次，时间结构体中的秒递增1，递增至59时清零，同时分钟递增1，之后同理。在此函数中也考虑了不同月份天数不同，闰年二月天数改变等细节问题。<br>
+时间显示函数包括了两个模块，分别为闪烁功能和时间的逐位显示。特别地，闪烁功能是基于定时中断实现的，每进入一次中断，闪烁标志都会取反，根据闪烁标志的0，1来确定显示空白字符还是时间。另外通过时间设置功能结构体中的闪烁位置成员计算OLED显示数组中需要被置为空白字符的数组元素，代码如下所示，省略了整数取位显示和变量赋值： <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">timeDisplay</span><span class="params">()</span> </span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="keyword">if</span>(<span class="built_in">set</span>.isTimeSet) &#123;</div><div class="line">    	isBlink = isBlink&gt;<span class="number">0</span>?<span class="number">0</span>:<span class="number">1</span>;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">else</span> isBlink = <span class="number">0</span>;</div><div class="line">     ...</div><div class="line">     <span class="keyword">if</span>(isBlink) &#123;</div><div class="line">     	<span class="keyword">if</span>(!<span class="built_in">set</span>.blinkPos) &#123;</div><div class="line">     	    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</div><div class="line">  	    numDate[i] = <span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">	    numDate[<span class="built_in">set</span>.blinkPos*<span class="number">3</span>+<span class="number">2</span>] = <span class="number">1</span>;</div><div class="line">	    numDate[<span class="built_in">set</span>.blinkPos*<span class="number">3</span>+<span class="number">3</span>] = <span class="number">1</span>;</div><div class="line">	    <span class="keyword">if</span>(<span class="built_in">set</span>.blinkPos &gt; <span class="number">2</span>) &#123;</div><div class="line">	        numTime[(<span class="built_in">set</span>.blinkPos<span class="number">-3</span>)*<span class="number">3</span>] = <span class="number">1</span>;</div><div class="line">		numTime[(<span class="built_in">set</span>.blinkPos<span class="number">-3</span>)*<span class="number">3</span>+<span class="number">1</span>] = <span class="number">1</span>;</div><div class="line">	    &#125;</div><div class="line">	&#125;</div><div class="line">    &#125;</div><div class="line">    Show_String(<span class="number">1</span>,numDate,<span class="number">2</span>,<span class="number">50</span>);</div><div class="line">    Show_String(<span class="number">1</span>,numTime,<span class="number">4</span>,<span class="number">50</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="时间调整实现">时间调整实现</h3>
+<p>电子钟的时间调整是通过按键实现的，而按键功能通常也有两种实现方式，第一种为循环查询方式，主要做法是在主函数循环中不断读按键寄存器捕捉电平跳变，捕捉到跳变则调用相应功能函数。这种循环查询方式的优势在于可以方便地设计消抖功能，无需硬件消抖，但缺点仍然是占用CPU资源，从嵌入式开发的角度不够合理。而第二种方式为中断查询方式，通过PIO中断来捕捉边沿，在中断服务函数中部署功能，这种做法节省CPU资源，同时我也为此方式提供了硬件消抖电路。在本设计中采取第二种方式。<br>
+按键的中断配置函数与定时中断类似，通过以下代码写PIO中断寄存器，配置中断为边沿触发，注册中断，在本例中使用了三个按键，在硬件资源足够的情况下注册了三个不同的硬件中断： <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">void initKey() &#123;</div><div class="line">    IOWR_ALTERA_AVALON_PIO_IRQ_MASK(KEY0_BASE, 0xf);</div><div class="line">    IOWR_ALTERA_AVALON_PIO_EDGE_CAP(KEY0_BASE, 0x0);</div><div class="line">    alt_ic_isr_register(KEY0_IRQ_INTERRUPT_CONTROLLER_ID,</div><div class="line">    KEY0_IRQ,isrKey0,NULL,0x0);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>按键的中断服务函数有三个，分别针对时间调整加，时间调整减，时间调整开关。时间调整按钮按下后，时间设置结构体中的时间设置标志置位，并将成员闪烁位步进1，直至闪烁位到5，也就是“秒”，将闪烁位置-1以备下次调整时间使用，清时间设置标志，相当于关时间设置功能。核心代码如下： <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">isrKey0</span><span class="params">(<span class="keyword">void</span>* context, <span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">    <span class="built_in">set</span>.isTimeSet = <span class="number">1</span>;</div><div class="line">    <span class="built_in">set</span>.blinkPos++;</div><div class="line">    <span class="keyword">if</span>(<span class="built_in">set</span>.blinkPos &gt; <span class="number">5</span>) &#123;</div><div class="line">        <span class="built_in">set</span>.isTimeSet = <span class="number">0</span>;</div><div class="line">	<span class="built_in">set</span>.blinkPos = <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line">    IOWR_ALTERA_AVALON_PIO_EDGE_CAP(KEY0_BASE, <span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>时间调整功能的实现使用了switch语句，通过当前的闪烁位置来决定具体增减哪部分的值，时间调整加示例代码如下，时间调整减代码类似： <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">isrKey1</span><span class="params">(<span class="keyword">void</span>* context, alt_u32 id)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(<span class="built_in">set</span>.isTimeSet == <span class="number">1</span>) &#123;</div><div class="line">        <span class="keyword">switch</span>(<span class="built_in">set</span>.blinkPos) &#123;</div><div class="line">            <span class="keyword">case</span> <span class="number">0</span>: clock.year++; <span class="keyword">break</span>;</div><div class="line">            ...</div><div class="line">	    <span class="keyword">default</span>: <span class="keyword">break</span>;</div><div class="line">	&#125;</div><div class="line">        IOWR_ALTERA_AVALON_PIO_EDGE_CAP(KEY1_BASE, <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>需要特别注意的是，在中断服务函数中需要清中断标志位，Altera官方文档说明寄存器写0清除。事实上，按官方文档上的写法并不能有效跳出中断，必须写1清除。 # 总结 ## 最终实现效果 电子钟最终在实验板上的显示效果如下图所示： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fhx8t3ke7ej32io1w07vj.jpg" alt="电子钟显示效果"> 由图可见，电子钟从默认的时间-1970年1月1日开始走时，经过五小时的测试误差小于1秒，说明了时钟还是比较准确的。<br>
+<strong>为何从1970-01-01开始</strong><br>
+作为一个使用UNIX和Linux的用户，当然要使用UNIX(POSIX)时间来致敬此伟大的计算机系统。 ## 一个bug 在电子钟上电时会自动进入时间设置功能，这是因为按键中断是用上升沿触发的。也就是说上电时的动作相当于按键从按下到抬起产生了一个上升沿。这个问题可通过在CPU的PIO中断配置中将其更改为下降沿触发解决。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这篇文章基本上是SoPC的课程设计报告，要求是使用SoPC EDA实验板开发一个电子钟，使用OLED显示时间，并支持按键修改时间。本文包括SoPC系统硬件消抖器的开发，定时中断与硬件中断的实现等内容。最终实现效果如下图所示 &lt;img src=&quot;https://ws1.sinaimg.cn/large/005WMcFzly1fhx8t3ke7ej32io1w07vj.jpg&quot; alt=&quot;电子钟显示效果&quot; /&gt;
+    
+    </summary>
+    
+      <category term="Embedded System" scheme="https://hsmouc.com/categories/Embedded-System/"/>
+    
+    
+      <category term="C" scheme="https://hsmouc.com/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>单自由度弹性关节机器人控制系统分析与设计</title>
@@ -1757,47 +1882,6 @@ GPIOs <span class="dv">0</span>-<span class="dv">53</span>, platform/3f200000.gp
       <category term="Pi" scheme="https://hsmouc.com/tags/Pi/"/>
     
       <category term="Python" scheme="https://hsmouc.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Raspberry Pi开启SSH和VNC</title>
-    <link href="https://hsmouc.com/2015/12/13/2015-12-13-pi/"/>
-    <id>https://hsmouc.com/2015/12/13/2015-12-13-pi/</id>
-    <published>2015-12-13T02:40:25.000Z</published>
-    <updated>2017-05-16T18:01:39.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>Raspberry装好了，显示器也搞定了，玩了整整一天(☆_☆)，发现了一个小问题：我的桌面不够大呀！！！显示器，树莓，笔记本电脑，外卖，概率作业不够放了怎么破，立马想到看过可以通过SSH和VNC的方式访问Pi，来试试吧！</li>
-</ul>
-<p><a id="more"></a></p>
-<h2 id="两种方式">两种方式</h2>
-<h3 id="ssh">SSH</h3>
-<p>命令行访问Pi，轻巧且功能强大。简单配置一下Pi,打开SSH服务即可: <code>service ssh start</code> 在Mac终端输入: <code>sudo ssh pi@192.168.1.6</code></p>
-<p><code>192.168.1.6</code>是Pi的ip。输入Pi的密码就可以连上了。更多的配置不细讲了，<a href="http://www.jianshu.com/p/a011d01bdf51" target="_blank" rel="external">简书</a>的这篇文章提到了关于配置root用户ssh登录的权限问题，<a href="http://liberize.me/tech/access-raspberry-pi-via-ssh-and-vnc.html" target="_blank" rel="external">liberize.blog</a>提到了使用私钥登录的问题。<br>
-### VNC 如果要使用Pi的图形界面，大家可以使用VNC服务。Pi需要安装vnc服务端，并在Mac上安装tigervnc(icon挺帅的)。<br>
-#### Pi的配置 我查到的资料大多数是在Pi上安装tightvncserver<code>sudo apt-get install tightvncserver</code>，简单的配置下用<code>service start tightvncserver</code>发现终端报错了。找不到目录的原因不清楚……<br>
-我发现在Jessie中貌似已经安装VNC服务，抱着试试的心态输入<code>vncserver</code><br>
-终端出现了帮助页面，可以这样打开VNC服务: <code>vncserver:1</code> #### Mac的配置</p>
-<p>安装tigervnc<a href="https://github.com/TigerVNC/tigervnc/releases" target="_blank" rel="external">下载</a>，编译安装。<br>
-发现Homebrew可以直接装，果断弃了tar.gz <code>brew cask install tigervnc-viewer</code> 打开tigervnc，输入<code>192.168.1.6</code>，点Connect就连上啦。</p>
-<h2 id="惯例">惯例</h2>
-<p>放上一些图片吧 <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bgjlyw2j30j60eejtp.jpg"> <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bh1l1mfj30j60bzt9k.jpg"> 发现屏下面垫一个橡皮还蛮不错的…… 下一阶段是学习GPIO的使用，主要还是使用WiringPi或者BCM2835 C Library来写，Python正在学ˊ_&gt;ˋ</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;Raspberry装好了，显示器也搞定了，玩了整整一天(☆_☆)，发现了一个小问题：我的桌面不够大呀！！！显示器，树莓，笔记本电脑，外卖，概率作业不够放了怎么破，立马想到看过可以通过SSH和VNC的方式访问Pi，来试试吧！&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;
-    
-    </summary>
-    
-      <category term="Embedded System" scheme="https://hsmouc.com/categories/Embedded-System/"/>
-    
-    
-      <category term="Pi" scheme="https://hsmouc.com/tags/Pi/"/>
     
   </entry>
   
