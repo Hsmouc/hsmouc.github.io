@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>https://hsmouc.com/2017/04/01/2017-04-01-regressionbykeras/</loc>
+    <lastmod>2017-08-27T07:05:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>神经网络库Keras解决Regression问题</title>
+        <pubTime>2017-04-01T13:11:18.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+        <tag>Keras</tag>
+         
+         
+           
+             
+              <breadCrumb title="Computer Science" url="https://hsmouc.com/categories/Computer-Science/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://hsmouc.com/2017/07/16/2017-07-16-sopcclock/</loc>
     <lastmod>2017-07-26T06:03:20.000Z</lastmod>
     <data>
@@ -39,28 +61,6 @@
            
              
               <breadCrumb title="Robot" url="https://hsmouc.com/categories/Robot/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://hsmouc.com/2017/04/01/2017-04-01-regressionbykeras/</loc>
-    <lastmod>2017-05-16T18:07:55.000Z</lastmod>
-    <data>
-        <display>
-        <title>神经网络库Keras解决Regression问题</title>
-        <pubTime>2017-04-01T13:11:18.000Z</pubTime>
-        
-        <tag>Python</tag>
-         
-        <tag>Keras</tag>
-         
-         
-           
-             
-              <breadCrumb title="Computer Science" url="https://hsmouc.com/categories/Computer-Science/"/>
           
         </display>
     </data>

@@ -630,13 +630,13 @@ s_4 = -75 \\
     <link href="https://hsmouc.com/2017/04/01/2017-04-01-regressionbykeras/"/>
     <id>https://hsmouc.com/2017/04/01/2017-04-01-regressionbykeras/</id>
     <published>2017-04-01T13:11:18.000Z</published>
-    <updated>2017-05-16T18:07:55.000Z</updated>
+    <updated>2017-08-27T07:05:59.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>Can machines think? –AM Turing</p>
 </blockquote>
 <ul>
-<li>写在文前：最近在学机器学习的相关知识，由于相关文档和更新速度的关系选择了当前较为流行的<a href="https://keras.io/" target="_blank" rel="external">Keras</a>，一个基于python的深度学习框架。学校正在进行一个基于深度学习/强化学习(reinforcement learning)控制水下滑翔机的项目。由于众所周知的原因代码和数据要求保密，所以这篇文章将水下滑翔机作为问题背景介绍一下用Keras和Sequential模型处理回归问题。</li>
+<li>写在文前：最近在学机器学习的相关知识，由于相关文档和更新速度的关系选择了当前较为流行的<a href="https://keras.io/" target="_blank" rel="external">Keras</a>，一个基于python的深度学习框架。学校正在进行一个基于深度学习/强化学习(reinforcement learning)控制水下滑翔机的项目，我学习了一下Keras，并做了一些练习。这篇文章将水下滑翔机作为问题背景介绍一下用Keras和Sequential模型处理回归问题。</li>
 </ul>
 <a id="more"></a>
 <h2 id="问题背景">问题背景</h2>
@@ -677,7 +677,7 @@ s_4 = -75 \\
 &lt;p&gt;Can machines think? –AM Turing&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ul&gt;
-&lt;li&gt;写在文前：最近在学机器学习的相关知识，由于相关文档和更新速度的关系选择了当前较为流行的&lt;a href=&quot;https://keras.io/&quot;&gt;Keras&lt;/a&gt;，一个基于python的深度学习框架。学校正在进行一个基于深度学习/强化学习(reinforcement learning)控制水下滑翔机的项目。由于众所周知的原因代码和数据要求保密，所以这篇文章将水下滑翔机作为问题背景介绍一下用Keras和Sequential模型处理回归问题。&lt;/li&gt;
+&lt;li&gt;写在文前：最近在学机器学习的相关知识，由于相关文档和更新速度的关系选择了当前较为流行的&lt;a href=&quot;https://keras.io/&quot;&gt;Keras&lt;/a&gt;，一个基于python的深度学习框架。学校正在进行一个基于深度学习/强化学习(reinforcement learning)控制水下滑翔机的项目，我学习了一下Keras，并做了一些练习。这篇文章将水下滑翔机作为问题背景介绍一下用Keras和Sequential模型处理回归问题。&lt;/li&gt;
 &lt;/ul&gt;
     
     </summary>
