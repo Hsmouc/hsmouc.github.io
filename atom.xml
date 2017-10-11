@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://hsmouc.com/"/>
+  <link href="https://rm-rf.moe/"/>
   <updated>2017-07-26T06:03:20.000Z</updated>
-  <id>https://hsmouc.com/</id>
+  <id>https://rm-rf.moe/</id>
   
   <author>
     <name>Hsmouc</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>我又双叒叕写了个电子钟</title>
-    <link href="https://hsmouc.com/2017/07/16/2017-07-16-sopcclock/"/>
-    <id>https://hsmouc.com/2017/07/16/2017-07-16-sopcclock/</id>
+    <link href="https://rm-rf.moe/2017/07/16/2017-07-16-sopcclock/"/>
+    <id>https://rm-rf.moe/2017/07/16/2017-07-16-sopcclock/</id>
     <published>2017-07-16T13:55:13.000Z</published>
     <updated>2017-07-26T06:03:20.000Z</updated>
     
@@ -133,17 +133,17 @@ Nios II是可以灵活配置的软核处理器，可以灵活地设计或者配�
     
     </summary>
     
-      <category term="Embedded System" scheme="https://hsmouc.com/categories/Embedded-System/"/>
+      <category term="Embedded System" scheme="https://rm-rf.moe/categories/Embedded-System/"/>
     
     
-      <category term="C" scheme="https://hsmouc.com/tags/C/"/>
+      <category term="C" scheme="https://rm-rf.moe/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>单自由度弹性关节机器人控制系统分析与设计</title>
-    <link href="https://hsmouc.com/2017/05/15/2017-05-15-flexiblejoint/"/>
-    <id>https://hsmouc.com/2017/05/15/2017-05-15-flexiblejoint/</id>
+    <link href="https://rm-rf.moe/2017/05/15/2017-05-15-flexiblejoint/"/>
+    <id>https://rm-rf.moe/2017/05/15/2017-05-15-flexiblejoint/</id>
     <published>2017-05-15T11:21:18.000Z</published>
     <updated>2017-07-16T09:27:13.000Z</updated>
     
@@ -616,19 +616,19 @@ s_4 = -75 \\
     
     </summary>
     
-      <category term="Robot" scheme="https://hsmouc.com/categories/Robot/"/>
+      <category term="Robot" scheme="https://rm-rf.moe/categories/Robot/"/>
     
     
-      <category term="Python" scheme="https://hsmouc.com/tags/Python/"/>
+      <category term="Python" scheme="https://rm-rf.moe/tags/Python/"/>
     
-      <category term="MATLAB" scheme="https://hsmouc.com/tags/MATLAB/"/>
+      <category term="MATLAB" scheme="https://rm-rf.moe/tags/MATLAB/"/>
     
   </entry>
   
   <entry>
     <title>神经网络库Keras解决Regression问题</title>
-    <link href="https://hsmouc.com/2017/04/01/2017-04-01-regressionbykeras/"/>
-    <id>https://hsmouc.com/2017/04/01/2017-04-01-regressionbykeras/</id>
+    <link href="https://rm-rf.moe/2017/04/01/2017-04-01-regressionbykeras/"/>
+    <id>https://rm-rf.moe/2017/04/01/2017-04-01-regressionbykeras/</id>
     <published>2017-04-01T13:11:18.000Z</published>
     <updated>2017-08-27T07:05:59.000Z</updated>
     
@@ -682,19 +682,19 @@ s_4 = -75 \\
     
     </summary>
     
-      <category term="Computer Science" scheme="https://hsmouc.com/categories/Computer-Science/"/>
+      <category term="Computer Science" scheme="https://rm-rf.moe/categories/Computer-Science/"/>
     
     
-      <category term="Python" scheme="https://hsmouc.com/tags/Python/"/>
+      <category term="Python" scheme="https://rm-rf.moe/tags/Python/"/>
     
-      <category term="Keras" scheme="https://hsmouc.com/tags/Keras/"/>
+      <category term="Keras" scheme="https://rm-rf.moe/tags/Keras/"/>
     
   </entry>
   
   <entry>
     <title>热电偶学习笔记--原理与使用</title>
-    <link href="https://hsmouc.com/2017/03/21/2017-03-21-thermocouple/"/>
-    <id>https://hsmouc.com/2017/03/21/2017-03-21-thermocouple/</id>
+    <link href="https://rm-rf.moe/2017/03/21/2017-03-21-thermocouple/"/>
+    <id>https://rm-rf.moe/2017/03/21/2017-03-21-thermocouple/</id>
     <published>2017-03-21T03:36:18.000Z</published>
     <updated>2017-05-16T18:07:43.000Z</updated>
     
@@ -733,19 +733,19 @@ s_4 = -75 \\
     
     </summary>
     
-      <category term="Embedded System" scheme="https://hsmouc.com/categories/Embedded-System/"/>
+      <category term="Embedded System" scheme="https://rm-rf.moe/categories/Embedded-System/"/>
     
     
-      <category term="MATLAB" scheme="https://hsmouc.com/tags/MATLAB/"/>
+      <category term="MATLAB" scheme="https://rm-rf.moe/tags/MATLAB/"/>
     
-      <category term="Sensor" scheme="https://hsmouc.com/tags/Sensor/"/>
+      <category term="Sensor" scheme="https://rm-rf.moe/tags/Sensor/"/>
     
   </entry>
   
   <entry>
     <title>加速度计和陀螺仪数据融合算法</title>
-    <link href="https://hsmouc.com/2017/02/06/2017-02-06-pi/"/>
-    <id>https://hsmouc.com/2017/02/06/2017-02-06-pi/</id>
+    <link href="https://rm-rf.moe/2017/02/06/2017-02-06-pi/"/>
+    <id>https://rm-rf.moe/2017/02/06/2017-02-06-pi/</id>
     <published>2017-02-06T03:16:18.000Z</published>
     <updated>2017-05-16T18:07:30.000Z</updated>
     
@@ -863,17 +863,17 @@ s_4 = -75 \\
     
     </summary>
     
-      <category term="Computer Science" scheme="https://hsmouc.com/categories/Computer-Science/"/>
+      <category term="Computer Science" scheme="https://rm-rf.moe/categories/Computer-Science/"/>
     
     
-      <category term="Python" scheme="https://hsmouc.com/tags/Python/"/>
+      <category term="Python" scheme="https://rm-rf.moe/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title>大三上学期总结</title>
-    <link href="https://hsmouc.com/2017/01/24/2017-01-24-summary/"/>
-    <id>https://hsmouc.com/2017/01/24/2017-01-24-summary/</id>
+    <link href="https://rm-rf.moe/2017/01/24/2017-01-24-summary/"/>
+    <id>https://rm-rf.moe/2017/01/24/2017-01-24-summary/</id>
     <published>2017-01-23T23:29:18.000Z</published>
     <updated>2017-05-16T18:07:17.000Z</updated>
     
@@ -914,17 +914,17 @@ SRDP项目顺利结题了，大概就是部署服务器之类的事情，做了�
     
     </summary>
     
-      <category term="Life" scheme="https://hsmouc.com/categories/Life/"/>
+      <category term="Life" scheme="https://rm-rf.moe/categories/Life/"/>
     
     
-      <category term="summary" scheme="https://hsmouc.com/tags/summary/"/>
+      <category term="summary" scheme="https://rm-rf.moe/tags/summary/"/>
     
   </entry>
   
   <entry>
     <title>基于卷积神经网络(CNN)的智能循迹小车</title>
-    <link href="https://hsmouc.com/2016/12/31/2016-12-31-pi/"/>
-    <id>https://hsmouc.com/2016/12/31/2016-12-31-pi/</id>
+    <link href="https://rm-rf.moe/2016/12/31/2016-12-31-pi/"/>
+    <id>https://rm-rf.moe/2016/12/31/2016-12-31-pi/</id>
     <published>2016-12-31T13:12:15.000Z</published>
     <updated>2017-05-16T18:07:10.000Z</updated>
     
@@ -975,19 +975,19 @@ SRDP项目顺利结题了，大概就是部署服务器之类的事情，做了�
     
     </summary>
     
-      <category term="Embedded System" scheme="https://hsmouc.com/categories/Embedded-System/"/>
+      <category term="Embedded System" scheme="https://rm-rf.moe/categories/Embedded-System/"/>
     
     
-      <category term="Pi" scheme="https://hsmouc.com/tags/Pi/"/>
+      <category term="Pi" scheme="https://rm-rf.moe/tags/Pi/"/>
     
-      <category term="Python" scheme="https://hsmouc.com/tags/Python/"/>
+      <category term="Python" scheme="https://rm-rf.moe/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title>使用Raspberry Pi制作循迹小车</title>
-    <link href="https://hsmouc.com/2016/12/06/2016-12-6-pi/"/>
-    <id>https://hsmouc.com/2016/12/06/2016-12-6-pi/</id>
+    <link href="https://rm-rf.moe/2016/12/06/2016-12-6-pi/"/>
+    <id>https://rm-rf.moe/2016/12/06/2016-12-6-pi/</id>
     <published>2016-12-06T05:12:15.000Z</published>
     <updated>2017-05-16T18:06:59.000Z</updated>
     
@@ -1038,19 +1038,19 @@ SRDP项目顺利结题了，大概就是部署服务器之类的事情，做了�
     
     </summary>
     
-      <category term="Embedded System" scheme="https://hsmouc.com/categories/Embedded-System/"/>
+      <category term="Embedded System" scheme="https://rm-rf.moe/categories/Embedded-System/"/>
     
     
-      <category term="Pi" scheme="https://hsmouc.com/tags/Pi/"/>
+      <category term="Pi" scheme="https://rm-rf.moe/tags/Pi/"/>
     
-      <category term="C" scheme="https://hsmouc.com/tags/C/"/>
+      <category term="C" scheme="https://rm-rf.moe/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>基于RFID和Raspberry Pi的雨伞租赁系统设计</title>
-    <link href="https://hsmouc.com/2016/11/26/2016-11-26-pi/"/>
-    <id>https://hsmouc.com/2016/11/26/2016-11-26-pi/</id>
+    <link href="https://rm-rf.moe/2016/11/26/2016-11-26-pi/"/>
+    <id>https://rm-rf.moe/2016/11/26/2016-11-26-pi/</id>
     <published>2016-11-26T13:22:35.000Z</published>
     <updated>2017-05-16T18:06:47.000Z</updated>
     
@@ -1134,19 +1134,19 @@ SRDP项目顺利结题了，大概就是部署服务器之类的事情，做了�
     
     </summary>
     
-      <category term="Embedded System" scheme="https://hsmouc.com/categories/Embedded-System/"/>
+      <category term="Embedded System" scheme="https://rm-rf.moe/categories/Embedded-System/"/>
     
     
-      <category term="Pi" scheme="https://hsmouc.com/tags/Pi/"/>
+      <category term="Pi" scheme="https://rm-rf.moe/tags/Pi/"/>
     
-      <category term="C" scheme="https://hsmouc.com/tags/C/"/>
+      <category term="C" scheme="https://rm-rf.moe/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>六足机器人技术报告</title>
-    <link href="https://hsmouc.com/2016/10/22/2016-10-22-robot/"/>
-    <id>https://hsmouc.com/2016/10/22/2016-10-22-robot/</id>
+    <link href="https://rm-rf.moe/2016/10/22/2016-10-22-robot/"/>
+    <id>https://rm-rf.moe/2016/10/22/2016-10-22-robot/</id>
     <published>2016-10-22T12:15:23.000Z</published>
     <updated>2017-05-16T18:06:40.000Z</updated>
     
@@ -1194,19 +1194,19 @@ SRDP项目顺利结题了，大概就是部署服务器之类的事情，做了�
     
     </summary>
     
-      <category term="Robot" scheme="https://hsmouc.com/categories/Robot/"/>
+      <category term="Robot" scheme="https://rm-rf.moe/categories/Robot/"/>
     
     
-      <category term="C" scheme="https://hsmouc.com/tags/C/"/>
+      <category term="C" scheme="https://rm-rf.moe/tags/C/"/>
     
-      <category term="robot" scheme="https://hsmouc.com/tags/robot/"/>
+      <category term="robot" scheme="https://rm-rf.moe/tags/robot/"/>
     
   </entry>
   
   <entry>
     <title>美国游玩小记</title>
-    <link href="https://hsmouc.com/2016/08/12/2016-08-12-the%20USA/"/>
-    <id>https://hsmouc.com/2016/08/12/2016-08-12-the USA/</id>
+    <link href="https://rm-rf.moe/2016/08/12/2016-08-12-the%20USA/"/>
+    <id>https://rm-rf.moe/2016/08/12/2016-08-12-the USA/</id>
     <published>2016-08-12T13:55:13.000Z</published>
     <updated>2017-05-16T18:06:31.000Z</updated>
     
@@ -1243,17 +1243,17 @@ SRDP项目顺利结题了，大概就是部署服务器之类的事情，做了�
     
     </summary>
     
-      <category term="Life" scheme="https://hsmouc.com/categories/Life/"/>
+      <category term="Life" scheme="https://rm-rf.moe/categories/Life/"/>
     
     
-      <category term="travel" scheme="https://hsmouc.com/tags/travel/"/>
+      <category term="travel" scheme="https://rm-rf.moe/tags/travel/"/>
     
   </entry>
   
   <entry>
     <title>基于89C51的计算器设计</title>
-    <link href="https://hsmouc.com/2016/05/19/2016-05-19-Calculator/"/>
-    <id>https://hsmouc.com/2016/05/19/2016-05-19-Calculator/</id>
+    <link href="https://rm-rf.moe/2016/05/19/2016-05-19-Calculator/"/>
+    <id>https://rm-rf.moe/2016/05/19/2016-05-19-Calculator/</id>
     <published>2016-05-19T13:55:13.000Z</published>
     <updated>2017-05-16T18:06:09.000Z</updated>
     
@@ -1297,17 +1297,17 @@ SRDP项目顺利结题了，大概就是部署服务器之类的事情，做了�
     
     </summary>
     
-      <category term="Embedded System" scheme="https://hsmouc.com/categories/Embedded-System/"/>
+      <category term="Embedded System" scheme="https://rm-rf.moe/categories/Embedded-System/"/>
     
     
-      <category term="C" scheme="https://hsmouc.com/tags/C/"/>
+      <category term="C" scheme="https://rm-rf.moe/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>基于MFC框架的贪吃蛇程序</title>
-    <link href="https://hsmouc.com/2016/04/13/2016-04-13-mfc/"/>
-    <id>https://hsmouc.com/2016/04/13/2016-04-13-mfc/</id>
+    <link href="https://rm-rf.moe/2016/04/13/2016-04-13-mfc/"/>
+    <id>https://rm-rf.moe/2016/04/13/2016-04-13-mfc/</id>
     <published>2016-04-13T07:34:43.000Z</published>
     <updated>2017-05-16T18:06:24.000Z</updated>
     
@@ -1525,19 +1525,19 @@ SRDP项目顺利结题了，大概就是部署服务器之类的事情，做了�
     
     </summary>
     
-      <category term="Computer Science" scheme="https://hsmouc.com/categories/Computer-Science/"/>
+      <category term="Computer Science" scheme="https://rm-rf.moe/categories/Computer-Science/"/>
     
     
-      <category term="C++" scheme="https://hsmouc.com/tags/C/"/>
+      <category term="C++" scheme="https://rm-rf.moe/tags/C/"/>
     
-      <category term="MFC" scheme="https://hsmouc.com/tags/MFC/"/>
+      <category term="MFC" scheme="https://rm-rf.moe/tags/MFC/"/>
     
   </entry>
   
   <entry>
     <title>基于89C51的电子时钟设计</title>
-    <link href="https://hsmouc.com/2016/04/12/2016-04-12-clock/"/>
-    <id>https://hsmouc.com/2016/04/12/2016-04-12-clock/</id>
+    <link href="https://rm-rf.moe/2016/04/12/2016-04-12-clock/"/>
+    <id>https://rm-rf.moe/2016/04/12/2016-04-12-clock/</id>
     <published>2016-04-12T12:34:43.000Z</published>
     <updated>2017-05-16T18:05:57.000Z</updated>
     
@@ -1581,17 +1581,17 @@ SRDP项目顺利结题了，大概就是部署服务器之类的事情，做了�
     
     </summary>
     
-      <category term="Embedded System" scheme="https://hsmouc.com/categories/Embedded-System/"/>
+      <category term="Embedded System" scheme="https://rm-rf.moe/categories/Embedded-System/"/>
     
     
-      <category term="C" scheme="https://hsmouc.com/tags/C/"/>
+      <category term="C" scheme="https://rm-rf.moe/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>使用tor隐藏自己的踪迹和深网</title>
-    <link href="https://hsmouc.com/2016/03/06/2016-03-13-tor/"/>
-    <id>https://hsmouc.com/2016/03/06/2016-03-13-tor/</id>
+    <link href="https://rm-rf.moe/2016/03/06/2016-03-13-tor/"/>
+    <id>https://rm-rf.moe/2016/03/06/2016-03-13-tor/</id>
     <published>2016-03-06T11:40:25.000Z</published>
     <updated>2017-05-16T18:05:18.000Z</updated>
     
@@ -1627,17 +1627,17 @@ Vidalia的配置比较简单，前提是可以科学上网，因为万能的某�
     
     </summary>
     
-      <category term="Network Security" scheme="https://hsmouc.com/categories/Network-Security/"/>
+      <category term="Network Security" scheme="https://rm-rf.moe/categories/Network-Security/"/>
     
     
-      <category term="tor" scheme="https://hsmouc.com/tags/tor/"/>
+      <category term="tor" scheme="https://rm-rf.moe/tags/tor/"/>
     
   </entry>
   
   <entry>
     <title>Sqlmap部分参数说明</title>
-    <link href="https://hsmouc.com/2016/03/06/2016-03-06-sqlmap/"/>
-    <id>https://hsmouc.com/2016/03/06/2016-03-06-sqlmap/</id>
+    <link href="https://rm-rf.moe/2016/03/06/2016-03-06-sqlmap/"/>
+    <id>https://rm-rf.moe/2016/03/06/2016-03-06-sqlmap/</id>
     <published>2016-03-06T11:40:25.000Z</published>
     <updated>2017-05-16T18:05:24.000Z</updated>
     
@@ -1692,17 +1692,17 @@ sqlmap的使用非常简单，通常我们使用如下命令就可以获知目�
     
     </summary>
     
-      <category term="Network Security" scheme="https://hsmouc.com/categories/Network-Security/"/>
+      <category term="Network Security" scheme="https://rm-rf.moe/categories/Network-Security/"/>
     
     
-      <category term="sqlmap" scheme="https://hsmouc.com/tags/sqlmap/"/>
+      <category term="sqlmap" scheme="https://rm-rf.moe/tags/sqlmap/"/>
     
   </entry>
   
   <entry>
     <title>娱乐向---Raspberry Pi搭建家庭影音娱乐系统</title>
-    <link href="https://hsmouc.com/2016/02/27/2016-02-27-pi/"/>
-    <id>https://hsmouc.com/2016/02/27/2016-02-27-pi/</id>
+    <link href="https://rm-rf.moe/2016/02/27/2016-02-27-pi/"/>
+    <id>https://rm-rf.moe/2016/02/27/2016-02-27-pi/</id>
     <published>2016-02-27T06:46:15.000Z</published>
     <updated>2017-05-16T18:04:46.000Z</updated>
     
@@ -1733,17 +1733,17 @@ sqlmap的使用非常简单，通常我们使用如下命令就可以获知目�
     
     </summary>
     
-      <category term="Embedded System" scheme="https://hsmouc.com/categories/Embedded-System/"/>
+      <category term="Embedded System" scheme="https://rm-rf.moe/categories/Embedded-System/"/>
     
     
-      <category term="Pi" scheme="https://hsmouc.com/tags/Pi/"/>
+      <category term="Pi" scheme="https://rm-rf.moe/tags/Pi/"/>
     
   </entry>
   
   <entry>
     <title>centos搭建LNMP服务器</title>
-    <link href="https://hsmouc.com/2016/02/19/2016-02-19-vps/"/>
-    <id>https://hsmouc.com/2016/02/19/2016-02-19-vps/</id>
+    <link href="https://rm-rf.moe/2016/02/19/2016-02-19-vps/"/>
+    <id>https://rm-rf.moe/2016/02/19/2016-02-19-vps/</id>
     <published>2016-02-19T06:20:15.000Z</published>
     <updated>2017-05-16T18:04:40.000Z</updated>
     
@@ -1796,17 +1796,17 @@ sqlmap的使用非常简单，通常我们使用如下命令就可以获知目�
     
     </summary>
     
-      <category term="Computer Skills" scheme="https://hsmouc.com/categories/Computer-Skills/"/>
+      <category term="Computer Skills" scheme="https://rm-rf.moe/categories/Computer-Skills/"/>
     
     
-      <category term="Linux" scheme="https://hsmouc.com/tags/Linux/"/>
+      <category term="Linux" scheme="https://rm-rf.moe/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>centos搭建服务器－安装apache</title>
-    <link href="https://hsmouc.com/2016/02/16/2016-02-16-vps/"/>
-    <id>https://hsmouc.com/2016/02/16/2016-02-16-vps/</id>
+    <link href="https://rm-rf.moe/2016/02/16/2016-02-16-vps/"/>
+    <id>https://rm-rf.moe/2016/02/16/2016-02-16-vps/</id>
     <published>2016-02-16T02:40:25.000Z</published>
     <updated>2017-05-16T18:04:28.000Z</updated>
     
@@ -1836,17 +1836,17 @@ sqlmap的使用非常简单，通常我们使用如下命令就可以获知目�
     
     </summary>
     
-      <category term="Computer Skills" scheme="https://hsmouc.com/categories/Computer-Skills/"/>
+      <category term="Computer Skills" scheme="https://rm-rf.moe/categories/Computer-Skills/"/>
     
     
-      <category term="Linux" scheme="https://hsmouc.com/tags/Linux/"/>
+      <category term="Linux" scheme="https://rm-rf.moe/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>通过python控制Pi的GPIO</title>
-    <link href="https://hsmouc.com/2015/12/17/2015-12-17-pi/"/>
-    <id>https://hsmouc.com/2015/12/17/2015-12-17-pi/</id>
+    <link href="https://rm-rf.moe/2015/12/17/2015-12-17-pi/"/>
+    <id>https://rm-rf.moe/2015/12/17/2015-12-17-pi/</id>
     <published>2015-12-17T02:40:25.000Z</published>
     <updated>2017-05-16T18:04:15.000Z</updated>
     
@@ -1876,12 +1876,12 @@ GPIOs <span class="dv">0</span>-<span class="dv">53</span>, platform/3f200000.gp
     
     </summary>
     
-      <category term="Embedded System" scheme="https://hsmouc.com/categories/Embedded-System/"/>
+      <category term="Embedded System" scheme="https://rm-rf.moe/categories/Embedded-System/"/>
     
     
-      <category term="Pi" scheme="https://hsmouc.com/tags/Pi/"/>
+      <category term="Pi" scheme="https://rm-rf.moe/tags/Pi/"/>
     
-      <category term="Python" scheme="https://hsmouc.com/tags/Python/"/>
+      <category term="Python" scheme="https://rm-rf.moe/tags/Python/"/>
     
   </entry>
   
