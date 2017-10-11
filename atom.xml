@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://rm-rf.moe/"/>
-  <updated>2017-07-26T06:03:20.000Z</updated>
+  <updated>2017-10-11T12:29:07.000Z</updated>
   <id>https://rm-rf.moe/</id>
   
   <author>
@@ -14,6 +14,47 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>谈笑风生又一年</title>
+    <link href="https://rm-rf.moe/2017/10/11/2017-10-11-summary/"/>
+    <id>https://rm-rf.moe/2017/10/11/2017-10-11-summary/</id>
+    <published>2017-10-11T11:31:28.000Z</published>
+    <updated>2017-10-11T12:29:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>混吃混喝-&gt;坐吃等死的大四生活开始啦(｡･ω･｡) <a id="more"></a> ## 大三下学期的一些微小的工作</p>
+<ul>
+<li>继续完成了平衡小车的制作，并意外的获得了山东省光电平衡组第一名的成绩。不过在全国赛表现不佳，很不适应现场的光线，坡道也跑不起来，速度一快起来车子就起飞。算法还是naive。</li>
+<li>大约一个月的时间完成了一个较简单的水下机器人的控制部分，前进后退上浮下沉都没什么问题，不过定深方面因为压力传感器莫名其妙的坏掉所以没有完成。主要时间并没有用在控制算法的调试与创新上，而是浪费在了调上位机上，上位机是<code>Python+Tk</code>搞出来的，总体来说界面很naive。</li>
+</ul>
+<p><img src="https://ws1.sinaimg.cn/large/005WMcFzly1fkejj1btr2j30qo0f0grz.jpg" alt="奔跑的小车"> <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fkejyxau05j30vk0notu7.jpg" alt="下沉中的水下机器人"> <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fkek5m7au8j30sf0lxae0.jpg" alt="简陋的图形界面"></p>
+<h2 id="大四的生活">大四的生活</h2>
+<h3 id="推免生复试">推免生复试</h3>
+<p>国庆节前去了一趟杭州，参加了浙江大学的推免生复试，顺便去逛了一逛西湖，吃了生煎包和糖醋排骨。虽然通过了复试但认识到自己与优秀控制系学生之间的差距，控制理论的基础不扎实，认识也很浅薄。电路方面更是需要花时间去弥补。 <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fkekelnxjwj31qw1qw1kx.jpg" alt="西湖一隅"> ### 未来的打算 听取未来导师的建议，坚持学习线性代数知识；培养高效阅读论文的能力；慢慢学习了解水动力学以及水下机器人的控制。认真把毕业设计做好，掌握水下机器人的建模方法，实现鲁棒控制并测试性能。</p>
+<h2 id="关于域名">关于域名</h2>
+<p>之前的域名快要到期了，昨天在浏览网站的时候意外发现<code>.moe</code>，而且似乎目前注册的人数也不多，价格也不算太贵，于是挑选了一个比较有意义的<code>rm -rf</code>注册了。<br>
+目前在<a href="https://cloudflare.com" target="_blank" rel="external">CloudFlare</a>部署了简单的<code>Page Rules</code>来不完全解决301重定向的问题。目前的<code>rules</code>是：</p>
+<ul>
+<li>https://hsmouc.com/* 301-&gt; https://rm-rf.moe/</li>
+<li>https://www.hsmouc.com/* 301-&gt; https://rm-rf.moe/</li>
+<li>https://en.hsmouc.com/* 301-&gt; https://en.rm-rf.moe/</li>
+</ul>
+<p>因为不是氪金用户所以只能添加三条，所以如果用户直接访问http的站就没有办法重定向到新域名。<br>
+另外，在我的个人服务器上配置<code>Nginx</code>的<code>server name</code>，并重新申请了SSL证书，来解决不安全连接的问题。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;混吃混喝-&amp;gt;坐吃等死的大四生活开始啦(｡･ω･｡)
+    
+    </summary>
+    
+      <category term="Life" scheme="https://rm-rf.moe/categories/Life/"/>
+    
+    
+      <category term="summary" scheme="https://rm-rf.moe/tags/summary/"/>
+    
+  </entry>
   
   <entry>
     <title>我又双叒叕写了个电子钟</title>
@@ -1840,48 +1881,6 @@ sqlmap的使用非常简单，通常我们使用如下命令就可以获知目�
     
     
       <category term="Linux" scheme="https://rm-rf.moe/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>通过python控制Pi的GPIO</title>
-    <link href="https://rm-rf.moe/2015/12/17/2015-12-17-pi/"/>
-    <id>https://rm-rf.moe/2015/12/17/2015-12-17-pi/</id>
-    <published>2015-12-17T02:40:25.000Z</published>
-    <updated>2017-05-16T18:04:15.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="python-gpio集成库">python GPIO集成库</h2>
-<p>我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835 C Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。 <a id="more"></a> ## 让LED闪烁 在这个实验中，我只是简单的控制了一个GPIO口，输出一个方波信号，占空比50%，这样就可以让一个LED小灯闪烁。</p>
-<ul>
-<li>连接实验电路 在单片机学习中，掌握好各个引脚的功能是非常重要的，要根据电路的连接来写相关的控制程序。在Pi中我们可以使用<code>GPIO readall</code>来列出所有的引脚，便于我们下一步操作。 <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1be2lv6oj30fu0cjjue.jpg" alt="引脚图"><br>
-然后将LED，电阻串联起来，LED正端接GPIO口，负接地。记得用杜邦线，拿着导线乱碰很可能导致引脚短路，损坏Pi。<br>
-</li>
-<li>Python代码部分 新建LED.py文件，加入以下代码:<br>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> RPi.GPIO <span class="keyword">as</span> GPIO</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">blink</span><span class="params">(pin)</span>:</span></div><div class="line">        GPIO.output(pin,GPIO.HIGH)</div><div class="line">        time.sleep(<span class="number">1</span>)</div><div class="line">		GPIO.output(pin,GPIO.LOW)</div><div class="line">        time.sleep(<span class="number">1</span>)</div><div class="line">        <span class="keyword">return</span></div><div class="line">GPIO.setmode(GPIO.BOARD)</div><div class="line">GPIO.setup(<span class="number">7</span>,GPIO.OUT）</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">50</span>):</div><div class="line">        blink(<span class="number">7</span>)</div><div class="line">GPIO.cleanup()</div></pre></td></tr></table></figure></li>
-</ul>
-<p>然后执行下试试吧～ <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bf7dc37j31kw16oncv.jpg" alt="点亮的LED"> 图是随手拍的，桌上的电阻都有点大了，亮起来不明显。建议大家还是串上一个阻值合适的电阻，GPIO输出的电压幅值好像是1V。当然大家就不要作死把发光二极管直接接在3.3V和GND之间了，不要问我是怎么知道的+_+，我炸了一个。<br>
-可以通过:</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">pi@raspberrypi:~/Desktop $ sudo cat /sys/kernel/debug/gpio
-GPIOs <span class="dv">0</span>-<span class="dv">53</span>, platform/3f200000.gpio, pinctrl-bcm2835:
- gpio-<span class="dv">35</span>  (?                   ) in  hi
- gpio-<span class="dv">47</span>  (?                   ) out lo</code></pre></div>
-<p>来查看引脚状态。</p>
-<p>最后说两句题外话吧: 其实系里还是挺关心我们的，想要什么小零件基本都能提供。模电老师还给我们每个人准备了一个小器件包，里面有面包版，各种电容电阻什么的。虽然都不是什么精贵的东西，但看到宿舍里有各种各样的小元件和各种工具，总有一种迷之幸福感。万用表好像也可以向系里申请了，还是希望系里越来越好吧（≧∇≦）</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;python-gpio集成库&quot;&gt;python GPIO集成库&lt;/h2&gt;
-&lt;p&gt;我大概了解了下树莓派的几种库，比较常见的有python GPIO，BCM2835 C Library还有wiringPi，其实对于我们自动化的学生来说最熟悉的应该就是wiringPi。Pi的官方资料中推荐的是python GPIO，而且相较于C，python更加简洁易读。
-    
-    </summary>
-    
-      <category term="Embedded System" scheme="https://rm-rf.moe/categories/Embedded-System/"/>
-    
-    
-      <category term="Pi" scheme="https://rm-rf.moe/tags/Pi/"/>
-    
-      <category term="Python" scheme="https://rm-rf.moe/tags/Python/"/>
     
   </entry>
   

@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://rm-rf.moe/links/index.html</loc>
+    
+    <lastmod>2017-10-11T12:36:33.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://rm-rf.moe/2017/10/11/2017-10-11-summary/</loc>
+    
+    <lastmod>2017-10-11T12:29:07.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://rm-rf.moe/2017/04/01/2017-04-01-regressionbykeras/</loc>
     
     <lastmod>2017-08-27T07:05:59.000Z</lastmod>
@@ -215,13 +229,6 @@
     <loc>https://rm-rf.moe/2015/10/01/2015-10-01-blog/</loc>
     
     <lastmod>2017-05-16T18:00:18.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://rm-rf.moe/links/index.html</loc>
-    
-    <lastmod>2017-04-23T12:24:07.000Z</lastmod>
     
   </url>
   
