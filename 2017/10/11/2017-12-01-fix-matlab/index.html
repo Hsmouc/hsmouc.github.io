@@ -97,7 +97,7 @@
 <meta property="og:site_name" content="梦的小窝">
 <meta property="og:description" content="最近设计滑膜控制器需要用MATLAB Simulink中的User-Defined Function，写好Function后编译报错。报错信息为： 1No supported compiler or SDK was found.
 在MathWorks论坛上有这个问题的解决方案。大致就是去App Store上安装Xcode就可以了，然而我并不想安装臃肿的Xcode且我已经安装了Xcode comma">
-<meta property="og:updated_time" content="2017-12-06T14:40:12.000Z">
+<meta property="og:updated_time" content="2017-12-06T14:52:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决在macOS Sierra(10.12)上MATLAB的mex问题">
 <meta name="twitter:description" content="最近设计滑膜控制器需要用MATLAB Simulink中的User-Defined Function，写好Function后编译报错。报错信息为： 1No supported compiler or SDK was found.
@@ -429,10 +429,14 @@
 <p>此时应该输出 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">MEX configured to use &apos;Xcode with Clang&apos; for C language compilation.</div><div class="line">Warning: The MATLAB C and Fortran API has changed to support MATLAB</div><div class="line">	 variables with more than 2^32-1 elements. In the near future</div><div class="line">	 you will be required to update your code to utilize the</div><div class="line">	 new API. You can find more information about this at:</div><div class="line">	 http://www.mathworks.com/help/matlab/matlab_external/upgrading-mex-files-to-use-64-bit-api.html.</div></pre></td></tr></table></figure></p>
 <p>这表明此时mex已经找到并使用gcc了，但是Simulink编译仍然会报以下错误： <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">invalid version number in &apos;-mmacosx-version-min=&apos;</div></pre></td></tr></table></figure></p>
 <p>这是因为在<code>clang_maci64.xml</code>33行处，还有其他的一些行 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CFLAGS=&quot;-fno-common -arch x86_64 -mmacosx-version-min=$SDKVER -fexceptions -isysroot $ISYSROOT&quot;</div></pre></td></tr></table></figure></p>
-<p>引用了我们刚才注释掉的内容<code>$SDKVER</code>和<code>ISYSROOT</code>。<br>
+<p>引用了我们刚才注释掉的内容<code>$SDKVER</code>和<code>$ISYSROOT</code>。<br>
 需要注意的是此时并不应该再修改这个文件，需要在Command Window中输入 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd( prefdir );</div></pre></td></tr></table></figure></p>
 <p>打开<code>mex_C_maci64.xml</code>继续修改。需要将文件中所有的<code>$SDKVER</code>更改为<code>10.11</code>，并将<code>ISYSROOT</code>更改为<code>/usr/bin</code>。<br>
-至此XML文件修改完毕，然而打开Simulink还是不能编译通过。 ## 复制头文件 Simulink报错的内容大概是在<code>simulink/include/</code>文件夹下找不到头文件，手动将<code>/usr/include/</code>中的所有文件复制到<code>/Applications/MATLAB_R2014a.app/simulink/include/</code>下即可。现在重新编译Simulink的model应该就可以顺利通过了。 ## 总结 之前在解决mex问题的时候搜索到<a href="https://stackoverflow.com/questions/40052388/matlab-mex-without-xcode-but-with-standalone-command-line-tools/40083012#40083012" target="_blank" rel="external">stackoverflow</a>上的这个答案，不过按照回答者提出的方案仍然报错，于是自己动手修改了一些细节上的内容，希望可以帮助到被这个问题困扰的朋友们。</p>
+至此XML文件修改完毕，然而打开Simulink还是不能编译通过。</p>
+<h2 id="复制头文件">复制头文件</h2>
+<p>Simulink报错的内容大概是在<code>simulink/include/</code>文件夹下找不到头文件，手动将<code>/usr/include/</code>中的所有文件复制到<code>/Applications/MATLAB_R2014a.app/simulink/include/</code>下即可。现在重新编译Simulink的model应该就可以顺利通过了。</p>
+<h2 id="总结">总结</h2>
+<p>之前在解决mex问题的时候搜索到<a href="https://stackoverflow.com/questions/40052388/matlab-mex-without-xcode-but-with-standalone-command-line-tools/40083012#40083012" target="_blank" rel="external">stackoverflow</a>上的这个答案，不过按照回答者提出的方案仍然报错，于是自己动手修改了一些细节上的内容，希望可以帮助到被这个问题困扰的朋友们。</p>
 
       
     </div>
@@ -634,7 +638,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#更改mex的xml配置"><span class="nav-number">1.</span> <span class="nav-text">更改mex的XML配置</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#更改mex的xml配置"><span class="nav-number">1.</span> <span class="nav-text">更改mex的XML配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制头文件"><span class="nav-number">2.</span> <span class="nav-text">复制头文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
