@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Pi," />
+  <meta name="keywords" content="MATLAB,bug," />
 
 
 
@@ -89,19 +89,19 @@
 
 
 
-<meta name="description" content="Raspberry装好了，显示器也搞定了，玩了整整一天(☆_☆)，发现了一个小问题：我的桌面不够大呀！！！显示器，树莓，笔记本电脑，外卖，概率作业不够放了怎么破，立马想到看过可以通过SSH和VNC的方式访问Pi，来试试吧！">
+<meta name="description" content="最近设计滑膜控制器需要用MATLAB Simulink中的User-Defined Function，写好Function后编译报错。报错信息为： 1No supported compiler or SDK was found.
+在MathWorks论坛上有这个问题的解决方案。大致就是去App Store上安装Xcode就可以了，然而我并不想安装臃肿的Xcode且我已经安装了Xcode comma">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Raspberry Pi开启SSH和VNC">
-<meta property="og:url" content="https://rm-rf.moe/2015/12/13/2015-12-13-pi/index.html">
+<meta property="og:title" content="解决在macOS Sierra(10.12)上MATLAB的mex问题">
+<meta property="og:url" content="https://rm-rf.moe/2017/10/11/2017-12-01-fix-matlab/index.html">
 <meta property="og:site_name" content="梦的小窝">
-<meta property="og:description" content="Raspberry装好了，显示器也搞定了，玩了整整一天(☆_☆)，发现了一个小问题：我的桌面不够大呀！！！显示器，树莓，笔记本电脑，外卖，概率作业不够放了怎么破，立马想到看过可以通过SSH和VNC的方式访问Pi，来试试吧！">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bgjlyw2j30j60eejtp.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bh1l1mfj30j60bzt9k.jpg">
-<meta property="og:updated_time" content="2017-05-16T18:01:39.000Z">
+<meta property="og:description" content="最近设计滑膜控制器需要用MATLAB Simulink中的User-Defined Function，写好Function后编译报错。报错信息为： 1No supported compiler or SDK was found.
+在MathWorks论坛上有这个问题的解决方案。大致就是去App Store上安装Xcode就可以了，然而我并不想安装臃肿的Xcode且我已经安装了Xcode comma">
+<meta property="og:updated_time" content="2017-12-06T14:40:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Raspberry Pi开启SSH和VNC">
-<meta name="twitter:description" content="Raspberry装好了，显示器也搞定了，玩了整整一天(☆_☆)，发现了一个小问题：我的桌面不够大呀！！！显示器，树莓，笔记本电脑，外卖，概率作业不够放了怎么破，立马想到看过可以通过SSH和VNC的方式访问Pi，来试试吧！">
-<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bgjlyw2j30j60eejtp.jpg">
+<meta name="twitter:title" content="解决在macOS Sierra(10.12)上MATLAB的mex问题">
+<meta name="twitter:description" content="最近设计滑膜控制器需要用MATLAB Simulink中的User-Defined Function，写好Function后编译报错。报错信息为： 1No supported compiler or SDK was found.
+在MathWorks论坛上有这个问题的解决方案。大致就是去App Store上安装Xcode就可以了，然而我并不想安装臃肿的Xcode且我已经安装了Xcode comma">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="https://rm-rf.moe/2015/12/13/2015-12-13-pi/"/>
+  <link rel="canonical" href="https://rm-rf.moe/2017/10/11/2017-12-01-fix-matlab/"/>
 
 
 
 
 
-  <title> Raspberry Pi开启SSH和VNC | 梦的小窝 </title>
+  <title> 解决在macOS Sierra(10.12)上MATLAB的mex问题 | 梦的小窝 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -303,7 +303,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://rm-rf.moe/2015/12/13/2015-12-13-pi/">
+    <link itemprop="mainEntityOfPage" href="https://rm-rf.moe/2017/10/11/2017-12-01-fix-matlab/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hsmouc">
@@ -324,7 +324,7 @@
             
             
               
-                Raspberry Pi开启SSH和VNC
+                解决在macOS Sierra(10.12)上MATLAB的mex问题
               
             
           </h1>
@@ -339,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-13T10:40:25+08:00">
-                2015-12-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-11T19:31:28+08:00">
+                2017-10-11
               </time>
             
 
@@ -362,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Embedded-System/" itemprop="url" rel="index">
-                    <span itemprop="name">Embedded System</span>
+                  <a href="/categories/BugFix/" itemprop="url" rel="index">
+                    <span itemprop="name">BugFix</span>
                   </a>
                 </span>
 
@@ -380,8 +380,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2015/12/13/2015-12-13-pi/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/13/2015-12-13-pi/" itemprop="commentCount"></span>
+                <a href="/2017/10/11/2017-12-01-fix-matlab/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/10/11/2017-12-01-fix-matlab/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -389,7 +389,7 @@
 
           
           
-             <span id="/2015/12/13/2015-12-13-pi/" class="leancloud_visitors" data-flag-title="Raspberry Pi开启SSH和VNC">
+             <span id="/2017/10/11/2017-12-01-fix-matlab/" class="leancloud_visitors" data-flag-title="解决在macOS Sierra(10.12)上MATLAB的mex问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -418,22 +418,21 @@
       
 
       
-        <ul>
-<li>Raspberry装好了，显示器也搞定了，玩了整整一天(☆_☆)，发现了一个小问题：我的桌面不够大呀！！！显示器，树莓，笔记本电脑，外卖，概率作业不够放了怎么破，立马想到看过可以通过SSH和VNC的方式访问Pi，来试试吧！</li>
-</ul>
-<p><a id="more"></a></p>
-<h2 id="两种方式">两种方式</h2>
-<h3 id="ssh">SSH</h3>
-<p>命令行访问Pi，轻巧且功能强大。简单配置一下Pi,打开SSH服务即可: <code>service ssh start</code> 在Mac终端输入: <code>sudo ssh pi@192.168.1.6</code></p>
-<p><code>192.168.1.6</code>是Pi的ip。输入Pi的密码就可以连上了。更多的配置不细讲了，<a href="http://www.jianshu.com/p/a011d01bdf51" target="_blank" rel="external">简书</a>的这篇文章提到了关于配置root用户ssh登录的权限问题，<a href="http://liberize.me/tech/access-raspberry-pi-via-ssh-and-vnc.html" target="_blank" rel="external">liberize.blog</a>提到了使用私钥登录的问题。<br>
-### VNC 如果要使用Pi的图形界面，大家可以使用VNC服务。Pi需要安装vnc服务端，并在Mac上安装tigervnc(icon挺帅的)。<br>
-#### Pi的配置 我查到的资料大多数是在Pi上安装tightvncserver<code>sudo apt-get install tightvncserver</code>，简单的配置下用<code>service start tightvncserver</code>发现终端报错了。找不到目录的原因不清楚……<br>
-我发现在Jessie中貌似已经安装VNC服务，抱着试试的心态输入<code>vncserver</code><br>
-终端出现了帮助页面，可以这样打开VNC服务: <code>vncserver:1</code> #### Mac的配置</p>
-<p>安装tigervnc<a href="https://github.com/TigerVNC/tigervnc/releases" target="_blank" rel="external">下载</a>，编译安装。<br>
-发现Homebrew可以直接装，果断弃了tar.gz <code>brew cask install tigervnc-viewer</code> 打开tigervnc，输入<code>192.168.1.6</code>，点Connect就连上啦。</p>
-<h2 id="惯例">惯例</h2>
-<p>放上一些图片吧 <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bgjlyw2j30j60eejtp.jpg"> <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bh1l1mfj30j60bzt9k.jpg"> 发现屏下面垫一个橡皮还蛮不错的…… 下一阶段是学习GPIO的使用，主要还是使用WiringPi或者BCM2835 C Library来写，Python正在学ˊ_&gt;ˋ</p>
+        <p>最近设计滑膜控制器需要用MATLAB Simulink中的User-Defined Function，写好Function后编译报错。报错信息为： <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">No supported compiler or SDK was found.</div></pre></td></tr></table></figure></p>
+<p>在<a href="https://cn.mathworks.com/matlabcentral/answers/246135-is-matlab-compatible-with-mac-os-x-10-11-el-capitan" target="_blank" rel="external">MathWorks论坛</a>上有这个问题的解决方案。大致就是去App Store上安装Xcode就可以了，然而我并不想安装臃肿的Xcode且我已经安装了Xcode command line tool。这篇文章将教你如何花式配置mex。<br>
+<a id="more"></a></p>
+<h2 id="更改mex的xml配置">更改mex的XML配置</h2>
+<p>打开MATLAB，并在其Command Line下输入： <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd( fullfile( matlabroot, &apos;bin&apos;, &apos;maci64&apos;, &apos;mexopts&apos; ) );</div></pre></td></tr></table></figure></p>
+<p>这里MATLAB左侧的Current Folder中应有三个文件，分别是<code>clang_maci64.xml</code>，<code>clang++_maci64.xml</code>和<code>gfortan.xml</code>，分别对应了c文件，cpp文件和fortan的编译配置。由于Simulink只需要编译c文件，所以仅更改<code>clang_maci64.xml</code>就可以了。<code>clang++_maci64.xml</code>的修改方法与<code>clang_maci64.xml</code>类似，就不多加说明了。<br>
+直接使用MATLAB打开<code>clang_maci64.xml</code>，找到以下部分，并将其用<code>&lt;!--&gt; &lt;--&gt;</code>注释掉。这将会使编译器在<code>/usr/include</code>中搜索头文件，而非Xcode的路径。 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ISYSROOT</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">and</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"xcode-select -print-path"</span>/&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">or</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">dirExists</span> <span class="attr">name</span>=<span class="string">"$$/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk"</span> /&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">dirExists</span> <span class="attr">name</span>=<span class="string">"$$/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk"</span> /&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">dirExists</span> <span class="attr">name</span>=<span class="string">"$$/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk"</span> /&gt;</span> </div><div class="line">                    <span class="tag">&lt;<span class="name">dirExists</span> <span class="attr">name</span>=<span class="string">"$$/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk"</span> /&gt;</span> </div><div class="line">                    <span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"find $$ -name MacOSX10.9.sdk"</span> /&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"find $$ -name MacOSX10.10.sdk"</span> /&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"find $$ -name MacOSX10.11.sdk"</span> /&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"find $$ -name MacOSX10.12.sdk"</span> /&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">or</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">and</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">ISYSROOT</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">SDKVER</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">and</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">and</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"xcode-select -print-path"</span>/&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">or</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">dirExists</span> <span class="attr">name</span>=<span class="string">"$$/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk"</span> /&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">dirExists</span> <span class="attr">name</span>=<span class="string">"$$/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk"</span> /&gt;</span></div><div class="line">						<span class="tag">&lt;<span class="name">dirExists</span> <span class="attr">name</span>=<span class="string">"$$/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk"</span> /&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">dirExists</span> <span class="attr">name</span>=<span class="string">"$$/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk"</span> /&gt;</span> </div><div class="line">                        <span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"find $$ -name MacOSX10.9.sdk"</span> /&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"find $$ -name MacOSX10.10.sdk"</span> /&gt;</span></div><div class="line">						<span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"find $$ -name MacOSX10.11.sdk"</span> /&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"find $$ -name MacOSX10.12.sdk"</span> /&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">or</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">and</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"echo $$ | rev | cut -c1-10 | rev | egrep -oh '[0-9]+\.[0-9]+'"</span> /&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">and</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">SDKVER</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>回到MATLAB的Command Window，并输入 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mex --setup</div></pre></td></tr></table></figure></p>
+<p>此时应该输出 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">MEX configured to use &apos;Xcode with Clang&apos; for C language compilation.</div><div class="line">Warning: The MATLAB C and Fortran API has changed to support MATLAB</div><div class="line">	 variables with more than 2^32-1 elements. In the near future</div><div class="line">	 you will be required to update your code to utilize the</div><div class="line">	 new API. You can find more information about this at:</div><div class="line">	 http://www.mathworks.com/help/matlab/matlab_external/upgrading-mex-files-to-use-64-bit-api.html.</div></pre></td></tr></table></figure></p>
+<p>这表明此时mex已经找到并使用gcc了，但是Simulink编译仍然会报以下错误： <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">invalid version number in &apos;-mmacosx-version-min=&apos;</div></pre></td></tr></table></figure></p>
+<p>这是因为在<code>clang_maci64.xml</code>33行处，还有其他的一些行 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CFLAGS=&quot;-fno-common -arch x86_64 -mmacosx-version-min=$SDKVER -fexceptions -isysroot $ISYSROOT&quot;</div></pre></td></tr></table></figure></p>
+<p>引用了我们刚才注释掉的内容<code>$SDKVER</code>和<code>ISYSROOT</code>。<br>
+需要注意的是此时并不应该再修改这个文件，需要在Command Window中输入 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd( prefdir );</div></pre></td></tr></table></figure></p>
+<p>打开<code>mex_C_maci64.xml</code>继续修改。需要将文件中所有的<code>$SDKVER</code>更改为<code>10.11</code>，并将<code>ISYSROOT</code>更改为<code>/usr/bin</code>。<br>
+至此XML文件修改完毕，然而打开Simulink还是不能编译通过。 ## 复制头文件 Simulink报错的内容大概是在<code>simulink/include/</code>文件夹下找不到头文件，手动将<code>/usr/include/</code>中的所有文件复制到<code>/Applications/MATLAB_R2014a.app/simulink/include/</code>下即可。现在重新编译Simulink的model应该就可以顺利通过了。 ## 总结 之前在解决mex问题的时候搜索到<a href="https://stackoverflow.com/questions/40052388/matlab-mex-without-xcode-but-with-standalone-command-line-tools/40083012#40083012" target="_blank" rel="external">stackoverflow</a>上的这个答案，不过按照回答者提出的方案仍然报错，于是自己动手修改了一些细节上的内容，希望可以帮助到被这个问题困扰的朋友们。</p>
 
       
     </div>
@@ -463,7 +462,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Pi/" rel="tag"># Pi</a>
+            <a href="/tags/MATLAB/" rel="tag"># MATLAB</a>
+          
+            <a href="/tags/bug/" rel="tag"># bug</a>
           
         </div>
       
@@ -476,8 +477,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/12/2015-12-12-pi/" rel="next" title="Raspberry Pi上手体验">
-                <i class="fa fa-chevron-left"></i> Raspberry Pi上手体验
+              <a href="/2017/10/11/2017-10-11-summary/" rel="next" title="谈笑风生又一年">
+                <i class="fa fa-chevron-left"></i> 谈笑风生又一年
               </a>
             
           </div>
@@ -485,10 +486,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/12/17/2015-12-17-pi/" rel="prev" title="通过python控制Pi的GPIO">
-                通过python控制Pi的GPIO <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -637,7 +634,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#两种方式"><span class="nav-number">1.</span> <span class="nav-text">两种方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh"><span class="nav-number">1.1.</span> <span class="nav-text">SSH</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#惯例"><span class="nav-number">2.</span> <span class="nav-text">惯例</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#更改mex的xml配置"><span class="nav-number">1.</span> <span class="nav-text">更改mex的XML配置</span></a></li></ol></div>
             
 
           </div>
@@ -775,9 +772,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'rice-cake';
-      var disqus_identifier = '2015/12/13/2015-12-13-pi/';
+      var disqus_identifier = '2017/10/11/2017-12-01-fix-matlab/';
 
-      var disqus_title = "Raspberry Pi开启SSH和VNC";
+      var disqus_title = "解决在macOS Sierra(10.12)上MATLAB的mex问题";
 
 
       function run_disqus_script(disqus_script) {

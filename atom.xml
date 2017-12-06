@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://rm-rf.moe/"/>
-  <updated>2017-10-11T12:41:40.000Z</updated>
+  <updated>2017-12-06T14:40:12.000Z</updated>
   <id>https://rm-rf.moe/</id>
   
   <author>
@@ -14,6 +14,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>解决在macOS Sierra(10.12)上MATLAB的mex问题</title>
+    <link href="https://rm-rf.moe/2017/10/11/2017-12-01-fix-matlab/"/>
+    <id>https://rm-rf.moe/2017/10/11/2017-12-01-fix-matlab/</id>
+    <published>2017-10-11T11:31:28.000Z</published>
+    <updated>2017-12-06T14:40:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近设计滑膜控制器需要用MATLAB Simulink中的User-Defined Function，写好Function后编译报错。报错信息为： <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">No supported compiler or SDK was found.</div></pre></td></tr></table></figure></p>
+<p>在<a href="https://cn.mathworks.com/matlabcentral/answers/246135-is-matlab-compatible-with-mac-os-x-10-11-el-capitan" target="_blank" rel="external">MathWorks论坛</a>上有这个问题的解决方案。大致就是去App Store上安装Xcode就可以了，然而我并不想安装臃肿的Xcode且我已经安装了Xcode command line tool。这篇文章将教你如何花式配置mex。<br>
+<a id="more"></a></p>
+<h2 id="更改mex的xml配置">更改mex的XML配置</h2>
+<p>打开MATLAB，并在其Command Line下输入： <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd( fullfile( matlabroot, &apos;bin&apos;, &apos;maci64&apos;, &apos;mexopts&apos; ) );</div></pre></td></tr></table></figure></p>
+<p>这里MATLAB左侧的Current Folder中应有三个文件，分别是<code>clang_maci64.xml</code>，<code>clang++_maci64.xml</code>和<code>gfortan.xml</code>，分别对应了c文件，cpp文件和fortan的编译配置。由于Simulink只需要编译c文件，所以仅更改<code>clang_maci64.xml</code>就可以了。<code>clang++_maci64.xml</code>的修改方法与<code>clang_maci64.xml</code>类似，就不多加说明了。<br>
+直接使用MATLAB打开<code>clang_maci64.xml</code>，找到以下部分，并将其用<code>&lt;!--&gt; &lt;--&gt;</code>注释掉。这将会使编译器在<code>/usr/include</code>中搜索头文件，而非Xcode的路径。 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ISYSROOT</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">and</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"xcode-select -print-path"</span>/&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">or</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">dirExists</span> <span class="attr">name</span>=<span class="string">"$$/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk"</span> /&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">dirExists</span> <span class="attr">name</span>=<span class="string">"$$/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk"</span> /&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">dirExists</span> <span class="attr">name</span>=<span class="string">"$$/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk"</span> /&gt;</span> </div><div class="line">                    <span class="tag">&lt;<span class="name">dirExists</span> <span class="attr">name</span>=<span class="string">"$$/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk"</span> /&gt;</span> </div><div class="line">                    <span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"find $$ -name MacOSX10.9.sdk"</span> /&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"find $$ -name MacOSX10.10.sdk"</span> /&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"find $$ -name MacOSX10.11.sdk"</span> /&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"find $$ -name MacOSX10.12.sdk"</span> /&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">or</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">and</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">ISYSROOT</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">SDKVER</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">and</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">and</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"xcode-select -print-path"</span>/&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">or</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">dirExists</span> <span class="attr">name</span>=<span class="string">"$$/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk"</span> /&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">dirExists</span> <span class="attr">name</span>=<span class="string">"$$/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk"</span> /&gt;</span></div><div class="line">						<span class="tag">&lt;<span class="name">dirExists</span> <span class="attr">name</span>=<span class="string">"$$/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk"</span> /&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">dirExists</span> <span class="attr">name</span>=<span class="string">"$$/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk"</span> /&gt;</span> </div><div class="line">                        <span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"find $$ -name MacOSX10.9.sdk"</span> /&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"find $$ -name MacOSX10.10.sdk"</span> /&gt;</span></div><div class="line">						<span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"find $$ -name MacOSX10.11.sdk"</span> /&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"find $$ -name MacOSX10.12.sdk"</span> /&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">or</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">and</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">cmdReturns</span> <span class="attr">name</span>=<span class="string">"echo $$ | rev | cut -c1-10 | rev | egrep -oh '[0-9]+\.[0-9]+'"</span> /&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">and</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">SDKVER</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>回到MATLAB的Command Window，并输入 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mex --setup</div></pre></td></tr></table></figure></p>
+<p>此时应该输出 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">MEX configured to use &apos;Xcode with Clang&apos; for C language compilation.</div><div class="line">Warning: The MATLAB C and Fortran API has changed to support MATLAB</div><div class="line">	 variables with more than 2^32-1 elements. In the near future</div><div class="line">	 you will be required to update your code to utilize the</div><div class="line">	 new API. You can find more information about this at:</div><div class="line">	 http://www.mathworks.com/help/matlab/matlab_external/upgrading-mex-files-to-use-64-bit-api.html.</div></pre></td></tr></table></figure></p>
+<p>这表明此时mex已经找到并使用gcc了，但是Simulink编译仍然会报以下错误： <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">invalid version number in &apos;-mmacosx-version-min=&apos;</div></pre></td></tr></table></figure></p>
+<p>这是因为在<code>clang_maci64.xml</code>33行处，还有其他的一些行 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CFLAGS=&quot;-fno-common -arch x86_64 -mmacosx-version-min=$SDKVER -fexceptions -isysroot $ISYSROOT&quot;</div></pre></td></tr></table></figure></p>
+<p>引用了我们刚才注释掉的内容<code>$SDKVER</code>和<code>ISYSROOT</code>。<br>
+需要注意的是此时并不应该再修改这个文件，需要在Command Window中输入 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd( prefdir );</div></pre></td></tr></table></figure></p>
+<p>打开<code>mex_C_maci64.xml</code>继续修改。需要将文件中所有的<code>$SDKVER</code>更改为<code>10.11</code>，并将<code>ISYSROOT</code>更改为<code>/usr/bin</code>。<br>
+至此XML文件修改完毕，然而打开Simulink还是不能编译通过。 ## 复制头文件 Simulink报错的内容大概是在<code>simulink/include/</code>文件夹下找不到头文件，手动将<code>/usr/include/</code>中的所有文件复制到<code>/Applications/MATLAB_R2014a.app/simulink/include/</code>下即可。现在重新编译Simulink的model应该就可以顺利通过了。 ## 总结 之前在解决mex问题的时候搜索到<a href="https://stackoverflow.com/questions/40052388/matlab-mex-without-xcode-but-with-standalone-command-line-tools/40083012#40083012" target="_blank" rel="external">stackoverflow</a>上的这个答案，不过按照回答者提出的方案仍然报错，于是自己动手修改了一些细节上的内容，希望可以帮助到被这个问题困扰的朋友们。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近设计滑膜控制器需要用MATLAB Simulink中的User-Defined Function，写好Function后编译报错。报错信息为： &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;No supported compiler or SDK was found.&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;在&lt;a href=&quot;https://cn.mathworks.com/matlabcentral/answers/246135-is-matlab-compatible-with-mac-os-x-10-11-el-capitan&quot;&gt;MathWorks论坛&lt;/a&gt;上有这个问题的解决方案。大致就是去App Store上安装Xcode就可以了，然而我并不想安装臃肿的Xcode且我已经安装了Xcode command line tool。这篇文章将教你如何花式配置mex。&lt;br /&gt;
+    
+    </summary>
+    
+      <category term="BugFix" scheme="https://rm-rf.moe/categories/BugFix/"/>
+    
+    
+      <category term="MATLAB" scheme="https://rm-rf.moe/tags/MATLAB/"/>
+    
+      <category term="bug" scheme="https://rm-rf.moe/tags/bug/"/>
+    
+  </entry>
   
   <entry>
     <title>谈笑风生又一年</title>
@@ -1633,52 +1673,6 @@ SRDP项目顺利结题了，大概就是部署服务器之类的事情，做了�
   </entry>
   
   <entry>
-    <title>使用tor隐藏自己的踪迹和深网</title>
-    <link href="https://rm-rf.moe/2016/03/06/2016-03-13-tor/"/>
-    <id>https://rm-rf.moe/2016/03/06/2016-03-13-tor/</id>
-    <published>2016-03-06T11:40:25.000Z</published>
-    <updated>2017-05-16T18:05:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="tor是什么">tor是什么</h3>
-<p>官方的介绍简单翻译下：<br>
-&gt; tor是一个免费软件和开放的网络，可以帮助你防御网络流量嗅探(一种会威胁个人自由和隐私的网络监视)。用tor可以保护商业机密，社会激进分子，军事机密，和一些学者的研究成果。</p>
-<p>（渣翻译请自行体会其中重点）<br>
-来自<a href="https://www.torproject.org/" target="_blank" rel="external">torproject.org</a><br>
-<a id="more"></a> ### 如何使用 #### 配置Vidalia 据我所知，有三种办法使用tor:<br>
-1. 使用tor的命令行版(比较复杂)<br>
-2. 使用Vidalia(GUI版本，目前已经停止维护)<br>
-3. 使用tor browser(最简单)</p>
-<p>我使用的是Vidalia，可以在这个地方下载<a href="https://dist.torproject.org/vidalia-bundles/" target="_blank" rel="external">Vidalia</a>，貌似没有for Linux？<br>
-Vidalia的配置比较简单，前提是可以科学上网，因为万能的某长城貌似已经全面封锁了tor。<br>
-<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1ayhisyaj30e50fdabl.jpg" alt="screenshot"> 选择Settings, <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1az4ldrhj30kg0k2act.jpg" alt="screenshot"> 选择我使用代理连接互联网，这里我的本地1080端口运行的是shadowsocks的代理。并选择我的ISP提供商封锁了tor网络的连接，并添加网桥.<br>
-注意，网桥可以向bridges@torproject.org发送一封内容为get bridges的邮件获得。 其他的设置不用管，点connect，洋葱变绿时说明连接上了tor。<br>
-#### 配置chrome 强推一个插件SwitchyOmega,可以快速在切换浏览器代理设置。<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1azt9zy2j313w0g5n02.jpg"></p>
-<p>左侧+New Profile，如图配置9050端口即可。<br>
-访问下面这个页面看看配置是否成功:<a href="https://check.torproject.org/" target="_blank" rel="external">checktor</a></p>
-<h3 id="deep-web深网">Deep Web(深网)</h3>
-<p>使用tor代理，访问下面的页面试试：<a href="http://zqktlwi4fecvo6ri.onion/wiki/" target="_blank" rel="external">The Hidden Wiki</a><br>
-是的，这里充满各种违法的信息，比特币洗钱，军火交易，假身份……这就是人们常说的地下黑产聚集地，这就是deep web。你可以找到各种各样的信息，会遇到各种各样疯狂的人。这里高度自治，如果你足够强大也可以与之对抗。<br>
-一个挺不错的聊天室链接<a href="http://tetatl6umgbmtv27.onion/" target="_blank" rel="external">chat with stangers</a>，在这里我遇到了无所事事的美国年轻黑客，对中国文化很感兴趣；也偶遇了做运维的美国大叔，耐心的给我讲解perl……有两点要注意: 1. 不要泄露个人信息 2. 英语要好，lol</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;tor是什么&quot;&gt;tor是什么&lt;/h3&gt;
-&lt;p&gt;官方的介绍简单翻译下：&lt;br /&gt;
-&amp;gt; tor是一个免费软件和开放的网络，可以帮助你防御网络流量嗅探(一种会威胁个人自由和隐私的网络监视)。用tor可以保护商业机密，社会激进分子，军事机密，和一些学者的研究成果。&lt;/p&gt;
-&lt;p&gt;（渣翻译请自行体会其中重点）&lt;br /&gt;
-来自&lt;a href=&quot;https://www.torproject.org/&quot;&gt;torproject.org&lt;/a&gt;&lt;br /&gt;
-    
-    </summary>
-    
-      <category term="Network Security" scheme="https://rm-rf.moe/categories/Network-Security/"/>
-    
-    
-      <category term="tor" scheme="https://rm-rf.moe/tags/tor/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Sqlmap部分参数说明</title>
     <link href="https://rm-rf.moe/2016/03/06/2016-03-06-sqlmap/"/>
     <id>https://rm-rf.moe/2016/03/06/2016-03-06-sqlmap/</id>
@@ -1740,6 +1734,52 @@ sqlmap的使用非常简单，通常我们使用如下命令就可以获知目�
     
     
       <category term="sqlmap" scheme="https://rm-rf.moe/tags/sqlmap/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用tor隐藏自己的踪迹和深网</title>
+    <link href="https://rm-rf.moe/2016/03/06/2016-03-13-tor/"/>
+    <id>https://rm-rf.moe/2016/03/06/2016-03-13-tor/</id>
+    <published>2016-03-06T11:40:25.000Z</published>
+    <updated>2017-05-16T18:05:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="tor是什么">tor是什么</h3>
+<p>官方的介绍简单翻译下：<br>
+&gt; tor是一个免费软件和开放的网络，可以帮助你防御网络流量嗅探(一种会威胁个人自由和隐私的网络监视)。用tor可以保护商业机密，社会激进分子，军事机密，和一些学者的研究成果。</p>
+<p>（渣翻译请自行体会其中重点）<br>
+来自<a href="https://www.torproject.org/" target="_blank" rel="external">torproject.org</a><br>
+<a id="more"></a> ### 如何使用 #### 配置Vidalia 据我所知，有三种办法使用tor:<br>
+1. 使用tor的命令行版(比较复杂)<br>
+2. 使用Vidalia(GUI版本，目前已经停止维护)<br>
+3. 使用tor browser(最简单)</p>
+<p>我使用的是Vidalia，可以在这个地方下载<a href="https://dist.torproject.org/vidalia-bundles/" target="_blank" rel="external">Vidalia</a>，貌似没有for Linux？<br>
+Vidalia的配置比较简单，前提是可以科学上网，因为万能的某长城貌似已经全面封锁了tor。<br>
+<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1ayhisyaj30e50fdabl.jpg" alt="screenshot"> 选择Settings, <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1az4ldrhj30kg0k2act.jpg" alt="screenshot"> 选择我使用代理连接互联网，这里我的本地1080端口运行的是shadowsocks的代理。并选择我的ISP提供商封锁了tor网络的连接，并添加网桥.<br>
+注意，网桥可以向bridges@torproject.org发送一封内容为get bridges的邮件获得。 其他的设置不用管，点connect，洋葱变绿时说明连接上了tor。<br>
+#### 配置chrome 强推一个插件SwitchyOmega,可以快速在切换浏览器代理设置。<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1azt9zy2j313w0g5n02.jpg"></p>
+<p>左侧+New Profile，如图配置9050端口即可。<br>
+访问下面这个页面看看配置是否成功:<a href="https://check.torproject.org/" target="_blank" rel="external">checktor</a></p>
+<h3 id="deep-web深网">Deep Web(深网)</h3>
+<p>使用tor代理，访问下面的页面试试：<a href="http://zqktlwi4fecvo6ri.onion/wiki/" target="_blank" rel="external">The Hidden Wiki</a><br>
+是的，这里充满各种违法的信息，比特币洗钱，军火交易，假身份……这就是人们常说的地下黑产聚集地，这就是deep web。你可以找到各种各样的信息，会遇到各种各样疯狂的人。这里高度自治，如果你足够强大也可以与之对抗。<br>
+一个挺不错的聊天室链接<a href="http://tetatl6umgbmtv27.onion/" target="_blank" rel="external">chat with stangers</a>，在这里我遇到了无所事事的美国年轻黑客，对中国文化很感兴趣；也偶遇了做运维的美国大叔，耐心的给我讲解perl……有两点要注意: 1. 不要泄露个人信息 2. 英语要好，lol</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;tor是什么&quot;&gt;tor是什么&lt;/h3&gt;
+&lt;p&gt;官方的介绍简单翻译下：&lt;br /&gt;
+&amp;gt; tor是一个免费软件和开放的网络，可以帮助你防御网络流量嗅探(一种会威胁个人自由和隐私的网络监视)。用tor可以保护商业机密，社会激进分子，军事机密，和一些学者的研究成果。&lt;/p&gt;
+&lt;p&gt;（渣翻译请自行体会其中重点）&lt;br /&gt;
+来自&lt;a href=&quot;https://www.torproject.org/&quot;&gt;torproject.org&lt;/a&gt;&lt;br /&gt;
+    
+    </summary>
+    
+      <category term="Network Security" scheme="https://rm-rf.moe/categories/Network-Security/"/>
+    
+    
+      <category term="tor" scheme="https://rm-rf.moe/tags/tor/"/>
     
   </entry>
   
@@ -1837,46 +1877,6 @@ sqlmap的使用非常简单，通常我们使用如下命令就可以获知目�
 &lt;li&gt;我们首先来看一张图片:&lt;img src=&quot;https://ws1.sinaimg.cn/large/005WMcFzly1fe1bag01fhj313t0odagt.jpg&quot; alt=&quot;Fuck DDOS&quot; /&gt;&lt;br /&gt;
 &lt;/li&gt;
 &lt;li&gt;前天折腾完apache，顺便装好了MySQL和PHP，放了一个Discuz!的开源论坛程序，什么乱七八糟权限都没管，全是弱密码。刚准备写个博纪念一下，发现我VPS被人黑了……无奈只好重新安装一遍centos。在&lt;a href=&quot;http://lyeec.me&quot;&gt;vagarlee&lt;/a&gt;的建议下，我吸取上一次的教训，使用更轻量的Nginx来替代Apache。
-    
-    </summary>
-    
-      <category term="Computer Skills" scheme="https://rm-rf.moe/categories/Computer-Skills/"/>
-    
-    
-      <category term="Linux" scheme="https://rm-rf.moe/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>centos搭建服务器－安装apache</title>
-    <link href="https://rm-rf.moe/2016/02/16/2016-02-16-vps/"/>
-    <id>https://rm-rf.moe/2016/02/16/2016-02-16-vps/</id>
-    <published>2016-02-16T02:40:25.000Z</published>
-    <updated>2017-05-16T18:04:28.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>好久都没更新博客里面的文章了，快要开学了发现寒假自己什么都没搞出来啊啊啊……最蛋疼的是学校的智能车比赛的网站，要实现论坛的功能。学校的服务器现在又不让用，只好在我自己的VPS上搭建一个简易的服务器来测试了。这是我开始自己搭服务器过程的记录，可能会有点乱…… <a id="more"></a></li>
-<li>我在本地使用的是Mac OS X，远程服务器运行的是centos-6 x86系统。这个VPS是在<a href="https://bandwagonhost.com/" target="_blank" rel="external">Bandwagon</a>上购买的，可以使用shadowsocks科学上网(咦，我好像说了什么不该说的)。</li>
-</ul>
-<h2 id="lamp环境">LAMP环境</h2>
-<p>所谓LAMP就是Linux+apache+MySQL+PHP，我目前只装好了apache……不然怎么能是万里长征第一步～ ### 安装Apache <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum install httpd</div><div class="line">chkconfig --level 235 httpd on</div><div class="line">/etc/init.d/httpd start</div></pre></td></tr></table></figure></p>
-<p>安装完后在浏览器中输入远程服务器的IP地址，看到这样的画面就说明安装成功了。<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bc8lac8j31700rh15c.jpg" alt="屏幕快照"> ### 配置ssh 配置ssh的目的在于方便的上传和下载文件，更加流畅的终端输入体验……<br>
-在终端中输入如下命令: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install openssh-server</div></pre></td></tr></table></figure></p>
-<p>安装完成后启动sshd服务: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/sshd start</div></pre></td></tr></table></figure></p>
-<p>设置开机启动: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig sshd on</div></pre></td></tr></table></figure></p>
-<p>我在本地使用: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh root@138.128.197.11</div></pre></td></tr></table></figure></p>
-<p>报错 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh: connect to host 138.128.197.11 port 22: Connection refused</div></pre></td></tr></table></figure></p>
-<p>我用<code>netstat -antp |grep sshd</code>命令查看了一下，系统的响应是这样的 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tcp        0      0 0.0.0.0:22           0.0.0.0:*                   LISTEN      3746/sshd</div></pre></td></tr></table></figure></p>
-<p>问题应该是出在了ssh的隧道没有对公网开放<br>
-修改ssh的配置文件 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/ssh/sshd_config</div></pre></td></tr></table></figure></p>
-<p>把<code>ListenAddress 0.0.0.0</code>改为<code>ListenAddress 138.128.197.11</code>这个是我远程服务器的IP，重新启动ssh服务发现无法启动，终端提示要先定义端口，我并不知道为什么……在刚刚那行配置前加上<code>port 22</code>然后<code>service sshd restart</code>，居然就成功了<br>
-附上成功后的图 <img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bcvn914j313r0p0167.jpg" alt="屏幕快照"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;好久都没更新博客里面的文章了，快要开学了发现寒假自己什么都没搞出来啊啊啊……最蛋疼的是学校的智能车比赛的网站，要实现论坛的功能。学校的服务器现在又不让用，只好在我自己的VPS上搭建一个简易的服务器来测试了。这是我开始自己搭服务器过程的记录，可能会有点乱……
     
     </summary>
     
