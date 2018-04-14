@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://rm-rf.moe/"/>
-  <updated>2017-12-06T14:52:33.000Z</updated>
+  <updated>2018-04-14T13:39:21.000Z</updated>
   <id>https://rm-rf.moe/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="https://rm-rf.moe/2017/10/11/2017-12-01-fix-matlab/"/>
     <id>https://rm-rf.moe/2017/10/11/2017-12-01-fix-matlab/</id>
     <published>2017-10-11T11:31:28.000Z</published>
-    <updated>2017-12-06T14:52:33.000Z</updated>
+    <updated>2018-04-14T13:39:21.000Z</updated>
     
-    <content type="html"><![CDATA[<p>最近设计滑膜控制器需要用MATLAB Simulink中的User-Defined Function，写好Function后编译报错。报错信息为： <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">No supported compiler or SDK was found.</div></pre></td></tr></table></figure></p>
+    <content type="html"><![CDATA[<p>最近设计滑模控制器需要用MATLAB Simulink中的User-Defined Function，写好Function后编译报错。报错信息为： <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">No supported compiler or SDK was found.</div></pre></td></tr></table></figure></p>
 <p>在<a href="https://cn.mathworks.com/matlabcentral/answers/246135-is-matlab-compatible-with-mac-os-x-10-11-el-capitan" target="_blank" rel="external">MathWorks论坛</a>上有这个问题的解决方案。大致就是去App Store上安装Xcode就可以了，然而我并不想安装臃肿的Xcode且我已经安装了Xcode command line tool。这篇文章将教你如何花式配置mex。<br>
 <a id="more"></a></p>
 <h2 id="更改mex的xml配置">更改mex的XML配置</h2>
@@ -45,7 +45,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;最近设计滑膜控制器需要用MATLAB Simulink中的User-Defined Function，写好Function后编译报错。报错信息为： &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;No supported compiler or SDK was found.&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+      &lt;p&gt;最近设计滑模控制器需要用MATLAB Simulink中的User-Defined Function，写好Function后编译报错。报错信息为： &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;No supported compiler or SDK was found.&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;在&lt;a href=&quot;https://cn.mathworks.com/matlabcentral/answers/246135-is-matlab-compatible-with-mac-os-x-10-11-el-capitan&quot;&gt;MathWorks论坛&lt;/a&gt;上有这个问题的解决方案。大致就是去App Store上安装Xcode就可以了，然而我并不想安装臃肿的Xcode且我已经安装了Xcode command line tool。这篇文章将教你如何花式配置mex。&lt;br /&gt;
     
     </summary>
