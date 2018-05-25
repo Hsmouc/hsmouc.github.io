@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://rm-rf.moe/2016/03/06/2016-03-13-tor/</loc>
+    
+    <lastmod>2018-05-25T06:32:16.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://rm-rf.moe/2017/12/01/2017-12-01-fix-matlab/</loc>
     
     <lastmod>2018-05-25T06:26:28.000Z</lastmod>
@@ -135,13 +142,6 @@
   </url>
   
   <url>
-    <loc>https://rm-rf.moe/2016/03/06/2016-03-13-tor/</loc>
-    
-    <lastmod>2017-05-16T18:05:18.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://rm-rf.moe/2016/02/27/2016-02-27-pi/</loc>
     
     <lastmod>2017-05-16T18:04:46.000Z</lastmod>
@@ -236,13 +236,6 @@
     <loc>https://rm-rf.moe/2015/12/13/2015-12-13-pi/</loc>
     
     <lastmod>2017-05-16T18:01:39.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://rm-rf.moe/2015/10/01/2015-10-01-blog/</loc>
-    
-    <lastmod>2017-05-16T18:00:18.000Z</lastmod>
     
   </url>
   

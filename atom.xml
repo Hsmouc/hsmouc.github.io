@@ -1892,11 +1892,11 @@ sqlmap的使用非常简单，通常我们使用如下命令就可以获知目�
   </entry>
   
   <entry>
-    <title>使用tor隐藏自己的踪迹和深网</title>
+    <title>使用tor隐藏自己的踪迹</title>
     <link href="https://rm-rf.moe/2016/03/06/2016-03-13-tor/"/>
     <id>https://rm-rf.moe/2016/03/06/2016-03-13-tor/</id>
     <published>2016-03-06T11:40:25.000Z</published>
-    <updated>2017-05-16T18:05:18.000Z</updated>
+    <updated>2018-05-25T06:32:16.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="tor是什么">tor是什么</h3>
 <p>官方的介绍简单翻译下：<br>
@@ -1914,8 +1914,7 @@ Vidalia的配置比较简单，前提是可以科学上网，因为万能的某�
 #### 配置chrome 强推一个插件SwitchyOmega,可以快速在切换浏览器代理设置。<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1azt9zy2j313w0g5n02.jpg"></p>
 <p>左侧+New Profile，如图配置9050端口即可。<br>
 访问下面这个页面看看配置是否成功:<a href="https://check.torproject.org/" target="_blank" rel="external">checktor</a></p>
-<h3 id="deep-web深网">Deep Web(深网)</h3>
-<p>使用tor代理，访问下面的页面试试：<a href="http://zqktlwi4fecvo6ri.onion/wiki/" target="_blank" rel="external">The Hidden Wiki</a><br>
+<p>###Deep Web(深网) 使用tor代理，访问下面的页面试试：<a href="http://zqktlwi4fecvo6ri.onion/wiki/" target="_blank" rel="external">The Hidden Wiki</a><br>
 是的，这里充满各种违法的信息，比特币洗钱，军火交易，假身份……这就是人们常说的地下黑产聚集地，这就是deep web。你可以找到各种各样的信息，会遇到各种各样疯狂的人。这里高度自治，如果你足够强大也可以与之对抗。<br>
 一个挺不错的聊天室链接<a href="http://tetatl6umgbmtv27.onion/" target="_blank" rel="external">chat with stangers</a>，在这里我遇到了无所事事的美国年轻黑客，对中国文化很感兴趣；也偶遇了做运维的美国大叔，耐心的给我讲解perl……有两点要注意: 1. 不要泄露个人信息 2. 英语要好，lol</p>
 ]]></content>
