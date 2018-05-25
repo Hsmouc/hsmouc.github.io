@@ -1,0 +1,1065 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Sliding Mode Control," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="梦的小窝" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="本文给出滑模控制在水下机器人运动控制方面的两个实例，主要参考JJE Slotine的著作Applied Nonlinear Control。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="水下机器人航向/轨迹跟踪控制系统设计--滑模控制">
+<meta property="og:url" content="https://rm-rf.moe/2018/05/25/2018-05-25-SMC/index.html">
+<meta property="og:site_name" content="梦的小窝">
+<meta property="og:description" content="本文给出滑模控制在水下机器人运动控制方面的两个实例，主要参考JJE Slotine的著作Applied Nonlinear Control。">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1frnhncvas9j30na03gmx8.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/mw690/005WMcFzly1frni2t0s2cj30nr0km3zp.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1frnimh3gs5j312m0j7411.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1frnimwj71wj30vh0j50vj.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1frnk34jq2dj30oi0f1aav.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1frnk9bjvgfj30ol0f474s.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1frnkaqtvzzj30oi0f1aak.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1frnk5i0wryj30og0f00ti.jpg">
+<meta property="og:updated_time" content="2018-05-25T06:22:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="水下机器人航向/轨迹跟踪控制系统设计--滑模控制">
+<meta name="twitter:description" content="本文给出滑模控制在水下机器人运动控制方面的两个实例，主要参考JJE Slotine的著作Applied Nonlinear Control。">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005WMcFzly1frnhncvas9j30na03gmx8.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://rm-rf.moe/2018/05/25/2018-05-25-SMC/"/>
+
+
+
+
+
+  <title> 水下机器人航向/轨迹跟踪控制系统设计--滑模控制 | 梦的小窝 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-71542166-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">梦的小窝</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            友链
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://rm-rf.moe/2018/05/25/2018-05-25-SMC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hsmouc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws1.sinaimg.cn/mw690/005WMcFzly1fe0mwkblnoj31d91d9qnl.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="梦的小窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                水下机器人航向/轨迹跟踪控制系统设计--滑模控制
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-25T12:24:12+08:00">
+                2018-05-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Control-Theory/" itemprop="url" rel="index">
+                    <span itemprop="name">Control Theory</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/25/2018-05-25-SMC/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/25/2018-05-25-SMC/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/05/25/2018-05-25-SMC/" class="leancloud_visitors" data-flag-title="水下机器人航向/轨迹跟踪控制系统设计--滑模控制">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文给出滑模控制在水下机器人运动控制方面的两个实例，主要参考JJE Slotine的著作<em>Applied Nonlinear Control</em>。</p>
+<a id="more"></a>
+<h1 id="基础知识">基础知识</h1>
+<h2 id="流形的选择与证明">流形的选择与证明</h2>
+<p>使<span class="math inline">\(\widetilde{x} = x - x_d\)</span>作为变量<span class="math inline">\(x\)</span>的跟踪误差，并使 <span class="math display">\[\widetilde{x}=x-x_d=
+ \left[
+ \begin{matrix}
+   \widetilde{x} &amp; \dot{\widetilde{x}}&amp; \cdots &amp; \widetilde{x}^{(n-1)} \\
+  \end{matrix}
+\right]^T\]</span> 定义一个在状态空间<span class="math inline">\(R^{(n)}\)</span>中时变的平面<span class="math inline">\(s(x;t)=0\)</span>，其中： <span class="math display">\[s(x;t) = (\frac{d}{dt}+\lambda)^{n-1}\widetilde{x}\]</span> 式中的<span class="math inline">\(\lambda\)</span>是一个正常数。若<span class="math inline">\(x_d(0)=x(0)\)</span>，那么使得<span class="math inline">\(x \equiv x_d\)</span>的跟踪问题等价于对任意<span class="math inline">\(t &gt; 0\)</span>，状态变量保持在流形<span class="math inline">\(s(t)\)</span>上。即<span class="math inline">\(n\)</span>阶向量<span class="math inline">\(x_d\)</span>的跟随问题可以被简化为使标量<span class="math inline">\(s\)</span>保持为0。且系统一旦到达流形，系统就将保持在流形上。<br>
+以一流形为例： <span class="math display">\[s = \dot{\widetilde{x}}+\lambda\widetilde{x}\]</span> 系统到达流形上后，由<span class="math inline">\(s\equiv0\)</span>，则有 <span class="math display">\[\dot{\widetilde{x}} = -\lambda \widetilde{x}\]</span> 上式表明系统将渐进趋近零点。<br>
+另外，标量<span class="math inline">\(s\)</span>的界可以转化为对跟踪误差<span class="math inline">\(\widetilde{x}\)</span>的界，所以可认为标量<span class="math inline">\(s\)</span>提供了一个对跟踪性能的可靠量度。特别的，假设<span class="math inline">\(\widetilde{x}(0)=0\)</span>，则有： <span class="math display">\[
+\forall t \geq 0, |s(t)| \leq \Phi \quad \Longrightarrow \quad
+\forall t \geq 0,|\widetilde{x}^{(i)}(t)| \leq (2\lambda)^i \varepsilon \qquad \qquad \qquad i=0,\cdots, n-1 
+\]</span><br>
+<strong>证明：</strong> <span class="math display">\[y_1(t) = \int_0^t e^{-\lambda(t-T)}s(T)dT\]</span> <img src="https://ws1.sinaimg.cn/large/005WMcFzly1frnhncvas9j30na03gmx8.jpg" alt="辅助说明"> 由<span class="math inline">\(|s|\leq \Phi\)</span>，可得： <span class="math display">\[|y_1 (t)|\leq \Phi \int_0^t e^{-\lambda(t-T)}dT =
+(\frac{\Phi}{\lambda})(1-e^{-\lambda t})
+\leq \frac{\Phi}{\lambda}\]</span> 依次类推，可以得到： <span class="math display">\[|\widetilde{x}| \leq \frac{\Phi}{\lambda^{n-1}}=\varepsilon \]</span> 用类似的方式可以得到<span class="math inline">\(\widetilde{x}^{(i)}\)</span>与<span class="math inline">\(s\)</span>的关系。假定标量<span class="math inline">\(s\)</span>通过了<span class="math inline">\(n-i-1\)</span>个低通滤波器得到了变量<span class="math inline">\(v_1\)</span>，则按上述证明可知： <span class="math display">\[|v_1| \leq \frac{\Phi}{\lambda^{n-i-1}} \]</span> 构造滤波器<span class="math inline">\(G_f\)</span>：<span class="math inline">\(\frac{r}{r+\lambda}\)</span>，<span class="math inline">\(v_1\)</span>经过一次<span class="math inline">\(G_f\)</span>得到的结果<span class="math inline">\(v_2\)</span>。上述过程可记为： <span class="math display">\[v_2 (t) = v_1 (t) - v_1 (t)\lambda \int_0^t e^{-\lambda(t-T)}dT\]</span> 由此可得： <span class="math display">\[v_2 (t) = (1+\frac{\lambda}{\lambda}) v_1 (t) \]</span> 经过<span class="math inline">\(i\)</span>次<span class="math inline">\(G_f\)</span>，将得到<span class="math inline">\(\widetilde{x}^*(i)\)</span>，因此联立两式可得： <span class="math display">\[|\widetilde{x^i}| \leq (\frac{\Phi}{\lambda^{n-1-i}})(1+\frac{\lambda}{\lambda})^i  = (2\lambda)^i \varepsilon \]</span></p>
+<h2 id="有限时间到达流形的证明">有限时间到达流形的证明</h2>
+<p>条件： <span class="math display">\[\frac{1}{2}\frac{d}{dt} s^2 \leq -\eta |s| \]</span> 其中<span class="math inline">\(\eta\)</span>是一个严格大于零的常数。满足以上条件则表明系统将在有限时间到达流形。 <strong>证明：</strong><br>
+令: <span class="math display">\[v = s^2 (s \neq 0)\]</span> 则： <span class="math display">\[\dot{v} = 2s\dot{s} &lt; -2\eta |s| = -2\eta\sqrt{v}\]</span> 等价于： <span class="math display">\[\frac{dv}{\sqrt{v}} &lt; -2\eta dt\]</span> 对上式积分可得： <span class="math display">\[\int_{v(0)}^{v(t)}\frac{dv}{v} &lt; -2\eta \int_0^t dt\]</span> 结果为： <span class="math display">\[\sqrt{v(t)}-\sqrt{v(0)} &lt; -\eta t\]</span> 由上式可得： <span class="math display">\[0 &lt; \sqrt{v(t)} &lt; \sqrt{v(0)}- \eta t\]</span> 由此可以推导出： <span class="math display">\[\sqrt{v(0)}-\eta t &gt; 0 \Longrightarrow t &lt; \frac{\sqrt{v(0)}}{\eta}\]</span></p>
+<h1 id="被控对象模型">被控对象模型</h1>
+<h2 id="单自由度艏摇模型">单自由度艏摇模型</h2>
+<p>水下机器人的运动模型可用以下形式表述： <span class="math display">\[\ddot{x} = -\frac{c}{m}\dot{x}|\dot{x}| + \frac{1}{m}u\]</span> 对航向控制来说，<span class="math inline">\(u\)</span>表示推进器的输入扭矩，<span class="math inline">\(x\)</span>表示当前指向的角度。 ## 平面三自由度模型 在进行平面轨迹跟踪控制系统设计之前，首先要将前文所述的单自由度模型扩展到平面三自由度，如下图： <img src="https://ws1.sinaimg.cn/mw690/005WMcFzly1frni2t0s2cj30nr0km3zp.jpg" width="300" alt="三自由度示意图" align="center"></p>
+<p>图中的<span class="math inline">\(p_1,p_2\)</span>代表推进器，平面内大地坐标和体坐标的速度转换关系如下： <span class="math display">\[
+\left\{ \begin{array}{l}
+\dot{x} = v_x cos(\theta) - v_y sin(\theta) \\
+\dot{y} = v_x sin(\theta) + v_y cos(\theta) \\
+\dot{\theta} = \omega 
+\end{array} \right. \label{cons:cvtnb}
+\]</span> 式中的坐标<span class="math inline">\((x,y)\)</span>表示水下机器人质心在大地坐标系下的位置，<span class="math inline">\(\theta\)</span>是相对于大地坐标系机器人的转向角。<span class="math inline">\(v_x,v_y,\omega\)</span>分别是其体坐标系下的纵荡，横荡与艏摇速度。平面内机器人运动除有前文已导出的模型，还有： <span class="math display">\[
+\left \{ \begin{array}{l}
+M_{x}\dot{v_x} - M_{y}v_y \omega + c_x v_x |v_x| = u \\
+M_{y}\dot{v_y} + M_{x}v_x \omega + c_y v_y |v_y| = 0 \\
+\end{array} \right. \label{cons:3dof}
+\]</span> 式中，<span class="math inline">\(M_{x}\)</span>与<span class="math inline">\(M_{y}\)</span>都包括刚体质量和附加质量，尽管在纵荡方向和垂荡方向水下机器人质量没有变化，但二者附加质量的差异导致了<span class="math inline">\(M_{x} \neq M_{y}\)</span>。其纵荡和横荡的阻尼也存在差异。</p>
+<h1 id="控制律推导">控制律推导</h1>
+<p>由改写的水下机器人动力学方程，二阶系统可描述为： <span class="math display">\[
+\ddot{x} = f + bu
+\]</span> 式中<span class="math inline">\(f,b\)</span>均不能精确测得，但是均已知参数摄动范围。其中<span class="math inline">\(b\)</span>的范围是： <span class="math display">\[
+0 &lt; b_{min} \leq b \leq b_{max}
+\]</span> 且认为<span class="math inline">\(b\)</span>的最优估计是: <span class="math display">\[
+\widehat{b} = \sqrt{b_{min} b_{max}}
+\]</span> 所以<span class="math inline">\(b\)</span>的边界条件也可写作： <span class="math display">\[
+\beta^{-1} \leq \frac{\widehat{b}}{b} \leq \beta 
+\]</span> <span class="math inline">\(f(x;t)\)</span>的摄动可认为被已知函数<span class="math inline">\(F(x;t)\)</span>限制，且设对动态的<span class="math inline">\(f\)</span>最优估计为<span class="math inline">\(\widehat{f}\)</span>： <span class="math display">\[
+|\widehat{f}-f|\leq F
+\]</span> 对输入跟踪问题<span class="math inline">\(x(t) \equiv x_d(t)\)</span>，定义一个流形： <span class="math display">\[
+s = (\frac{d}{dt}+\lambda)\widetilde{x} = \dot{\widetilde{x}}+\lambda \widetilde{x} \label{cons:yawsf}
+\]</span> 可以推出： <span class="math display">\[
+\dot{s} = \ddot{\widetilde{x}}+\lambda \dot{\widetilde{x}}  = \ddot{x}-\ddot{x}_d+\lambda \dot{\widetilde{x}}
+\]</span> 又由<span class="math inline">\(\ddot{x} = f + bu\)</span>，则： <span class="math display">\[
+\dot{s} = f + bu - \ddot{x}_d + \lambda \dot{\widetilde{x}}
+\]</span> 因此，使得<span class="math inline">\(\dot{s}=0\)</span>的最优估计<span class="math inline">\(\widehat{u}\)</span>为： <span class="math display">\[
+\widehat{u} = \widehat{b}^{-1}(-\widehat{f}+\ddot{x}_d-\lambda\dot{\widetilde{x}}) \label{cons:estu}
+\]</span> 为满足滑动模态存在条件，在输入<span class="math inline">\(\widehat{u}\)</span>上需要叠加一个非线性输入。记为： <span class="math display">\[
+u = \widehat{b}^{-1}[\widehat{u}-k sgn(s)] \label{cons:u}
+\]</span> 式中<span class="math inline">\(sgn(s)\)</span>为符号函数。 <span class="math display">\[
+\left\{ \begin{array}{ll}
+    sgn(s) = +1 \qquad\qquad if \quad s&gt;0 \\
+    sgn(s) = -1 \qquad\qquad if \quad s&lt;0
+\end{array} \right.
+\]</span> 需选择足够大的<span class="math inline">\(k\)</span>才能保证满足滑动模态存在条件。</p>
+<p>联立，得： <span class="math display">\[
+\dot{s} = f + b\widehat{b}^{-1}(-\widehat{f}+\ddot{x}_d-\lambda\dot{\widetilde{x}}-k sgn(s))-\ddot{x}_d+\lambda \dot{\widetilde{x}}
+\]</span> 整理得： <span class="math display">\[
+\dot{s} = f-b\widehat{b}^{-1}\widehat{f}+(1-b\widehat{b}^{-1})(-\ddot{x}_d+\lambda \dot{\widetilde{x}})-b\widehat{b}^{-1}k sgn(s)
+\]</span> 又因为： <span class="math display">\[
+s\dot{s} = [f-b\widehat{b}^{-1}\widehat{f}+(1-b\widehat{b}^{-1})(-\ddot{x}_d+\lambda \dot{\widetilde{x}})]s-b\widehat{b}^{-1}k|s| \leq -\eta |s| 
+\]</span> 所以<span class="math inline">\(k\)</span>必须满足： <span class="math display">\[
+k \geq |\widehat{b}b^{-1}f-\widehat{f}+(\widehat{b}b^{-1}-1)(-\ddot{x}_d+\lambda \dot{\widetilde{x}})|+\eta\widehat{b}b^{-1}
+\]</span> 由<span class="math inline">\(\beta &gt; \widehat{b}b^{-1}\)</span>： <span class="math display">\[
+\begin{array}{ll}
+    \Longrightarrow k \geq |\beta f - \widehat{f} + (\beta -1)(-\ddot{x}_d+\lambda\dot{\widetilde{x}})|+\eta \beta\\
+    \Longrightarrow k \geq |f + (\beta -1)f - \widehat{f}+(\beta -1)(-\ddot{x}_d+\lambda\dot{\widetilde{x}})|+\eta \beta\\
+    \Longrightarrow k \geq |(f - \widehat{f})+(\beta -1)f +(\beta -1)(-\ddot{x}_d+\lambda\dot{\widetilde{x}})|+\eta \beta
+\end{array} 
+\]</span> 又因为<span class="math inline">\(|f-\widehat{f}|\leq F\)</span>，可导出： <span class="math display">\[
+k \geq |F+(\beta -1)f +(\beta -1)(-\ddot{x}_d+\lambda\dot{\widetilde{x}})|+\eta \beta
+\]</span> 对于前文所述的水下机器人动力学模型：<span class="math inline">\(f = -\frac{c}{m}\dot{x}|\dot{x}|\)</span>，由于流体阻力与机器人运动方向相反，所以<span class="math inline">\(f\leq 0\)</span>。又<span class="math inline">\(\beta-1 \geq 0\)</span>，所以： <span class="math display">\[
+k \geq (F+\beta \eta) + (\beta -1)|\ddot{x}_d-\lambda \dot{\widetilde{x}}| \label{cons:k}
+\]</span> 对水下机器人运动学方程： <span class="math display">\[
+\left\{\begin{array}{ll}
+f = -\frac{\widehat{c}}{\widehat{m}}\dot{x}|\dot{x}| \\
+b = \frac{1}{\widehat{m}}
+\end{array}\right. 
+\]</span> 代入前式，得到航向角滑模控制律应为： <span class="math display">\[
+u = \widehat{c}\dot{x}|\dot{x}|+\widehat{m}(\ddot{x}_d-\lambda\dot{\widetilde{x}})- \widehat{m}ksgn(s) \label{cons:sf1}
+\]</span> 其中<span class="math inline">\(k\)</span>应该满足： <span class="math display">\[
+k \geq (F+\beta \eta) + (\beta -1)|\ddot{x}_d-\lambda \dot{\widetilde{x}}| \label{cons:sf2}
+\]</span> 类似地，导出轨迹跟踪滑模控制律为：<br>
+流形： <span class="math inline">\(s=\widetilde{v}_x + \lambda \int_0^t \widetilde{v}_x(\tau)d\tau\)</span>： <span class="math display">\[
+u = -\widehat{M}_y v_y \omega + c_x v_x |v_x| - \widehat{M}_x\dot{s_r} - ksgn(s) 
+\]</span> 其中： <span class="math display">\[
+k = \beta_y |v_y \omega| + F + \beta_x |\dot{s_r}| + \widehat{M}_x\eta 
+\]</span></p>
+<h1 id="仿真">仿真</h1>
+<h2 id="航向角控制">航向角控制</h2>
+<p><img src="https://ws1.sinaimg.cn/large/005WMcFzly1frnimh3gs5j312m0j7411.jpg" alt="heading control"> <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">u</span> = <span class="title">smc</span><span class="params">(k, ddot_x_d, e_dot, dot_x, s, lambda)</span></span></div><div class="line">    u = <span class="number">1.352</span>*(ddot_x_d-lambda*e_dot)+<span class="number">0.87</span>*dot_x*<span class="built_in">abs</span>(dot_x)<span class="number">-1.352</span>*k*<span class="built_in">sign</span>(s)<span class="comment">%sat(s,20); </span></div><div class="line"><span class="comment">%#codegen</span></div></pre></td></tr></table></figure></p>
+<h2 id="轨迹跟踪控制">轨迹跟踪控制</h2>
+<p><img src="https://ws1.sinaimg.cn/large/005WMcFzly1frnimwj71wj30vh0j50vj.jpg" alt="trajectory tracking control"> <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">u</span> = <span class="title">smc_surge</span><span class="params">(v_y,omega,v_x_d,v_x_dd,x_d,lambda,k,x,v_x)</span></span></div><div class="line"><span class="comment">%#codegen</span></div><div class="line">    u = <span class="number">-42.951</span>*v_y*omega+<span class="number">25</span>*v_x^<span class="number">2</span>+<span class="number">5.379</span>*v_x<span class="number">-34.675</span>*(-v_x_dd+lambda*(v_x-v_x_d))-k*<span class="built_in">sign</span>(v_x-v_x_d+lambda*(x-x_d));</div></pre></td></tr></table></figure></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">u</span> = <span class="title">fcnK</span><span class="params">(v_y,omega,v_x_dd,v_x_d,eta,lambda,v_x)</span></span></div><div class="line">u = <span class="number">1.2</span>*<span class="built_in">abs</span>(v_y*omega)+v_x^<span class="number">2</span>+<span class="number">1.2</span>*<span class="built_in">abs</span>(-v_x_dd+lambda*(v_x-v_x_d))+<span class="number">34.675</span>*eta;</div></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="params">[v_x,v_y]</span> = <span class="title">fcnT</span><span class="params">(theta,v)</span></span></div><div class="line">v_x = v*<span class="built_in">cos</span>(theta);</div><div class="line">v_y = v*<span class="built_in">sin</span>(theta);</div></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">y</span> = <span class="title">fcnD</span><span class="params">(dx,dy)</span></span></div><div class="line"><span class="comment">%#codegen</span></div><div class="line">y = <span class="built_in">sqrt</span>(dx^<span class="number">2</span>+dy^<span class="number">2</span>);</div></pre></td></tr></table></figure>
+<h2 id="跟踪轨迹设置">跟踪轨迹设置</h2>
+<p>对给定的时变跟踪轨迹曲线可用如下参数方程描述： <span class="math display">\[
+\left\{ \begin{array}{l}
+x = \phi(t) \\
+y = \psi(t)
+\end{array} \right.
+\]</span> 纵荡滑模控制的设定曲线为弧长<span class="math inline">\(l\)</span>与时间<span class="math inline">\(t\)</span>的关系，有： <span class="math display">\[
+ds = \sqrt{(dx)^2+(dy)^2} = \sqrt{\dot{\phi}^2 (t)+\dot{\psi}^2 (t)} dt
+\]</span> 弧长为： <span class="math display">\[
+s = \int_0^t \sqrt{\dot{\phi}^2 (t)+\dot{\psi}^2 (t)} dt
+\]</span> 航向角滑模控制的设定曲线为角度<span class="math inline">\(\theta\)</span>与时间<span class="math inline">\(t\)</span>的关系，有： <span class="math display">\[
+\theta = arctan(\frac{dy}{dx})
+\]</span> <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">%% Input Signal Generator</span></div><div class="line"><span class="comment">% By heshiming</span></div><div class="line"><span class="comment">%</span></div><div class="line"><span class="comment">%% for generate input signal</span></div><div class="line">t = <span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">10</span>,<span class="number">15</span>);</div><div class="line">input = <span class="number">2</span>*<span class="built_in">ones</span>(<span class="number">1</span>,<span class="number">15</span>);</div><div class="line"><span class="keyword">for</span> num = <span class="built_in">linspace</span>(<span class="number">1</span>,<span class="number">15</span>,<span class="number">15</span>)</div><div class="line">   input(num) = <span class="number">0.1</span>*t(num);</div><div class="line"><span class="keyword">end</span></div><div class="line">c = spcrv([input(<span class="number">1</span>) input input(end)],<span class="number">3</span>,<span class="number">50000</span>)';</div><div class="line">time = <span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">10</span>,<span class="built_in">length</span>(c))';</div><div class="line">T = <span class="number">10</span>/<span class="built_in">length</span>(c);tau = <span class="number">0.3</span>;</div><div class="line">a = T/tau;</div><div class="line">x_filt = filter(a, [<span class="number">1</span> a<span class="number">-1</span>],c);</div><div class="line">y_filt = <span class="built_in">cos</span>(x_filt.^<span class="number">2</span>)<span class="number">-1</span>;</div><div class="line">x_t = [time(<span class="number">3</span>:end),x_filt(<span class="number">3</span>:end)];</div><div class="line">y_t = [time(<span class="number">3</span>:end),y_filt(<span class="number">3</span>:end)];</div></pre></td></tr></table></figure></p>
+<h2 id="参数摄动下的航向角控制">参数摄动下的航向角控制</h2>
+<h3 id="航向角随时间的变化情况">航向角随时间的变化情况</h3>
+<figure>
+<img src="https://ws1.sinaimg.cn/large/005WMcFzly1frnk34jq2dj30oi0f1aav.jpg" alt="航向角响应曲线"><figcaption>航向角响应曲线</figcaption>
+</figure>
+<h3 id="控制器输出">控制器输出</h3>
+<p>当控制律中含符号函数时，控制器的输出情况： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1frnk9bjvgfj30ol0f474s.jpg" alt="含符号函数控制器的输出"> 将符号函数更换为饱和函数，以消除控制器抖动： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1frnkaqtvzzj30oi0f1aak.jpg" alt="含饱和函数控制器的输出"></p>
+<h2 id="轨迹跟踪情况">轨迹跟踪情况</h2>
+<figure>
+<img src="https://ws1.sinaimg.cn/large/005WMcFzly1frnk5i0wryj30og0f00ti.jpg" alt="轨迹跟踪"><figcaption>轨迹跟踪</figcaption>
+</figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Sliding-Mode-Control/" rel="tag"># Sliding Mode Control</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/01/2017-12-01-fix-matlab/" rel="next" title="解决在macOS Sierra(10.12)上MATLAB的mex问题">
+                <i class="fa fa-chevron-left"></i> 解决在macOS Sierra(10.12)上MATLAB的mex问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://ws1.sinaimg.cn/mw690/005WMcFzly1fe0mwkblnoj31d91d9qnl.jpg"
+               alt="Hsmouc" />
+          <p class="site-author-name" itemprop="name">Hsmouc</p>
+           
+              <p class="site-description motion-element" itemprop="description">乱七八糟的个人学习生活记录</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#流形的选择与证明"><span class="nav-number">1.1.</span> <span class="nav-text">流形的选择与证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有限时间到达流形的证明"><span class="nav-number">1.2.</span> <span class="nav-text">有限时间到达流形的证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#被控对象模型"><span class="nav-number">2.</span> <span class="nav-text">被控对象模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单自由度艏摇模型"><span class="nav-number">2.1.</span> <span class="nav-text">单自由度艏摇模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制律推导"><span class="nav-number">3.</span> <span class="nav-text">控制律推导</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#仿真"><span class="nav-number">4.</span> <span class="nav-text">仿真</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#航向角控制"><span class="nav-number">4.1.</span> <span class="nav-text">航向角控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#轨迹跟踪控制"><span class="nav-number">4.2.</span> <span class="nav-text">轨迹跟踪控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跟踪轨迹设置"><span class="nav-number">4.3.</span> <span class="nav-text">跟踪轨迹设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数摄动下的航向角控制"><span class="nav-number">4.4.</span> <span class="nav-text">参数摄动下的航向角控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#航向角随时间的变化情况"><span class="nav-number">4.4.1.</span> <span class="nav-text">航向角随时间的变化情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制器输出"><span class="nav-number">4.4.2.</span> <span class="nav-text">控制器输出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#轨迹跟踪情况"><span class="nav-number">4.5.</span> <span class="nav-text">轨迹跟踪情况</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsmouc</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'rice-cake';
+      var disqus_identifier = '2018/05/25/2018-05-25-SMC/';
+
+      var disqus_title = "水下机器人航向/轨迹跟踪控制系统设计--滑模控制";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("kKHlf4qV0AFaIXctFqFjGXIG-gzGzoHsz", "iIyqUvbAEGJmFXnlc7mAcSAg");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+</body>
+</html>

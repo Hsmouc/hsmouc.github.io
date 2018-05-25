@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://rm-rf.moe/"/>
-  <updated>2018-04-14T13:39:21.000Z</updated>
+  <updated>2018-05-25T06:22:25.000Z</updated>
   <id>https://rm-rf.moe/</id>
   
   <author>
@@ -16,11 +16,161 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>水下机器人航向/轨迹跟踪控制系统设计--滑模控制</title>
+    <link href="https://rm-rf.moe/2018/05/25/2018-05-25-SMC/"/>
+    <id>https://rm-rf.moe/2018/05/25/2018-05-25-SMC/</id>
+    <published>2018-05-25T04:24:12.000Z</published>
+    <updated>2018-05-25T06:22:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文给出滑模控制在水下机器人运动控制方面的两个实例，主要参考JJE Slotine的著作<em>Applied Nonlinear Control</em>。</p>
+<a id="more"></a>
+<h1 id="基础知识">基础知识</h1>
+<h2 id="流形的选择与证明">流形的选择与证明</h2>
+<p>使<span class="math inline">\(\widetilde{x} = x - x_d\)</span>作为变量<span class="math inline">\(x\)</span>的跟踪误差，并使 <span class="math display">\[\widetilde{x}=x-x_d=
+ \left[
+ \begin{matrix}
+   \widetilde{x} &amp; \dot{\widetilde{x}}&amp; \cdots &amp; \widetilde{x}^{(n-1)} \\
+  \end{matrix}
+\right]^T\]</span> 定义一个在状态空间<span class="math inline">\(R^{(n)}\)</span>中时变的平面<span class="math inline">\(s(x;t)=0\)</span>，其中： <span class="math display">\[s(x;t) = (\frac{d}{dt}+\lambda)^{n-1}\widetilde{x}\]</span> 式中的<span class="math inline">\(\lambda\)</span>是一个正常数。若<span class="math inline">\(x_d(0)=x(0)\)</span>，那么使得<span class="math inline">\(x \equiv x_d\)</span>的跟踪问题等价于对任意<span class="math inline">\(t &gt; 0\)</span>，状态变量保持在流形<span class="math inline">\(s(t)\)</span>上。即<span class="math inline">\(n\)</span>阶向量<span class="math inline">\(x_d\)</span>的跟随问题可以被简化为使标量<span class="math inline">\(s\)</span>保持为0。且系统一旦到达流形，系统就将保持在流形上。<br>
+以一流形为例： <span class="math display">\[s = \dot{\widetilde{x}}+\lambda\widetilde{x}\]</span> 系统到达流形上后，由<span class="math inline">\(s\equiv0\)</span>，则有 <span class="math display">\[\dot{\widetilde{x}} = -\lambda \widetilde{x}\]</span> 上式表明系统将渐进趋近零点。<br>
+另外，标量<span class="math inline">\(s\)</span>的界可以转化为对跟踪误差<span class="math inline">\(\widetilde{x}\)</span>的界，所以可认为标量<span class="math inline">\(s\)</span>提供了一个对跟踪性能的可靠量度。特别的，假设<span class="math inline">\(\widetilde{x}(0)=0\)</span>，则有： <span class="math display">\[
+\forall t \geq 0, |s(t)| \leq \Phi \quad \Longrightarrow \quad
+\forall t \geq 0,|\widetilde{x}^{(i)}(t)| \leq (2\lambda)^i \varepsilon \qquad \qquad \qquad i=0,\cdots, n-1 
+\]</span><br>
+<strong>证明：</strong> <span class="math display">\[y_1(t) = \int_0^t e^{-\lambda(t-T)}s(T)dT\]</span> <img src="https://ws1.sinaimg.cn/large/005WMcFzly1frnhncvas9j30na03gmx8.jpg" alt="辅助说明"> 由<span class="math inline">\(|s|\leq \Phi\)</span>，可得： <span class="math display">\[|y_1 (t)|\leq \Phi \int_0^t e^{-\lambda(t-T)}dT =
+(\frac{\Phi}{\lambda})(1-e^{-\lambda t})
+\leq \frac{\Phi}{\lambda}\]</span> 依次类推，可以得到： <span class="math display">\[|\widetilde{x}| \leq \frac{\Phi}{\lambda^{n-1}}=\varepsilon \]</span> 用类似的方式可以得到<span class="math inline">\(\widetilde{x}^{(i)}\)</span>与<span class="math inline">\(s\)</span>的关系。假定标量<span class="math inline">\(s\)</span>通过了<span class="math inline">\(n-i-1\)</span>个低通滤波器得到了变量<span class="math inline">\(v_1\)</span>，则按上述证明可知： <span class="math display">\[|v_1| \leq \frac{\Phi}{\lambda^{n-i-1}} \]</span> 构造滤波器<span class="math inline">\(G_f\)</span>：<span class="math inline">\(\frac{r}{r+\lambda}\)</span>，<span class="math inline">\(v_1\)</span>经过一次<span class="math inline">\(G_f\)</span>得到的结果<span class="math inline">\(v_2\)</span>。上述过程可记为： <span class="math display">\[v_2 (t) = v_1 (t) - v_1 (t)\lambda \int_0^t e^{-\lambda(t-T)}dT\]</span> 由此可得： <span class="math display">\[v_2 (t) = (1+\frac{\lambda}{\lambda}) v_1 (t) \]</span> 经过<span class="math inline">\(i\)</span>次<span class="math inline">\(G_f\)</span>，将得到<span class="math inline">\(\widetilde{x}^*(i)\)</span>，因此联立两式可得： <span class="math display">\[|\widetilde{x^i}| \leq (\frac{\Phi}{\lambda^{n-1-i}})(1+\frac{\lambda}{\lambda})^i  = (2\lambda)^i \varepsilon \]</span></p>
+<h2 id="有限时间到达流形的证明">有限时间到达流形的证明</h2>
+<p>条件： <span class="math display">\[\frac{1}{2}\frac{d}{dt} s^2 \leq -\eta |s| \]</span> 其中<span class="math inline">\(\eta\)</span>是一个严格大于零的常数。满足以上条件则表明系统将在有限时间到达流形。 <strong>证明：</strong><br>
+令: <span class="math display">\[v = s^2 (s \neq 0)\]</span> 则： <span class="math display">\[\dot{v} = 2s\dot{s} &lt; -2\eta |s| = -2\eta\sqrt{v}\]</span> 等价于： <span class="math display">\[\frac{dv}{\sqrt{v}} &lt; -2\eta dt\]</span> 对上式积分可得： <span class="math display">\[\int_{v(0)}^{v(t)}\frac{dv}{v} &lt; -2\eta \int_0^t dt\]</span> 结果为： <span class="math display">\[\sqrt{v(t)}-\sqrt{v(0)} &lt; -\eta t\]</span> 由上式可得： <span class="math display">\[0 &lt; \sqrt{v(t)} &lt; \sqrt{v(0)}- \eta t\]</span> 由此可以推导出： <span class="math display">\[\sqrt{v(0)}-\eta t &gt; 0 \Longrightarrow t &lt; \frac{\sqrt{v(0)}}{\eta}\]</span></p>
+<h1 id="被控对象模型">被控对象模型</h1>
+<h2 id="单自由度艏摇模型">单自由度艏摇模型</h2>
+<p>水下机器人的运动模型可用以下形式表述： <span class="math display">\[\ddot{x} = -\frac{c}{m}\dot{x}|\dot{x}| + \frac{1}{m}u\]</span> 对航向控制来说，<span class="math inline">\(u\)</span>表示推进器的输入扭矩，<span class="math inline">\(x\)</span>表示当前指向的角度。 ## 平面三自由度模型 在进行平面轨迹跟踪控制系统设计之前，首先要将前文所述的单自由度模型扩展到平面三自由度，如下图： <img src="https://ws1.sinaimg.cn/mw690/005WMcFzly1frni2t0s2cj30nr0km3zp.jpg" width="300" alt="三自由度示意图" align="center"></p>
+<p>图中的<span class="math inline">\(p_1,p_2\)</span>代表推进器，平面内大地坐标和体坐标的速度转换关系如下： <span class="math display">\[
+\left\{ \begin{array}{l}
+\dot{x} = v_x cos(\theta) - v_y sin(\theta) \\
+\dot{y} = v_x sin(\theta) + v_y cos(\theta) \\
+\dot{\theta} = \omega 
+\end{array} \right. \label{cons:cvtnb}
+\]</span> 式中的坐标<span class="math inline">\((x,y)\)</span>表示水下机器人质心在大地坐标系下的位置，<span class="math inline">\(\theta\)</span>是相对于大地坐标系机器人的转向角。<span class="math inline">\(v_x,v_y,\omega\)</span>分别是其体坐标系下的纵荡，横荡与艏摇速度。平面内机器人运动除有前文已导出的模型，还有： <span class="math display">\[
+\left \{ \begin{array}{l}
+M_{x}\dot{v_x} - M_{y}v_y \omega + c_x v_x |v_x| = u \\
+M_{y}\dot{v_y} + M_{x}v_x \omega + c_y v_y |v_y| = 0 \\
+\end{array} \right. \label{cons:3dof}
+\]</span> 式中，<span class="math inline">\(M_{x}\)</span>与<span class="math inline">\(M_{y}\)</span>都包括刚体质量和附加质量，尽管在纵荡方向和垂荡方向水下机器人质量没有变化，但二者附加质量的差异导致了<span class="math inline">\(M_{x} \neq M_{y}\)</span>。其纵荡和横荡的阻尼也存在差异。</p>
+<h1 id="控制律推导">控制律推导</h1>
+<p>由改写的水下机器人动力学方程，二阶系统可描述为： <span class="math display">\[
+\ddot{x} = f + bu
+\]</span> 式中<span class="math inline">\(f,b\)</span>均不能精确测得，但是均已知参数摄动范围。其中<span class="math inline">\(b\)</span>的范围是： <span class="math display">\[
+0 &lt; b_{min} \leq b \leq b_{max}
+\]</span> 且认为<span class="math inline">\(b\)</span>的最优估计是: <span class="math display">\[
+\widehat{b} = \sqrt{b_{min} b_{max}}
+\]</span> 所以<span class="math inline">\(b\)</span>的边界条件也可写作： <span class="math display">\[
+\beta^{-1} \leq \frac{\widehat{b}}{b} \leq \beta 
+\]</span> <span class="math inline">\(f(x;t)\)</span>的摄动可认为被已知函数<span class="math inline">\(F(x;t)\)</span>限制，且设对动态的<span class="math inline">\(f\)</span>最优估计为<span class="math inline">\(\widehat{f}\)</span>： <span class="math display">\[
+|\widehat{f}-f|\leq F
+\]</span> 对输入跟踪问题<span class="math inline">\(x(t) \equiv x_d(t)\)</span>，定义一个流形： <span class="math display">\[
+s = (\frac{d}{dt}+\lambda)\widetilde{x} = \dot{\widetilde{x}}+\lambda \widetilde{x} \label{cons:yawsf}
+\]</span> 可以推出： <span class="math display">\[
+\dot{s} = \ddot{\widetilde{x}}+\lambda \dot{\widetilde{x}}  = \ddot{x}-\ddot{x}_d+\lambda \dot{\widetilde{x}}
+\]</span> 又由<span class="math inline">\(\ddot{x} = f + bu\)</span>，则： <span class="math display">\[
+\dot{s} = f + bu - \ddot{x}_d + \lambda \dot{\widetilde{x}}
+\]</span> 因此，使得<span class="math inline">\(\dot{s}=0\)</span>的最优估计<span class="math inline">\(\widehat{u}\)</span>为： <span class="math display">\[
+\widehat{u} = \widehat{b}^{-1}(-\widehat{f}+\ddot{x}_d-\lambda\dot{\widetilde{x}}) \label{cons:estu}
+\]</span> 为满足滑动模态存在条件，在输入<span class="math inline">\(\widehat{u}\)</span>上需要叠加一个非线性输入。记为： <span class="math display">\[
+u = \widehat{b}^{-1}[\widehat{u}-k sgn(s)] \label{cons:u}
+\]</span> 式中<span class="math inline">\(sgn(s)\)</span>为符号函数。 <span class="math display">\[
+\left\{ \begin{array}{ll}
+    sgn(s) = +1 \qquad\qquad if \quad s&gt;0 \\
+    sgn(s) = -1 \qquad\qquad if \quad s&lt;0
+\end{array} \right.
+\]</span> 需选择足够大的<span class="math inline">\(k\)</span>才能保证满足滑动模态存在条件。</p>
+<p>联立，得： <span class="math display">\[
+\dot{s} = f + b\widehat{b}^{-1}(-\widehat{f}+\ddot{x}_d-\lambda\dot{\widetilde{x}}-k sgn(s))-\ddot{x}_d+\lambda \dot{\widetilde{x}}
+\]</span> 整理得： <span class="math display">\[
+\dot{s} = f-b\widehat{b}^{-1}\widehat{f}+(1-b\widehat{b}^{-1})(-\ddot{x}_d+\lambda \dot{\widetilde{x}})-b\widehat{b}^{-1}k sgn(s)
+\]</span> 又因为： <span class="math display">\[
+s\dot{s} = [f-b\widehat{b}^{-1}\widehat{f}+(1-b\widehat{b}^{-1})(-\ddot{x}_d+\lambda \dot{\widetilde{x}})]s-b\widehat{b}^{-1}k|s| \leq -\eta |s| 
+\]</span> 所以<span class="math inline">\(k\)</span>必须满足： <span class="math display">\[
+k \geq |\widehat{b}b^{-1}f-\widehat{f}+(\widehat{b}b^{-1}-1)(-\ddot{x}_d+\lambda \dot{\widetilde{x}})|+\eta\widehat{b}b^{-1}
+\]</span> 由<span class="math inline">\(\beta &gt; \widehat{b}b^{-1}\)</span>： <span class="math display">\[
+\begin{array}{ll}
+    \Longrightarrow k \geq |\beta f - \widehat{f} + (\beta -1)(-\ddot{x}_d+\lambda\dot{\widetilde{x}})|+\eta \beta\\
+    \Longrightarrow k \geq |f + (\beta -1)f - \widehat{f}+(\beta -1)(-\ddot{x}_d+\lambda\dot{\widetilde{x}})|+\eta \beta\\
+    \Longrightarrow k \geq |(f - \widehat{f})+(\beta -1)f +(\beta -1)(-\ddot{x}_d+\lambda\dot{\widetilde{x}})|+\eta \beta
+\end{array} 
+\]</span> 又因为<span class="math inline">\(|f-\widehat{f}|\leq F\)</span>，可导出： <span class="math display">\[
+k \geq |F+(\beta -1)f +(\beta -1)(-\ddot{x}_d+\lambda\dot{\widetilde{x}})|+\eta \beta
+\]</span> 对于前文所述的水下机器人动力学模型：<span class="math inline">\(f = -\frac{c}{m}\dot{x}|\dot{x}|\)</span>，由于流体阻力与机器人运动方向相反，所以<span class="math inline">\(f\leq 0\)</span>。又<span class="math inline">\(\beta-1 \geq 0\)</span>，所以： <span class="math display">\[
+k \geq (F+\beta \eta) + (\beta -1)|\ddot{x}_d-\lambda \dot{\widetilde{x}}| \label{cons:k}
+\]</span> 对水下机器人运动学方程： <span class="math display">\[
+\left\{\begin{array}{ll}
+f = -\frac{\widehat{c}}{\widehat{m}}\dot{x}|\dot{x}| \\
+b = \frac{1}{\widehat{m}}
+\end{array}\right. 
+\]</span> 代入前式，得到航向角滑模控制律应为： <span class="math display">\[
+u = \widehat{c}\dot{x}|\dot{x}|+\widehat{m}(\ddot{x}_d-\lambda\dot{\widetilde{x}})- \widehat{m}ksgn(s) \label{cons:sf1}
+\]</span> 其中<span class="math inline">\(k\)</span>应该满足： <span class="math display">\[
+k \geq (F+\beta \eta) + (\beta -1)|\ddot{x}_d-\lambda \dot{\widetilde{x}}| \label{cons:sf2}
+\]</span> 类似地，导出轨迹跟踪滑模控制律为：<br>
+流形： <span class="math inline">\(s=\widetilde{v}_x + \lambda \int_0^t \widetilde{v}_x(\tau)d\tau\)</span>： <span class="math display">\[
+u = -\widehat{M}_y v_y \omega + c_x v_x |v_x| - \widehat{M}_x\dot{s_r} - ksgn(s) 
+\]</span> 其中： <span class="math display">\[
+k = \beta_y |v_y \omega| + F + \beta_x |\dot{s_r}| + \widehat{M}_x\eta 
+\]</span></p>
+<h1 id="仿真">仿真</h1>
+<h2 id="航向角控制">航向角控制</h2>
+<p><img src="https://ws1.sinaimg.cn/large/005WMcFzly1frnimh3gs5j312m0j7411.jpg" alt="heading control"> <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">u</span> = <span class="title">smc</span><span class="params">(k, ddot_x_d, e_dot, dot_x, s, lambda)</span></span></div><div class="line">    u = <span class="number">1.352</span>*(ddot_x_d-lambda*e_dot)+<span class="number">0.87</span>*dot_x*<span class="built_in">abs</span>(dot_x)<span class="number">-1.352</span>*k*<span class="built_in">sign</span>(s)<span class="comment">%sat(s,20); </span></div><div class="line"><span class="comment">%#codegen</span></div></pre></td></tr></table></figure></p>
+<h2 id="轨迹跟踪控制">轨迹跟踪控制</h2>
+<p><img src="https://ws1.sinaimg.cn/large/005WMcFzly1frnimwj71wj30vh0j50vj.jpg" alt="trajectory tracking control"> <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">u</span> = <span class="title">smc_surge</span><span class="params">(v_y,omega,v_x_d,v_x_dd,x_d,lambda,k,x,v_x)</span></span></div><div class="line"><span class="comment">%#codegen</span></div><div class="line">    u = <span class="number">-42.951</span>*v_y*omega+<span class="number">25</span>*v_x^<span class="number">2</span>+<span class="number">5.379</span>*v_x<span class="number">-34.675</span>*(-v_x_dd+lambda*(v_x-v_x_d))-k*<span class="built_in">sign</span>(v_x-v_x_d+lambda*(x-x_d));</div></pre></td></tr></table></figure></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">u</span> = <span class="title">fcnK</span><span class="params">(v_y,omega,v_x_dd,v_x_d,eta,lambda,v_x)</span></span></div><div class="line">u = <span class="number">1.2</span>*<span class="built_in">abs</span>(v_y*omega)+v_x^<span class="number">2</span>+<span class="number">1.2</span>*<span class="built_in">abs</span>(-v_x_dd+lambda*(v_x-v_x_d))+<span class="number">34.675</span>*eta;</div></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="params">[v_x,v_y]</span> = <span class="title">fcnT</span><span class="params">(theta,v)</span></span></div><div class="line">v_x = v*<span class="built_in">cos</span>(theta);</div><div class="line">v_y = v*<span class="built_in">sin</span>(theta);</div></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">y</span> = <span class="title">fcnD</span><span class="params">(dx,dy)</span></span></div><div class="line"><span class="comment">%#codegen</span></div><div class="line">y = <span class="built_in">sqrt</span>(dx^<span class="number">2</span>+dy^<span class="number">2</span>);</div></pre></td></tr></table></figure>
+<h2 id="跟踪轨迹设置">跟踪轨迹设置</h2>
+<p>对给定的时变跟踪轨迹曲线可用如下参数方程描述： <span class="math display">\[
+\left\{ \begin{array}{l}
+x = \phi(t) \\
+y = \psi(t)
+\end{array} \right.
+\]</span> 纵荡滑模控制的设定曲线为弧长<span class="math inline">\(l\)</span>与时间<span class="math inline">\(t\)</span>的关系，有： <span class="math display">\[
+ds = \sqrt{(dx)^2+(dy)^2} = \sqrt{\dot{\phi}^2 (t)+\dot{\psi}^2 (t)} dt
+\]</span> 弧长为： <span class="math display">\[
+s = \int_0^t \sqrt{\dot{\phi}^2 (t)+\dot{\psi}^2 (t)} dt
+\]</span> 航向角滑模控制的设定曲线为角度<span class="math inline">\(\theta\)</span>与时间<span class="math inline">\(t\)</span>的关系，有： <span class="math display">\[
+\theta = arctan(\frac{dy}{dx})
+\]</span> <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">%% Input Signal Generator</span></div><div class="line"><span class="comment">% By heshiming</span></div><div class="line"><span class="comment">%</span></div><div class="line"><span class="comment">%% for generate input signal</span></div><div class="line">t = <span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">10</span>,<span class="number">15</span>);</div><div class="line">input = <span class="number">2</span>*<span class="built_in">ones</span>(<span class="number">1</span>,<span class="number">15</span>);</div><div class="line"><span class="keyword">for</span> num = <span class="built_in">linspace</span>(<span class="number">1</span>,<span class="number">15</span>,<span class="number">15</span>)</div><div class="line">   input(num) = <span class="number">0.1</span>*t(num);</div><div class="line"><span class="keyword">end</span></div><div class="line">c = spcrv([input(<span class="number">1</span>) input input(end)],<span class="number">3</span>,<span class="number">50000</span>)';</div><div class="line">time = <span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">10</span>,<span class="built_in">length</span>(c))';</div><div class="line">T = <span class="number">10</span>/<span class="built_in">length</span>(c);tau = <span class="number">0.3</span>;</div><div class="line">a = T/tau;</div><div class="line">x_filt = filter(a, [<span class="number">1</span> a<span class="number">-1</span>],c);</div><div class="line">y_filt = <span class="built_in">cos</span>(x_filt.^<span class="number">2</span>)<span class="number">-1</span>;</div><div class="line">x_t = [time(<span class="number">3</span>:end),x_filt(<span class="number">3</span>:end)];</div><div class="line">y_t = [time(<span class="number">3</span>:end),y_filt(<span class="number">3</span>:end)];</div></pre></td></tr></table></figure></p>
+<h2 id="参数摄动下的航向角控制">参数摄动下的航向角控制</h2>
+<h3 id="航向角随时间的变化情况">航向角随时间的变化情况</h3>
+<figure>
+<img src="https://ws1.sinaimg.cn/large/005WMcFzly1frnk34jq2dj30oi0f1aav.jpg" alt="航向角响应曲线"><figcaption>航向角响应曲线</figcaption>
+</figure>
+<h3 id="控制器输出">控制器输出</h3>
+<p>当控制律中含符号函数时，控制器的输出情况： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1frnk9bjvgfj30ol0f474s.jpg" alt="含符号函数控制器的输出"> 将符号函数更换为饱和函数，以消除控制器抖动： <img src="https://ws1.sinaimg.cn/large/005WMcFzly1frnkaqtvzzj30oi0f1aak.jpg" alt="含饱和函数控制器的输出"></p>
+<h2 id="轨迹跟踪情况">轨迹跟踪情况</h2>
+<figure>
+<img src="https://ws1.sinaimg.cn/large/005WMcFzly1frnk5i0wryj30og0f00ti.jpg" alt="轨迹跟踪"><figcaption>轨迹跟踪</figcaption>
+</figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文给出滑模控制在水下机器人运动控制方面的两个实例，主要参考JJE Slotine的著作&lt;em&gt;Applied Nonlinear Control&lt;/em&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Control Theory" scheme="https://rm-rf.moe/categories/Control-Theory/"/>
+    
+    
+      <category term="Sliding Mode Control" scheme="https://rm-rf.moe/tags/Sliding-Mode-Control/"/>
+    
+  </entry>
+  
+  <entry>
     <title>解决在macOS Sierra(10.12)上MATLAB的mex问题</title>
-    <link href="https://rm-rf.moe/2017/10/11/2017-12-01-fix-matlab/"/>
-    <id>https://rm-rf.moe/2017/10/11/2017-12-01-fix-matlab/</id>
-    <published>2017-10-11T11:31:28.000Z</published>
-    <updated>2018-04-14T13:39:21.000Z</updated>
+    <link href="https://rm-rf.moe/2017/12/01/2017-12-01-fix-matlab/"/>
+    <id>https://rm-rf.moe/2017/12/01/2017-12-01-fix-matlab/</id>
+    <published>2017-12-01T03:27:18.000Z</published>
+    <updated>2018-05-25T06:26:28.000Z</updated>
     
     <content type="html"><![CDATA[<p>最近设计滑模控制器需要用MATLAB Simulink中的User-Defined Function，写好Function后编译报错。报错信息为： <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">No supported compiler or SDK was found.</div></pre></td></tr></table></figure></p>
 <p>在<a href="https://cn.mathworks.com/matlabcentral/answers/246135-is-matlab-compatible-with-mac-os-x-10-11-el-capitan" target="_blank" rel="external">MathWorks论坛</a>上有这个问题的解决方案。大致就是去App Store上安装Xcode就可以了，然而我并不想安装臃肿的Xcode且我已经安装了Xcode command line tool。这篇文章将教你如何花式配置mex。<br>
@@ -1825,69 +1975,6 @@ Vidalia的配置比较简单，前提是可以科学上网，因为万能的某�
     
     
       <category term="Pi" scheme="https://rm-rf.moe/tags/Pi/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>centos搭建LNMP服务器</title>
-    <link href="https://rm-rf.moe/2016/02/19/2016-02-19-vps/"/>
-    <id>https://rm-rf.moe/2016/02/19/2016-02-19-vps/</id>
-    <published>2016-02-19T06:20:15.000Z</published>
-    <updated>2017-05-16T18:04:40.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>我们首先来看一张图片:<img src="https://ws1.sinaimg.cn/large/005WMcFzly1fe1bag01fhj313t0odagt.jpg" alt="Fuck DDOS"><br>
-</li>
-<li>前天折腾完apache，顺便装好了MySQL和PHP，放了一个Discuz!的开源论坛程序，什么乱七八糟权限都没管，全是弱密码。刚准备写个博纪念一下，发现我VPS被人黑了……无奈只好重新安装一遍centos。在<a href="http://lyeec.me" target="_blank" rel="external">vagarlee</a>的建议下，我吸取上一次的教训，使用更轻量的Nginx来替代Apache。 <a id="more"></a> ### 安装Nginx 在使用yum安装Nginx的时候有一些小小的麻烦,需要自己建立一个<code>nginx.repo</code>的软件源配置文件。 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/yum.repo.d/nginx.repo</div></pre></td></tr></table></figure></li>
-</ul>
-<p>在其中填写如下内容: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[nginx]</div><div class="line">name=nginx repo</div><div class="line">baseurl=http://nginx.org/packages/centos/$releasever/$basearch/</div><div class="line">gpgcheck=0</div><div class="line">enabled=1</div></pre></td></tr></table></figure></p>
-<p>保存，使用 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install nginx</div></pre></td></tr></table></figure></p>
-<p>nginx安装完成。<br>
-启动Nginx服务: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/nginx start</div></pre></td></tr></table></figure></p>
-<p>这个时候访问VPS的IP地址应该就能出现Nginx的欢迎页面了。 ### 安装MySQL</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server mysql mysql-deve</div></pre></td></tr></table></figure>
-<p>我第一次安装MySQl的时候想当然只安装了mysql，并没有安装mysql-server导致数据库无法使用，mysql-server是一个服务端，需要安装。<br>
-启用MySQl服务: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld start</div></pre></td></tr></table></figure></p>
-<p>这时候会出现长长的提示信息，恭喜数据库安装成功。<br>
-接下来我们给数据库设置管理员账号和密码: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysqladmin -u root password &apos;yourpassword&apos;</div></pre></td></tr></table></figure></p>
-<h3 id="安装php">安装PHP</h3>
-<p>这一步比较简单，直接使用yum: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php-fpm php-mysql</div></pre></td></tr></table></figure></p>
-<ul>
-<li>至此，LNMP环境的软件包已经全部安装完成，下面就是简单的配置阶段。</li>
-</ul>
-<h3 id="配置php">配置PHP</h3>
-<p>更改下面的文件: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/php.ini</div></pre></td></tr></table></figure></p>
-<p>将1改为0 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cgi.fix_pathinfo = 0</div></pre></td></tr></table></figure></p>
-<p>这儿有一段英文解释，来自<a href="www.digitalocean.com">digitalocean</a>: &gt;If this number is kept as a 1, the php interpreter will do its best to process the file that is as near to the requested file as possible. This is a possible security risk. If this number is set to 0, conversely, the interpreter will only process the exact file path—a much safer alternative.</p>
-<h3 id="配置nginx">配置Nginx</h3>
-<p>主要是改一下Nginx.conf这个文件夹里的配置文件: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/nginx/conf.d/default.conf</div></pre></td></tr></table></figure></p>
-<p>改成了这样: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">server&#123;</div><div class="line"></div><div class="line">    listen       80;</div><div class="line">    server_name  localhost;</div><div class="line"></div><div class="line">    #charset koi8-r;</div><div class="line">    #access_log  /var/log/nginx/log/host.access.log  main;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        root   /usr/share/nginx/html;</div><div class="line">        index  index.html index.htm index.php;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    #error_page  404              /404.html;</div><div class="line"></div><div class="line">    # redirect server error pages to the static page /50x.html</div><div class="line">    #</div><div class="line">    error_page   500 502 503 504  /50x.html;</div><div class="line">    location = /50x.html &#123;</div><div class="line">        root   /usr/share/nginx/html;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # proxy the PHP scripts to Apache listening on 127.0.0.1:80</div><div class="line">    #</div><div class="line">    #location ~ \.php$ &#123;</div><div class="line">    #    proxy_pass   http://127.0.0.1;</div><div class="line">    #&#125;</div><div class="line"></div><div class="line">    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</div><div class="line">    #</div><div class="line">    location ~ \.php$ &#123;</div><div class="line">        root           /usr/share/nginx/html;</div><div class="line">        fastcgi_pass   127.0.0.1:9000;</div><div class="line">        fastcgi_index  index.php;</div><div class="line">        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</div><div class="line">        include        fastcgi_params;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<ul>
-<li>改<code>server_name</code>后面的地址为<code>localhost</code></li>
-<li>改<code>location</code>中的<code>root</code>地址为<code>/usr/share/nginx/html</code></li>
-<li>在index index.html index.htm后加上index.php</li>
-<li>把<code>&quot;location ~ \.php$ {&quot;,</code>前的注释去了，改<code>fastcgi_param</code>后面的内容为<code>SCRIPT_FILENAME  $document_root</code></li>
-</ul>
-<p>保存退出后打开php-fpm的配置: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/php-fpm.d/www.conf</div></pre></td></tr></table></figure></p>
-<p>找到 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">; Unix user/group of processes</div><div class="line">; Note: The user is mandatory. If the group is not set, the default user&apos;s group</div><div class="line">;	will be used.</div><div class="line">; RPM: apache Choosed to be able to access some dir as httpd</div><div class="line">user = nginx</div><div class="line">; RPM: Keep a group allowed to write in log dir.</div><div class="line">group = nginx</div></pre></td></tr></table></figure></p>
-<p>改成<code>User=nginx</code>，<code>group=nginx</code> 重新启动php-fpm即可 ### 参考的文档 <a href="http://nginx.org/en/docs/" target="_blank" rel="external">Nginx官方文档</a><br>
-<a href="https://support.rackspace.com/how-to/installing-nginx-and-php-fpm-setup-for-nginx/" target="_blank" rel="external">Installing Nginx and php-fpm - Setup For Nginx</a><br>
-<a href="https://www.nginx.com/resources/wiki/start/topics/examples/phpfcgi/" target="_blank" rel="external">Nginx -PHP FastCGI Example</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;我们首先来看一张图片:&lt;img src=&quot;https://ws1.sinaimg.cn/large/005WMcFzly1fe1bag01fhj313t0odagt.jpg&quot; alt=&quot;Fuck DDOS&quot; /&gt;&lt;br /&gt;
-&lt;/li&gt;
-&lt;li&gt;前天折腾完apache，顺便装好了MySQL和PHP，放了一个Discuz!的开源论坛程序，什么乱七八糟权限都没管，全是弱密码。刚准备写个博纪念一下，发现我VPS被人黑了……无奈只好重新安装一遍centos。在&lt;a href=&quot;http://lyeec.me&quot;&gt;vagarlee&lt;/a&gt;的建议下，我吸取上一次的教训，使用更轻量的Nginx来替代Apache。
-    
-    </summary>
-    
-      <category term="Computer Skills" scheme="https://rm-rf.moe/categories/Computer-Skills/"/>
-    
-    
-      <category term="Linux" scheme="https://rm-rf.moe/tags/Linux/"/>
     
   </entry>
   

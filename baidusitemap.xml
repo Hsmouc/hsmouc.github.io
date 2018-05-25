@@ -3,14 +3,13 @@
 
 
     
-    
   <url>
-    <loc>https://rm-rf.moe/2017/10/11/2017-12-01-fix-matlab/</loc>
-    <lastmod>2018-04-14T13:39:21.000Z</lastmod>
+    <loc>https://rm-rf.moe/2017/12/01/2017-12-01-fix-matlab/</loc>
+    <lastmod>2018-05-25T06:26:28.000Z</lastmod>
     <data>
         <display>
         <title>解决在macOS Sierra(10.12)上MATLAB的mex问题</title>
-        <pubTime>2017-10-11T11:31:28.000Z</pubTime>
+        <pubTime>2017-12-01T03:27:18.000Z</pubTime>
         
         <tag>MATLAB</tag>
          
@@ -25,6 +24,27 @@
     </data>
     </url>
 
+    
+  <url>
+    <loc>https://rm-rf.moe/2018/05/25/2018-05-25-SMC/</loc>
+    <lastmod>2018-05-25T06:22:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>水下机器人航向/轨迹跟踪控制系统设计--滑模控制</title>
+        <pubTime>2018-05-25T04:24:12.000Z</pubTime>
+        
+        <tag>Sliding Mode Control</tag>
+         
+         
+           
+             
+              <breadCrumb title="Control Theory" url="https://rm-rf.moe/categories/Control-Theory/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>https://rm-rf.moe/2017/10/11/2017-10-11-summary/</loc>
